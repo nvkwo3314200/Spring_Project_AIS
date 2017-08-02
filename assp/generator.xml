@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+
+	<classPathEntry location="F:\java_workspace\pssp\ojdbc-14.jar" />
+	 <context id="DB2Tables"  targetRuntime="MyBatis3">  
+		<commentGenerator>
+			<property name="suppressDate" value="true"/>  
+            <property name="suppressAllComments" value="true"/>  
+		</commentGenerator>
+
+		 <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" 
+          connectionURL="jdbc:oracle:thin:@192.168.1.98:1521:ORCL" 
+          userId="pssp" 
+          password="pssp"> 
+		</jdbcConnection> 
+
+		<javaTypeResolver >
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.aswatson.model" targetProject="D:\development\EWorkspace_dev\assp\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="\"  targetProject="D:\development\EWorkspace_dev\assp\src\main\resources\com\aswatson\pssp\mapper\shop">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.aswatson.dao"  targetProject="D:\development\EWorkspace_dev\assp\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<table  tableName="PSSP_PRODUCT"  domainObjectName="ProductInfo"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false">	
+        </table>
+	</context>
+</generatorConfiguration>

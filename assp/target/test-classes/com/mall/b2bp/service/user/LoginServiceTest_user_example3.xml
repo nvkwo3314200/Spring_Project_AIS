@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<pssp_user ID="10003" USER_ID="dengjin" USER_NAME="dj"
+		USER_ROLE="SYSTEMADMIN" PASSWORD="e10adc3949ba59abbe56e057f20f883e" SUPPLIER_ID="2" activate="Y"
+		deactivate_date="" created_by="dengjin" created_date="2016-03-8 00:00:00" last_updated_by="dengjin"
+		last_updated_date="2016-03-8 00:00:00" TOKEN=""  />
+</dataset>

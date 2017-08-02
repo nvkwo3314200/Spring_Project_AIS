@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.dept.SubClassModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.dept.SubClassModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+     <id column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <id column="CLASS_ID" property="classId" jdbcType="DECIMAL" />
+    <id column="SUB_CLASS_ID" property="subClassId" jdbcType="DECIMAL" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="ECATEGORY_ID" property="ecategroyId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID_REAL" property="deptIdReal" jdbcType="DECIMAL" />
+    <result column="CLASS_ID_REAL" property="classIdReal" jdbcType="DECIMAL" />
+
+  </resultMap>
+    <resultMap id="FullResultMap" type="com.mall.b2bp.models.dept.SubClassModel" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+    <id column="CLASS_ID" property="classId" jdbcType="DECIMAL" />
+    <id column="SUB_CLASS_ID" property="subClassId" jdbcType="DECIMAL" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="ECATEGORY_ID" property="ecategroyId" jdbcType="VARCHAR" />
+    <result column="LOV_DESC" property="lovDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID,CLASS_ID,SUB_CLASS_ID, DESCRIPTION, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, ECATEGORY_ID,
+    LAST_UPDATED_DATE
+  </sql>
+    <sql id="Full_Column_List" >
+    ID,CLASS_ID, SUB_CLASS_ID, DESCRIPTION, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, ECATEGORY_ID,LOV_DESC,
+    LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_SUB_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+     
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_SUB_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+   
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.dept.SubClassModel" >
+    insert into PSSP_SUB_CLASS (ID,CLASS_ID, SUB_CLASS_ID, 
+      DESCRIPTION, CREATED_BY, CREATED_DATE, 
+      LAST_UPDATED_BY, LAST_UPDATED_DATE,ECATEGORY_ID)
+    values (#{id,jdbcType=DECIMAL},#{classId,jdbcType=DECIMAL}, #{subClassId,jdbcType=DECIMAL}, 
+      #{description,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}), #{ecategroyId,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.dept.SubClassModel" >
+            <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select pssp_sub_class_seq.nextval FROM DUAL
+      </selectKey>
+    insert into PSSP_SUB_CLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="subClassId != null" >
+        SUB_CLASS_ID,
+      </if>
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="ecategroyId != null" >
+        ECATEGORY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="subClassId != null" >
+        #{subClassId,jdbcType=DECIMAL},
+      </if>
+            <if test="classId != null" >
+        #{classId,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="ecategroyId != null" >
+        #{ecategroyId},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.dept.SubClassModel" >
+    update PSSP_SUB_CLASS
+    <set >
+      <if test="subClassId != null" >
+        SUB_CLASS_ID = #{subClassId,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+      <if test="ecategroyId != null" >
+        ECATEGORY_ID = #{ecategroyId}
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.dept.SubClassModel" >
+    update PSSP_SUB_CLASS
+    set DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+     SUB_CLASS_ID = #{subClassId,jdbcType=DECIMAL},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate},
+        ECATEGORY_ID = #{ecategroyId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="getAll" resultMap="BaseResultMap">
+  	SELECT * FROM PSSP_SUB_CLASS
+  </select>
+  
+  <select id="getSubClassByClassId" parameterType="String" resultMap="BaseResultMap">
+	   select 
+	   *
+	   from PSSP_SUB_CLASS
+	   where class_id = #{classId,jdbcType=VARCHAR} 
+  </select>
+  
+    <select id="checkSubClass" parameterType="java.util.Map" resultMap="BaseResultMap">
+       
+	 select * from PSSP_SUB_CLASS t
+	   where SUB_CLASS_ID=#{subClassId,jdbcType=DECIMAL}
+	   
+	   <if test="id!= null" >
+	   	AND CLASS_ID = (select t2.class_id from PSSP_SUB_CLASS t2 where t2.id = #{id,jdbcType=DECIMAL})
+       	and t.id != #{id,jdbcType=DECIMAL}
+       </if>
+       <if test="classId!= null" >
+       	AND CLASS_ID = #{classId,jdbcType=DECIMAL}
+       </if>
+     
+  </select>
+  
+    <select id="getSubClassList" resultMap="FullResultMap" parameterType="java.util.Map" >
+    select 
+  		psc.*,ss.lov_desc lov_desc
+    from PSSP_SUB_CLASS psc left join SYS_LOV ss on psc.ecategory_id=ss.lov_value and psc.class_id=#{classId} order by psc.SUB_CLASS_ID
+   
+  </select>
+  
+  
+   	<select id="getSubClasssBySupplierClassId" resultMap="BaseResultMap" parameterType="java.util.Map">
+	    select distinct(psc.id),psc.sub_class_id,psc.class_id,
+    	psc.description,psc.created_by,psc.created_date,psc.last_updated_by,
+    	psc.last_updated_date
+    	from pssp_sub_class psc,pssp_supplier_sub_class pss
+		where psc.id=pss.sub_class_id  
+		and  pss.supplier_id=#{supplierId} and pss.class_id=#{classId} order by psc.description
+  </select>
+  
+  	<select id="getAllSubClassByDesc" resultMap="BaseResultMap"  parameterType="java.util.Map">
+  	  select s.id,d.dept_id,c.class_id,s.sub_class_id, d.id || '_' || c.id || '_' || s.id as  deptClassSubclassId,
+  	  	D.id dept_id_real,
+		C.id class_id_real,
+  	  d.dept_id || '-' || d.description || '>' || c.class_id || '-' || c.description || '>' || s.sub_class_id || '-' || s.description  as description
+    from pssp_dept d, PSSP_CLASS c ,pssp_sub_class s
+    where d.id = c.dept_id and c.id = s.class_id
+        <if test="pId != null" >
+       and s.CLASS_ID in 
+                        <foreach item="item" index="index" collection="pId" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+     </if>
+      order by d.dept_id,c.class_id,s.sub_class_id
+  	</select>
+  	
+  	 <select id="getAllSelectSubClassByUserId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+      select c.id,d.dept_id,c2.class_id,c.sub_class_id, 
+      c2.id CLASS_ID_REAL,d.id DEPT_ID_REAL,
+      d.id || '_' || c2.id || '_' || c.id as  deptClassSubclassId,d.dept_id || '-' || d.description || '>' || c2.class_id || '-' || c2.description
+     || '>' || c.sub_class_id || '-' || c.description as  description from  pssp_user u,pssp_supplier_sub_class s,pssp_sub_class c,pssp_class c2,pssp_dept d
+    where u.supplier_id = s.supplier_id and s.sub_class_id = c.id and c.class_id = c2.id and c2.dept_id = d.id
+    and u.id =#{id,jdbcType=DECIMAL} 
+     group by c.id,d.dept_id,c2.class_id,c.sub_class_id, c2.id,d.id,d.id || '_' || c2.id || '_' || c.id,d.dept_id || '-' || d.description || '>' || c2.class_id || '-' || c2.description
+     || '>' || c.sub_class_id || '-' || c.description
+      order by d.dept_id,c2.class_id,c.sub_class_id
+      
+  </select> 
+  
+    <select id="getSubClassByClassIdSubClassId" parameterType="java.util.Map" resultMap="BaseResultMap">
+	   select 
+	   *
+	   from PSSP_SUB_CLASS
+	   where sub_class_id = #{subClassId,jdbcType=VARCHAR}  and class_id=#{classId,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

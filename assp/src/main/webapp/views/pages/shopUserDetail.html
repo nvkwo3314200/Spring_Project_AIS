@@ -1,0 +1,86 @@
+<!--  
+<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">{{'user_id' | translate}}</label>
+							</div>
+							<div class="col-md-3">
+								<input type="text" class="form-control" maxlength="30"
+									style="border-radius: 4px"
+			placeholder="{{'user_id' | translate}}" id="userId"
+			ng-model="searchUserInfoVo.userCode">
+	</div>
+
+	<div class="col-md-2">
+		<label class="control-label">{{'user_name' | translate}}</label>
+	</div>
+	<div class="col-md-3">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'user_name' | translate}}" id="userName"
+			ng-model="searchUserInfoVo.userName">
+	</div>
+	<div class="col-md-2">
+		<button type="button" class="btn btn-primary"
+			ng-click="initViewList();">{{'user_search' |
+			translate}}</button>
+	</div>
+</div>
+-->
+
+<div class="row">
+	<div class="col-md-12">
+		<button type="button" class="btn btn-primary"
+			ng-click="openAddUser()">{{'product_add'| translate}}
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="openAddUser('EDIT')">{{'product_edit'|
+			translate}}</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="deleteUsers()">{{'product_delete'|
+			translate}}</button>
+	</div>
+</div>
+</br>
+
+<div class="table-responsive">
+	<table st-table="vm.data"class="table table-bordered table-hover smart-table">
+		<thead>
+			<tr  class="table-header ">
+				<th row-select-all="vm.data" selected="vm.selected"
+					ng-click="vm.selectAll(vm.data)"></th>
+				<th ng-hide='true'></th>
+				<th>{{'user_id' | translate}}</th>
+				<th>{{'user_name' | translate}}</th>
+				<th>{{'system_shop_role_type_no' | translate}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in vm.data"  id="tr{{row.id}}"  ng-click="vm.select(row)" >
+				<td row-select="row" ></td>
+				<td ng-hide='true'>{{row.id}}</td>
+				<td>
+					{{row.userCode}}
+				</td>
+				<td>
+					{{row.userName}}
+				</td>
+				<td>
+					<p style="display:inline;" ng-repeat=" role in row.subRoleModelList">
+						{{role.roleName}} ,
+					</p>
+				</td>
+			</tr>
+			<tfoot>
+				<tr>
+					<td colspan="8" class="text-center">
+						<div st-items-by-page="page" st-pagination=""
+							st-template="./views/pages/pagination_custom.html">
+							</div>
+								<div ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                               			<input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+					</td>
+				</tr>
+			</tfoot>
+		</tbody>
+	</table>
+</div>

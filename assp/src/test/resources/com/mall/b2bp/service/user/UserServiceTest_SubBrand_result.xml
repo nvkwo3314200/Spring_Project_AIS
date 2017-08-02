@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_SUPPLIER_BRAND
+    ID="1000001"
+	SUPPLIER_ID="2"
+	BRAND_CODE="002"
+	CREATED_BY="ADMIN"
+    CREATED_DATE="2016-03-11 00:00:00"
+    LAST_UPDATED_BY="ADMIN"
+    LAST_UPDATED_DATE="2016-03-11 00:00:00"
+    />
+</dataset>
+

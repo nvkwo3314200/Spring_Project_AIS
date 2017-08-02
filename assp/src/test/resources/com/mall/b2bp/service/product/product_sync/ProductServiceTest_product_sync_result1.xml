@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+
+    
+<PSSP_PRODUCT
+    BASE_PRODUCT_CODE="6"
+    SUPPLIER_CODE="2"
+    SHORT_DESC_EN="test2"
+    DELIVERY_MODE="SDD"
+    STATUS="DRAFT"
+    SUPPLIER_PRODUCT_CODE="bbb"
+
+    VERSION="STAGING"/>    
+</dataset>

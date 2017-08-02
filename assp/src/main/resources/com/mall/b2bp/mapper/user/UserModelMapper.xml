@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.user.UserModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.user.UserModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_CODE" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_ROLE" property="userRole" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_IND" property="activate" jdbcType="VARCHAR" />
+    <!-- 
+    <result column="DEACTIVATE_DATE" property="deactivateDate" jdbcType="DATE" />
+     -->
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <!-- 
+    <result column="CONTACT_NO" property="contactNo" jdbcType="VARCHAR" />
+     -->
+    <!-- 
+    <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR" />
+     --> 
+    <result column="LOGIN_FAIL_TIMES" property="loginFailTimes" jdbcType="DECIMAL" /> 
+  </resultMap>
+  
+   <resultMap id="SupplierBrandResultMap" type="com.mall.b2bp.vos.user.SupplierBrandVo">
+    <result column="brandCode" property="brandCode" jdbcType="VARCHAR" />
+     <result column="brandValue" property="brandValue" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="supplierListResultMap" type="com.mall.b2bp.models.user.UserModel" extends="BaseResultMap">
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  
+   <resultMap id="SupplierLovResultMap" type="com.mall.b2bp.vos.user.SupplierLovVo" >
+    <result column="lovCode" property="lovCode" jdbcType="VARCHAR" />
+     <result column="lovValue" property="lovValue" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_CODE, USER_NAME, SUPPLIER_ID, ACTIVE_IND, CREATED_BY, 
+    CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, PASSWORD,TOKEN,Email,LOGIN_FAIL_TIMES
+  </sql>
+  
+   <sql id="Base_Column_List2" >
+    ID as id, USER_ID as userId, USER_NAME as userName, USER_ROLE as userRole, 
+    SUPPLIER_ID as supplierId, ACTIVATE as activate, 
+    DEACTIVATE_DATE as deactivateDate, CREATED_BY as createdBy, 
+    CREATED_DATE as createdDate, LAST_UPDATED_BY as lastUpdatedBy, 
+    LAST_UPDATED_DATE as lastUpdatedDate, PASSWORD as password,TOKEN as token,EMAIL as email,
+    CONTACT_NO as contactNo,SESSION_LANG as sessionLang,LAST_LOGIN_DATE as lastLoginDate,
+    LOGIN_FAIL_TIMES as loginFailTimes
+  </sql>
+  
+  <sql id="user_view_List" >
+    P.ID, P.USER_ID, P.USER_NAME, P.USER_ROLE, P.SUPPLIER_ID, P.ACTIVATE, P.DEACTIVATE_DATE, P.CREATED_BY, 
+    P.CREATED_DATE, P.LAST_UPDATED_BY, P.LAST_UPDATED_DATE, P.PASSWORD,P.TOKEN,P.Email,P.CONTACT_NO
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+    <select id="forgetPassword" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where 1=1
+      <if test="email != null" >
+       and email=#{email,jdbcType=VARCHAR}
+      </if>
+      <if test="token != null" >
+        and token=#{token,jdbcType=VARCHAR}
+      </if>          
+    
+  </select>
+  
+  
+  
+   <select id="selectUserByUserId" resultType="com.mall.b2bp.models.user.UserModel" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where USER_CODE = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectUserByUserEmail" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List2" />
+    from SYS_USER
+    where EMAIL = #{email,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.user.UserModel" >
+    insert into SYS_USER (ID, USER_ID, USER_NAME, 
+      USER_ROLE, SUPPLIER_ID, ACTIVATE, 
+      DEACTIVATE_DATE, CREATED_BY, CREATED_DATE, 
+      LAST_UPDATED_BY, LAST_UPDATED_DATE, PASSWORD,TOKEN
+      )
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userRole,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}, #{activate,jdbcType=VARCHAR}, 
+      #{deactivateDate}, #{createdBy,jdbcType=VARCHAR}, #{createdDate}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}, #{password,jdbcType=VARCHAR},#{token,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.user.UserModel" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select SYS_USER_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userRole != null" >
+        USER_ROLE,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="activate != null" >
+        ACTIVATE,
+      </if>
+      <if test="deactivateDate != null" >
+        DEACTIVATE_DATE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+       <if test="token != null" >
+        TOKEN,
+      </if>
+       <if test="email != null" >
+        EMAIL,
+      </if>
+     <if test="contactNo != null" >
+        CONTACT_NO
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="activate != null" >
+        #{activate,jdbcType=VARCHAR},
+      </if>
+      <if test="deactivateDate != null" >
+        #{deactivateDate},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+
+             <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="contactNo != null" >
+        #{contactNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.user.UserModel" >
+
+    update SYS_USER
+    <set >
+      <if test="userId != null" >
+        USER_CODE = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      
+      	 <if test="supplierId != null" >
+	        	SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+	      </if>
+	      
+     <!--  <if test="supplierId != null" >
+	        <if test="userRole == 'SUPPLIER'" >
+	        	SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+	      </if>
+	        <if test="userRole != 'SUPPLIER'" >
+	        	SUPPLIER_ID = null,
+	      </if>
+      </if>
+       -->
+      <if test="activate != null" >
+        ACTIVE_IND = #{activate,jdbcType=VARCHAR},
+      </if>
+      <if test="deactivateDate != null" >
+        DEACTIVATE_DATE = #{deactivateDate},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        TOKEN = #{token,jdbcType=VARCHAR},
+      </if>
+        <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+        <if test="contactNo != null" >
+        CONTACT_NO = #{contactNo,jdbcType=VARCHAR},
+      </if>
+    <if test="lastChangePwdDate != null" >
+        LAST_CHANGE_PWD_DATE = #{lastChangePwdDate},
+      </if>
+          <if test="lastLoginDate != null" >
+        LAST_LOGIN_DATE = #{lastLoginDate},
+      </if>
+      <if test="sessionLang != null" >
+        SESSION_LANG = #{sessionLang,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="loginFailTimes != null" >
+        LOGIN_FAIL_TIMES = #{loginFailTimes,jdbcType=DECIMAL},
+      </if>
+      
+      
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.user.UserModel" >
+    update SYS_USER
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ROLE = #{userRole,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      ACTIVATE = #{activate,jdbcType=VARCHAR},
+      DEACTIVATE_DATE = #{deactivateDate},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      TOKEN = #{token,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+   <update id="updateTokenByUserId" parameterType="com.mall.b2bp.models.user.UserModel" >
+    update SYS_USER
+    set TOKEN = #{token,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+   <select id="selectUserList" resultMap="supplierListResultMap" parameterType="com.mall.b2bp.vos.user.UserVo" >
+   select 
+       P.ID, P.USER_ID, P.USER_NAME, P.USER_ROLE, P.SUPPLIER_ID, P.ACTIVATE, P.DEACTIVATE_DATE, P.CREATED_BY, 
+    P.CREATED_DATE, P.LAST_UPDATED_BY, P.LAST_UPDATED_DATE, P.PASSWORD,P.TOKEN,P.Email,P.CONTACT_NO,
+    pu.shop_name_en supplier_name
+    from SYS_USER P,
+    supplier pu  
+    
+     where 1=1 and p.supplier_id = pu.id(+)
+     
+     <if test="supplierId !=null">
+		  AND  p.SUPPLIER_ID like '%'||#{supplierId}||'%'
+     </if>
+     <if test="userId !=null">
+		  AND  P.user_id like '%'||#{userId}||'%'
+     </if>
+        <if test="userName !=null">
+		  AND  UPPER( P.user_name) like '%'||UPPER(#{userName})||'%'
+     </if>
+     <if test="userRole !=null">
+		  AND  P.user_role = #{userRole,jdbcType=VARCHAR}
+     </if>
+     <if test="email !=null">
+		  AND  P.email like '%'||#{email}||'%'
+     </if>
+     <if test="activate !=null">
+		  AND  P.activate = #{activate,jdbcType=VARCHAR}
+      </if>
+      <if test="contactNo !=null">
+		  AND UPPER( P.contact_no) like '%'|| UPPER(#{contactNo,jdbcType=VARCHAR} )||'%'
+      </if>
+     order by   P.user_id asc
+  </select>
+  <select id="getUserModeListByEmail" parameterType="java.util.Map" resultMap="BaseResultMap">
+	 select *
+     from SYS_USER   
+	 where EMAIL= #{email,jdbcType=VARCHAR}
+   	 <if test="id != null" >
+       and ID != #{id,jdbcType=DECIMAL}
+     </if>
+  </select>
+  
+  <select id="getSupplierLovByUserId" resultMap="SupplierLovResultMap" parameterType="java.math.BigDecimal">
+select distinct p2.lov_value as lovCode,p2.lov_value || '-' || p2.lov_desc as lovValue from SYS_USER u ,supplier_category p1,SYS_LOV p2
+where u.supplier_id = p1.supplier_id and p1.category_id = p2.lov_value
+and u.id = #{id,jdbcType=DECIMAL}  and p2.lov_id=789 
+order by lovCode
+  </select>
+  
+
+  
+  <select id="getAllUserBySupplierId" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.user.UserViewVo">
+  	select * from SYS_USER t where 1=1 
+  	 <if test="supplierId !=null">
+		  and  t.supplier_id = #{supplierId,jdbcType=VARCHAR}
+     </if>
+     <if test="userId !=null">
+		  	<![CDATA[ and  t.user_id <>  #{userId,jdbcType=VARCHAR} ]]>
+     </if>
+  </select>
+  
+  <select id="getUserBySupplierId" resultType="com.mall.b2bp.models.user.UserModel" parameterType="String">
+  	select * from SYS_USER p where p.supplier_id = #{supplierId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <update id="updateUserForLoginSuccess" parameterType="com.mall.b2bp.models.user.UserModel" >
+  UPDATE SYS_USER T
+   SET 
+       LOGIN_FAIL_TIMES =0,
+       
+       LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+       LAST_UPDATED_DATE = #{lastUpdatedDate},
+       last_login_date = #{lastUpdatedDate}
+   WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateUserForLoginFailTime" parameterType="com.mall.b2bp.models.user.UserModel" >
+  UPDATE SYS_USER T
+   SET 
+       T.LOGIN_FAIL_TIMES =(NVL(T.LOGIN_FAIL_TIMES, 0) + 1),
+       T.ACTIVATE = (CASE WHEN NVL(T.LOGIN_FAIL_TIMES, 0) >= 4 THEN 'N' ELSE T.ACTIVATE  END ),
+       LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+       LAST_UPDATED_DATE = #{lastUpdatedDate}
+   WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+  
+</mapper>

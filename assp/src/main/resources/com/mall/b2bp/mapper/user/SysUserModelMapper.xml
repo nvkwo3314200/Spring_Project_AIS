@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.user.SysUserModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.user.SysUserModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_CODE" property="userCode" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="ACTIVE_IND" property="activeInd" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_CODE, USER_NAME, PASSWORD, SUPPLIER_ID, ACTIVE_IND, CREATED_BY, CREATED_DATE, 
+    LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectListByVo" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.user.SysUserViewVo" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where 1=1
+    <if test="id != null">
+    	AND ID = #{id,jdbcType=DECIMAL}
+    </if>
+    <if test="userCode !=null">
+        AND	USER_CODE like '%'||#{userCode}||'%'
+    </if>
+    <if test="userName !=null">
+    	AND	UPPER(USER_NAME) like '%'||UPPER(#{userName})||'%'
+    </if>
+    <if test="shopId !=null">
+    	AND	SUPPLIER_ID = #{shopId, jdbcType=VARCHAR}
+    </if>
+    <if test="activeInd !=null">
+    	AND ACTIVE_IND= #{activeInd, jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+ 
+  <insert id="insert" parameterType="com.mall.b2bp.models.user.SysUserModel" >
+    insert into SYS_USER (ID, USER_CODE, USER_NAME, 
+      PASSWORD, SUPPLIER_ID, ACTIVE_IND, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{shopId,jdbcType=DECIMAL}, #{activeInd,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.user.SysUserModel" >
+  	insert into SYS_USER 
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+         select SYS_USER_ID_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="shopId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="activeInd != null" >
+        ACTIVE_IND,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="activeInd != null" >
+        #{activeInd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.user.SysUserModel" >
+    update SYS_USER
+    <set >
+      <if test="userCode != null" >
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        SUPPLIER_ID = #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="activeInd != null" >
+        ACTIVE_IND = #{activeInd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.user.SysUserModel" >
+    update SYS_USER
+    set USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{shopId,jdbcType=DECIMAL},
+      ACTIVE_IND = #{activeInd,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,50 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        {{'cron_job' | translate}}
+    </h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body">
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+						<div class="table-responsive">
+
+
+							<table st-table="cronJobList"
+								class="table table-bordered table-hover smart-table">
+								<thead>
+									<tr class="table-header ">
+										<th st-sort="userId">{{'cron_job' | translate}}</th>
+										<th >{{'cron_job_action' | translate}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in cronJobList">
+										<td>{{row.jobName}}</td>
+										<td>
+		                                    <button  type="button" class="btn btn-primary" ng-click="run(row.jobId)">
+			                                    {{'cron_job_run' | translate}}
+			                                </button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+                    
+               </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.supplier.SupplierSubModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.supplier.SupplierSubModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="CLASS_ID" property="classId" jdbcType="DECIMAL" />
+    <result column="SUB_CLASS_ID" property="subClassId" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SUPPLIER_ID, DEPT_ID, CLASS_ID, SUB_CLASS_ID, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+    LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_SUPPLIER_SUB_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_SUPPLIER_SUB_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteBySupplierId" parameterType="String" >
+    delete from PSSP_SUPPLIER_SUB_CLASS
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.supplier.SupplierSubModel" >
+   <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_SUPPLIER_SUB_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PSSP_SUPPLIER_SUB_CLASS (ID, SUPPLIER_ID, DEPT_ID, 
+      CLASS_ID, SUB_CLASS_ID, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{supplierId,jdbcType=VARCHAR}, #{deptId,jdbcType=DECIMAL}, 
+      #{classId,jdbcType=DECIMAL}, #{subClassId,jdbcType=DECIMAL}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.supplier.SupplierSubModel" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_SUPPLIER_SUB_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PSSP_SUPPLIER_SUB_CLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="subClassId != null" >
+        SUB_CLASS_ID,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=DECIMAL},
+      </if>
+      <if test="subClassId != null" >
+        #{subClassId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.supplier.SupplierSubModel" >
+    update PSSP_SUPPLIER_SUB_CLASS
+    <set >
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="classId != null" >
+        CLASS_ID = #{classId,jdbcType=DECIMAL},
+      </if>
+      <if test="subClassId != null" >
+        SUB_CLASS_ID = #{subClassId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.supplier.SupplierSubModel" >
+    update PSSP_SUPPLIER_SUB_CLASS
+    set SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      CLASS_ID = #{classId,jdbcType=DECIMAL},
+      SUB_CLASS_ID = #{subClassId,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

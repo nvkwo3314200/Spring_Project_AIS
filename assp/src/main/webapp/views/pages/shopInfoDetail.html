@@ -1,0 +1,365 @@
+<div class="row">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_name' | translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control"
+			maxlength="30" style="border-radius: 4px"
+			placeholder="{{'system_shop_name' | translate}}" id="shopName"
+			ng-model="shopInfo.shopBasicInfo.shopName" ng-disabled="state">
+	</div>
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_id' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_id' |translate}}" id="shopId"
+			ng-blur="checkUnq('code');"
+			ng-model="shopInfo.shopBasicInfo.shopCode"
+			ng-disabled="state || isEdit">
+	</div>
+</div>
+
+<div class="row" >
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.shopName==null && isSaveCk">
+			shop Name is required
+		</span>
+	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.shopCode==null && isSaveCk">
+			Shop Id is required
+		</span>
+		<span style="color:red" ng-show="codeError">
+			Shop Id already exists
+		</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_principal' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_principal' | translate}}"
+			id="principal" ng-model="shopInfo.shopBasicInfo.respPerson" 
+			ng-disabled="state">
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.respPerson==null && isSaveCk">
+			Principal is required
+		</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_contact' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_contact' | translate}}"
+			id="contant" ng-model="shopInfo.shopBasicInfo.contactPerson" 
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_contact_email' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_contact_email' | translate}}"
+			id="contantEmail"
+			ng-model="shopInfo.shopBasicInfo.contactEmail" 
+			ng-disabled="state">
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.contactPerson==null && isSaveCk">
+			Contact Person is required
+		</span>
+	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.contactEmail==null && isSaveCk">
+			Contact email is required
+		</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<label class="control-label">{{'system_shop_phone' | translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_phone' | translate}}" id="phone"
+			ng-model="shopInfo.shopBasicInfo.telNo" 
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'system_shop_fax' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_fax' | translate}}" id="fax"
+			ng-model="shopInfo.shopBasicInfo.fax" 
+			ng-disabled="state">
+	</div>
+	<!-- 
+	<div class="col-md-2 ">
+		<label class="control-label">{{'activate' | translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="checkbox" ng-model="activate2" ng-true-value="'Y'"
+			ng-false-value="'N'">
+	</div>
+	 -->
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		<label class="control-label">{{'system_shop_address' |
+			translate}}</label>
+	</div>
+	<div class="col-md-4 longdiv">
+		<input type="text" class="form-control" maxlength="300"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_address' | translate}}"
+			id="address" ng-model="shopInfo.shopBasicInfo.address" 
+			ng-disabled="state">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4 longdiv">
+		<input type="text" class="form-control" maxlength="300"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_address' | translate}}"
+			ng-model="shopInfo.shopBasicInfo.address2" 
+			ng-disabled="state">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4 longdiv">
+		<input type="text" class="form-control" maxlength="300"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_address' | translate}}"
+			ng-model="shopInfo.shopBasicInfo.address3" 
+			ng-disabled="state">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4 longdiv">
+		<input type="text" class="form-control" maxlength="300"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_address' | translate}}"
+			ng-model="shopInfo.shopBasicInfo.address4" 
+			ng-disabled="state">
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_status_owner'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<select class="form-control"
+			ng-model="shopInfo.shopBasicInfo.ownerStatus"
+			ng-options="option.code as option.description for option in ownerStatuses"
+			ng-disabled="state">
+		</select>
+	</div>
+</div>
+
+<!--  
+<div class="row">
+	<div class="col-md-2">
+		<label class="control-label">{{'system_shop_contract_effective_date'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_contract_effective_date' | translate}}"
+			id="contractEffectiveDate"
+			ng-model="shopInfo.shopBasicInfo.contractStartDate" 
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_contract_expire_date'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_contract_expire_date' | translate}}"
+			id="contractExprieDate"
+			ng-model="shopInfo.shopBasicInfo.contractEndDate" 
+			ng-disabled="state">
+	</div>
+</div>
+-->
+
+<div class="row">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_website_name'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_website_name' | translate}}"
+			id="websiteName" ng-model="shopInfo.shopBasicInfo.websiteName" 
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_domain_name'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			ng-blur="checkUnq('websiteDomain');"
+			placeholder="{{'system_shop_domain_name' | translate}}"
+			id="domainName" ng-model="shopInfo.shopBasicInfo.websiteDomain" 
+			ng-disabled="state">
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.websiteName==null && isSaveCk">
+			Website Name is required
+		</span>
+	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.websiteDomain==null && isSaveCk">
+			Website Domain is required
+		</span>
+		<span style="color:red" ng-show="websiteDomainError">
+			Website Domain already exists
+		</span>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_domain_suffix'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_domain_suffix' | translate}}"
+			id="domainSuffix"
+			ng-model="shopInfo.shopBasicInfo.domainSuffix" 
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2 required">
+		<label class="control-label">{{'system_shop_customer_service_email'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px"
+			placeholder="{{'system_shop_customer_service_email' | translate}}"
+			id="serviceEmail"
+			ng-blur="checkUnq('websiteEmailDomain')";
+			ng-model="shopInfo.shopBasicInfo.websiteEmailDomain" 
+			ng-disabled="state">
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-4">
+		<span style="color:red" ng-show="shopInfo.shopBasicInfo.websiteEmailDomain==null && isSaveCk">
+			Service email is required
+		</span>
+		<span style="color:red" ng-show="websiteEmailDomainError">
+			Service email already exists
+		</span>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_use_shopping_cart'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<input type="checkbox"
+			ng-model="shopInfo.shopBasicInfo.useShoppingCart"
+			ng-true-value="'Y'" ng-false-value="'N'"
+			ng-disabled="state">
+	</div>
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_website_status_owner'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<select class="form-control"
+			ng-model="shopInfo.shopBasicInfo.ownerWebSiteStatus"
+			ng-options="option.code as option.description for option in websiteStatuses"
+			ng-disabled="state">
+		</select>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_website_online_time'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<p>{{shopInfo.shopBasicInfo.websiteOnlineDate}}</p>
+	</div>
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_website_off_line_time'
+			| translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<p>{{shopInfo.shopBasicInfo.websiteInactiveDate}}</p>
+	</div>
+</div>
+<div class="shop_foot">
+	<div class="row">
+		<div class="col-md-12 text-right">
+			<button type="button" class="btn btn-primary ng-binding"
+				ng-click="save(shopInfo.shopBasicInfo.id)" 
+				ng-if="!state">{{'button_save'| translate}}</button>
+			<button type="button" class="btn btn-primary" id="cancel2"
+				ng-click="cancel2()">{{'button_cancel' | translate}}</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+
+
+<PSSP_PRODUCT
+ID="11"
+    PRODUCT_CODE="3-1111-55513"
+    BASE_PRODUCT_CODE="4"
+    SUPPLIER_CODE="2"
+    SHORT_DESC_EN="test"
+    SHORT_DESC_TC="null"
+    DELIVERY_MODE="SDD"
+    STATUS="APPROVED"
+    SUPPLIER_PRODUCT_CODE="aaa"
+    VERSION="STAGING"
+CREATED_BY="UNITTEST"
+CREATED_DATE="2016-03-11 00:00:00"
+LAST_UPDATED_BY="UNITTEST"
+LAST_UPDATED_DATE="2016-03-11 00:00:00"
+    />
+    
+        <PSSP_PRODUCT_AUDIT/>
+
+    
+    <PSSP_PRODUCT_IMAGES
+    	id="1"
+    	product_id="11"
+    	file_name="sdf.jpg"
+		file_path="20160332323_abc.jpg"
+		description="测试1图片"
+		sequence="1"
+        image_type="PRODUCT_IMAGE"
+        CREATED_BY="UNITTEST"
+        CREATED_DATE="2016-03-11 00:00:00"
+        LAST_UPDATED_BY="UNITTEST"
+        LAST_UPDATED_DATE="2016-03-11 00:00:00"
+    />
+
+    <PSSP_PRODUCT_BARCODE/>
+    <AUDIT_PSSP_PRODUCT/>
+
+</dataset>
+

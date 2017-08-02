@@ -1,0 +1,66 @@
+<!-- Content Header (Page header) -->
+
+<!-- Main content -->
+<section class="content">
+
+	Delivery Confirm
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+<br/>
+					
+
+					<div class="row">
+					<div class="col-md-12">
+						{{deliveryMessage}}
+						</div>
+					</div>
+						
+						<br/>
+					<div class="row"  ng-if="showTrackId ">
+						
+						<div class="col-md-3">
+						 <label >Track ID </label>
+						</div>
+       
+						 <div class="col-md-7"><input class="form-control"  type="text" ng-model="popupOrder.trackId2" maxlength="50" 
+						 style="border-radius: 4px; "></div>
+						
+					</div>
+					
+<br/>
+
+					<div class="row">
+						<div class="col-md-12 text-right">
+							
+							<button type="button" ng-click="deliveryConfirm()" class="btn btn-primary" ng-if="!orderShipConfirmDisable">Delivery Confirm</button>
+
+							<button type="button" class="btn btn-primary" ng-click="cancelDeliveryConfirm()">Cancel</button>
+
+						</div>
+					</div>
+
+				
+
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+</section>
+</section>
+
+
+

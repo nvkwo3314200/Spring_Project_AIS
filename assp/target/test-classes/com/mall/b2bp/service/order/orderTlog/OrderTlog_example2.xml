@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+ 
+            
+            
+   
+  <PSSP_ORDER_TLOG
+    
+       HYBRIS_ORDER_ID="19000000"
+       SKU_ID="1092067"
+       TRANSACTION_DATE="2016-03-11 00:00:00"
+       ORDER_CREATED_DATE="2016-03-11 00:00:00"
+       AMOUNT="11"
+       QTY="11"
+       NET_SALES="11"
+       TYPE_OF_DISTRIBUTION="11"
+/>
+  
+  
+  
+   
+</dataset>

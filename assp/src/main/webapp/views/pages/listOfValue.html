@@ -1,0 +1,158 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{'list_of_value_manager'|translate}}</h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+
+
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+ <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+					<div class="row">
+
+
+						<div class="col-md-2">
+							<label>{{'list_of_value'|translate}}</label>
+						</div>
+						<div class="col-md-9">
+							<select id="lovId" class="input-inline"
+								style="width: 140px; height: 35px; border-radius: 4px"
+								ng-model="lovId" placeholder="Please select value"
+								ng-change="getValueList()"
+								ng-options="item.lovValue as item.lovDesc for item in valueList">
+							</select>
+						</div>
+					</div>
+
+
+
+
+					<form name="forms" id="forms" >
+
+
+						<div class="row" ng-if="showTable">
+
+
+
+							<div class="col-md-12 text-right">
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="updateValue()">{{'save_button'|translate}}</button>
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="openDelete()">{{'button_delete'|translate}}
+								</button>
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="openAdd()">{{'button_add'|translate}}</button>
+
+							</div>
+						</div>
+
+
+
+						<div class="table-responsive" ng-if="showTable && !showCategory">
+
+							<table st-table="vm.data" st-safe-src="vm.rowCollection"
+								class="table table-bordered table-hover smart-table" novalidate>
+
+								<thead>
+									<tr>
+										<th st-ratio="1" row-select-all="vm.data"
+											selected="vm.selected" ng-click="vm.selectAll(vm.data)"></th>
+										<th st-ratio="11">{{'lov_value'|translate}}</th>
+										<th st-ratio="10">{{'lov_description'|translate}}</th>
+										<th st-ratio="5">{{'lov_drag_drop'|translate}}</th>
+									</tr>
+								</thead>
+								<tbody class="columns" html-sortable="sortable_option"
+									ng-model="vm.data">
+
+									<tr class="columnrow" ng-repeat="row in vm.data">
+
+										<td row-select="row" ng-click="vm.select(row)"></td>
+										<td><input type="text" style="border-radius: 4px" ng-model="row.lovValue" class="form-control" maxlength="30">
+										
+										</td>
+										<td><input type="text" style="border-radius: 4px" ng-model="row.lovDesc" class="form-control" maxlength="255">
+										
+										</td>
+										<td class="nothandle handpaint "> <div class="drom-order">&nbsp;</div>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-responsive" ng-if="showTable && showCategory">
+
+							<table st-table="vm.data" st-safe-src="vm.rowCollection"
+								class="table table-bordered table-hover smart-table">
+
+								<thead>
+									<tr>
+										<th st-ratio="1" row-select-all="vm.data"
+											selected="vm.selected" ng-click="vm.selectAll(vm.data)"></th>
+										<th st-ratio="15">{{'lov_value'|translate}}</th>
+										<th st-ratio="15">{{'lov_description'|translate}}</th>
+									</tr>
+								</thead>
+								<tbody class="columns" ng-model="vm.data">
+
+									<tr class="columnrow" ng-repeat="row in vm.data">
+
+										<td row-select="row" ng-click="vm.select(row)"></td>
+										<td><input type="text" style="border-radius: 4px"
+											ng-model="row.lovValue" class="form-control"></td>
+										<td><input type="text" style="border-radius: 4px"
+											ng-model="row.lovDesc" class="form-control"></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+
+
+						<div class="row" ng-if="showTable">
+							<div class="col-md-12 text-right">
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="updateValue()">{{'save_button'|translate}}</button>
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="openDelete()">{{'button_delete'|translate}}
+								</button>
+
+
+								<button type="button" class="btn btn-primary"
+									ng-click="openAdd()">{{'button_add'|translate}}</button>
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

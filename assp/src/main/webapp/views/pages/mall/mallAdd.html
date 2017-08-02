@@ -1,0 +1,75 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{state?'sys_button_view':'sys_label_add_edit'|translate}} {{'mall'|translate}}</h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="alert.close($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+					<div class="row">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'common_code'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="20"
+								 placeholder="{{'common_code'|translate}}"
+								required
+								ng-model="mallVo.code"
+								onkeyup="this.value=this.value.toUpperCase()"
+								ng-blur="checkCode(mallVo.code);"
+								ng-disabled="mallVo.falg">
+						</div>
+					</div>
+					<div class="row" >
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="mallVo.code==null && isSaveCk">
+								{{'common_code_required'|translate}}
+							</span>
+							<span style="color:red" ng-show="mallVo.code!=null && codeUn">
+								{{'common_code_exist'|translate}}
+							</span>
+						</div>
+						</div>
+					<div class="row" style="margin-top:10">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'common_name'|translate}}</label>
+						</div>
+						<div class="col-md-4">						
+							<input type="text" class="form-control" required maxlength="100"
+								ng-disabled="state"
+								 placeholder="{{'common_name'|translate}}"
+								ng-model="mallVo.name">
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="mallVo.name==null && isSaveCk">
+								{{'common_name_required'|translate}}
+							</span>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-md-12 text-right">
+						<button type="button" class="btn btn-primary"  ng-if="!state"
+							ng-click="save()">{{'sys_button_save'|translate}}</button>
+						<button type="button" class="btn btn-primary" ng-click="cancel()">{{'sys_button_cancel'|translate}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+

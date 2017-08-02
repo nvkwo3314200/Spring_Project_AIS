@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductAuditModelMapper">
+    <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductAuditModel">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="PRODUCT_ID" property="productId" jdbcType="DECIMAL"/>
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+
+        <result column="ACTION" property="action" jdbcType="VARCHAR"/>
+        <result column="ACTION_TIME" property="actionTime" />
+        <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="CREATED_DATE" property="createdDate" jdbcType="DATE"/>
+        <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR"/>
+        <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, PRODUCT_ID, USER_ID, ACTION, ACTION_TIME, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+    LAST_UPDATED_DATE, STATUS
+  </sql>
+
+    <select id="viewHistory" resultMap="BaseResultMap"
+            parameterType="com.mall.b2bp.vos.product.ProductAuditVo">
+
+
+        select  pa.*
+        from PRODUCT_AUDIT PA,
+
+        (select *
+        from (select p1.*
+        from PRODUCT p1
+        where p1.id = #{productId}
+
+        union all
+
+        select p2.*
+        from PRODUCT p2
+        where p2.product_code =
+        (select product_code from PRODUCT where id = #{productId})
+          and p2.id != #{productId}
+        )) PR
+
+        WHERE PA.PRODUCT_ID = PR.ID
+
+
+        <if test="action != null and action != ''" >
+            AND UPPER(PA.action)  like '%'||UPPER(#{action})||'%'
+        </if>
+
+
+        <if test="userId != null and userId!=''">
+            AND UPPER(PA.USER_ID)  like '%'||UPPER(#{userId})||'%'
+        </if>
+
+
+        <if test="actionTimeFrom !=null">
+            AND to_char(pa.ACTION_TIME,'yyyyMMdd') >= to_char(#{actionTimeFrom,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="actionTimeTo !=null">
+             <![CDATA[AND  to_char(pa.ACTION_TIME,'yyyyMMdd') <= to_char(#{actionTimeTo,jdbcType=DATE},'yyyyMMdd')]]>
+        </if>
+
+        order by PA.CREATED_DATE DESC
+
+    </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List"/>
+        from PRODUCT_AUDIT
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from PRODUCT_AUDIT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductAuditModel">
+    insert into PRODUCT_AUDIT (ID, PRODUCT_ID, USER_ID, 
+      ACTION, ACTION_TIME, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, 
+      STATUS)
+    values (#{id,jdbcType=DECIMAL}, #{productId,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, 
+      #{action,jdbcType=VARCHAR}, #{actionTime,jdbcType=DATE}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductAuditModel">
+        insert into PRODUCT_AUDIT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="productId != null">
+                PRODUCT_ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="action != null">
+                ACTION,
+            </if>
+            <if test="actionTime != null">
+                ACTION_TIME,
+            </if>
+            <if test="createdBy != null">
+                CREATED_BY,
+            </if>
+            <if test="createdDate != null">
+                CREATED_DATE,
+            </if>
+            <if test="lastUpdatedBy != null">
+                LAST_UPDATED_BY,
+            </if>
+            <if test="lastUpdatedDate != null">
+                LAST_UPDATED_DATE,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=DECIMAL},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="action != null">
+                #{action,jdbcType=VARCHAR},
+            </if>
+            <if test="actionTime != null">
+                #{actionTime,jdbcType=DATE},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=DATE},
+            </if>
+            <if test="lastUpdatedBy != null">
+                #{lastUpdatedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdatedDate != null">
+                #{lastUpdatedDate,jdbcType=DATE},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.ProductAuditModel">
+        update PRODUCT_AUDIT
+        <set>
+            <if test="productId != null">
+                PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="action != null">
+                ACTION = #{action,jdbcType=VARCHAR},
+            </if>
+            <if test="actionTime != null">
+                ACTION_TIME = #{actionTime,jdbcType=DATE},
+            </if>
+            <if test="createdBy != null">
+                CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                CREATED_DATE = #{createdDate,jdbcType=DATE},
+            </if>
+            <if test="lastUpdatedBy != null">
+                LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdatedDate != null">
+                LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.ProductAuditModel">
+    update PRODUCT_AUDIT
+    set PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=DECIMAL},
+      ACTION = #{action,jdbcType=VARCHAR},
+      ACTION_TIME = #{actionTime,jdbcType=DATE},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <delete id="deleteByProductId" parameterType="String">
+    delete from PRODUCT_AUDIT
+    where PRODUCT_ID = #{productId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteBySupplierId" parameterType="String">
+    delete from PRODUCT_AUDIT
+    where PRODUCT_ID = (select id from PRODUCT  where SUPPLIER_CODE = 
+    	#{supplierCode,jdbcType=VARCHAR}  and DELIVERY_FEE_PRODUCT_IND ='Y' and rownum = 1)
+  </delete>
+  
+  
+  
+</mapper>

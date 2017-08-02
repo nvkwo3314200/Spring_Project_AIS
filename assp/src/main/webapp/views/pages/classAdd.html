@@ -1,0 +1,78 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>
+	{{'class_manager'|translate}}
+		
+	</h1>
+	
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body" style="height:300px;">
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+
+                    
+                    <div class="row">
+					  <div class="col-md-6 "><label class="control-label">{{'dept_label_id'|translate}}</label></div>
+					  <div class="col-md-6">
+						  	<input type="text" class="form-control"   maxlength="30" style="border-radius:4px"    ng-model="deptId" disabled>
+					  </div>
+					  </div>
+					   <div class="row">
+					   <div class="col-md-6 "><label class="control-label">{{'dept_label_description'|translate}}</label></div>
+					  <div class="col-md-6">
+						  	<input type="text" class="form-control" maxlength="255" style="border-radius:4px"    ng-model="deptDescripton" disabled>
+					  </div>
+					</div>
+                    
+                    <div class="row">
+					  <div class="col-md-6 required"><label class="control-label">{{'label_id'|translate}}</label></div>
+					  <div class="col-md-6">
+						  	<input type="text" class="form-control"   maxlength="30" style="border-radius:4px"  id="valId"  ng-model="valId">
+					  </div>
+					  </div>
+					   <div class="row">
+					   <div class="col-md-6 required"><label class="control-label">{{'label_description'|translate}}</label></div>
+					  <div class="col-md-6">
+						  	<input type="text" class="form-control" maxlength="255" style="border-radius:4px"  id="lovDesc"  ng-model="valDesc">
+					  </div>
+					</div>
+				
+				 
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+
+                         <button type="button" class="btn btn-primary ng-binding"  ng-click="addClass()">
+                                	 {{'button_save'|translate}}
+                                </button>
+                                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="closeThisDialog(0)">{{'button_cancel'
+                                    | translate}}
+                                </button>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</section>
+<!-- /.content -->

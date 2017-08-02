@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+ 		<pssp_user ID="1000001"
+ 	  USER_ID="DJTEST"
+ 	  USER_NAME="dj666"
+	  USER_ROLE="SYSTEMADMIN" 
+	  SUPPLIER_ID="2" 
+	  ACTIVATE="Y" 
+	  DEACTIVATE_DATE="2016-03-8 00:00:00"
+	  CREATED_BY="DJ"  
+	  EMAIL="136548@qq.com"
+	  CREATED_DATE="2016-03-8 00:00:00"
+	  LAST_UPDATED_BY="DJ" 
+	  LAST_UPDATED_DATE="2016-03-8 00:00:00"
+	  PASSWORD="123456"   
+	  CONTACT_NO="13168075869"
+	  TOKEN="0d4dc90c-deef-4297-b49c-f80973f74eae"/>
+
+</dataset>

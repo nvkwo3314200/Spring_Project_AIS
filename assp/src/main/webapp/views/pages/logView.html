@@ -1,0 +1,153 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{'product_import_log_view' | translate}}</h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+ <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+                     
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label">{{'import_type' |
+								translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<!--  <input type="text" class="form-control " ng-model="importType"> -->
+							<select id="importType" class="form-control"
+								ng-model="importTypeArr"
+								ng-options="option.code as option.description for option in importTypes"
+								multiple="true">
+							</select>
+
+						</div>
+
+						<div class="col-md-1">
+							<label class="control-label">{{'import_date' |translate}} </label>
+						</div>
+
+						<div class="col-md-2">
+
+
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="importDateFrStr"
+									is-open="popup1.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open1()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+
+
+						</div>
+
+						<div class="col-md-1">
+							<label class="control-label">To</label>
+						</div>
+
+						<div class="col-md-2">
+
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="importDateToStr"
+									is-open="popup2.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open2()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+
+
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-12 text-right">
+							<button type="button" class="btn btn-primary"
+								ng-click="searchProductLog()">{{'product_search' |
+								translate}}</button>
+						</div>
+					</div>
+					<br />
+					<div class="table-responsive">
+
+
+						<table st-table="vm.data" st-safe-src="vm.rowCollection"
+							class="table table-bordered table-hover smart-table">
+							<thead>
+								<tr  class="table-header ">
+									<th st-sort="productImportLogVo.importType">{{'import_type'
+										| translate}}</th>
+									<th st-sort="productImportLogVo.importDate">{{'import_date'
+										| translate}}</th>
+									<th st-sort="productImportLogVo.importType">{{'message' |
+										translate}}</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="row in vm.data">
+									<td ng-hide='true'>{{row.id}}</td>
+									<td>{{row.importType}}</td>
+									<td>{{row.importDateStr}}</td>
+									<td>{{row.message}}</td>
+									<td><div class="icon"
+											data-class="glyphicon glyphicon-download"
+											style="cursor: pointer;" data-toggle="modal"
+											data-target="#clipboardModal" name="icons"
+											ng-click="downloadFile(row.fileName,row.importCode)"
+											data-tags="[&quot;download&quot;]">
+											<i class="glyphicon glyphicon-download"></i>&nbsp;&nbsp;download
+										</div></td>
+								</tr>
+							<tfoot>
+								<tr>
+									<td colspan="8" class="text-center">
+										<div st-items-by-page="page" st-pagination=""
+											st-template="./views/pages/pagination_custom.html"></div>
+										<div ng-show="page  < vm.rowCollection.length"
+											style="margin-left: 412px; margin-top: -53px">
+											<input style="height: 32px" id="pageInput"
+												class="select-page" type="text" ng-model="page">&nbsp;{{'items_per_page'| translate}}
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+							</tbody>
+						</table>
+
+					</div>
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</section>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.order.OrderReturnEntryModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.order.OrderReturnEntryModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ORDER_RETURN_ID" property="orderReturnId" jdbcType="DECIMAL" />
+    <result column="SKU_ID" property="skuId" jdbcType="VARCHAR" />
+    <result column="SKU_TYPE" property="skuType" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="BRAND" property="brand" jdbcType="VARCHAR" />
+    <result column="BRAND_SEC" property="brandSec" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME_SEC" property="productNameSec" jdbcType="VARCHAR" />
+    <result column="ORDER_QTY" property="orderQty" jdbcType="DECIMAL" />
+    <result column="EXPECTED_QTY" property="expectedQty" jdbcType="DECIMAL" />
+    <result column="RETURN_REQ_QTY" property="returnReqQty" jdbcType="DECIMAL" />
+    <result column="WRITE_OFF_QTY" property="writeOffQty" jdbcType="DECIMAL" />
+    <result column="SIZE_DESC" property="sizeDesc" jdbcType="VARCHAR" />
+    <result column="SKU_COLLECT_RMK" property="skuCollectRmk" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="ACTUAL_COLLECTED_QTY" property="actualCollectedQty" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDER_RETURN_ID, SKU_ID, SKU_TYPE, SUPPLIER_ID, BRAND, BRAND_SEC, PRODUCT_NAME, 
+    PRODUCT_NAME_SEC, ORDER_QTY, EXPECTED_QTY, RETURN_REQ_QTY, WRITE_OFF_QTY, SIZE_DESC, 
+    SKU_COLLECT_RMK, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, ACTUAL_COLLECTED_QTY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_RETURN_ENTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  
+   <select id="selectByReturnId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_RETURN_ENTRY
+    where ORDER_RETURN_ID = #{id,jdbcType=DECIMAL} 
+     order by SKU_ID 
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_ORDER_RETURN_ENTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderReturnEntryModel" >
+    insert into PSSP_ORDER_RETURN_ENTRY (ID, ORDER_RETURN_ID, SKU_ID, 
+      SKU_TYPE, SUPPLIER_ID, BRAND, 
+      BRAND_SEC, PRODUCT_NAME, PRODUCT_NAME_SEC, 
+      ORDER_QTY, EXPECTED_QTY, RETURN_REQ_QTY, 
+      WRITE_OFF_QTY, SIZE_DESC, SKU_COLLECT_RMK, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE, ACTUAL_COLLECTED_QTY)
+    values (#{id,jdbcType=DECIMAL}, #{orderReturnId,jdbcType=DECIMAL}, #{skuId,jdbcType=VARCHAR}, 
+      #{skuType,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{brandSec,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productNameSec,jdbcType=VARCHAR}, 
+      #{orderQty,jdbcType=DECIMAL}, #{expectedQty,jdbcType=DECIMAL}, #{returnReqQty,jdbcType=DECIMAL}, 
+      #{writeOffQty,jdbcType=DECIMAL}, #{sizeDesc,jdbcType=VARCHAR}, #{skuCollectRmk,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=DATE}, #{actualCollectedQty,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.order.OrderReturnEntryModel" >
+  
+   <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_ORDER_RETURN_ENTRY_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+      
+    insert into PSSP_ORDER_RETURN_ENTRY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderReturnId != null" >
+        ORDER_RETURN_ID,
+      </if>
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="skuType != null" >
+        SKU_TYPE,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="brand != null" >
+        BRAND,
+      </if>
+      <if test="brandSec != null" >
+        BRAND_SEC,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="productNameSec != null" >
+        PRODUCT_NAME_SEC,
+      </if>
+      <if test="orderQty != null" >
+        ORDER_QTY,
+      </if>
+      <if test="expectedQty != null" >
+        EXPECTED_QTY,
+      </if>
+      <if test="returnReqQty != null" >
+        RETURN_REQ_QTY,
+      </if>
+      <if test="writeOffQty != null" >
+        WRITE_OFF_QTY,
+      </if>
+      <if test="sizeDesc != null" >
+        SIZE_DESC,
+      </if>
+      <if test="skuCollectRmk != null" >
+        SKU_COLLECT_RMK,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="actualCollectedQty != null" >
+        ACTUAL_COLLECTED_QTY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="orderReturnId != null" >
+        #{orderReturnId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null" >
+        #{skuType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="brandSec != null" >
+        #{brandSec,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNameSec != null" >
+        #{productNameSec,jdbcType=VARCHAR},
+      </if>
+      <if test="orderQty != null" >
+        #{orderQty,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedQty != null" >
+        #{expectedQty,jdbcType=DECIMAL},
+      </if>
+      <if test="returnReqQty != null" >
+        #{returnReqQty,jdbcType=DECIMAL},
+      </if>
+      <if test="writeOffQty != null" >
+        #{writeOffQty,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeDesc != null" >
+        #{sizeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCollectRmk != null" >
+        #{skuCollectRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="actualCollectedQty != null" >
+        #{actualCollectedQty,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.order.OrderReturnEntryModel" >
+    update PSSP_ORDER_RETURN_ENTRY
+    <set >
+      <if test="orderReturnId != null" >
+        ORDER_RETURN_ID = #{orderReturnId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuId != null" >
+        SKU_ID = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null" >
+        SKU_TYPE = #{skuType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="brandSec != null" >
+        BRAND_SEC = #{brandSec,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNameSec != null" >
+        PRODUCT_NAME_SEC = #{productNameSec,jdbcType=VARCHAR},
+      </if>
+      <if test="orderQty != null" >
+        ORDER_QTY = #{orderQty,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedQty != null" >
+        EXPECTED_QTY = #{expectedQty,jdbcType=DECIMAL},
+      </if>
+      <if test="returnReqQty != null" >
+        RETURN_REQ_QTY = #{returnReqQty,jdbcType=DECIMAL},
+      </if>
+      <if test="writeOffQty != null" >
+        WRITE_OFF_QTY = #{writeOffQty,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeDesc != null" >
+        SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCollectRmk != null" >
+        SKU_COLLECT_RMK = #{skuCollectRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="actualCollectedQty != null" >
+        ACTUAL_COLLECTED_QTY = #{actualCollectedQty,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.order.OrderReturnEntryModel" >
+    update PSSP_ORDER_RETURN_ENTRY
+    set ORDER_RETURN_ID = #{orderReturnId,jdbcType=DECIMAL},
+      SKU_ID = #{skuId,jdbcType=VARCHAR},
+      SKU_TYPE = #{skuType,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      BRAND = #{brand,jdbcType=VARCHAR},
+      BRAND_SEC = #{brandSec,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_NAME_SEC = #{productNameSec,jdbcType=VARCHAR},
+      ORDER_QTY = #{orderQty,jdbcType=DECIMAL},
+      EXPECTED_QTY = #{expectedQty,jdbcType=DECIMAL},
+      RETURN_REQ_QTY = #{returnReqQty,jdbcType=DECIMAL},
+      WRITE_OFF_QTY = #{writeOffQty,jdbcType=DECIMAL},
+      SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+      SKU_COLLECT_RMK = #{skuCollectRmk,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      ACTUAL_COLLECTED_QTY = #{actualCollectedQty,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

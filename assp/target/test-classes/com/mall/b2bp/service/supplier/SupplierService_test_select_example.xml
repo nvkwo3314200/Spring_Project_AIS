@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+    <PSSP_SUPPLIER
+            id="10001"
+            name="unitTestSupplier"
+            delivery_fee="100"
+            free_delivery_threshold="10"
+            min_delivery_day="1"
+            max_delivery_day="10"
+            warehouse_deli_lead_time="50"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+
+
+
+    <!--<PSSP_SUPPLIER-->
+            <!--id="2000"-->
+            <!--name="unitTestSupplier"-->
+            <!--delivery_fee="100"-->
+            <!--free_delivery_threshold="10"-->
+            <!--min_delivery_day="12"-->
+            <!--max_delivery_day="40"-->
+            <!--warehouse_deli_lead_time="29"-->
+            <!--created_by="unitTest"-->
+            <!--created_date="2016-03-11 00:00:00"-->
+            <!--last_updated_by="unitTest"-->
+            <!--last_updated_date="2016-03-11 00:00:00"-->
+            <!--/>-->
+
+
+    <!--<PSSP_SUPPLIER-->
+    <!--id="3000"-->
+    <!--name="unitTestSupplier"-->
+    <!--delivery_fee="11"-->
+    <!--free_delivery_threshold="10"-->
+    <!--min_delivery_day="1"-->
+    <!--max_delivery_day="29"-->
+    <!--warehouse_deli_lead_time="50"-->
+    <!--created_by="unitTest"-->
+    <!--created_date="2016-03-11 00:00:00"-->
+    <!--last_updated_by="unitTest"-->
+    <!--last_updated_date="2016-03-11 00:00:00"-->
+    <!--/>-->
+
+</dataset>

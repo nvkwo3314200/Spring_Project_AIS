@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.SupplierBrandModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.SupplierBrandModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="BRAND_CODE" property="brandCode" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SUPPLIER_ID, BRAND_CODE, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER_BRAND
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from SUPPLIER_BRAND
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteBySupplierId" parameterType="String" >
+    delete from SUPPLIER_BRAND
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.SupplierBrandModel" >
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select SUPPLIER_BRAND_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into SUPPLIER_BRAND (ID, SUPPLIER_ID, BRAND_CODE, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{supplierId,jdbcType=VARCHAR}, #{brandCode,jdbcType=DECIMAL}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.SupplierBrandModel" >
+    insert into SUPPLIER_BRAND
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="brandCode != null" >
+        BRAND_CODE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        SUPPLIER_BRAND_SEQ.nextval,
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.SupplierBrandModel" >
+    update SUPPLIER_BRAND
+    <set >
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        BRAND_CODE = #{brandCode,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.SupplierBrandModel" >
+    update SUPPLIER_BRAND
+    set SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      BRAND_CODE = #{brandCode,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

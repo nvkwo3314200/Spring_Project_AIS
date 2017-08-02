@@ -1,0 +1,83 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+	<h1>
+		{{'system_shop_user_id_add_edit' | translate}}
+	</h1>
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body" >
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+					
+					
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label">{{'user_id' | translate}}</label>
+						</div>
+						<div class="col-md-4 required">
+							<input type="text" class="form-control" maxlength="30"
+								style="border-radius: 4px"
+								placeholder="{{'user_id' | translate}}" id="userId"
+								ng-model="sysUserEdit.userCode">
+						</div>
+
+						<div class="col-md-2">
+							<label class="control-label">{{'user_name' | translate}}</label>
+						</div>
+						<div class="col-md-4 required">
+							<input type="text" class="form-control" maxlength="30"
+								style="border-radius: 4px"
+								placeholder="{{'user_name' | translate}}" id="userName"
+								ng-model="sysUserEdit.userName">
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-md-2 required"><label class="control-label">{{'user_password' | translate}}</label></div>
+						<div class="col-md-4">
+							<input type="password" class="form-control" maxlength="30" style="border-radius:4px" placeholder="*******" id="password"  ng-model="sysUserEdit.password">
+						</div>
+						<div class="col-md-2 "><label class="control-label">{{'activate' | translate}}</label></div>
+						<div class="col-md-4">
+							<input type="checkbox"  ng-model="sysUserEdit.activeInd" ng-true-value="'Y'" ng-false-value="'N'">	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 required"><label class="control-label">{{'system_shop_role_type_no' | translate}}</label></div>
+						<div class="col-md-4">
+							<select id="roleCode" class="form-control"  ng-change="roleValueChange()"
+									ng-model="sysUserEdit.roleId" ng-options="roleManager.id as roleManager.roleName for roleManager in roleManagerCodeList">
+							</select>
+						</div>
+					</div>
+				 
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                         <button type="button" class="btn btn-primary ng-binding" ng-disabled="ableAdd" ng-click="saveEditIp(this)">
+                                	 {{'button_add'|translate}}
+                                </button>
+                                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="closeThisDialog(0)">{{'button_cancel'
+                                    | translate}}
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- /.content -->

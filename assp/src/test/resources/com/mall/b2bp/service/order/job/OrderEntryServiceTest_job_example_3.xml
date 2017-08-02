@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+        <PSSP_SUPPLIER
+            id="2"
+            name="unitTestSupplier"
+            delivery_fee="100"
+            free_delivery_threshold="10"
+            min_delivery_day="1"
+            max_delivery_day="10"
+            warehouse_deli_lead_time="50"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+     <PSSP_SUPPLIER_SUB_CLASS/>
+    
+<PSSP_ORDER
+	id="5555"
+    hybris_order_id="8888880"
+    order_datetime="2016-03-10 00:00:00"
+    pick_store="923"
+    pick_type="P" special_instruction="C"
+     customer_id="1058801"
+    customer_name="Karen"
+     customer_mobile_no="67896789"
+    tender_type="CreditCardFull" payment_ref="eNetsHK01178959"
+    delivery_fee="33"
+    delivery_date="2016-03-8 00:00:00"
+
+    delivery_timeslot="33"
+    ship_district="33"
+    receiver_name="3241234"
+    receiver_phone_no="12342134"
+    receiver_mobile_no="234234"
+    delivery_address="2134134"
+    show_price="1"
+    dn_filename="dsafsdaf" 
+    remark="341234asdf"
+    status="SHIPPED"
+    created_by="test1"
+    pick_order_id="888882"
+    shipped_date      ="2016-03-8 00:00:00"
+    pick_date         ="2016-03-8 00:00:00"
+    box_num             ="1"
+    delivery_success ="A"
+
+    />
+    
+
+
+    <PSSP_ORDER_ENTRY
+    id="7888888"
+		order_id="5555"
+        seq_num="2"
+        sku_id="32323"
+        sku_type="Ambient2"
+        supplier_id="2"
+        brand="BORGO SALCETIN2O"
+        product_name="nullCHIANTI CL3ASSICO DOCG"
+        product_name_sec="bbs"
+        qty="533"
+        size_desc="725CL"
+        unit_price="113."
+        sku_amount="113"
+        picked_qty="50"
+            />
+            
+<PSSP_ORDER_AUDIT/>
+ <PSSP_ORDER_RETURN/>
+ <PSSP_ORDER_RETURN_ENTRY/>
+</dataset>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.system.UserLoginInfoMapper">
+<resultMap id="BaseResultMap" type="com.mall.b2bp.models.system.UserInfoModel" >
+	<result column="ID" 			property="loginUserInfoId" 			jdbcType="VARCHAR"/>
+	<result column="REAL_NAME"		property="userName" 				jdbcType="VARCHAR"/>
+	<result column="ROLE_CODE"		property="roleCode" 				jdbcType="VARCHAR"/>
+	<result column="USER_PLANT"		property="plantCode" 				jdbcType="VARCHAR"/>
+	<result column="USER_PROD_LN" 	property="prodLn" 					jdbcType="VARCHAR"/>
+	<result column="OPERATE" 		property="operate" 					jdbcType="VARCHAR"/>
+	<result column="OPERATE_DATE" 	property="opDate" 					jdbcType="VARCHAR"/>
+	<result column="IP"				property="ip" 						jdbcType="VARCHAR"/>
+	<result column="DATA_TOTAL"		property="dataTotal"				jdbcType="INTEGER" />
+</resultMap>
+	<select id="searchUserLoginInfo" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.UserInfoModel">
+		select * from(
+			select t.*, ROWNUM row_num from(
+				select 
+					count(*)over () DATA_TOTAL,
+					sul.ID ,
+					sui.REAL_NAME,
+					<!-- (select LISTAGG(sr.ROLE_CODE,',') WITHIN GROUP(ORDER BY sr.ROLE_CODE) ROLE_CODE 
+					  from SYS_ROLE sr, SYS_USER_ROLE sur 
+					  where sui.ID = sur.USER_ID
+					  and sur.ROLE_ID = sr.ID)  -->
+					  (select wmsys.wm_concat(ROLE_CODE)  from (select  sr.ROLE_CODE 
+					  from SYS_ROLE sr,
+					   SYS_USER_ROLE sur 
+					  <!-- where sui.ID = sur.USER_ID -->
+					  where sur.USER_ID =#{loginUserInfoId,jdbcType=VARCHAR}
+					  and
+             sur.ROLE_ID = sr.ID
+            GROUP by sr.ROLE_CODE )) ROLE_CODE, 
+					sui.USER_PLANT,
+					sui.USER_PROD_LN,
+					sul.OPERATE,
+					to_char(sul.OPERATE_DATE,'yyyy-MM-dd HH24:mm:ss') OPERATE_DATE,
+					sul.IP
+				from 
+					SYS_USER_LOGINS sul, SYS_USER sui
+					where sul.USER_CODE = sui.USER_CODE 
+					<if test="loginUserInfoId != null">
+					and sul.ID=#{loginUserInfoId,jdbcType=VARCHAR}
+					</if>
+					<if test="userName != null">
+					and sui.REAL_NAME=#{userName,jdbcType=VARCHAR}
+					</if>
+					<if test="plantCode !=null">
+					AND upper(sui.USER_PLANT) like '%'||#{plantCode,jdbcType=VARCHAR}||'%'
+					</if>
+					<if test="prodLn !=null">
+					AND upper(sui.USER_PROD_LN) like '%'||#{prodLn,jdbcType=VARCHAR}||'%'
+					</if>
+					<if test="operateDate !=null">
+					and  to_char(sul.OPERATE_DATE,'yyyy-MM-dd') = to_char(#{operateDate,jdbcType=DATE},'yyyy-MM-dd')
+					</if>
+					order by operate_date DESC
+				) t
+				<where>
+				<if test="roleCode !=null">
+					upper(ROLE_CODE) like '%'||#{roleCode,jdbcType=VARCHAR}||'%'
+				</if>
+				</where>
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+	
+	</select>
+</mapper>

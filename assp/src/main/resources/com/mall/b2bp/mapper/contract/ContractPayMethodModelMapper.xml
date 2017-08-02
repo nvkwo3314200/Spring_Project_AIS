@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.contract.ContractPayMethodModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.contract.ContractPayMethodModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CONTRACT_ID" property="contractId" jdbcType="DECIMAL" />
+    <result column="PAY_METHOD_ID" property="payMethodId" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+    <resultMap id="PayVoResultMap" type="com.mall.b2bp.vos.contract.PayMethodVo" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="CONTRACT_ID" property="contractId" jdbcType="DECIMAL" />
+        <result column="PAY_METHOD_ID" property="payMethodId" jdbcType="DECIMAL" />
+
+        <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+        <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+        <association property="payMethod" javaType="com.mall.b2bp.models.parm.ParmModel">
+          <id column="sid" property="id" jdbcType="DECIMAL" />
+          <result column="SEGMENT" property="segment" jdbcType="VARCHAR" />
+          <result column="CODE" property="code" jdbcType="VARCHAR" />
+          <result column="SHORT_DESC" property="shortDesc" jdbcType="VARCHAR" />
+          <result column="LONG_DESC" property="longDesc" jdbcType="VARCHAR" />
+          <result column="PARM_VALUE" property="value" jdbcType="VARCHAR" />
+          <result column="screate" property="createdBy" jdbcType="VARCHAR" />
+          <result column="screatedate" property="createdDate" jdbcType="TIMESTAMP" />
+          <result column="slastupdate" property="lastUpdatedBy" jdbcType="VARCHAR" />
+          <result column="slastupdatedate" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+          <result column="MALL_ID" property="mallId" jdbcType="DECIMAL" />
+          <result column="DISP_SEQ" property="dispSeq" jdbcType="DECIMAL" />
+        </association>
+    </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CONTRACT_ID, PAY_METHOD_ID, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <sql id='TABLE_SEQUENCE'> CONTRACT_PAY_METHOD_SEQ.nextval</sql>
+  <select id="selectNextId" resultType="java.math.BigDecimal" >
+    select <include refid="TABLE_SEQUENCE" /> from dual
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ASSP.CONTRACT_PAY_METHOD
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+    <select id="selectByContractId" resultType="com.mall.b2bp.models.contract.ContractPayMethodModel" parameterType="java.math.BigDecimal" >
+      select
+      <include refid="Base_Column_List" />
+      from ASSP.CONTRACT_PAY_METHOD
+      where CONTRACT_ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <select id="selectPayVosByContractId" resultMap="PayVoResultMap" parameterType="java.math.BigDecimal">
+      SELECT
+  p.ID as ID, p.CONTRACT_ID, p.PAY_METHOD_ID, p.CREATED_BY,
+  p.CREATED_DATE, p.LAST_UPDATED_BY, p.LAST_UPDATED_DATE,
+  s.ID as sid, s.SEGMENT, s.CODE, s.SHORT_DESC,
+  s.LONG_DESC,s.PARM_VALUE, s.CREATED_BY as screate,
+  s.CREATED_DATE as screatedate, s.LAST_UPDATED_BY as slastupdate,
+  s.LAST_UPDATED_DATE slastupdatedate, s.MALL_ID, s.DISP_SEQ
+FROM CONTRACT_PAY_METHOD p ,SYS_PARM s WHERE p.CONTRACT_ID = #{id,jdbcType=DECIMAL} AND p.PAY_METHOD_ID = s.ID
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from ASSP.CONTRACT_PAY_METHOD
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByContractId" parameterType="java.math.BigDecimal" >
+    delete from ASSP.CONTRACT_PAY_METHOD
+    where CONTRACT_ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.contract.ContractPayMethodModel" >
+    insert into ASSP.CONTRACT_PAY_METHOD (ID, CONTRACT_ID, PAY_METHOD_ID, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{contractId,jdbcType=DECIMAL}, #{payMethodId,jdbcType=DECIMAL}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertContractPayBatch" parameterType="java.util.List">
+
+    BEGIN
+    <foreach collection="list" item="item" index="index" separator=";">
+      insert into CONTRACT_PAY_METHOD (ID, CONTRACT_ID, PAY_METHOD_ID,
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY,
+      LAST_UPDATED_DATE)
+      values
+      (#{item.id,jdbcType=DECIMAL}, #{item.contractId,jdbcType=DECIMAL}, #{item.payMethodId,jdbcType=DECIMAL},
+      #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.lastUpdatedBy,jdbcType=VARCHAR},
+      #{item.lastUpdatedDate,jdbcType=TIMESTAMP})
+    </foreach>
+    ;END ;
+
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.contract.ContractPayMethodModel" >
+    insert into ASSP.CONTRACT_PAY_METHOD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="contractId != null" >
+        CONTRACT_ID,
+      </if>
+      <if test="payMethodId != null" >
+        PAY_METHOD_ID,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=DECIMAL},
+      </if>
+      <if test="payMethodId != null" >
+        #{payMethodId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.contract.ContractPayMethodModel" >
+    update ASSP.CONTRACT_PAY_METHOD
+    <set >
+      <if test="contractId != null" >
+        CONTRACT_ID = #{contractId,jdbcType=DECIMAL},
+      </if>
+      <if test="payMethodId != null" >
+        PAY_METHOD_ID = #{payMethodId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.contract.ContractPayMethodModel" >
+    update ASSP.CONTRACT_PAY_METHOD
+    set CONTRACT_ID = #{contractId,jdbcType=DECIMAL},
+      PAY_METHOD_ID = #{payMethodId,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

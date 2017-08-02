@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.shop.ShopIpModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.shop.ShopIpModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="EX_INCLUDE_IND" property="exIncludeInd" jdbcType="VARCHAR" />
+    <result column="IP_START_RANGE" property="ipStartRange" jdbcType="VARCHAR" />
+    <result column="IP_END_RANGE" property="ipEndRange" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, SUPPLIER_ID, EX_INCLUDE_IND, IP_START_RANGE, IP_END_RANGE, CREATED_BY, CREATED_DATE, 
+    LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER_IP
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectListByShopIpViewVo" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.shop.ShopIpViewVo" >
+    select
+    <include refid="Base_Column_List" />
+    from SUPPLIER_IP
+    where 1=1
+    <if test="exIncludeInd !=null">
+		  AND EX_INCLUDE_IND = #{exIncludeInd, jdbcType=VARCHAR}
+    </if>
+    <if test="shopId !=null">
+		  AND SUPPLIER_ID = #{shopId,jdbcType=DECIMAL}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SUPPLIER_IP
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+ 
+  <insert id="insert" parameterType="com.mall.b2bp.models.shop.ShopIpModel" >
+    insert into SUPPLIER_IP (ID, SUPPLIER_ID, EX_INCLUDE_IND, 
+      IP_START_RANGE, IP_END_RANGE, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{shopId,jdbcType=DECIMAL}, #{exIncludeInd,jdbcType=VARCHAR}, 
+      #{ipStartRange,jdbcType=VARCHAR}, #{ipEndRange,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.shop.ShopIpModel" >
+  	<selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+         select SUPPLIER_IP_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    insert into SUPPLIER_IP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="shopId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="exIncludeInd != null" >
+        EX_INCLUDE_IND,
+      </if>
+      <if test="ipStartRange != null" >
+        IP_START_RANGE,
+      </if>
+      <if test="ipEndRange != null" >
+        IP_END_RANGE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="exIncludeInd != null" >
+        #{exIncludeInd,jdbcType=VARCHAR},
+      </if>
+      <if test="ipStartRange != null" >
+        #{ipStartRange,jdbcType=VARCHAR},
+      </if>
+      <if test="ipEndRange != null" >
+        #{ipEndRange,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.shop.ShopIpModel" >
+    update SUPPLIER_IP
+    <set >
+      <if test="shopId != null" >
+        SUPPLIER_ID = #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="exIncludeInd != null" >
+        EX_INCLUDE_IND = #{exIncludeInd,jdbcType=VARCHAR},
+      </if>
+      <if test="ipStartRange != null" >
+        IP_START_RANGE = #{ipStartRange,jdbcType=VARCHAR},
+      </if>
+      <if test="ipEndRange != null" >
+        IP_END_RANGE = #{ipEndRange,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.shop.ShopIpModel" >
+    update SUPPLIER_IP
+    set SUPPLIER_ID = #{shopId,jdbcType=DECIMAL},
+      EX_INCLUDE_IND = #{exIncludeInd,jdbcType=VARCHAR},
+      IP_START_RANGE = #{ipStartRange,jdbcType=VARCHAR},
+      IP_END_RANGE = #{ipEndRange,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

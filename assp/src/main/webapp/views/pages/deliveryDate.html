@@ -1,0 +1,59 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>{{'General_Configuration' | translate}}</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Your Page Content Here -->
+
+
+	<div class="row">
+		<div class="col-xs-15">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					
+					<div class="row">
+					
+							<label class="col-md-2 control-label" style="width: 260px; ">{{'MIN_DELIVERY_DATE' | translate}}</label> 
+							<div class="col-md-2">
+								<select style="width: 140px; height: 35px; border-radius: 4px" ng-model="selectedMinDeliverDate">
+									<option ng-repeat="x in minDeliverDate" value="{{x.lovValue}}">{{x.lovDesc}}</option>
+								</select>
+							</div>
+					</div>
+					<div class="row">
+						<label class="col-md-2 control-label" style="width: 260px; ">{{'MAX_DELIVERY_DATE' | translate}}</label>  
+						<div class="col-md-2">
+							<select style="width: 140px; height: 35px; border-radius: 4px" ng-model="selectedMaxDeliverDate">
+								<option ng-repeat="y in maxDeliverDate" value="{{y.lovValue}}">{{y.lovDesc}}</option>
+							</select>
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary" style="float: right"
+						ng-click="saveDeliveryDate()">{{'save_button' | translate}}</button>
+				
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+	</div>
+
+
+
+</section>
+<!-- /.content -->

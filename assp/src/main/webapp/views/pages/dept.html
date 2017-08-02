@@ -1,0 +1,173 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        {{'department_manager'|translate}}
+
+    </h1>
+  <style type="text/css">
+
+		/* TreeGrid settings */
+		.iui-treegrid-column-header-cell, .iui-treegrid-column-footer-cell
+		{
+			padding: 2px 2px;
+		}
+		.iui-treegrid-row-selected
+		{
+			background: transparent;
+			color: black;
+		}
+		.iui-treegrid-row-cell-content
+		{
+			padding: 2px 2px;
+		}
+		.checkbox
+		{
+			width: 16px;
+			margin: auto;
+		}
+		.checkbox-box
+		{
+	        border: 0;
+	        display: inline-block;
+			width: 16px;
+			height: 16px;
+		}
+		.row-highlight
+		{
+			background: #008000;
+			color: white;
+		}
+		.checkbox
+		{
+			width: 14px;
+			margin: auto;
+		}
+		.checkbox-checked
+		{
+			border-color: red;
+			color: red;
+		}
+		.checkbox-unchecked
+		{
+			border-color: #000080;
+		}
+
+		/* Editor Template Inline */
+	    .cell-editor
+	    {
+	    	background: white;
+			overflow: hidden;
+	    }
+		.cell-editor:before {
+		  content: "";
+		  display: inline-block;
+		  vertical-align: middle;
+		  height: 100%;
+		}
+	    input
+	    {
+	    	display: inline-block;
+			vertical-align: middle;
+	    	width: 150px;
+	    }
+	    button
+	    {
+	    	background: #2455b0;
+	    	border: thin solid #1e4691;
+	    	color: white;
+	    	padding: 2px 5px;
+	    	display: inline-block;
+			vertical-align: middle;
+	    }
+	    
+		.feature-content
+		{
+			width: 750px;
+		}
+		.directive
+		{
+			border: thin solid #cecece;
+        	width: 100%;
+        	height: 100%;
+		}
+		.iui-treegrid-row-selected
+		{
+		}
+    </style>
+</section>
+			<script type="text/ng-template" id="celleditor.html">
+				<div class="cell-editor" ng-model="editCell">
+					<input ng-model="editBox.text" iui-focus="editorFocus" onfocus="this.select()" tabindex="91" ng-keydown="onEditKeyDown($event,editCell)" />
+					<button ng-click="onOk(editCell)" tabindex="92">Ok</button>
+					<button ng-click="onCancel(editCell)" tabindex="93">Cancel</button>
+				</div>
+			</script>
+			
+				<script type="text/ng-template" id="'cell-button.html'">
+				<div class="button-cell">
+		<span ng-class="obj.indicator == true ? 'glyphicon glyphicon-pencil' : ''"></span>{{obj.text}}
+				</div>
+			</script>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+
+                    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <div translate="{{alert.msg}}">
+                        </div>
+                    </uib-alert>
+
+  <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+                     
+                        <div class="row" >
+                        <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-primary" ng-click="openAdd()">
+                                    {{'button_add'|translate}}
+                                </button>
+
+                              <!-- 
+                                <button  type="button" class="btn btn-primary"
+                                        ng-click="updateValue()">{{'save_button'|translate}}
+                                </button>
+ -->
+
+                                <button  type="button" class="btn btn-primary" ng-click="openDelete()">
+                                    {{'button_delete'|translate}}
+                                </button>
+
+
+            
+
+                        </div>
+                    </div>    
+                      <div class="row" >
+                      <br/>
+                      </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        
+        
+         <iui-treegrid   name="{{gridName}}" class="directive" expanding-column-index="1" selection-mode="multi-extended" columns="columns" rows="rows" before-edit="onBeforeEdit(e)" after-edit="onAfterEdit(e)" events="gridEvents" allow-drag ="true" allow-drop="true" albel-edit="true">
+         </iui-treegrid>
+               
+                </div>
+                </div>
+                
+
+                
+                    </div>                   
+                  </div>  
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

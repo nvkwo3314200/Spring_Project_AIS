@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.mall.MallModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.mall.MallModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+    
+    <result column="DATA_TOTAL"		property="dataTotal"	jdbcType="INTEGER" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    ID, CODE, NAME, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from MALL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from MALL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.mall.MallModel" >
+    insert into MALL (ID, CODE, NAME, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.mall.MallModel" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+  	SELECT MALL_SEQ.NEXTVAL FROM DUAL
+  </selectKey>
+    insert into MALL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.mall.MallModel" >
+    update MALL
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.vos.mall.MallVo" >
+    update MALL
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.mall.MallModel" >
+    select
+    <include refid="Base_Column_List" />
+    from MALL where 1 = 1
+    <if test="id != null" >
+      	AND	ID = #{id, jdbcType=DECIMAL}
+    </if>
+    <if test="code != null" >
+      	AND	CODE = #{code, jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+      	AND  NAME like '%'||#{name}||'%'
+    </if>
+    order by CODE
+  </select>
+  <select id="search" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.mall.MallModel" >
+  		select * from(
+			select t.*, ROWNUM row_num from(
+			    select 
+			    	count(*)over () DATA_TOTAL,
+			    <include refid="Base_Column_List" />
+			 	from  MALL b 
+			    where 1 = 1
+			       <if test="id != null" >
+				      	AND	ID = #{id, jdbcType=DECIMAL}
+				    </if>
+				    <if test="code != null" >
+				      	AND	CODE = #{code, jdbcType=VARCHAR}
+				    </if>
+				    <if test="name != null" >
+				      	AND  NAME like '%'||#{name}||'%'
+				    </if>
+				order by ID
+				) t
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+  	</select>
+</mapper>

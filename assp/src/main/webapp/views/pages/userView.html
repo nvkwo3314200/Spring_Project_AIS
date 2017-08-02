@@ -1,0 +1,194 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		{{'user_view_list' | translate}}
+	</h1>
+
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+
+ <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+                     
+						<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">{{'user_id' | translate}}</label>
+							</div>
+
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="userId" maxlength="50">
+							</div>
+
+							<div class="col-md-1">
+								<label class="control-label">{{'user_name' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="userName" maxlength="50">
+							</div>
+
+						</div>
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'user_role' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<select id="userRole" class="form-control" ng-model="userRole" ng-options="option.code as option.descriptionTw for option in userroles">
+								</select>
+							</div>
+
+
+
+							<div class="col-md-1">
+								<label class="control-label">{{'email' | translate}}</label>
+							</div>
+
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="email" maxlength="50">
+							</div>
+						</div>
+
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'contact_no' |
+									translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="contactNo" maxlength="50">
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">{{'activate' | translate}}</label>
+							</div>
+							<div class="col-md-2">
+									<!-- <input type="checkbox" id="activate" checked="checked"> -->
+									 <input type="checkbox"  ng-model="activate" ng-true-value="'Y'" ng-false-value="'N'"> 
+							</div>
+						</div>
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'supplier_id' |
+									translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="supplierId" maxlength="50"	>
+							</div>
+							<div class="col-md-4"></div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-primary"
+									ng-click="searchUser()">{{'user_search' |
+									translate}}</button>
+							</div>
+						</div>
+						<br />
+
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<button type="button" class="btn btn-primary"
+									 ng-click="addUser()">
+									{{'product_add'| translate}}
+							    </button>
+								<button type="button" class="btn btn-primary"
+									 ng-click="editUser()">
+									{{'product_edit'| translate}}
+							    </button>
+								<button type="button" class="btn btn-primary"
+									 ng-click="deleteUser()">
+									{{'product_delete'| translate}}
+								</button>
+						    </div>
+						</div>
+						</br>
+						<div class="table-responsive">
+
+
+							<table st-table="vm.data" st-safe-src="vm.rowCollection"
+								class="table table-bordered table-hover smart-table">
+								<thead>
+									<tr  class="table-header ">
+										<th row-select-all="vm.data" selected="vm.selected"
+											ng-click="vm.selectAll(vm.data)"></th>
+										<th ng-hide='true'></th>
+										<th st-sort="userId">{{'user_id' | translate}}</th>
+										<th st-sort="userName">{{'user_name' | translate}}</th>
+										<th st-sort="userRole">{{'user_role' | translate}}</th>
+										<th st-sort="email">{{'email' | translate}}</th>
+										<th st-sort="contactNo">{{'contact_no' |
+											translate}}</th>
+										<th st-sort="activate">{{'activate' |
+											translate}}</th>
+										<th st-sort="supplierId">{{'supplier_id' |
+											translate}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in vm.data"  id="tr{{row.id}}"  ng-click="vm.select(row)" >
+										<td row-select="row" ></td>
+										<td ng-hide='true'>{{row.id}}</td>
+										<td>{{row.userId}}</td>
+										<td>{{row.userName}}</td>
+										<td>
+											<p ng-if="row.userRole == 'SYSTEMADMIN'">商家</p>
+											<p ng-if="row.userRole == 'SUPPLIER'">店家</p>
+											<p ng-if="row.userRole == 'APPROVER'">店家-APPROVER</p>
+										</td>
+										<td>{{row.email}}</td>
+										<td>{{row.contactNo}}</td>
+										<td>{{row.activate}}</td>
+										<td>
+											<!-- <div ng-show="row.supplierId=='1000000000'" >
+												Bossini
+											</div>
+											<div ng-show="row.supplierId=='1052630101'" >
+												Fortress
+											</div> -->
+											<div>
+												{{row.supplierName}}
+											</div>
+										
+										</td>
+									</tr>
+								<tfoot>
+									<tr>
+										<td colspan="8" class="text-center">
+											<div st-items-by-page="page" st-pagination=""
+												st-template="./views/pages/pagination_custom.html">
+												</div>
+													<div ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                                    <input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+										</td>
+										</tr>
+								</tfoot>
+								</tbody>
+							</table>
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+</section>

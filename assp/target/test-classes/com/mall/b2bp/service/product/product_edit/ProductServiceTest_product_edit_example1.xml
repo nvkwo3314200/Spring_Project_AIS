@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_PRODUCT
+	ID="1000000001"
+    BRAND_CODE="2"
+    ESTORE_CATEGORY="2"
+    SUPPLIER_CODE="2"
+    UNIT_RETAIL="1111"
+    SHORT_DESC_EN="test2test2"
+    DELIVERY_MODE="N"
+    SUPPLIER_PRODUCT_CODE="1111111111122222222222"
+    VERSION="STAGING"
+    STATUS="DRAFT"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    /> 
+   
+     <PSSP_PRODUCT_AUDIT/>
+<PSSP_PRODUCT_BARCODE
+   ID="1000001"
+   PRODUCT_ID="1000000001"
+   ITEM_NUM_TYPE="UCC14"
+   BARCODE_NUM="12313131311231"
+   created_by="unitTest"
+   created_date="2016-03-11 00:00:00"
+   last_updated_by="unitTest"
+   last_updated_date="2016-03-11 00:00:00"
+/>
+
+<PSSP_PRODUCT_IMAGES/>
+
+    <PSSP_PRODUCT_IMAGES/>
+     
+</dataset>

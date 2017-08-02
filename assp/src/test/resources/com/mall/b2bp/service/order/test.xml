@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+    <PSSP_SUPPLIER_BRAND
+            id="411"
+            supplier_id="2"
+            brand_code="2"
+            created_by="dunitTest1"
+            created_date=""
+            last_updated_by="dunitTest1"
+            last_updated_date=""
+            />
+
+</dataset>

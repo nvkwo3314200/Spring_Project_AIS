@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductImagesUpFieldModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductImagesUpFieldModel" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="ACTION_DATE" property="actionDate" jdbcType="TIMESTAMP" />
+    <result column="COLUMN_NAME" property="columnName" jdbcType="VARCHAR" />
+    <result column="OLD_VALUE" property="oldValue" jdbcType="VARCHAR" />
+    <result column="NEW_VALUE" property="newValue" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="HighLightResultMap" type="com.mall.b2bp.models.product.ProductImagesUpFieldModel" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="ACTION_DATE" property="actionDate" jdbcType="TIMESTAMP" />
+    <result column="COLUMN_NAME" property="columnName" jdbcType="VARCHAR" />
+    <result column="OLD_VALUE" property="oldValue" jdbcType="VARCHAR" />
+    <result column="NEW_VALUE" property="newValue" jdbcType="VARCHAR" />
+    <result column="IMAGE_TYPE" property="imageType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductImagesUpFieldModel" >
+    insert into PRODUCT_IMAGES_UP_FIELD (ID, PRODUCT_ID, ACTION_DATE, 
+      COLUMN_NAME, OLD_VALUE, NEW_VALUE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{actionDate,jdbcType=TIMESTAMP}, 
+      #{columnName,jdbcType=VARCHAR}, #{oldValue,jdbcType=VARCHAR}, #{newValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductImagesUpFieldModel" >
+    insert into PRODUCT_IMAGES_UP_FIELD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="actionDate != null" >
+        ACTION_DATE,
+      </if>
+      <if test="columnName != null" >
+        COLUMN_NAME,
+      </if>
+      <if test="oldValue != null" >
+        OLD_VALUE,
+      </if>
+      <if test="newValue != null" >
+        NEW_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="actionDate != null" >
+        #{actionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="columnName != null" >
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldValue != null" >
+        #{oldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="newValue != null" >
+        #{newValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+     <select id="getProductImagesUpFieldModelByProductId" resultMap="HighLightResultMap" parameterType="String" >
+    <![CDATA[
+	     select U.*, I.IMAGE_TYPE from PRODUCT_IMAGES_UP_FIELD U, PRODUCT_IMAGES I 
+	     where U.ID = I.ID  AND U.PRODUCT_ID = #{productId,jdbcType=VARCHAR} 
+     ]]>
+  </select>
+    <delete id="deleteByProductId" parameterType="String" >
+   	 delete from PRODUCT_IMAGES_UP_FIELD
+      where   PRODUCT_ID = #{productId,jdbcType=VARCHAR} 
+  </delete>
+  
+</mapper>

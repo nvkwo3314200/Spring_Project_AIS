@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductBarcodeModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="DECIMAL" />
+    <result column="ITEM_NUM_TYPE" property="itemNumType" jdbcType="VARCHAR" />
+    <result column="BARCODE_NUM" property="barcodeNum" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="FAILED_REASON" property="failedReason" jdbcType="VARCHAR" />    
+    <result column="LAST_EXPORTED_DATE" property="lastExportedDate" jdbcType="DATE" />
+    <result column="PRIMARY_IND" property="primaryInd" jdbcType="VARCHAR" /> 
+  </resultMap>
+  
+  <resultMap id="ExportBarcodesResultMap" type="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="DECIMAL" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="ITEM_NUM_TYPE" property="itemNumType" jdbcType="VARCHAR" />
+    <result column="BARCODE_NUM" property="barcodeNum" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="FAILED_REASON" property="failedReason" jdbcType="VARCHAR" />    
+    <result column="LAST_EXPORTED_DATE" property="lastExportedDate" jdbcType="DATE" /> 
+  </resultMap>  
+  
+  <sql id="Base_Column_List" >
+    ID, PRODUCT_ID, ITEM_NUM_TYPE, BARCODE_NUM, STATUS, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+    LAST_UPDATED_DATE,PRIMARY_IND
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCT_BARCODE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PRODUCT_BARCODE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PRODUCT_BARCODE_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PRODUCT_BARCODE (ID, PRODUCT_ID, ITEM_NUM_TYPE, 
+      BARCODE_NUM, STATUS, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE,PRIMARY_IND
+      )
+    values (#{id,jdbcType=DECIMAL}, #{productId,jdbcType=DECIMAL}, #{itemNumType,jdbcType=VARCHAR}, 
+      #{barcodeNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+       #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR},#{lastUpdatedDate}, #{primaryInd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    insert into PRODUCT_BARCODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="itemNumType != null" >
+        ITEM_NUM_TYPE,
+      </if>
+      <if test="barcodeNum != null" >
+        BARCODE_NUM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="primaryInd != null" >
+        PRIMARY_IND
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+       product_seq.nextval,
+
+      <if test="productId != null" >
+        #{productId,jdbcType=DECIMAL},
+      </if>
+      <if test="itemNumType != null" >
+        #{itemNumType,jdbcType=VARCHAR},
+      </if>
+      <if test="barcodeNum != null" >
+        #{barcodeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+        <if test="createdDate != null" >
+         #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+        <if test="lastUpdatedDate != null" >
+       #{lastUpdatedDate},
+      </if>
+       <if test="primaryInd != null" >
+       #{primaryInd,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    update PRODUCT_BARCODE
+    <set >
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      </if>
+      <if test="itemNumType != null" >
+        ITEM_NUM_TYPE = #{itemNumType,jdbcType=VARCHAR},
+      </if>
+      <if test="barcodeNum != null" >
+        BARCODE_NUM = #{barcodeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="failedReason != null" >
+        FAILED_REASON = #{failedReason,jdbcType=VARCHAR},
+      </if>      
+      <if test="lastExportedDate != null" >
+        LAST_EXPORTED_DATE = #{lastExportedDate}
+      </if>    
+       <if test="primaryInd != null" >
+        PRIMARY_IND = #{primaryInd,jdbcType=VARCHAR}
+      </if>       
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.ProductBarcodeModel" >
+    update PRODUCT_BARCODE
+    set PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      ITEM_NUM_TYPE = #{itemNumType,jdbcType=VARCHAR},
+      BARCODE_NUM = #{barcodeNum,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate},
+      PRIMARY_IND = #{primaryInd,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  	<select id="getProductBarcodeModelByBarcodeNum" parameterType="java.util.Map" resultMap="BaseResultMap">
+	 select 
+     	PPB.*
+     from PRODUCT_BARCODE PPB  inner join  PRODUCT PP  ON PPB.PRODUCT_ID=PP.ID 
+	   where PPB.BARCODE_NUM = #{barcodenum,jdbcType=VARCHAR} AND PP.VERSION= #{version,jdbcType=VARCHAR}
+	   <if test="id != null" >
+        and PPB.ID != #{id,jdbcType=DECIMAL}
+      </if>
+	   
+  </select>
+    	<select id="getProductBarcodeModelsByProductId" parameterType="String" resultMap="BaseResultMap">
+	   select 
+	   *
+	   from PRODUCT_BARCODE
+	   where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	   order by id asc
+  </select>
+    <delete id="deleteProductBarcodeByProductId" parameterType="String" >
+    delete from PRODUCT_BARCODE
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="getProductBarcodeByProductCode" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    ppb.*
+    from PRODUCT_BARCODE ppb,PRODUCT pp
+    where pp.id=ppb.product_id
+    and pp.VERSION = #{version,jdbcType=VARCHAR} 
+    and pp.PRODUCT_CODE = #{productCode,jdbcType=VARCHAR}
+    and ppb.BARCODE_NUM = #{barcodenum,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getExportBarcodes" resultMap="ExportBarcodesResultMap">
+  	<![CDATA[
+     select P.PRODUCT_CODE, B.* from PRODUCT P, PRODUCT_BARCODE B 
+     where P.ID = B.PRODUCT_ID AND P.VERSION = 'STAGING' and P.STATUS = 'APPROVED_IN_RETEK' and (B.LAST_EXPORTED_DATE IS NULL OR B.LAST_EXPORTED_DATE < P.LAST_APPROVAL_DATE)
+     ]]>
+  </select>  
+  
+
+</mapper>

@@ -1,0 +1,235 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>{{'brand' | translate}}</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brandCode'|translate}}</label>
+						</div>
+						<div class="col-md-1">{{brandCurrentData.code}}</div>
+					
+						<div class="col-md-2">
+							<label class="control-label">{{'masterId'|translate}}</label>
+						</div>
+						<div>{{brandCurrentData.masterId}}</div>
+					</div>
+					
+					
+					
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_image' |
+								translate}} </label>
+						</div>
+
+						<div class="col-md-4">
+							<input type="file" id="file1" ng-show="image_file1" /> <img
+								src="./supplierUpload?fileName={{brandCurrentData.imageFileName}}"
+								ng-show="!image_file1" />
+						</div>
+
+						<div class="col-md-1">
+
+							<button type="button" class="btn btn-primary" ng-click="upload()"
+								ng-show="upload_button">{{'upload_button' |translate}}</button>
+
+							<button type="button" class="btn btn-primary"
+								ng-click="deleteImage()" ng-show="delete_button">{{'button_delete'|translate}}</button>
+
+						</div>
+						<div class="col-md-5"></div>
+					</div>
+					
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'retek_brand_desc_en'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control" style="border-radius: 4px" ng-readonly="true"
+								 ng-model="brandCurrentData.descEn">
+						</div>
+					</div>
+					
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'retek_brand_desc_tc'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control" style="border-radius: 4px" ng-readonly="true"
+								 ng-model="brandCurrentData.descTc">
+						</div>
+					</div>
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'retek_brand_desc_sc'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control" style="border-radius: 4px" ng-readonly="true"
+								 ng-model="brandCurrentData.descSc">
+						</div>
+					</div>
+					
+					<!-- edidt -->
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_name(EN)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="500"
+								placeholder="{{'brand_name(EN)' | translate}}"
+								style="border-radius: 4px" ng-readonly="shopNameEnReadonly"
+								id="shopNameEn" ng-model="brandCurrentData.brandNameEn">
+						</div>
+					</div>
+
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_name(TC)'
+								|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="500"
+								style="border-radius: 4px"
+								placeholder="{{'brand_name(TC)' | translate}}" id="shopNameTc"
+								ng-model="brandCurrentData.brandNameTc">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_name(SC)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="500"
+								style="border-radius: 4px"
+								placeholder="{{'brand_name(SC)' | translate}}" id="shopNameSc"
+								ng-model="brandCurrentData.brandNameSc">
+						</div>
+					</div>
+
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_tagline(EN)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="50"
+								placeholder="{{'brand_tagline(EN)' | translate}}"
+								style="border-radius: 4px"
+								ng-model="brandCurrentData.brandTaglineEn">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_tagline(TC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="50"
+								style="border-radius: 4px"
+								placeholder="{{'brand_tagline(TC)' | translate}}"
+								id="brand_taglineTc" ng-model="brandCurrentData.brandTaglineTc">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_tagline(SC)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="50"
+								style="border-radius: 4px"
+								placeholder="{{'brand_tagline(SC)' | translate}}"
+								id="brand_taglineSc" ng-model="brandCurrentData.brandTaglineSc">
+						</div>
+					</div>
+
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_description(EN)'
+								|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" 
+								placeholder="{{'brand_description(EN)' | translate}}"
+									style="border-radius: 4px; width:699"
+								ng-model="brandCurrentData.brandDescEn" maxlength="4000"> 
+					  		</textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_description(TC)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" 
+								placeholder="{{'brand_description(TC)' | translate}}"
+									style="border-radius: 4px; width:699"
+								ng-model="brandCurrentData.brandDescTc" maxlength="4000">
+					  		</textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'brand_description(SC)'|translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" 
+								placeholder="{{'brand_description(SC)' | translate}}"
+								style="border-radius: 4px; width:699"
+								ng-model="brandCurrentData.brandDescSc" maxlength="4000">
+					 		</textarea>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-12 text-right">
+
+						<button type="button" class="btn btn-primary"
+							ng-click="returnConfirmed()">{{'update_button'|
+							translate}}</button>
+
+
+						<button type="button" class="btn btn-primary"
+							ng-click="cancelReturn()">{{'button_cancel'| translate}}</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

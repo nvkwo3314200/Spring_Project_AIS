@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	
+	<PSSP_LOV />
+	<PSSP_DEPT/>
+	<PSSP_CLASS />
+	<PSSP_SUB_CLASS />
+<PSSP_SUPPLIER_SUB_CLASS/>
+</dataset>
+

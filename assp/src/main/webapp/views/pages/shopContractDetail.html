@@ -1,0 +1,225 @@
+<div ng-show="!showEditContract;">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary"
+                    ng-click="openEditContract('ADD')">{{'contract_add'| translate}}</button>
+            <button type="button" class="btn btn-primary"
+                    ng-click="openEditContract('EDIT')">{{'contract_edit'| translate}}
+            </button>
+            <button type="button" class="btn btn-primary"
+                    ng-click="deleteContract()">{{'contract_delete'| translate}}</button>
+            <button type="button" class="btn btn-primary"
+                    ng-click="showContract()">{{'contract_show'| translate}}</button>
+        </div>
+    </div>
+    </br>
+
+    <div class="table-responsive">
+        <table st-table="vm.data"class="table table-bordered table-hover smart-table" st-safe-src="vm.rowCollection">
+            <thead>
+            <tr  class="table-header ">
+                <th row-select-all="vm.data" selected="vm.selected"
+                    ng-click="vm.selectAll(vm.data)"></th>
+                <th ng-hide='true'></th>
+                <th>{{'contract_ref' | translate}}</th>
+                <th>{{'contract_effective_date' | translate}}</th>
+                <th>{{'contract_expire_date' | translate}}</th>
+                <th>{{'contract_status' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.data"  id="tr{{row.id}}"  ng-click="vm.select(row)" >
+                <td row-select="row" ></td>
+                <td ng-hide='true'>{{row.id}}</td>
+                <td>
+                    {{row.ref}}
+                </td>
+                <td>
+                    {{row.startDate | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{row.endDate | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    <p ng-if="row.status == 'A'"> {{'contract_status_active' | translate}}</p>
+                    <p ng-if="row.status == 'C'"> {{'contract_status_cancelled' | translate}}</p>
+                </td>
+            </tr>
+            <tfoot>
+            <tr>
+                <td colspan="8" class="text-center">
+                    <div st-items-by-page="page" st-pagination=""
+                         st-template="./views/pages/pagination_custom.html">
+                    </div>
+                    <div ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                        <input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+                </td>
+            </tr>
+            </tfoot>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- 增加、编辑合同页面 -->
+<div ng-show="showEditContract">
+    <style type="text/css">
+        .required .control-label :after {
+            color: #d00;
+            content: "*";
+            position: absolute;
+            margin-left: 5px;
+        }
+    </style>
+    <section class="content-header">
+        <div class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible" ng-if="hasError">
+            <div>
+                <div class="ng-scope">{{dialogErrorMessage}}</div>
+            </div>
+        </div>
+        <div ng-if="isEditContract">
+            <h3>{{"contract_edit" | translate}}{{"contract" | translate}}</h3>
+        </div>
+        <div ng-if="!isEditContract">
+            <h3>{{"contract_add" | translate}}{{"contract" | translate}}</h3>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-2 required">
+                <label class=" control-label">{{"contract_ref" | translate}}</label>
+            </div>
+            <div class="col-sm-4">
+                <!--<div ng-if="isEditContract">-->
+                    <input ng-model="contract.ref" type="text" class="form-control" id="contract_ref"
+                           placeholder="{{'contract_please_enter' | translate}}{{'contract_ref' | translate}}"
+                           required maxlength="20" ng-disabled="isEditContract" />
+               <!-- </div>-->
+               <!-- <div ng-if="!isEditContract">
+                    <input ng-model="contract.ref" type="text" class="form-control" id="contract_ref"
+                           placeholder="{{'contract_please_enter' | translate}}{{'contract_ref' | translate}}"
+                           required maxlength="20"/>
+                </div>-->
+
+                <span style="color:red" ng-show="contract.ref==null||contract.ref.length>20">
+                <span ng-show="contract.ref==null||contract.ref.length>20">{{"contract_ref_cannot_null" |translate}}</span>
+            </span>
+            </div>
+        </div>
+        <div class="row required">
+            <label for="contract_effective_date" class="col-sm-2 control-label">{{'contract_effective_date' | translate}}</label>
+            <div class="col-sm-4">
+                <p class="input-group">
+                    <input class="form-control" type="text" style="border-radius: 4px;"
+                           id="contract_effective_date" uib-datepicker-popup="MM/dd/yyyy"
+                           ng-model="contract.startDate" ng-disabled="false"
+                           is-open="popup1.opened" datepicker-options="dateOptions"
+                           ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+                           required readonly="readonly"/>
+                    <span class="input-group-btn">
+				    <button type="button" class="btn btn-default" ng-click="open1()">
+					    <i class="glyphicon glyphicon-calendar"></i>
+				    </button>
+			</span>
+                </p>
+            </div>
+        </div>
+        <div class="row required">
+            <label for="contract_expire_date" class="col-sm-2 control-label">{{'contract_expire_date' | translate}}</label>
+            <div class="col-sm-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" style="border-radius: 4px;"
+                           id="contract_expire_date" uib-datepicker-popup="MM/dd/yyyy"
+                           ng-model="contract.endDate" ng-disabled="offlineDateReadonly"
+                           is-open="popup2.opened" datepicker-options="dateOptions"
+                           ng-required="true" close-text="Close"
+                           alt-input-formats="altInputFormats"
+                           required readonly="readonly"/>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+        </div>
+        <div class="row  required">
+            <label class="col-sm-2 control-label">{{'contract_status' | translate}}</label>
+            <div class="col-md-1">
+                <input type="radio" ng-model="contract.status" name="contract_status" id="statusA"
+                       ng-checked="contract.status=='A'" value="A"> {{"contract_status_active" | translate}}
+            </div>
+            <div class="col-md-1">
+                <input type="radio" ng-model="contract.status" name="contract_status" id="statusC"
+                       ng-checked="contract.status=='C'" value="C"> {{"contract_status_cancelled" | translate}}
+            </div>
+        </div>
+        <div class="row ">
+            <div class="row">
+                <h3 class="col-sm-4">{{"contract_pay" | translate}}</h3>
+            </div>
+            <table st-table="payMethods"class="table table-bordered table-hover smart-table" >
+                <thead>
+                <tr  class="table-header ">
+                    <th row-select-all="payMethods" selected="vm.paySelected"
+                        ng-click="vm.selectPayAll(payMethods)"></th>
+                    <th ng-hide='true'></th>
+                    <th>{{'parm_code' | translate}}</th>
+                    <th>{{'parm_short_desc' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="pay in payMethods"  id="payTr{{pay.id}}"  ng-click="vm.selectPay(pay)">
+                    <td row-select="pay" ></td>
+                    <td ng-hide='true'>{{pay.id}}</td>
+                    <td>{{pay.code}}</td>
+                    <td>{{pay.shortDesc}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="row">
+                <h3 class="col-sm-4">{{"contract_deliver" | translate}}</h3>
+            </div>
+            <table st-table="deliverMethods"class="table table-bordered table-hover smart-table" >
+                <thead>
+                <tr  class="table-header ">
+                    <th row-select-all="deliverMethods" selected="vm.deliverSelected"
+                        ng-click="vm.selectDeliverAll(deliverMethods)"></th>
+                    <th ng-hide='true'></th>
+                    <th>{{'parm_code' | translate}}</th>
+                    <th>{{'parm_short_desc' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="deliver in deliverMethods"  id="deliverTr{{deliver.id}}"  ng-click="vm.selectDeliver(deliver)" >
+                    <td row-select="deliver" ></td>
+                    <td ng-hide='true'>{{deliver.id}}</td>
+                    <td>{{deliver.code}}</td>
+                    <td>{{deliver.shortDesc}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+
+                <button type="button" class="btn btn-primary ng-binding" ng-disabled="ableAdd"
+                        ng-click="saveContract(this,contract)">
+                    {{'sys_button_save'|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" id="backToContract" ng-click="backToContract()">{{'sys_button_return'
+                    | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" id="cancel2" ng-click="backToContract()">{{'sys_button_cancel'
+                    | translate}}
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+</div>

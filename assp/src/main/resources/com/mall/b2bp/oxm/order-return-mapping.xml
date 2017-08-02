@@ -1,0 +1,170 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+	<class name="com.mall.b2bp.oxm.order.OrderReturnBeans">
+
+		<map-to xml="ReturnRequests" />
+		<field name="orderReturnBeanList" collection="arraylist" auto-complete="true"
+			type="com.mall.b2bp.oxm.order.OrderReturnBean">
+			<bind-xml name="ReturnRequest" />
+		</field>
+
+	</class>
+
+	<class name="com.mall.b2bp.oxm.order.OrderReturnBean">
+		<map-to xml="ReturnRequest" />
+		
+		<field name="returnType" type="java.math.BigDecimal">
+			<bind-xml name="ReturnType" node="element" />
+		</field>
+		
+		<field name="pickStore" type="java.math.BigDecimal">
+			<bind-xml name="PickStore" node="element" />
+		</field>
+
+		<field name="hybrisReturnId" type="string">
+			<bind-xml name="ReturnId" node="element" />
+		</field>
+		
+		<field name="hybrisOrderId" type="string">
+			<bind-xml name="OrderId" node="element" />
+		</field>
+
+		<field name="returnCreateDate" type="string">
+			<bind-xml name="ReturnCreateDate" node="element" />
+		</field>
+
+		
+
+		<field name="remark" type="string">
+			<bind-xml name="Remark" node="element" />
+		</field>
+
+		<field name="specialInstruction" type="string">
+			<bind-xml name="SpecialInstruction" node="element" />
+		</field>
+
+		<field name="customerId" type="java.math.BigDecimal">
+			<bind-xml name="CustomerId" node="element" />
+		</field>
+
+		<field name="customerType" type="string">
+			<bind-xml name="CustomerType" node="element" />
+		</field>
+
+		<field name="customerName" type="string">
+			<bind-xml name="CustomerName" node="element" />
+		</field>
+
+		<field name="customerPhoneNo" type="string">
+			<bind-xml name="CustomerPhoneNo" node="element" />
+		</field>
+
+		<field name="customerMobileNo" type="string">
+			<bind-xml name="CustomerMobileNo" node="element" />
+		</field>
+
+		<field name="tenderType" type="string">
+			<bind-xml name="TenderType" node="element" />
+		</field>
+
+		<field name="paymentRef" type="string">
+			<bind-xml name="PaymentRef" node="element" />
+		</field>
+
+	
+
+		<field name="collectDate" type="string">
+			<bind-xml name="CollectDate" node="element" />
+		</field>
+
+		<field name="collectTimeSlot" type="string">
+			<bind-xml name="CollectTimeSlot" node="element" />
+		</field>
+
+		<field name="collectDistrict" type="string">
+			<bind-xml name="CollectDistrict" node="element" />
+		</field>
+
+		<field name="contactName" type="string">
+			<bind-xml name="ContactName" node="element" />
+		</field>
+
+		<field name="contactPhoneNo" type="string">
+			<bind-xml name="ContactPhoneNo" node="element" />
+		</field>
+
+		<field name="contactMobileNo" type="string">
+			<bind-xml name="ContactrMobileNo" node="element" />
+		</field>
+
+		<field name="collectAddress" type="string">
+			<bind-xml name="CollectAddress" node="element" />
+		</field>
+
+	
+		<field name="entryBeanList"  collection="arraylist" auto-complete="true"  type="com.mall.b2bp.oxm.order.OrderReturnEntryBean">
+			<bind-xml name="ReturnEntry"  location="ReturnEntries" />
+		</field>
+
+	</class>
+	
+	
+	<class name="com.mall.b2bp.oxm.order.OrderReturnEntryBean">
+		<map-to xml="ReturnEntry" />
+
+		<field name="skuId" type="string">
+			<bind-xml name="SkuId" node="element" />
+		</field>
+
+		<field name="skuType" type="string">
+			<bind-xml name="SkuType" node="element" />
+		</field>
+
+		<field name="brand" type="string">
+			<bind-xml name="Brand" node="element" />
+		</field>
+
+		<field name="brandSec" type="string">
+			<bind-xml name="BrandSec" node="element" />
+		</field>
+
+		<field name="productName" type="string">
+			<bind-xml name="ProductName" node="element" />
+		</field>
+
+		<field name="productNameSec" type="string">
+			<bind-xml name="ProductNameSec" node="element" />
+		</field>
+
+		<field name="sizeDesc" type="string">
+			<bind-xml name="SizeDesc" node="element" />
+		</field>
+		
+		<field name="orderQty" type="java.math.BigDecimal">
+			<bind-xml name="OrderQty" node="element" />
+		</field>
+
+		<field name="expectedQty" type="java.math.BigDecimal">
+			<bind-xml name="ExpectedCollectQty" node="element" />
+		</field>
+
+		<field name="returnReqQty" type="java.math.BigDecimal">
+			<bind-xml name="ReturnReqQty" node="element" />
+		</field>
+
+		<field name="writeOffQty" type="java.math.BigDecimal">
+			<bind-xml name="WriteOffQty" node="element" />
+		</field>
+		
+		<field name="skuCollectRmk" type="string">
+			<bind-xml name="SkuCollectRemark" node="element" />
+		</field>
+		
+		<field name="supplierId" type="string">
+			<bind-xml name="SupplierCode" node="element" />
+		</field>
+		</class>
+	</mapping>

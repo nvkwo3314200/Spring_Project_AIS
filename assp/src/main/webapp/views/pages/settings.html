@@ -1,0 +1,296 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+	<h1>{{'menu_settings' | translate}}</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert type="warning" >
+					<div
+						translate="Delivery fee - Cannot be edited on Supplier Portal after first setup, to update delivery fee afterwards, please contact support staff"></div>
+					<div
+						translate="Free delivery threshold - Changes will be effective from tomorrow"></div>
+						
+					<div translate="{{failedReason}}" ng-if="failedReason!=null"></div>
+					
+					</uib-alert>
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+ <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+                     
+					<div class="row">
+						<label class="col-md-2 control-label">{{'supplier_id'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control " ng-model="supplierVo.id"
+								ng-readonly="true" />
+						</div>
+					</div>
+
+					<div class="row" >
+						<label class="col-md-2 control-label">{{'delivery_fee'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control " ng-readonly="disableDeliveryFee"
+								ng-model="supplierVo.deliveryFee" maxlength="10">
+						</div>
+						<div class="col-md-8">
+							<div style="color: red" id="error_deliveryFee"></div>
+						</div>
+					</div>
+
+					<div class="row" >
+						<label class="col-md-2 control-label">{{'free_delivery_threshold'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control "
+								ng-model="supplierVo.freeDeliveryThreshold" maxlength="10">
+						</div>
+
+						<div class="col-md-8">
+							<div style="color: red" id="error_freeDeliveryThreshold"></div>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<label class="col-md-2 control-label">{{'supplier_direct_delivery_SLA'|translate}}:</label>
+
+						<label class="col-md-1 control-label">{{'min_value'|translate}}:</label>
+						<div class="col-md-2">
+							<select class="form-control" ng-model="supplierVo.minDeliveryDay"
+								ng-change="minDeliveryDayChange()"
+								ng-selected="supplierVo.minDeliveryDay"
+								ng-options="op.lovValue as op.lovDesc for op in minValueList">
+							</select>
+
+						</div>
+						<label class="col-md-1 control-label">{{'max_value'|translate}}:</label>
+						<div class="col-md-2">
+							<select class="form-control" ng-model="supplierVo.maxDeliveryDay"
+								ng-change="maxDeliveryDayChange()"
+								ng-selected="supplierVo.maxDeliveryDay"
+								ng-options="op.lovValue as op.lovDesc for op in maxValueList">
+							</select>
+						</div>
+
+						<div class="col-md-4">
+							<div style="color: red" id="error_deliveryDay"></div>
+						</div>
+					</div>
+
+					<div class="row">
+						<label class="col-md-3 control-label">{{'delivery_lead_time'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control "
+								ng-model="supplierVo.warehouseDeliLeadTime"
+								ng-change="warehouseDeliLeadTimeChange()" maxlength="4">
+						</div>
+
+						<div class="col-md-7">
+							<div style="color: red" id="error_warehouseDeliLeadTime"></div>
+						</div>
+					</div>
+
+		
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(EN)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"  
+								placeholder="{{'shop_name(EN)' | translate}}"
+								style="border-radius: 4px" ng-readonly="shopNameEnReadonly"
+								id="shopNameEn" ng-model="supplierVo.shopNameEn">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(TC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"
+								style="border-radius: 4px"
+								placeholder="{{'shop_name(TC)' | translate}}" id="shopNameTc"
+								ng-readonly="shopNameTcReadonly"
+								ng-model="supplierVo.shopNameTc">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(SC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"
+								style="border-radius: 4px"
+								placeholder="{{'shop_name(SC)' | translate}}" id="shopNameSc"
+								ng-readonly="shopNameScReadonly"
+								ng-model="supplierVo.shopNameSc">
+						</div>
+					</div>
+
+					
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(EN)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(EN)' | translate}}"
+								style="border-radius: 4px;" ng-model="supplierVo.shopDescEn"
+								maxlength="4000" id="shopDescEn"
+								ng-readonly="shopDescEnReadonly"> 
+					  		</textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(TC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(TC)' | translate}}"
+								style="border-radius: 4px;" ng-model="supplierVo.shopDescTc"
+								maxlength="4000" id="shopDescTc"
+								ng-readonly="shopDescTcReadonly">
+					  </textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(SC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(SC)' | translate}}"
+								style="border-radius: 4px;" ng-model="supplierVo.shopDescSc"
+								maxlength="4000" id="shopDescSc"
+								ng-readonly="shopDescScReadonly">
+					  </textarea>
+						</div>
+					</div>
+
+				
+				<br />
+					<div class="row ">
+						<div class="col-md-12 text-right">
+							<button type="button" class="btn btn-primary" ng-click="save()">{{'save_button'
+								|translate}}</button>
+						</div>
+					</div>
+					
+				    <div class="table-responsive">
+  <table st-table="vm.data" st-safe-src="vm.rowCollection"
+                               class="table table-bordered table-hover smart-table">
+						<thead>
+							<tr>
+
+								<th st-ratio="5" st-sort="brandCode">{{'brandCode' |translate}}</th>
+								<th st-ratio="5" st-sort="masterId">{{'masterId' |translate}}</th>
+								<th>{{'brand_image' | translate}}</th>
+								
+								<th>{{'retek_brand_desc_en' | translate}}</th>
+								<th>{{'retek_brand_desc_tc' | translate}}</th>
+								<th>{{'retek_brand_desc_sc' | translate}}</th>
+								
+								<th>{{'brand_name(EN)' | translate}}</th>
+								<th>{{'brand_name(TC)' | translate}}</th>
+								<th>{{'brand_name(SC)' | translate}}</th>
+								
+								<th>{{'brand_tagline(EN)' | translate}}</th>
+								<th>{{'brand_tagline(TC)' | translate}}</th>
+								<th>{{'brand_tagline(SC)' | translate}}</th>
+							
+								<th>{{'brand_description(EN)' | translate}}</th>
+								<th>{{'brand_description(TC)' | translate}}</th>
+								<th>{{'brand_description(SC)' | translate}}</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							   <tr ng-repeat="row in vm.data">
+								<td>{{row.code}}</td>
+								<td>{{row.masterId}}</td>
+								
+								<td> <img style="width:50" ng-src="./supplierUpload?fileName={{row.imageFileName}}" ng-show="row.imageFileName!=null " />
+								</td>
+								
+								<td>{{row.descEn}}</td>
+								<td>{{row.descTc}}</td>
+								<td>{{row.descSc}}</td>
+								
+								<td>{{row.brandNameEn}}</td>
+								<td>{{row.brandNameTc}}</td>
+								<td>{{row.brandNameSc}}</td>
+								
+								<td>{{row.brandTaglineEn}}</td>
+								<td>{{row.brandTaglineTc}}</td>
+								<td>{{row.brandTaglineSc}}</td>
+								
+								<td>{{row.brandDescEn}}</td>
+								<td>{{row.brandDescTc}}</td>
+								<td>{{row.brandDescSc}}</td>
+	
+								<td>
+									<button type="button" class="btn btn-default"
+										ng-click="openView(row.brandCode)">
+										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</button>
+
+								</td>
+							</tr>
+							
+							 <tfoot>
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div st-items-by-page="page" st-pagination=""
+                                         st-template="./views/pages/pagination_custom.html"></div>
+                                    <div  ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                                        <input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                            
+
+						</tbody>
+					</table>		
+	</div>
+		
+
+
+			</div>
+		</div>
+
+
+	</div>
+	</div>
+	</div>
+
+
+</section>
+<!-- /.content -->

@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+ <PSSP_SUPPLIER
+            id="10001"
+            name="unitTestSupplier"
+            delivery_fee="100"
+            free_delivery_threshold="10"
+            min_delivery_day="1"
+            max_delivery_day="10"
+            warehouse_deli_lead_time="50"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+
+ <PSSP_USER/>
+ <PSSP_SUPPLIER_SUB_CLASS/>
+    <PSSP_ORDER
+            id="19000000"
+            hybris_order_id="19000000"
+            order_datetime="2016-03-11 00:00:00"
+            pick_store="922"
+			SUPPLIER_ID = "10001"
+            delivery_date="2016-03-8 00:00:00"
+            status="NEW"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+            pick_order_id="11221"
+            shipped_date="2016-03-9 00:00:00"
+            pick_date="2016-03-10 00:00:00"
+            track_id="2525889"
+            box_num="1"
+            delivery_success="Y"
+            />
+
+    
+
+    <PSSP_ORDER_ENTRY
+            id="2092067443"
+            ORDER_ID="19000000"
+            seq_num="2"
+            sku_id="1092067442"
+            sku_type="Ambient"
+            supplier_id="10001"
+            brand="BORGO SALCETINO"
+            brand_sec="BORGO"
+            product_name="nullCHIANTI CLASSICO DOCG"
+            product_name_sec="古典奇揚第紅酒"
+            qty="15"
+            size_desc="75CL"
+            unit_price="113.05"
+            sku_amount="113.05"
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+            
+            <PSSP_ORDER_RETURN
+             ID="1001"
+       ORDER_ID="19000000"
+       HYBRIS_ORDER_ID="19000000"
+       HYBRIS_RETURN_ID="1"
+       RETURN_TYPE="1"
+       PICK_STORE="922"
+       SUPPLIER_ID="10001"
+       RETURN_CREATE_DATE="2016-03-11 00:00:00"
+       
+       CUSTOMER_ID="1057504"
+       CUSTOMER_TYPE="Individual"
+       CUSTOMER_NAME="Joe MemberHome1 "
+       CUSTOMER_PHONE_NO="1122"
+       CUSTOMER_MOBILE_NO="2222"
+       
+       COLLECT_DATE="2016-03-11 00:00:00"
+       COLLECT_TIME_SLOT="11"
+       CONTACT_NAME="test name"
+       COLLECT_DISTRICT=" test dis"
+       CONTACT_MOBILE_NO="111122"
+       CONTACT_PHONE_NO="11222"
+       COLLECT_ADDRESS="test address"
+       created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+       REMARK="test"
+       PICK_ORDER_ID="11221"
+       RETURN_REQUEST_STATUS="RETURN_CONFIRMED"
+       RETURN_RECEIVED_IND="P"
+       RETURN_REQUEST_UPDATE_DATE ="2016-03-11 00:00:00" />
+   
+   <PSSP_ORDER_RETURN_ENTRY 
+   
+   ID="1"
+               ORDER_RETURN_ID="1001"
+               SKU_ID="1"
+               SKU_TYPE="1"
+               SUPPLIER_ID="10001"
+               BRAND="test "
+               BRAND_SEC="test"
+               PRODUCT_NAME="test"
+               PRODUCT_NAME_SEC="test"
+               ORDER_QTY="10"
+               EXPECTED_QTY="1"
+               RETURN_REQ_QTY="1"
+               WRITE_OFF_QTY="1"
+               SIZE_DESC="size"
+               SKU_COLLECT_RMK=" test mark"
+               created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+               ACTUAL_COLLECTED_QTY = "1"
+   
+   />
+   
+   
+   <PSSP_ORDER_RETURN_ENTRY 
+	   ID="2"
+               ORDER_RETURN_ID="1001"
+               SKU_ID="1"
+               SKU_TYPE="1"
+               SUPPLIER_ID="10001"
+               BRAND="test "
+               BRAND_SEC="test"
+               PRODUCT_NAME="test"
+               PRODUCT_NAME_SEC="test"
+               ORDER_QTY="10"
+               EXPECTED_QTY="1"
+               RETURN_REQ_QTY="1"
+               WRITE_OFF_QTY="1"
+               SIZE_DESC="size"
+               SKU_COLLECT_RMK=" test mark"
+               created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+               ACTUAL_COLLECTED_QTY = "1" />
+               
+               
+               <PSSP_ORDER_RETURN_ENTRY 
+	   ID="3"
+               ORDER_RETURN_ID="1001"
+               SKU_ID="1"
+               SKU_TYPE="1"
+               SUPPLIER_ID="10001"
+               BRAND="test "
+               BRAND_SEC="test"
+               PRODUCT_NAME="test"
+               PRODUCT_NAME_SEC="test"
+               ORDER_QTY="10"
+               EXPECTED_QTY="1"
+               RETURN_REQ_QTY="1"
+               WRITE_OFF_QTY="1"
+               SIZE_DESC="size"
+               SKU_COLLECT_RMK=" test mark"
+               created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+               ACTUAL_COLLECTED_QTY = "1" />
+   
+   
+   
+</dataset>

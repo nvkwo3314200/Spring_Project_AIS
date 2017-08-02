@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.supplier.SupplierModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.supplier.SupplierModel" >
+  	<id column="ID" property="idDb" jdbcType="DECIMAL"/>
+    <result column="CODE" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DELIVERY_FEE" property="deliveryFee" jdbcType="DECIMAL" />
+    <result column="FREE_DELIVERY_THRESHOLD" property="freeDeliveryThreshold" jdbcType="DECIMAL" />
+    <result column="MIN_DELIVERY_DAY" property="minDeliveryDay" jdbcType="DECIMAL" />
+    <result column="MAX_DELIVERY_DAY" property="maxDeliveryDay" jdbcType="DECIMAL" />
+    <result column="CONSIGNMENT_VIA" property="consignmentVia" jdbcType="DECIMAL" />
+    <result column="WAREHOUSE_DELI_LEAD_TIME" property="warehouseDeliLeadTime" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="SHOP_NAME_EN" property="shopNameEn" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME_TC" property="shopNameTc" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME_SC" property="shopNameSc" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_EN" property="shopDescEn" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_TC" property="shopDescTc" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_SC" property="shopDescSc" jdbcType="VARCHAR" />
+    <result column="UPDATED_IND"  property="updatedInd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseResultMap1" type="com.mall.b2bp.models.supplier.SupplierModel" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DELIVERY_FEE" property="deliveryFee" jdbcType="DECIMAL" />
+    <result column="FREE_DELIVERY_THRESHOLD" property="freeDeliveryThreshold" jdbcType="DECIMAL" />
+    <result column="MIN_DELIVERY_DAY" property="minDeliveryDay" jdbcType="DECIMAL" />
+    <result column="MAX_DELIVERY_DAY" property="maxDeliveryDay" jdbcType="DECIMAL" />
+    <result column="CONSIGNMENT_VIA" property="consignmentVia" jdbcType="DECIMAL" />
+    <result column="WAREHOUSE_DELI_LEAD_TIME" property="warehouseDeliLeadTime" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+   
+    <result column="SHOP_NAME_EN" property="shopNameEn" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME_TC" property="shopNameTc" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME_SC" property="shopNameSc" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_EN" property="shopDescEn" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_TC" property="shopDescTc" jdbcType="VARCHAR" />
+    <result column="SHOP_DESC_SC" property="shopDescSc" jdbcType="VARCHAR" />
+    <result column="UPDATED_IND"  property="updatedInd" jdbcType="VARCHAR" />
+    <result column="deliveryCode"  property="deliveryCode" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  
+   
+   <resultMap id="UserSupplierMap" type="com.mall.b2bp.vos.supplier.UserSupplierVo" >
+    <result column="CODE" property="supplierId" jdbcType="VARCHAR" />
+     <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, NAME, DELIVERY_FEE, FREE_DELIVERY_THRESHOLD, MIN_DELIVERY_DAY, MAX_DELIVERY_DAY, 
+    CONSIGNMENT_VIA, WAREHOUSE_DELI_LEAD_TIME, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+    LAST_UPDATED_DATE,
+   SHOP_NAME_EN,SHOP_NAME_TC,SHOP_NAME_SC,SHOP_DESC_EN,SHOP_DESC_TC,
+    SHOP_DESC_SC,UPDATED_IND
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="searchAll" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER
+    
+  </select>
+  
+    <select id="getAllUserSupplier" resultMap="UserSupplierMap">
+		  	select p.SUPPLIER_ID,p.user_name from SYS_USER p ,SUPPLIER p2
+		where p.SUPPLIER_ID = p2.id 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="String" >
+    delete from SUPPLIER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteBySupplerIdNotExistsPd" parameterType="String" >
+    delete from SUPPLIER t
+    where ID = #{id,jdbcType=VARCHAR} 
+    and  not exists (select 1 from PRODUCT p where p.supplier_code = t.id and DELIVERY_FEE_PRODUCT_IND!='Y')
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.supplier.SupplierModel" >
+    insert into SUPPLIER (ID, NAME, DELIVERY_FEE, 
+      FREE_DELIVERY_THRESHOLD, MIN_DELIVERY_DAY, 
+      MAX_DELIVERY_DAY, CONSIGNMENT_VIA, WAREHOUSE_DELI_LEAD_TIME, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE
+      <!-- ,IMAGE_FILE_NAME,SHOP_NAME_EN,SHOP_NAME_TC,SHOP_NAME_SC,SHOP_DESC_EN,SHOP_DESC_TC,
+      SHOP_DESC_SC,SHOP_CATEGORY
+       -->
+      )
+      values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{deliveryFee,jdbcType=DECIMAL}, 
+      #{freeDeliveryThreshold,jdbcType=DECIMAL}, #{minDeliveryDay,jdbcType=DECIMAL}, 
+      #{maxDeliveryDay,jdbcType=DECIMAL}, #{consignmentVia,jdbcType=DECIMAL}, #{warehouseDeliLeadTime,jdbcType=DECIMAL}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate}
+      <!-- , #{imageFileName,jdbcType=VARCHAR}, #{shopNameEn,jdbcType=VARCHAR}
+      , #{shopNameTc,jdbcType=VARCHAR}, #{shopNameSc,jdbcType=VARCHAR}, #{shopDescEn,jdbcType=VARCHAR}
+      , #{shopDescTc,jdbcType=VARCHAR}, #{shopDescSc,jdbcType=VARCHAR}, #{shopCategory,jdbcType=DECIMAL}
+       -->
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.supplier.SupplierModel" >
+  	<selectKey keyProperty="idDb" resultType="java.math.BigDecimal" order="BEFORE">
+         select SUPPLIER_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    insert into SUPPLIER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idDb != null" >
+        ID,
+      </if>
+      <if test="id != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="deliveryFee != null" >
+        DELIVERY_FEE,
+      </if>
+      <if test="freeDeliveryThreshold != null" >
+        FREE_DELIVERY_THRESHOLD,
+      </if>
+      <if test="minDeliveryDay != null" >
+        MIN_DELIVERY_DAY,
+      </if>
+      <if test="maxDeliveryDay != null" >
+        MAX_DELIVERY_DAY,
+      </if>
+      <if test="consignmentVia != null" >
+        CONSIGNMENT_VIA,
+      </if>
+      <if test="warehouseDeliLeadTime != null" >
+        WAREHOUSE_DELI_LEAD_TIME,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="shopNameEn != null" >
+        SHOP_NAME_EN,
+      </if>
+      
+      <if test="shopNameTc != null" >
+        SHOP_NAME_TC,
+      </if>
+      
+      <if test="shopNameSc != null" >
+        SHOP_NAME_SC,
+      </if>
+      
+      <if test="shopDescEn != null" >
+        SHOP_DESC_EN,
+      </if>
+      
+      <if test="shopDescTc != null" >
+        SHOP_DESC_TC,
+      </if>
+      
+      <if test="shopDescSc != null" >
+        SHOP_DESC_SC,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idDb != null" >
+        #{idDb,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null" >
+        #{CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryFee != null" >
+        #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="freeDeliveryThreshold != null" >
+        #{freeDeliveryThreshold,jdbcType=DECIMAL},
+      </if>
+      <if test="minDeliveryDay != null" >
+        #{minDeliveryDay,jdbcType=DECIMAL},
+      </if>
+      <if test="maxDeliveryDay != null" >
+        #{maxDeliveryDay,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentVia != null" >
+        #{consignmentVia,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseDeliLeadTime != null" >
+        #{warehouseDeliLeadTime,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+      <if test="shopNameEn != null" >
+        #{shopNameEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopNameTc != null" >
+        #{shopNameTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopNameSc != null" >
+        #{shopNameSc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescEn != null" >
+        #{shopDescEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescTc != null" >
+        #{shopDescTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescSc != null" >
+        #{shopDescSc,jdbcType=VARCHAR},
+      </if>
+      
+      
+
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.supplier.SupplierModel" >
+    update SUPPLIER
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryFee != null" >
+        DELIVERY_FEE = #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="freeDeliveryThreshold != null" >
+        FREE_DELIVERY_THRESHOLD = #{freeDeliveryThreshold,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="deliveryFeeStr ==''" >
+        DELIVERY_FEE = null,
+      </if>
+      
+      <if test="freeDeliveryThresholdStr ==''" >
+        FREE_DELIVERY_THRESHOLD = null,
+      </if>
+      
+      <if test="minDeliveryDay != null" >
+        MIN_DELIVERY_DAY = #{minDeliveryDay,jdbcType=DECIMAL},
+      </if>
+      <if test="maxDeliveryDay != null" >
+        MAX_DELIVERY_DAY = #{maxDeliveryDay,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentVia != null" >
+        CONSIGNMENT_VIA = #{consignmentVia,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseDeliLeadTime != null" >
+        WAREHOUSE_DELI_LEAD_TIME = #{warehouseDeliLeadTime,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      
+      <!-- 
+      <if test="imageFileName != null" >
+       IMAGE_FILE_NAME = #{imageFileName,jdbcType=VARCHAR},
+      </if>
+      
+       <if test="shopCategory != null" >
+       SHOP_CATEGORY = #{shopCategory,jdbcType=DECIMAL}
+      </if>
+      
+       -->
+       
+      
+      <if test="shopNameEn != null" >
+        SHOP_NAME_EN = #{shopNameEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopNameTc != null" >
+        SHOP_NAME_TC = #{shopNameTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopNameSc != null" >
+        SHOP_NAME_SC = #{shopNameSc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescEn != null" >
+        SHOP_DESC_EN = #{shopDescEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescTc != null" >
+        SHOP_DESC_TC = #{shopDescTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shopDescSc != null" >
+        SHOP_DESC_SC = #{shopDescSc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="updatedInd != null" >
+        UPDATED_IND = #{updatedInd,jdbcType=VARCHAR},
+      </if>
+		      
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.supplier.SupplierModel" >
+    update SUPPLIER
+    set NAME = #{name,jdbcType=VARCHAR},
+      DELIVERY_FEE = #{deliveryFee,jdbcType=DECIMAL},
+      FREE_DELIVERY_THRESHOLD = #{freeDeliveryThreshold,jdbcType=DECIMAL},
+      MIN_DELIVERY_DAY = #{minDeliveryDay,jdbcType=DECIMAL},
+      MAX_DELIVERY_DAY = #{maxDeliveryDay,jdbcType=DECIMAL},
+      CONSIGNMENT_VIA = #{consignmentVia,jdbcType=DECIMAL},
+      WAREHOUSE_DELI_LEAD_TIME = #{warehouseDeliLeadTime,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      <!-- 
+      IMAGE_FILE_NAME = #{imageFileName,jdbcType=VARCHAR},
+      SHOP_CATEGORY = #{shopCategory,jdbcType=DECIMAL},
+      -->
+      SHOP_NAME_EN = #{shopNameEn,jdbcType=VARCHAR},
+      SHOP_NAME_TC = #{shopNameTc,jdbcType=VARCHAR},
+      SHOP_NAME_SC = #{shopNameSc,jdbcType=VARCHAR},
+      SHOP_DESC_EN = #{shopDescEn,jdbcType=VARCHAR},
+      SHOP_DESC_TC = #{shopDescTc,jdbcType=VARCHAR},
+      SHOP_DESC_SC = #{shopDescSc,jdbcType=VARCHAR}
+
+     
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAllSupplierByName" parameterType = "String" resultMap="BaseResultMap">
+  	select * from SUPPLIER p where p.name = #{name,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getUserSupplierVoBySupplierId" parameterType = "String" resultMap="UserSupplierMap">
+	 select p.SUPPLIER_ID,p.user_name from SYS_USER p ,SUPPLIER p2
+	 where p.SUPPLIER_ID = p2.id  and  p.SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </select>
+  
+ 
+  <select id="getSupplierByUpdatedInd" resultMap="BaseResultMap1">
+select pu.email,pp.product_code deliveryCode ,ps.* from SUPPLIER ps ,
+
+(select * from PRODUCT p  where p.delivery_fee_product_ind = 'Y' ) pp ,
+
+SYS_USER pu 
+where ps.id = pp.supplier_code(+)
+and  ps.id= pu.SUPPLIER_ID(+)
+
+and ps.updated_ind = 'Y'
+  </select>
+  
+  
+  
+  
+</mapper>

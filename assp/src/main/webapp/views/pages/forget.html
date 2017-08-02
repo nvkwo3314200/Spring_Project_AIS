@@ -1,0 +1,42 @@
+    <div class="login-box">
+		<!-- 
+      <div class="login-logo">
+        <b>A.S. Watson</b>
+			<br>
+        <b>Supplier Portal</b>
+      </div> 
+       -->     
+   		
+      <div class="login-box-body"> 
+      		<div class="login-box-forget">
+     			<b>{{'login_forget_password' | translate}}</b>
+     		</div>
+      		<!--       
+          <div class="login-logo-pic">
+        		<img style="width: 100%" alt="" src="./pssp/images/logo.jpg">
+    		</div>   
+    		<br/>
+    		-->
+		  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+			  <div translate="{{alert.msg}}" >
+			  </div>
+		  </uib-alert>
+
+
+          <div class="form-group has-feedback">
+            <input class="form-control" placeholder="{{'please_input_register_email' | translate}}" name="email" type="text" ng-model="email" required>
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-8" style="margin-left:21px">
+         
+            </div><!-- /.col -->
+            <div class="col-xs-4" style="margin-left:234px">
+               <button ng-click="send()" class="btn btn-lg btn-success btn-block" >{{'send' | translate}}</button>
+            </div><!-- /.col -->
+          </div>
+           <a ng-click="login()">{{'label_login' | translate}}</a>
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+

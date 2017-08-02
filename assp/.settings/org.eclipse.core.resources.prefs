@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/com/aswatson/pssp/services/impl/order/OrderServiceImpl.java=UTF-8
+encoding//src/main/java/com/mall/b2bp/utils/StringUtil.java=UTF-8
+encoding//src/main/resources/messages/message_zh_TW.properties=UTF-8
+encoding//src/main/resources/messages/messages_zh_CN.properties=UTF-8
+encoding//src/main/webapp/i18n/zh_CN.json=UTF-8
+encoding//src/main/webapp/i18n/zh_TW.json=UTF-8
+encoding//src/main/webapp/scripts/controllers/product.js=UTF-8
+encoding//src/main/webapp/views/pages/settings.html=UTF-8
+encoding//src/main/webapp/views/pages/userView.html=UTF-8
+encoding/<project>=UTF-8

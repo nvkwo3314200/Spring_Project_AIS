@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+<PSSP_BRAND
+BRAND_CODE	="13683237"			
+DESC_EN="test en"			
+DESC_TC	="test tc"			
+DESC_SC	="test sc"			
+SYS_REF	="123"			
+MASTER_ID	="1001"			    
+created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+   /> 
+   
+   
+
+<AUDIT_PSSP_PRODUCT_BARCODE/>
+<PSSP_SUPPLIER_BRAND/>
+
+</dataset>
+

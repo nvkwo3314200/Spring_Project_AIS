@@ -1,0 +1,44 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Batch upload
+	</h1>
+	
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+ <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+	  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+		  <div translate="{{alert.msg}}" >
+		  </div>
+	  </uib-alert>
+	  
+	    <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+	<div class="row">
+		<div class="col-md-12">
+			<input type="file" id="file1"  multiple /> (upload file format: zip)
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-primary" ng-click="upload()"
+				ng-disabled="disable" data-ui-sref-opts="{reload: true}">Upload</button>
+				
+				<button type="button" class="btn btn-primary" ng-click="downloadProductTemplate()"
+				 data-ui-sref-opts="{reload: true}">{{'download_template'|translate}}</button>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /.content -->

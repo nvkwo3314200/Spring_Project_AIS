@@ -1,0 +1,127 @@
+
+<!-- 
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_login_type' | translate}}</label>
+	</div>
+	<div class="col-md-4">
+		<select name="loginIpRest.exIncludeInd" class="form-control"
+			ng-model="loginIpRest.exIncludeInd"
+			ng-options="option.code as option.description for option in loginTypes">
+		</select>
+	</div>
+</div>
+<div class="row">
+	
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_start_from' | translate}}</label>
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipStart1"
+			ng-model="loginIpRest.ipStart1">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipStart2"
+			ng-model="loginIpRest.ipStart2">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipStart3"
+			ng-model="loginIpRest.ipStart3">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipStart4"
+			ng-model="loginIpRest.ipStart4">
+	</div>
+	
+	<div class="col-md-5">
+		<button type="button" class="btn btn-primary"
+			ng-click="initShopIpList();">{{'user_search' |
+			translate}}</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2 ">
+		<label class="control-label">{{'system_shop_end_to' | translate}}</label>
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipEnd1"
+			ng-model="loginIpRest.ipEnd1">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipEnd2"
+			ng-model="loginIpRest.ipEnd2">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipEnd3"
+			ng-model="loginIpRest.ipEnd3">
+	</div>
+	<div class="col-md-1">
+		<input type="number" class="form-control" maxlength=3 max="255" onkeyup="if(this.value > 255) this.value= 255;"
+			min="0" style="border-radius: 4px" id="ipEnd4"
+			ng-model="loginIpRest.ipEnd4">
+	</div>
+</div>
+ -->
+<div class="row">
+	<div class="col-md-12">
+		<button type="button" class="btn btn-primary"
+			ng-click="openAddIp()">{{'product_add'| translate}}</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="openAddIp('EDIT')">{{'product_edit'| translate}}
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="deleteShopIps()">{{'product_delete'| translate}}</button>
+	</div>
+</div>
+</br>
+
+<div class="table-responsive">
+	<table st-table="vm.data"class="table table-bordered table-hover smart-table">
+		<thead>
+			<tr  class="table-header ">
+				<th row-select-all="vm.data" selected="vm.selected"
+					ng-click="vm.selectAll(vm.data)"></th>
+				<th ng-hide='true'></th>
+				<th>{{'system_shop_login_type' | translate}}</th>
+				<th>{{'system_shop_start_from' | translate}}</th>
+				<th>{{'system_shop_end_to' | translate}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in vm.data"  id="tr{{row.id}}"  ng-click="vm.select(row)" >
+				<td row-select="row" ></td>
+				<td ng-hide='true'>{{row.id}}</td>
+				<td>
+					<p ng-if="row.exIncludeInd == 'I'"> {{'system_shop_allow' | translate}}</p>
+					<p ng-if="row.exIncludeInd == 'E'"> {{'system_shop_deny' | translate}}</p>
+				</td>
+				<td>
+					{{row.ipStart1}}.{{row.ipStart2}}.{{row.ipStart3}}.{{row.ipStart4}}
+				</td>
+				<td>
+					{{row.ipEnd1}}.{{row.ipEnd2}}.{{row.ipEnd3}}.{{row.ipEnd4}}
+				</td>
+			</tr>
+			<tfoot>
+				<tr>
+					<td colspan="8" class="text-center">
+						<div st-items-by-page="page" st-pagination=""
+							st-template="./views/pages/pagination_custom.html">
+							</div>
+								<div ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                               			<input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+					</td>
+				</tr>
+			</tfoot>
+		</tbody>
+	</table>
+</div>
+

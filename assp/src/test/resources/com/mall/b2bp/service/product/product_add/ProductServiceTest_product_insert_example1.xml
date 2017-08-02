@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_PRODUCT
+	ID="1000000003"
+    BRAND_CODE="3"
+    ESTORE_CATEGORY="2"
+    SUPPLIER_CODE="2"
+    UNIT_RETAIL="12"
+    SHORT_DESC_EN="test2"
+    DELIVERY_MODE="SDD"
+    STATUS="DRAFT"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    SUPPLIER_PRODUCT_CODE="5555555566666666"
+    VERSION="STAGING"/> 
+   
+      
+
+<PSSP_PRODUCT
+	ID="1000000001"
+    BRAND_CODE="3"
+    ESTORE_CATEGORY="2"
+    SUPPLIER_CODE="2"
+    UNIT_RETAIL="12"
+    SHORT_DESC_EN="test2"
+    DELIVERY_MODE="SDD"
+    STATUS="DRAFT"
+    SUPPLIER_PRODUCT_CODE="1111111111122222222222"
+    VERSION="STAGING"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+        />
+ <PSSP_PRODUCT
+	ID="1000000002"
+    BRAND_CODE="3"
+    ESTORE_CATEGORY="2"
+    SUPPLIER_CODE="2"
+    UNIT_RETAIL="12"
+    SHORT_DESC_EN="test2"
+    DELIVERY_MODE="SDD"
+    STATUS="DRAFT"
+    SUPPLIER_PRODUCT_CODE="33333333344444444"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    VERSION="STAGING"/> 
+      
+  <PSSP_PRODUCT_AUDIT/>
+<PSSP_PRODUCT_BARCODE
+   ID="1000001"
+   PRODUCT_ID="1000000001"
+   ITEM_NUM_TYPE="UCC14"
+   BARCODE_NUM="44233345345313131"
+   created_by="unitTest"
+   created_date="2016-03-11 00:00:00"
+   last_updated_by="unitTest"
+   last_updated_date="2016-03-11 00:00:00"
+/>
+
+
+ 
+<PSSP_PRODUCT_BARCODE
+   ID="1000002"
+   PRODUCT_ID="1000000002"
+   ITEM_NUM_TYPE="UCC14"
+   BARCODE_NUM="34535364541231"
+   created_by="unitTest"
+   created_date="2016-03-11 00:00:00"
+   last_updated_by="unitTest"
+   last_updated_date="2016-03-11 00:00:00"
+/>
+
+
+
+ 
+<PSSP_PRODUCT_BARCODE
+   ID="1000003"
+   PRODUCT_ID="1000000003"
+   ITEM_NUM_TYPE="UCC14"
+   BARCODE_NUM="678678645643643"
+   created_by="unitTest"
+   created_date="2016-03-11 00:00:00"
+   last_updated_by="unitTest"
+   last_updated_date="2016-03-11 00:00:00"
+/>
+
+
+	<PSSP_PRODUCT_IMAGES/>
+   
+ 
+     
+</dataset>

@@ -1,0 +1,79 @@
+<!-- Content Header (Page header) -->
+
+<!-- Main content -->
+<section class="content">
+
+Shiped Confirm
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+
+					<div class="table-responsive">
+
+						<br />
+
+
+						<table st-table="rowCollection"
+							class="table table-bordered table-hover smart-table">
+							<thead>
+								<tr>
+
+									<th st-ratio="8">supplier</th>
+									<th st-ratio="13">status</th>
+									
+									<th st-ratio="5" >Shipped ?</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="row in rowCollection">
+									<td>{{row.supplier}}</td>
+									<td>{{row.status}}</td>
+									
+									<td >
+										<input type="checkbox"  ng-model="row.flag" 
+										ng-true-value="'Y'" ng-false-value="'N'"  ng-disabled="{{row.disableCheckbox}}" ng-change="changeOrderShipConfirm()">
+									</td>
+								</tr>
+                                <div style="color:red" id="error_shippedDate"></div>
+							</tbody>
+
+						</table>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 text-right">
+
+							<button type="button" ng-click="saveConfirm()" class="btn btn-primary" >Save</button>
+							
+							<button type="button" ng-click="shipConfirm()" class="btn btn-primary" ng-if="!orderShipConfirmDisable">Ship Confirm</button>
+
+							<button type="button" class="btn btn-primary" ng-click="cancelShipConfirm()">Cancel</button>
+
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+</section>
+</section>
+
+
+

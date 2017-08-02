@@ -1,0 +1,111 @@
+
+<!-- Content Header (Page header) -->
+<style type="text/css">
+	@media screen and (min-width: 500px){
+		input.form-control {
+			width: 60px;
+			display:inline;	
+		}
+		div.col-sm-1 {
+			display:inline;
+		}
+	}
+	@media screen and (min-width: 768px){
+		div.col-sm-1 {
+			margin-right:30px;
+		}
+	}
+</style>
+
+<section class="content-header">
+
+	<div class="alert ng-scope ng-isolate-scope alert-danger alert-dismissible" ng-if="hasError">
+    	<div>
+			<div class="ng-scope">{{dialogErrorMessage}}</div>
+		</div>
+	</div>
+	<h1>
+		{{'system_shop_login_ip_id_add_edit' | translate}}
+	</h1>
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-2 ">
+			<label class="control-label">{{'system_shop_login_type' | translate}}</label>
+		</div>
+		<div class="col-md-4">
+			<select name="loginIpRestEdit.exIncludeInd" class="form-control"
+				ng-model="loginIpRestEdit.exIncludeInd"
+				ng-options="option.code as option.description for option in loginTypes">
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 ">
+			<label class="control-label">{{'system_shop_start_from' | translate}}</label>
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3 max="255" onkeyup="this.value=this.value.replace(/\D/g,''); if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="ipStart1"
+				ng-model="loginIpRestEdit.ipStart1">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3 max="255" onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="ipStart2"
+				ng-model="loginIpRestEdit.ipStart2">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3 max="255" onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="ipStart3"
+				ng-model="loginIpRestEdit.ipStart3">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3 onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="ipStart4"
+				ng-model="loginIpRestEdit.ipStart4">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-2 ">
+			<label class="control-label">{{'system_shop_end_to' | translate}}</label>
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3  onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="endIp1"
+				ng-model="loginIpRestEdit.ipEnd1">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3  onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="endIp2"
+				ng-model="loginIpRestEdit.ipEnd2">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3  onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="endIp3"
+				ng-model="loginIpRestEdit.ipEnd3">
+		</div>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" maxlength=3  onkeyup="this.value=this.value.replace(/\D/g,'');if(this.value > 255) this.value = 255;"  onafterpaste="this.value=this.value.replace(/\D/g,'')"
+				 style="border-radius: 4px" id="endIp4"
+				ng-model="loginIpRestEdit.ipEnd4">
+		</div>
+	</div>
+	
+	<div class="row">
+        <div class="col-md-12 text-right">
+
+         <button type="button" class="btn btn-primary ng-binding" ng-disabled="ableAdd" ng-click="saveEditIp(this);">
+                	 {{'button_save'|translate}}
+                </button>
+                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="closeThisDialog(0)">{{'button_cancel'
+                    | translate}}
+                </button>
+        </div>
+       
+    </div>
+</section>
+<!-- /.content -->

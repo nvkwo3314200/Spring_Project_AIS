@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.order.OrderReturnModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.order.OrderReturnModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ORDER_ID" property="orderId" jdbcType="DECIMAL" />
+    <result column="HYBRIS_ORDER_ID" property="hybrisOrderId" jdbcType="VARCHAR" />
+    <result column="HYBRIS_RETURN_ID" property="hybrisReturnId" jdbcType="VARCHAR" />
+    <result column="RETURN_TYPE" property="returnType" jdbcType="DECIMAL" />
+    <result column="PICK_STORE" property="pickStore" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="RETURN_CREATE_DATE" property="returnCreateDate" jdbcType="DATE" />
+    <result column="SPECIAL_INSTRUCTION" property="specialInstruction" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="DECIMAL" />
+    <result column="CUSTOMER_TYPE" property="customerType" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_PHONE_NO" property="customerPhoneNo" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_MOBILE_NO" property="customerMobileNo" jdbcType="VARCHAR" />
+    <result column="TENDER_TYPE" property="tenderType" jdbcType="VARCHAR" />
+    <result column="PAYMENT_REF" property="paymentRef" jdbcType="VARCHAR" />
+    <result column="COLLECT_DATE" property="collectDate" jdbcType="DATE" />
+    <result column="COLLECT_TIME_SLOT" property="collectTimeSlot" jdbcType="VARCHAR" />
+    <result column="CONTACT_NAME" property="contactName" jdbcType="VARCHAR" />
+    <result column="COLLECT_DISTRICT" property="collectDistrict" jdbcType="VARCHAR" />
+    <result column="CONTACT_MOBILE_NO" property="contactMobileNo" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE_NO" property="contactPhoneNo" jdbcType="VARCHAR" />
+    <result column="COLLECT_ADDRESS" property="collectAddress" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    
+    <result column="PICK_ORDER_ID" property="pickOrderId" jdbcType="VARCHAR" />
+    <result column="RETURN_REQUEST_STATUS" property="returnRequestStatus" jdbcType="VARCHAR" />
+    <result column="RETURN_REQUEST_UPDATE_DATE" property="returnRequestUpdateDate" jdbcType="DATE" />
+  </resultMap>
+  
+  
+  <resultMap id="OrderReturnReceivedMap" type="com.mall.b2bp.models.order.OrderReturnReceivedModel" >
+ 
+   <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="hybris_order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="hybris_return_id" property="returnId" jdbcType="VARCHAR" />  
+    <result column="return_request_update_date" property="returnUpdateDate" jdbcType="VARCHAR" />  
+    <result column="sku_id" property="skuId" jdbcType="VARCHAR" />  
+    <result column="total_returnQty" property="totalReturnQty" jdbcType="VARCHAR" />
+    <result column="actual_collected_qty" property="actualCollectedQty" jdbcType="VARCHAR" />
+    <result column="write_off_qty" property="writeOffQty" jdbcType="VARCHAR" />
+    <result column="sku_collect_rmk" property="returnSkuRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+    
+  <sql id="Base_Column_List" >
+    ID, ORDER_ID, HYBRIS_ORDER_ID, HYBRIS_RETURN_ID, RETURN_TYPE, PICK_STORE, SUPPLIER_ID, 
+    RETURN_CREATE_DATE, SPECIAL_INSTRUCTION, CUSTOMER_ID, CUSTOMER_TYPE, CUSTOMER_NAME, 
+    CUSTOMER_PHONE_NO, CUSTOMER_MOBILE_NO, TENDER_TYPE, PAYMENT_REF, COLLECT_DATE, COLLECT_TIME_SLOT, 
+    CONTACT_NAME, COLLECT_DISTRICT, CONTACT_MOBILE_NO, CONTACT_PHONE_NO, COLLECT_ADDRESS, 
+    CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, REMARK, 
+    PICK_ORDER_ID, RETURN_REQUEST_STATUS, RETURN_REQUEST_UPDATE_DATE
+  </sql>
+  
+   <select id="selectByReturnId" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_RETURN
+    where hybris_return_id = #{hybrisReturnId,jdbcType=VARCHAR}
+  </select>
+  
+  
+   <select id="getReturnReceived" resultMap="OrderReturnReceivedMap" >
+    select 
+    por.id,
+    por.hybris_order_id,
+       por.hybris_return_id,
+       to_char(por.return_request_update_date, 'yyyyMMdd') return_request_update_date,
+       porn.sku_id,
+       (porn.actual_collected_qty + porn.write_off_qty) total_returnQty,
+       porn.actual_collected_qty,
+       porn.write_off_qty,
+       porn.sku_collect_rmk
+
+  from pssp_order_return por, pssp_order_return_entry porn, pssp_order po
+ where po.id = por.order_id
+   and por.id = porn.order_return_id
+   and por.return_request_status = 'RETURN_CONFIRMED'
+   and por.return_received_ind = 'P'
+  </select>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_RETURN
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+	SELECT ORN.* FROM PSSP_ORDER_RETURN ORN,PSSP_ORDER O 
+	WHERE ORN.ORDER_ID = O.ID
+		
+		 AND ORN.ORDER_ID= #{orderId,jdbcType=VARCHAR}
+        
+        <if test="supplierId != null and supplierId != ''">
+       		AND ORN.SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+       </if>
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_ORDER_RETURN
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderReturnModel" >
+    insert into PSSP_ORDER_RETURN (ID, ORDER_ID, HYBRIS_ORDER_ID, 
+      HYBRIS_RETURN_ID, RETURN_TYPE, PICK_STORE, 
+      SUPPLIER_ID, RETURN_CREATE_DATE, SPECIAL_INSTRUCTION, 
+      CUSTOMER_ID, CUSTOMER_TYPE, CUSTOMER_NAME, 
+      CUSTOMER_PHONE_NO, CUSTOMER_MOBILE_NO, TENDER_TYPE, 
+      PAYMENT_REF, COLLECT_DATE, COLLECT_TIME_SLOT, 
+      CONTACT_NAME, COLLECT_DISTRICT, CONTACT_MOBILE_NO, 
+      CONTACT_PHONE_NO, COLLECT_ADDRESS, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, 
+      REMARK, PICK_ORDER_ID, 
+      RETURN_REQUEST_STATUS, RETURN_REQUEST_UPDATE_DATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{orderId,jdbcType=DECIMAL}, #{hybrisOrderId,jdbcType=VARCHAR}, 
+      #{hybrisReturnId,jdbcType=DECIMAL}, #{returnType,jdbcType=DECIMAL}, #{pickStore,jdbcType=DECIMAL}, 
+      #{supplierId,jdbcType=VARCHAR}, #{returnCreateDate,jdbcType=DATE}, #{specialInstruction,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=DECIMAL}, #{customerType,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{customerPhoneNo,jdbcType=VARCHAR}, #{customerMobileNo,jdbcType=VARCHAR}, #{tenderType,jdbcType=VARCHAR}, 
+      #{paymentRef,jdbcType=VARCHAR}, #{collectDate,jdbcType=DATE}, #{collectTimeSlot,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{collectDistrict,jdbcType=VARCHAR}, #{contactMobileNo,jdbcType=VARCHAR}, 
+      #{contactPhoneNo,jdbcType=VARCHAR}, #{collectAddress,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR},  #{pickOrderId,jdbcType=VARCHAR}, 
+      #{returnRequestStatus,jdbcType=VARCHAR}, #{returnRequestUpdateDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.order.OrderReturnModel" >
+  
+  
+   <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_ORDER_RETURN_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+      
+    insert into PSSP_ORDER_RETURN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID,
+      </if>
+      <if test="hybrisReturnId != null" >
+        HYBRIS_RETURN_ID,
+      </if>
+      <if test="returnType != null" >
+        RETURN_TYPE,
+      </if>
+      <if test="pickStore != null" >
+        PICK_STORE,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="returnCreateDate != null" >
+        RETURN_CREATE_DATE,
+      </if>
+      <if test="specialInstruction != null" >
+        SPECIAL_INSTRUCTION,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="customerPhoneNo != null" >
+        CUSTOMER_PHONE_NO,
+      </if>
+      <if test="customerMobileNo != null" >
+        CUSTOMER_MOBILE_NO,
+      </if>
+      <if test="tenderType != null" >
+        TENDER_TYPE,
+      </if>
+      <if test="paymentRef != null" >
+        PAYMENT_REF,
+      </if>
+      <if test="collectDate != null" >
+        COLLECT_DATE,
+      </if>
+      <if test="collectTimeSlot != null" >
+        COLLECT_TIME_SLOT,
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME,
+      </if>
+      <if test="collectDistrict != null" >
+        COLLECT_DISTRICT,
+      </if>
+      <if test="contactMobileNo != null" >
+        CONTACT_MOBILE_NO,
+      </if>
+      <if test="contactPhoneNo != null" >
+        CONTACT_PHONE_NO,
+      </if>
+      <if test="collectAddress != null" >
+        COLLECT_ADDRESS,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+     
+      <if test="pickOrderId != null" >
+        PICK_ORDER_ID,
+      </if>
+      <if test="returnRequestStatus != null" >
+        RETURN_REQUEST_STATUS,
+      </if>
+      <if test="returnRequestUpdateDate != null" >
+        RETURN_REQUEST_UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="hybrisOrderId != null" >
+        #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="hybrisReturnId != null" >
+        #{hybrisReturnId,jdbcType=DECIMAL},
+      </if>
+      <if test="returnType != null" >
+        #{returnType,jdbcType=DECIMAL},
+      </if>
+      <if test="pickStore != null" >
+        #{pickStore,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCreateDate != null" >
+        #{returnCreateDate,jdbcType=DATE},
+      </if>
+      <if test="specialInstruction != null" >
+        #{specialInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhoneNo != null" >
+        #{customerPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMobileNo != null" >
+        #{customerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderType != null" >
+        #{tenderType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentRef != null" >
+        #{paymentRef,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDate != null" >
+        #{collectDate,jdbcType=DATE},
+      </if>
+      <if test="collectTimeSlot != null" >
+        #{collectTimeSlot,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDistrict != null" >
+        #{collectDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMobileNo != null" >
+        #{contactMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNo != null" >
+        #{contactPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="collectAddress != null" >
+        #{collectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="pickOrderId != null" >
+        #{pickOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnRequestStatus != null" >
+        #{returnRequestStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="returnRequestUpdateDate != null" >
+        #{returnRequestUpdateDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.order.OrderReturnModel" >
+    update PSSP_ORDER_RETURN
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="hybrisReturnId != null" >
+        HYBRIS_RETURN_ID = #{hybrisReturnId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnType != null" >
+        RETURN_TYPE = #{returnType,jdbcType=DECIMAL},
+      </if>
+      <if test="pickStore != null" >
+        PICK_STORE = #{pickStore,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCreateDate != null" >
+        RETURN_CREATE_DATE = #{returnCreateDate,jdbcType=DATE},
+      </if>
+      <if test="specialInstruction != null" >
+        SPECIAL_INSTRUCTION = #{specialInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhoneNo != null" >
+        CUSTOMER_PHONE_NO = #{customerPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMobileNo != null" >
+        CUSTOMER_MOBILE_NO = #{customerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderType != null" >
+        TENDER_TYPE = #{tenderType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentRef != null" >
+        PAYMENT_REF = #{paymentRef,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDate != null" >
+        COLLECT_DATE = #{collectDate,jdbcType=DATE},
+      </if>
+      <if test="collectTimeSlot != null" >
+        COLLECT_TIME_SLOT = #{collectTimeSlot,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDistrict != null" >
+        COLLECT_DISTRICT = #{collectDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMobileNo != null" >
+        CONTACT_MOBILE_NO = #{contactMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhoneNo != null" >
+        CONTACT_PHONE_NO = #{contactPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="collectAddress != null" >
+        COLLECT_ADDRESS = #{collectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+     
+      <if test="pickOrderId != null" >
+        PICK_ORDER_ID = #{pickOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="returnRequestStatus != null" >
+        RETURN_REQUEST_STATUS = #{returnRequestStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="returnRequestUpdateDate != null" >
+        RETURN_REQUEST_UPDATE_DATE = #{returnRequestUpdateDate,jdbcType=DATE},
+      </if>
+      
+      <if test="returnReceiveInd != null" >
+        RETURN_RECEIVED_IND = #{returnReceiveInd,jdbcType=DATE},
+      </if>
+      
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.order.OrderReturnModel" >
+    update PSSP_ORDER_RETURN
+    set ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      HYBRIS_RETURN_ID = #{hybrisReturnId,jdbcType=VARCHAR},
+      RETURN_TYPE = #{returnType,jdbcType=DECIMAL},
+      PICK_STORE = #{pickStore,jdbcType=DECIMAL},
+      SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      RETURN_CREATE_DATE = #{returnCreateDate,jdbcType=DATE},
+      SPECIAL_INSTRUCTION = #{specialInstruction,jdbcType=VARCHAR},
+      CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      CUSTOMER_PHONE_NO = #{customerPhoneNo,jdbcType=VARCHAR},
+      CUSTOMER_MOBILE_NO = #{customerMobileNo,jdbcType=VARCHAR},
+      TENDER_TYPE = #{tenderType,jdbcType=VARCHAR},
+      PAYMENT_REF = #{paymentRef,jdbcType=VARCHAR},
+      COLLECT_DATE = #{collectDate,jdbcType=DATE},
+      COLLECT_TIME_SLOT = #{collectTimeSlot,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      COLLECT_DISTRICT = #{collectDistrict,jdbcType=VARCHAR},
+      CONTACT_MOBILE_NO = #{contactMobileNo,jdbcType=VARCHAR},
+      CONTACT_PHONE_NO = #{contactPhoneNo,jdbcType=VARCHAR},
+      COLLECT_ADDRESS = #{collectAddress,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      
+      PICK_ORDER_ID = #{pickOrderId,jdbcType=VARCHAR},
+      RETURN_REQUEST_STATUS = #{returnRequestStatus,jdbcType=VARCHAR},
+      RETURN_REQUEST_UPDATE_DATE = #{returnRequestUpdateDate,jdbcType=DATE}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <resultMap id="ExportReturnOrderResultMap" type="com.mall.b2bp.models.order.OrderReturnExportModel" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="HYBRIS_ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+        <result column="hybris_return_id" property="hybrisReturnId" jdbcType="VARCHAR" />
+        <result column="return_create_date" property="returnCreateDate" jdbcType="DATE"/>
+        <result column="return_request_status" property="returnRequestStatus" jdbcType="VARCHAR" />
+        <result column="return_request_update_date" property="returnRequestUpdateDate" jdbcType="DATE" />
+        <result column="customer_id" property="customerId" jdbcType="DECIMAL" />
+        <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="customer_phone_no" property="customerPhoneNo" jdbcType="VARCHAR" />
+        <result column="customer_mobile_no" property="customerMobileNo" jdbcType="VARCHAR" />
+        <result column="tender_type" property="tenderType" jdbcType="VARCHAR" />
+        <result column="payment_ref" property="paymentRef" jdbcType="VARCHAR" />
+        <result column="collect_date" property="collectDate" jdbcType="DATE" />
+        <result column="collect_time_slot" property="collectTimeSlot" jdbcType="VARCHAR" />
+        <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+        <result column="contact_mobile_no" property="contactMobileNo" jdbcType="VARCHAR" />
+        <result column="contact_phone_no" property="contactPhoneNo" jdbcType="VARCHAR" />
+        <result column="collect_district" property="collectDistrict" jdbcType="VARCHAR" />
+        <result column="collect_address" property="collectAddress" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="special_instruction" property="specialinstruction" jdbcType="VARCHAR" />
+        <result column="sku_id" property="skuId" jdbcType="VARCHAR" />
+        <result column="brand" property="brand" jdbcType="VARCHAR" />
+        <result column="brand_sec" property="brandSec" jdbcType="VARCHAR" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="product_name_sec" property="productNameSec" jdbcType="VARCHAR" />
+        <result column="size_desc" property="sizeDesc" jdbcType="VARCHAR" />
+        <result column="order_qty" property="orderQty" jdbcType="DECIMAL" />
+        <result column="return_req_qty" property="returnReqQty" jdbcType="DECIMAL" />
+        <result column="expected_qty" property="expectedQty" jdbcType="DECIMAL" />
+        <result column="actual_collected_qty" property="actualCollectedQty" jdbcType="DECIMAL" />
+        <result column="write_off_qty" property="writeOffQty" jdbcType="DECIMAL" />
+        <result column="sku_collect_rmk" property="skuCollectRmk" jdbcType="VARCHAR" />
+    </resultMap>
+       
+<select id="exportOrderReturnList" resultMap="ExportReturnOrderResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo" >
+select temp.*,temp.totalRetrnRequest||'('|| temp.sizeWaitReturn||')' return_request_outstanding 
+ from( 
+select por.hybris_order_id,por.hybris_return_id,por.return_create_date,por.return_request_status,por.return_request_update_date,
+por.customer_id,por.customer_type,por.customer_name,por.customer_phone_no,por.customer_mobile_no,
+por.tender_type,por.payment_ref,por.collect_date,por.collect_time_slot,por.contact_name,por.contact_mobile_no,por.contact_phone_no,
+por.collect_district,por.collect_address,por.remark,por.special_instruction,
+poe.sku_id,poe.brand,poe.brand_sec,poe.product_name,poe.product_name_sec,poe.size_desc,
+poe.order_qty,poe.return_req_qty,poe.expected_qty,poe.actual_collected_qty,poe.write_off_qty,poe.sku_collect_rmk
+,    (SELECT COUNT(1)
+                  FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER POT
+                 WHERE ORN.ORDER_ID = POT.ID
+                   AND ORN.RETURN_REQUEST_STATUS = 'WAIT_RETURN'
+                   AND POT.ID = po.ID
+                   
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) sizeWaitReturn,
+               
+               
+               (SELECT COUNT(1)
+                  FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER POT
+                 WHERE ORN.ORDER_ID = POT.ID
+                   AND POT.ID = po.ID
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) totalRetrnRequest    
+  
+                   
+from pssp_order po,pssp_order_entry pe, (select * from PRODUCT where version = 'ONLINE') pp ,pssp_order_return por,pssp_order_return_entry poe 
+ WHERE  1=1
+ and po.id=pe.order_id 
+   AND pe.sku_id=pp.product_code(+)
+       and por.order_id=po.id
+       and poe.order_return_id=por.id
+
+        <if test="orderId != null and orderId != ''" >
+          AND po.hybris_order_id  like #{orderId}||'%'
+        </if>
+
+        <if test="pickOrderId != null and pickOrderId != ''" >
+            AND po.PICK_ORDER_ID  LIKE #{pickOrderId}||'%'
+        </if>
+
+        <if test="orderStatus!= null and orderStatus.length>0" >
+            AND po.status  IN
+            <foreach item="item" index="index" collection="orderStatus" open="(" separator="," close=")">
+            #{item}
+            </foreach>
+        </if>
+
+   <if test="orderType=='C'.toString()">
+        AND po.ORDER_TYPE in ('CONSIGNMENT_VIA_WAREHOUSE','CONSIGNMENT') 
+    </if>
+    
+    <if test="orderType=='S'.toString()">
+        AND po.ORDER_TYPE = 'SUPPLIER_DIRECT_DELIVERY'
+    </if>
+
+    <if test="invoiceReadyInd != null and invoiceReadyInd != ''">
+        AND po.INVOICE_READY_IND = #{invoiceReadyInd}
+    </if>
+
+        <if test="orderDateFr !=null">
+            AND to_char(po.order_datetime,'yyyyMMdd') >= to_char(#{orderDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="orderDateTo !=null">
+            AND to_char(#{orderDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.order_datetime,'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateFr !=null">
+            AND to_char(po.shipped_date,'yyyyMMdd')  >= to_char(#{shippedDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateTo !=null">
+            AND to_char(#{shippedDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.shipped_date,'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateFr !=null">
+            AND to_char(po.delivery_date,'yyyyMMdd')  >= to_char(#{deliveryDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateTo !=null">
+            AND to_char(#{deliveryDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.delivery_date,'yyyyMMdd')
+        </if>
+
+        <if test="supplier !=null and supplier.length>0">
+        and exists (select 1
+                  from PSSP_ORDER_ENTRY oe
+                   where  po.id = oe.order_id
+                    and oe.supplier_id in
+
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+
+                    )
+        </if>
+) temp where 1=1
+        <if test="returnRequest =='Y'.toString()">
+           <![CDATA[ and sizeWaitReturn  >0 ]]>
+        </if>
+        
+        
+        <if test="returnRequest =='N'.toString()">
+           <![CDATA[ and sizeWaitReturn  <=0 ]]>
+        </if>
+       order by hybris_order_id,hybris_return_id,sku_id
+    </select>
+  
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+	<PSSP_USER />
+	
+    <PSSP_SUPPLIER_CATEGORY />
+    <PSSP_ORDER />
+    <PSSP_ORDER_ENTRY />
+</dataset>

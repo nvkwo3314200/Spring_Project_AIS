@@ -1,0 +1,70 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>
+		EStore Category
+	</h1>
+	
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body" style="height:250px;width:100%">
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+
+                    
+           	<div class="row"  style="margin-bottom: 10px">
+	  <div class="col-md-2 required"><label class="control-label">{{'estore_category' | translate}}</label></div>
+	  <div class="col-md-10">
+			<div   
+                    isteven-multi-select
+                    input-model="estoreCategorys"
+                    output-model="estoreCategory"
+                    button-label=" lovDesc"
+                    item-label=" lovDesc"
+                    tick-property="ticked"
+                    selection-mode="single"
+                    on-item-click="chooseCategory(data)"
+                  
+                    >
+            </div>            
+			<div style="color:red" id="estoreCategory_err"></div>
+	  </div>
+	</div>
+	
+				 
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+
+                         <button type="button" class="btn btn-primary ng-binding"  ng-click="addOrUpdateCategory()">
+                                	 {{'button_add'|translate}}
+                                </button>
+                                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="closeThisDialog(0)">{{'button_cancel'
+                                    | translate}}
+                                </button>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</section>
+<!-- /.content -->

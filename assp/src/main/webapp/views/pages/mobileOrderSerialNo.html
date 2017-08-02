@@ -1,0 +1,99 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>Serial No</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+
+
+					<div class="row">
+						<div class="box1">
+							<label>SKU:</label>
+						</div>
+						<div class="box2">{{orderEntry.skuId}}</div>
+
+					</div>
+
+<!-- 
+					<div class="row">
+						<div class="box1">
+							<label>Supplier:</label>
+						</div>
+						<div class="box2">{{orderEntry.supplierName}}</div>
+					</div>
+ -->
+
+					<div class="row">
+						<div class="box1">
+							<label>Supplier:</label>
+						</div>
+						<div class="box2">{{orderEntry.brand}}</div>
+					</div>
+
+					<div class="row">
+						<div class="box1">
+							<label>Product Description:</label>
+						</div>
+						<div class="box2">{{orderEntry.productName}}</div>
+					</div>
+
+
+					
+				</div>
+
+				<div class="table-responsive">
+
+					<div >
+						<label class="control-label">Serial No</label>
+					</div>
+
+					<table st-table="serialCollection"
+						class="table table-bordered table-hover smart-table">
+
+						<tbody>
+								  <tr ng-repeat="(index,row) in orderEntry.orderEntrySerialList">
+									
+									
+									<td><input ng-model="row.serialNo"  id="serialNoId_{{index}}"></td>
+									
+								</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 text-right">
+					
+					
+ 					<div ng-if="status!= 'DELIVERY'  ">
+							<button type="button" ng-click="saveSerialNo()" class="btn btn-primary">OK</button>
+
+							<button type="button" class="btn btn-primary" ng-click="cancelSerialNo()">Cancel</button>
+							</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

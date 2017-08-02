@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.dept.ClassModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.dept.ClassModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <id column="CLASS_ID" property="classId" jdbcType="DECIMAL" />
+    <id column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="DEPT_ID_REAL" property="deptIdReal" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+   ID, CLASS_ID, DEPT_ID, DESCRIPTION, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+  begin
+  	delete from PSSP_SUB_CLASS where CLASS_ID=#{id,jdbcType=DECIMAL};
+    delete from PSSP_CLASS where  ID = #{id,jdbcType=DECIMAL};
+    end;
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.dept.ClassModel" >
+    insert into PSSP_CLASS (ID,CLASS_ID, DEPT_ID, DESCRIPTION, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{ID,jdbcType=DECIMAL},#{classId,jdbcType=DECIMAL}, #{deptId,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.dept.ClassModel" >
+          <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select pssp_dept_class_seq.nextval FROM DUAL
+      </selectKey>
+    insert into PSSP_CLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+ 	 <if test="classId != null" >
+        #{classId,jdbcType=DECIMAL},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.dept.ClassModel" >
+    update PSSP_CLASS
+    <set >
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        CLASS_ID = #{classId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+      
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.dept.ClassModel" >
+    update PSSP_CLASS
+    set DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+      CLASS_ID = #{classId,jdbcType=DECIMAL},
+      DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate}
+    where ID =#{id,jdbcType=DECIMAL}
+   
+  </update>
+  	<select id="getClassByDeptId" parameterType="String" resultMap="BaseResultMap">
+	   select 
+	   *
+	   from PSSP_CLASS
+	   where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+  	SELECT * FROM PSSP_CLASS
+  	</select>
+   <select id="checkDept" resultMap="BaseResultMap">
+  	SELECT * FROM PSSP_CLASS
+  	</select> 	
+  	
+  <select id="checkClass" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	SELECT * FROM PSSP_CLASS t where CLASS_ID  = #{classId,jdbcType=DECIMAL} 
+  	<if test="id!= null" >
+	  	and t.dept_id = (select t2.dept_id from pssp_class t2 where t2.id = #{id,jdbcType=DECIMAL})
+		and t.id != #{id,jdbcType=DECIMAL}
+	</if>
+
+	<if test="deptId!= null" >
+       	AND dept_id = #{deptId,jdbcType=DECIMAL}
+       </if>
+       
+  </select>
+  
+  
+ 	<select id="getClasssBySupplierDeptId" resultMap="BaseResultMap" parameterType="java.util.Map">
+	    select distinct(pc.id),pc.class_id,pc.dept_id,pc.description,
+	    pc.created_by,pc.created_date,pc.last_updated_by,pc.last_updated_date
+		from pssp_class pc,pssp_supplier_sub_class ps
+		where pc.id=ps.class_id 
+		and  ps.supplier_id=#{supplierId} and ps.dept_id=#{deptId} order by pc.description
+  </select>
+ 
+  	<select id="getAllClassByDesc" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	    select  c.id,d.dept_id,c.class_id, d.id || '_' || c.id as deptCLassId,d.dept_id || '-' || d.description || '>' || c.class_id || '-' || c.description as description , D.id dept_id_real
+    from pssp_dept d, PSSP_CLASS c  
+    where d.id = c.dept_id
+     <if test="deptId != null" >
+       and c.dept_id in 
+                        <foreach item="item" index="index" collection="deptId" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+     </if>
+      order by d.dept_id,c.class_id
+  	</select>
+  	
+  	 <select id="getAllSelectClassByUserId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+ select c.id,d.dept_id,c.class_id, d.id as DEPT_ID_REAL  ,
+  d.id || '_' || c.id as deptCLassId,d.dept_id || '-' || d.description || '>' || c.class_id || '-' || c.description as description 
+   from pssp_user u,pssp_supplier_sub_class s,pssp_class c ,pssp_dept d where
+  u.supplier_id = s.supplier_id and s.class_id = c.id and c.dept_id = d.id and u.id = #{id,jdbcType=DECIMAL}  
+ group by c.id,d.dept_id,c.class_id,d.id ,d.id || '_' || c.id, d.dept_id || '-' || d.description || '>' || c.class_id || '-' || c.description
+ order by d.dept_id,c.class_id
+  </select> 
+  
+    <select id="getClassByDeptIdClassId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_CLASS
+    where CLASS_ID = #{classId} and DEPT_ID=#{deptId}
+  </select>
+  
+</mapper>

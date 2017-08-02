@@ -1,0 +1,1266 @@
+
+<div class="row" ng-show="onlineUpdatedMsg"
+	style="margin-bottom: 10px; color: green">
+	<div class="col-md-12">{{'online_updated_msg' | translate}}</div>
+</div>
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+	close="closeAlert($index)">
+<div translate="{{alert.msg}}"></div>
+</uib-alert>
+
+ <uib-alert type="error" ng-if="failedReason!=null">
+		
+						
+						<div translate="{{failedReason}}"></div>
+					
+					</uib-alert>
+					
+<input type="hidden" ng-model="productinfo.id" id="product_id">
+<input type="hidden" name="delete_product_id" value="" ng-model="delete_product_id">
+
+
+<!-- ng-show="supplierlist_div"  -->
+<div class="row"  ng-show="supplierlist_div" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label"> {{'supplier_id' | translate}}</label>
+	</div>
+	
+	<div class="col-md-10">
+		<div isteven-multi-select input-model="supplierList"
+			output-model="supplier" 
+			button-label="shopName"
+			item-label="shopName"
+			tick-property="ticked" 
+			selection-mode="single"
+			on-item-click="fClick(data)"
+			></div>
+		<div style="color: red" id="supplierCode_err"></div>
+	</div>
+</div>
+
+
+<div class="row" ng-show="!supplierlist_div" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'supplier_id' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<div id="supplier_name">{{productinfo.supplierName}}</div>
+	</div>
+	<div class="col-md-2">
+		<div>
+			<label class="control-label">{{'status' | translate}}</label>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div>{{productinfo.status}}</div>
+	</div>
+	<div class="col-md-6"></div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'estore_category' | translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<div isteven-multi-select input-model="estoreCategorys"
+			output-model="estoreCategory" button-label=" lovDesc"
+			item-label=" lovDesc" 
+			tick-property="ticked" 
+			selection-mode="single"
+			
+			is-disabled="estoreCategoryReadonly"></div>
+		<div style="color: red" id="estoreCategory_err"></div>
+	</div>
+
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'variant_on' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.variantOn" id="variantOn"
+			ng-disabled="variantOnReadonly"
+			placeholder="{{'variant_on' | translate}}">
+			<option value="Color">{{'color' | translate}}</option>
+			<option value="Size">{{'size' | translate}}</option>
+		</select>
+	</div>
+	<div class="col-md-8">
+	</div>
+
+</div>
+
+<button type="button" ng-show="add_product" ng-click="add_sub_product()"
+	class="btn btn-primary ng-binding" style="float: right">{{'add_variant'
+	| translate}}</button>
+
+<div class="row" ng-show="product_list_div">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover smart-table"
+				st-table="subProductInfoList" st-safe-src="rowCollection"
+				style="border: 1px;">
+				<thead>
+					<tr>
+						<th>{{'base_product' | translate}}</th>
+						<th>{{'vpn' | translate}}</th>
+						<th>{{'product_description' | translate}}</th>
+						<th>{{'variant_color' | translate}}</th>
+						<th>{{'variant_size' | translate}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="subProductInfo in subProductInfoList"
+						st-select-row="subProductInfo" st-select-mode="single">
+						<td>
+							<div
+								ng-if='subProductInfo.baseProductId==NULL && subProductInfo.supplierProductCode'>{{'y'
+								| translate}}</div>
+						</td>
+						<td>{{subProductInfo.supplierProductCode}}</td>
+						<td>{{subProductInfo.colorDesc}}</td>
+						<td>{{subProductInfo.variantColor}}</td>
+						<td>{{subProductInfo.variantSize}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_code' | translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px" placeholder="{{'product_code' | translate}}"
+			id="productCode" ng-show="productCodeShow"
+			ng-readonly="productCodeReadonly" ng-model="productinfo.productCode">
+		<div style="color: red" id="productCode_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'supplier_product_code' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<input type="text" class="form-control" maxlength="30"
+			style="border-radius: 4px" placeholder="{{'supplier_product_code'|translate}}"
+			id="supplierProductCode" ng-readonly="supplierProductCodeReadonly"
+			ng-model="productinfo.supplierProductCode">
+		<div style="color: red" id="supplierProductCode_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'item_name(EN)' | translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<input type="text" class="form-control " maxlength="100"
+			placeholder="{{'item_name(EN)' | translate}}" style="border-radius: 4px"
+			ng-readonly="shortDescEnReadonly" id="shortDescEn"
+			ng-model="productinfo.shortDescEn">
+		<div style="color: red" id="shortDescEn_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'item_name(TC)' | translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<input type="text" class="form-control " maxlength="50"
+			style="border-radius: 4px" placeholder="{{'item_name(TC)' | translate}}"
+			id="shortDescTc" ng-readonly="shortDescTcReadonly"
+			ng-model="productinfo.shortDescTc">
+		<div style="color: red" id="shortDescTc_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'item_name(SC)' | translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<input type="text" class="form-control " maxlength="50"
+			style="border-radius: 4px" placeholder="{{'item_name(SC)' | translate}}"
+			id="shortDescSc" ng-readonly="shortDescScReadonly"
+			ng-model="productinfo.shortDescSc">
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'long_description(EN)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="4" cols="98" placeholder="{{'long_description(EN)'|translate}}" class="form-control "  
+			style="border-radius: 4px;" ng-model="productinfo.longDescEn"
+			maxlength="4000" id="longDescEn" ng-readonly="longDescEnReadonly"> 
+	  		</textarea>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'long_description(TC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="2" cols="98" placeholder="{{'long_description(TC)' | translate}}" class="form-control " 
+			style="border-radius: 4px;" ng-model="productinfo.longDescTc"
+			maxlength="2000" id="longDescTc" ng-readonly="longDescTcReadonly">
+	  </textarea>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'long_description(SC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="2" cols="98" placeholder="{{'long_description(SC)' | translate}}" class="form-control " 
+			style="border-radius: 4px;" ng-model="productinfo.longDescSc"
+			maxlength="2000" id="longDescSc" ng-readonly="longDescScReadonly">
+	  </textarea>
+	</div>
+</div>
+
+<div >
+    <button class="btn" ng-click="collapsed()">Additional Product Detail</button>
+    <hr>
+    
+    <div ng-show="isCollapsed" >
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_usage(EN)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_usage(EN)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productUsageEn" class="form-control " 
+			id="productUsageEn" maxlength="4000"
+			ng-readonly="productUsageEnReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_usage(TC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_usage(TC)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productUsageTc" class="form-control " 
+			id="productUsageTc" maxlength="2000"
+			ng-readonly="productUsageTcReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_usage(SC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_usage(SC)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productUsageSc" class="form-control " 
+			id="productUsageSc" maxlength="2000"
+			ng-readonly="productUsageScReadonly">
+	  </textarea>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_warnings(EN)' |
+			translate}}<span class="glyphicon glyphicon-question-sign"
+			ng-click="openEnWarnings()"></span>
+		</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_warnings(EN)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productWarningsEn"  class="form-control " 
+			id="productWarningsEn" maxlength="4000"
+			ng-readonly="productWarningsEnReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_warnings(TC)' |
+			translate}}<span class="glyphicon glyphicon-question-sign"
+			ng-click="openTcWarnings()"></span>
+		</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_warnings(TC)' |translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productWarningsTc" class="form-control " 
+			id="productWarningsTc" maxlength="2000"
+			ng-readonly="productWarningsTcReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_warnings(SC)' |
+			translate}}<span class="glyphicon glyphicon-question-sign"
+			ng-click="openScWarnings()"></span>
+		</label>
+
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_warnings(SC)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.productWarningsSc"  class="form-control " 
+			id="productWarningsSc" maxlength="2000"
+			ng-readonly="productWarningsScReadonly">
+	  </textarea>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'storage_condition(EN)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'storage_condition(EN)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.storageConditionEn" class="form-control " 
+			id="storageConditionEn" maxlength="4000"
+			ng-readonly="storageConditionEnReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'storage_condition(TC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'storage_condition(TC)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.storageConditionTc"  class="form-control " 
+			id="storageConditionTc" maxlength="2000"
+			ng-readonly="storageConditionTcReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'storage_condition(SC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'storage_condition(SC)' |
+			translate}}"
+			style="border-radius: 4px;" ng-model="productinfo.storageConditionSc" class="form-control " 
+			id="storageConditionSc" maxlength="2000"
+			ng-readonly="storageConditionScReadonly">
+	  </textarea>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_ingredients(EN)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_ingredients(EN)' |
+			translate}}"
+			style="border-radius: 4px;"
+			ng-model="productinfo.productIngredientsEn" id="productIngredientsEn"  class="form-control " 
+			maxlength="4000" ng-readonly="productIngredientsEnReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_ingredients(TC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_ingredients(TC)' |
+			translate}}"
+			style="border-radius: 4px;"
+			ng-model="productinfo.productIngredientsTc" id="productIngredientsTc"  class="form-control " 
+			maxlength="2000" ng-readonly="productIngredientsTcReadonly">
+	  </textarea>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_ingredients(SC)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-10">
+		<textarea rows="3" cols="98"
+			placeholder="{{'product_ingredients(SC)' |
+			translate}}"
+			style="border-radius: 4px;"
+			ng-model="productinfo.productIngredientsSc" id="productIngredientsSc" class="form-control " 
+			maxlength="2000" ng-readonly="productIngredientsScReadonly">
+	  </textarea>
+	</div>
+</div>
+
+
+  </div>
+            
+   
+</div>
+
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'color_group' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline" ng-model="productinfo.colorGroup"
+			style="width: 120px; height: 35px; border-radius: 4px;"
+			placeholder="{{'color_group' | translate}}" id="colorGroup"
+			ng-options="colorGroup.lovValue as colorGroup.lovDesc for colorGroup in colorGroups"
+			ng-disabled="colorGroupReadonly">
+		</select>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'color_code' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" style="border-radius: 4px"  maxlength="250"
+			placeholder="{{'color_code' | translate}}"
+			ng-model="productinfo.colorCode" id="colorCode"
+			ng-readonly="colorCodeReadonly">
+	</div>
+	<div class="col-md-4"></div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'color_description' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" style="border-radius: 4px;" maxlength="250"
+			placeholder="{{'color_description' | translate}}"
+			ng-model="productinfo.colorDesc" id="colorDesc"
+			ng-readonly="colorDescReadonly">
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'color_hex_code' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control " style="border-radius: 4px;"
+			maxlength="6" placeholder="{{'color_hex_code' | translate}}"
+			ng-model="productinfo.colorHexCode" id="colorHexCode"
+			ng-readonly="colorHexCodeReadonly">
+	</div>
+	<div class="col-md-2"></div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'contract_effective_date' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<p class="input-group">
+			<input type="text" class="form-control" style="border-radius: 4px;"
+				id="onlineDate" uib-datepicker-popup="{{format}}"
+				ng-model="contract.startDate" ng-disabled="false"
+				is-open="popup1.opened" datepicker-options="dateOptions"
+				ng-required="true" close-text="Close"
+				alt-input-formats="altInputFormats"/> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open1()">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</p>
+		<div style="color: red" id="onlineDate_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'offline_date' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<p class="input-group">
+			<input type="text" class="form-control" style="border-radius: 4px;"
+				id="offlineDate" uib-datepicker-popup="{{format}}"
+				ng-model="productinfo.offlineDate" ng-disabled="offlineDateReadonly"
+				is-open="popup2.opened" datepicker-options="dateOptions"
+				ng-required="true" close-text="Close"
+				alt-input-formats="altInputFormats" /> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open2()">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</p>
+	</div>
+	<div style="color: red" id="offlineDate_err"></div>
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'standard_uom' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.standardUom"
+			placeholder="{{'standard_uom' | translate}}" id="standardUom"
+			ng-options="uom.lovValue as uom.lovDesc for uom in uoms"
+			ng-disabled="standardUomReadonly">
+		</select>
+		<div style="color: red" id="standardUom_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'unit_retail(HKD)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control " style="border-radius: 4px;" maxlength="10"
+			placeholder="{{'unit_retail(HKD)' |translate}}" id="unitRetail"
+			ng-readonly="unitRetailReadonly" ng-model="productinfo.unitRetail"
+			ng-blur="setSmallExpensive()">
+		<div style="color: red" id="unitRetail_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'small_expensive' | translate}}</label><div class="glyphicon glyphicon-question-sign" title="{{'retail_price' | translate}}" >
+		</div>
+		
+		
+	</div>
+	<div class="col-md-2">
+		<input type="checkbox" name="smallExpensive"
+			style="border-radius: 4px;" ng-model="productinfo.smallExpensive"
+			id="smallExpensive" g-true-value="true" ng-false-value="false"
+			ng-disabled="smallExpensiveReadonly">
+	</div>
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'origin_country' | translate}}</label>
+	</div>
+	<div class="col-md-2 ">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.originCountry" placeholder="{{'origin_country' | translate}}"
+			id="originCountry"
+			ng-options="country.lovValue as country.lovDesc for country in countrys"
+			ng-disabled="originCountryReadonly">
+		</select>
+		<div style="color: red" id="originCountry_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'estore_consignment_delivery_mode'
+			| translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.deliveryMode"
+			placeholder="{{'estore_consignment_delivery_mode'
+			| translate}}" id="deliveryMode"
+			ng-change="getSupplierBySupplierId()"
+			ng-disabled="deliveryModeReadonly">
+			<option value="D">{{'supplier_direct_delivery' | translate}}</option>
+			<option value="W">{{'consignment_via_warehouse' | translate}}</option>
+			<option value="C">{{'consignment' | translate}}</option>
+		</select>
+		<div style="color: red" id="deliveryMode_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'supplier_lead_time(days)' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control " style="border-radius: 4px"
+			placeholder="{{'supplier_lead_time(days)' |
+			translate}}" id="supplierLeadTime"
+			ng-readonly="supplierLeadTimeReadonly"
+			ng-model="productinfo.supplierLeadTime">
+		<div style="color: red" id="supplierleadtime_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'minimum_order_quantity' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.minOrderQty"
+			ng-options="minOrderQty.lovValue as minOrderQty.lovDesc for minOrderQty in minOrderQtys"
+			ng-disabled="minOrderQtyReadonly" id="minOrderQty">
+		</select>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 required">
+		<label class="control-label">{{'pns_online_item_delivery_type' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+			<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.pnsOnlineDeliveryType" placeholder="{{'pns_online_item_delivery_type' | translate}}"
+			id="pnsOnlineDeliveryType"
+			ng-disabled="pnsOnlineDeliveryTypeReadonly"
+			ng-options="pnsOnlineDeliveryType.lovValue as pnsOnlineDeliveryType.lovDesc for pnsOnlineDeliveryType in pnsOnlineDeliveryTypes"
+			>
+		</select>
+		<div style="color: red" id="pnsOnlineDeliveryType_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'replenishment level (min)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" style="border-radius: 4px"   maxlength="10"
+			placeholder="{{'replenishment level (min)' | translate}}"
+			ng-model="productinfo.minReplenishmentLevel"
+			ng-readonly="minReplenishmentLevelReadonly" id="minReplenishmentLevel">
+		<div style="color: red" id="minReplenishmentLevel_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'replenishment level (max)' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'replenishment level (max)' | translate}}"  maxlength="10"
+			style="border-radius: 4px" ng-model="productinfo.maxReplenishmentLevel"
+			class="form-control" ng-readonly="maxReplenishmentLevelReadonly"
+			id="maxReplenishmentLevel">
+		<div style="color: red" id="maxReplenishmentLevel_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+
+	<div class="col-md-2">
+		<label class="control-label">{{'minimum_deliver_date' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+	<!-- 
+		<input type="text"
+			placeholder="{{'minimum_deliver_date' | translate}}"
+			style="border-radius: 4px" id="minDeliverDate"
+			ng-model="productinfo.minDeliverDate" class="form-control">
+	-->
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.minDeliverDateStr"
+			ng-options="x.lovValue as x.lovDesc for x in minDeliverDateList"
+			ng-disabled =true
+			id="minDeliverDate">
+		</select>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'maximum_deliver_date' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<!-- <select
+				class="input-inline" style="width:120px;height:35px;border-radius:4px"
+				ng-model="productinfo.maxDeliverDate" placeholder="Maximum deliver date"
+				ng-options="maxDeliverDate.udaId as maxDeliverDate.udaDesc for maxDeliverDate in maxDeliverDates">
+			</select>
+		<input type="text"
+			placeholder="{{'maximum_deliver_date' | translate}}"
+			style="border-radius: 4px" id="maxDeliverDate"
+			ng-model="productinfo.maxDeliverDate" class="form-control"
+			ng-readonly="maxDeliverDateReadonly"> 
+		-->
+			
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.maxDeliverDateStr"
+			ng-options="x.lovValue as x.lovDesc for x in maxDeliverDateList"
+			ng-disabled =true
+			id="maxDeliverDate" >
+		</select>	
+			
+	</div>
+
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'daily_inventory'
+			| translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.dailyInventory" placeholder="{{'daily_inventory'
+			| translate}}"
+			id="dailyInventory"
+			ng-options="dailyInventory.lovValue as dailyInventory.lovDesc for dailyInventory in dailyInventorys"
+			ng-disabled="dailyInventoryReadonly" >
+		</select>
+
+		<div style="color: red" id="dailyInventory_err"></div>
+	</div>
+
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+
+	<div class="col-md-2">
+		<label class="control-label">{{'consigment_type' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.consignmentType" id="consignmentType"
+			placeholder="{{'consigment_type' | translate}}" ng-disabled="consignmentTypeReadonly">
+			<option value="C">{{'normal_consignment' | translate}}</option>
+			<option value="W">{{'warehouse_consignment' | translate}}</option>
+		</select>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'consignment_calculation_basis'
+			| translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			ng-model="productinfo.consignmentCalBasis"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			placeholder="{{'consignment_calculation_basis'
+			| translate}}"
+			ng-disabled="consignmentCalBasisReadonly" id="consignmentCalBasis">
+			<option value="N" selected>{{'amount(Net)' | translate}}</option>
+			<option value="G">{{'Amount(Gross)' | translate}}</option>
+		</select>
+	</div>
+
+
+	<div class="col-md-2">
+		<label class="control-label">{{'consignment_rate(%)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'consignment_rate(%)' |
+			translate}}"
+			style="border-radius: 4px" id="consignmentRate"  maxlength="10"
+			ng-readonly="consignmentRateReadonly"
+			ng-model="productinfo.consignmentRate" class="form-control">
+		<div style="color: red" id="consignmentRate_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+
+	<div class="col-md-2 required_auto_approved">
+		<label class="control-label">{{'size_description' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'size_description' |
+			translate}}"
+			style="border-radius: 4px" ng-model="productinfo.sizeDesc"    maxlength="255"
+			class="form-control " ng-readonly="sizeDescReadonly" id="sizeDesc">
+		<div style="color: red" id="sizeDesc_err"></div>	
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'case_pack(Inner)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'case_pack(Inner)' |
+			translate}}"
+			style="border-radius: 4px" id="casePackInner"  maxlength="10"
+			ng-model="productinfo.casePackInner" class="form-control "
+			ng-readonly="casePackInnerReadonly">
+		<div style="color: red" id="casePackInner_err"></div>
+	</div>
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'case_pack(Case)' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'case_pack(Case)' | translate}}"
+			style="border-radius: 4px" id="casePackCase"  maxlength="10"
+			ng-model="productinfo.casePackCase" class="form-control "
+			ng-readonly="casePackCaseReadonly">
+		<div style="color: red" id="casePackCase_err"></div>
+	</div>
+
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'dim_unit' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline" ng-model="productinfo.dimUnit"
+			style="width: 120px; height: 35px; border-radius: 4px;"
+			placeholder="{{'dim_unit' | translate}}" id="dimUnit"
+			ng-options="lov.lovValue as lov.lovDesc for lov in lovs"
+			ng-disabled="dimUnitReadonly">
+		</select>
+	</div>
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'product_dimension(Height)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'product_dimension(Height)' | translate}}"
+			style="border-radius: 4px" id="productDimHeight" maxlength="12"
+			ng-model="productinfo.productDimHeight" class="form-control"
+			ng-readonly="productDimHeightReadonly">
+		<div style="color: red" id="productDimHeight_err"></div>
+	</div>
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'product_dimension(Width)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'product_dimension(Width)' | translate}}"
+			style="border-radius: 4px" id="productDimWidth"  maxlength="12"
+			ng-model="productinfo.productDimWidth" class="form-control"
+			ng-readonly="productDimWidthReadonly">
+		<div style="color: red" id="productDimWidth_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'product_dimension(Length)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'product_dimension(Length)' | translate}}"
+			style="border-radius: 4px" id="productDimLength" maxlength="12"
+			ng-model="productinfo.productDimLength" class="form-control"
+			ng-readonly="productDimLengthReadonly">
+		<div style="color: red" id="productDimLength_err"></div>
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'shipping_dimension(Height)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'shipping_dimension(Height)' | translate}}"
+			style="border-radius: 4px" id="shippingDimHeight"  maxlength="10"
+			ng-model="productinfo.shippingDimHeight" class="form-control "
+			ng-readonly="shippingDimHeightReadonly">
+		<div style="color: red" id="shippingDimHeight_err"></div>
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'shipping_dimension(Width)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'shipping_dimension(Width)' | translate}}" maxlength="10"
+			style="border-radius: 4px" id="shippingDimWidth"
+			ng-model="productinfo.shippingDimWidth" class="form-control "
+			ng-readonly="shippingDimWidthReadonly">
+		<div style="color: red" id="shippingDimWidth_err"></div>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'shipping_dimension(Length)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'shipping_dimension(Length)' | translate}}" maxlength="10"
+			style="border-radius: 4px" id="shippingDimLength"
+			ng-model="productinfo.shippingDimLength" class="form-control "
+			ng-readonly="shippingDimLengthReadonly">
+		<div style="color: red" id="shippingDimLength_err"></div>
+	</div>
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'case_dimension(Height)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'case_dimension(Height)' | translate}}"  maxlength="10"
+			style="border-radius: 4px" id="caseDimHeight"
+			ng-model="productinfo.caseDimHeight" class="form-control "
+			ng-readonly="caseDimHeightReadonly">
+		<div style="color: red" id="caseDimHeight_err"></div>
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'case_dimension(Width)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'case_dimension(Width)' | translate}}"  maxlength="10"
+			style="border-radius: 4px" id="caseDimWidth"
+			ng-model="productinfo.caseDimWidth" class="form-control "
+			ng-readonly="caseDimWidthReadonly">
+		<div style="color: red" id="caseDimWidth_err"></div>
+	</div>
+
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'case_dimension(Length)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text"
+			placeholder="{{'case_dimension(Length)' | translate}}"  maxlength="10"
+			style="border-radius: 4px" id="caseDimLength"
+			ng-model="productinfo.caseDimLength" class="form-control "
+			ng-readonly="caseDimLengthReadonly">
+		<div style="color: red" id="caseDimLength_err"></div>
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'weight_unit' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline" ng-model="productinfo.weightUnit" maxlength="10"
+			style="width: 120px; height: 35px; border-radius: 4px;"
+			placeholder="{{'weight_unit' | translate}}" id="weightUnit"
+			ng-options="weight.lovValue as weight.lovDesc for weight in uomWeights"
+			ng-disabled="weightUnitReadonly">
+		</select>
+	</div>
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'gross_weight(g)' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" id="grossWeight" maxlength="10"
+			style="border-radius: 4px"
+			placeholder="{{'gross_weight(g)' | translate}}"
+			ng-model="productinfo.grossWeight" ng-readonly="grossWeightReadonly">
+		<div style="color: red" id="grossWeight_err"></div>
+	</div>
+
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'shipping_weight(g)' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'shipping_weight(g)' | translate}}" maxlength="10"
+			style="border-radius: 4px" ng-model="productinfo.shippingWeight"
+			id="shippingWeight" class="form-control"
+			ng-readonly="shippingWeightReadonly">
+		<div style="color: red" id="shippingWeight_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'package' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.packAge" placeholder="{{'package' | translate}}"
+			id="packAge"
+			ng-options="package.lovValue as package.lovDesc for package in packages"
+			ng-disabled="packAgeReadonly">
+		</select>
+		<div style="color: red" id="packAge_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'nutrition_label' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.nutritionLabel" id="nutritionLabel"
+			placeholder="{{'nutrition_label' | translate}}"
+			ng-disabled="untritionLabelReadonly">
+			<option value="E">{{'nutrition_labeling_exemption' |
+				translate}}</option>
+			<option value="W">{{'with_nutrition_label_on_package' |
+				translate}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'product_shelf_life' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" style="border-radius: 4px"
+			placeholder="{{'product_shelf_life' | translate}}"  maxlength="255"
+			ng-model="productinfo.productShelfLife"
+			ng-readonly="productShelfLifeReadonly" id="productShelfLife">
+		<div style="color: red" id="productShelfLife_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'min_shelf_life' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" placeholder="{{'min_shelf_life' | translate}}"
+			style="border-radius: 4px" ng-model="productinfo.minShelfLife"
+			class="form-control" ng-readonly="minShelfLifeReadonly"  maxlength="255"
+			id="minShelfLife">
+		<div style="color: red" id="minShelfLife_err"></div>
+	</div>
+	<div class="col-md-2">
+		<label class="control-label">{{'manuf_country' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+			<select class="input-inline"
+			style="width: 120px; height: 35px; border-radius: 4px"
+			ng-model="productinfo.manufCountry" placeholder="{{'manuf_country' | translate}}"
+			id="manufCountry"
+			ng-options="manufCountry.lovValue as manufCountry.lovDesc for manufCountry in manufCountrys"
+			ng-disabled="packAgeReadonly">
+		</select>
+	</div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-2">
+		<label class="control-label">{{'shipping_info' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<input type="text" class="form-control" style="border-radius: 4px"  maxlength="4000"
+			placeholder="{{'shipping_info' |
+			translate}}"
+			ng-model="productinfo.shippingInfo"
+			ng-readonly="shippingInfoReadonly" id="shippingInfo">
+		<div style="color: red" id="shippingInfo_err"></div>
+	</div>
+</div>
+
+
+<button type="button" ng-click="add_item_num_type()"
+	class="btn btn-primary ng-binding" ng-show="add_item_num_type_div"
+	style="float: right">Add Barcode</button>
+<div class="row" style="margin-bottom: 10px">
+	<div class="col-md-12">
+		<label class="control-label"> </label>
+	</div>
+</div>
+<div class="row" ng-repeat="barcode in productinfo.barcodeList"
+	style="margin-bottom: 10px">
+	<input type="hidden" ng-model="barcode.id" />
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'item_number_type' |
+			translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<div ng-if="barcode.highLightBarCodeNum==true">
+			<select class="input-inline"
+				style="width: 120px; height: 35px; border-radius: 4px; border: 1px solid #d8a256"
+				ng-model="barcode.itemNumType" placeholder="{{'item_number_type' |
+			translate}}"
+				ng-options="itemnumtype.lovValue as itemnumtype.lovDesc for itemnumtype in itemNumTypes">
+			</select>
+		</div>
+		<div ng-if="barcode.highLightBarCodeNum!=true">
+			<select class="input-inline"
+				style="width: 120px; height: 35px; border-radius: 4px;"
+				ng-model="barcode.itemNumType" placeholder="{{'item_number_type' |
+			translate}}"
+				ng-options="itemnumtype.lovValue as itemnumtype.lovDesc for itemnumtype in itemNumTypes">
+			</select>
+		</div>
+	</div>
+
+	<div class="col-md-2 auto_approved">
+		<label class="control-label">{{'barcode_number' | translate}}</label>
+	</div>
+	<div class="col-md-2">
+		<div ng-if="barcode.highLightBarCodeNum==true">
+			<input type="text" placeholder="{{'barcode_number' | translate}}"
+				ng-model="barcode.barcodeNum"
+				style="border-radius: 4px; border: 1px solid #d8a256"
+				class="form-control" maxlength="25" ng-readonly="barcodeNumReadonly">
+		</div>
+		<div ng-if="barcode.highLightBarCodeNum!=true">
+			<input type="text" placeholder="{{'barcode_number' | translate}}"
+				ng-model="barcode.barcodeNum" style="border-radius: 4px;"
+				class="form-control" maxlength="25" ng-readonly="barcodeNumReadonly">
+		</div>
+	</div>
+	<div class="col-md-1">
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-click="deleteitemnumtype(barcode)" ng-show="delete_item_num_type">{{'button_delete'|translate}}</button>
+	</div>
+	<div class="col-md-3"></div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div style="color: red" id="barcode_err"></div>
+	</div>
+</div>
+
+<!-- product iamge -->
+
+<div class="row" style="margin-top: 10px;">
+	<fieldset id="product_image">
+		<legend>
+			{{'product_images_max'|translate}}<font color="#d00">^</font>
+		</legend>
+		<div id="imgUpload" data-ng-init="loadImages()" class="imgContainer"
+			style="height: 250px;">
+
+
+			<div>{{'drag_image_here'|translate}}</div>
+			<div class="columns" html-sortable="sortable_option"
+				ng-model="productinfo.imagesList">
+				<div class="column" id="showImg"
+					ng-repeat="item in productinfo.imagesList">
+
+					<div class="drowme" id="drowme_{{$index}}" style="font-size: 8px;">{{'click_here_to_drag'|translate}}</div>
+					<div class="handle" id="handle_{{$index}}">
+
+						<div class="row">
+							<div class="col-md-2">
+								<div class="thumbimg" style="display: inline-block;"
+									title="{{item.fileName}}">
+									<a target="_blank" href="product/getImage/{{item.filePath}}">
+										<img ng-src="product/getImage/{{item.filePath}}"
+										class="imgClass" sfile="{{item.filePath}}" /> <input
+										type="hidden"
+										ng-model="productinfo.imagesList[$index].filePath" /> <input
+										type="hidden"
+										ng-model="productinfo.imagesList[$index].fileName" />
+									</a> <br /> <input type="text"
+										ng-model="productinfo.imagesList[$index].description"
+										class="form-control" />
+								</div>
+								<div class="deleteMedia" title="Delete This Picture">
+									<a name="deleteImageFile($index)"
+										ng-click="deleteImageFile($index)">X</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</fieldset>
+</div>
+
+
+<div class="row" style="margin-top: 10px">
+	<fieldset id="swatchImage">
+		<legend style="width: 260px;">
+			{{'color_swatch_images_max'|translate}}<font color="#d00">^</font>
+		</legend>
+		<div id="swatchImgUpload" data-ng-init="loadSwatchImages()"
+			class="imgContainer2" style="height: 160px;">
+			<div>{{'drag_image_here'|translate}}</div>
+			<div class="columns" html-sortable="swatch_sortable_option"
+				ng-model="productinfo.swatchImagesList" >
+				<div class="column" id="showImg_swatch"
+					ng-repeat="item in productinfo.swatchImagesList">
+
+
+					<div class="handle" id="handle_swatch_{{$index}}">
+
+						<div class="row" >
+							<div class="col-md-2">
+								<div class="thumbimg" style="display: inline-block;"
+									title="{{item.fileName}}">
+									<a target="_blank" href="product/getImage/{{item.filePath}}">
+										<img ng-src="product/getImage/{{item.filePath}}"
+										class="imgClass2" sfile="{{item.filePath}}" /> <input
+										type="hidden"
+										ng-model="productinfo.swatchImagesList[$index].filePath" /> <input
+										type="hidden"
+										ng-model="productinfo.swatchImagesList[$index].fileName" />
+									</a> <br /> <input type="text"
+										ng-model="productinfo.swatchImagesList[$index].description"
+										class="form-control" />
+								</div>
+								<div class="deleteMedia2" title="Delete This Picture">
+									<a name="deleteSwatchImageFile($index)"
+										ng-click="deleteSwatchImageFile($index)">X</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</fieldset>
+</div>
+
+<div class="row">
+	<div class="col-md-12 text-right">{{'product_auto_approve_info' |
+		translate}}</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12 text-right">
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="save_button" ng-click="save()">{{'save_button' |
+			translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="delete_button" ng-click="delete_product()">{{'product_delete'
+			| translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="submit_for_approve_button" ng-click="submit_for_approve()">{{'product_submit_approve'
+			| translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="approve_button" ng-click="approve()" ng-disabled="approvalButtonDisable">{{'approve' |
+			translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="reject_button" ng-click="reject_product()">{{'reject'
+			| translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="confirmUpdateButton" ng-click="confirm_update()">{{'confirm_update_button'
+			| translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="ignoreUpdateButton" ng-click="ignore_update()">{{'ignore_update_button'
+			| translate}}</button>
+		<button type="button" class="btn btn-primary ng-binding"
+			ng-show="cancel_button" ng-click="cancel()">{{'button_cancel'
+			| translate}}</button>
+	</div>
+</div>
+
+
+
+
+
+
+
+</div>

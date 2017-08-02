@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="newOrderImportJob" class="com.mall.b2bp.schedule.NewOrderImportJob">
+		<property name="orderXmlToObject" ref="orderXmlToObject"></property>
+		<property name="orderService" ref="orderService"></property>
+		<property name="orderEntryService" ref="orderEntryService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+	</bean>
+
+	<bean id="newOrderImportQtzJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="newOrderImportJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+    <bean id="newOrderImportQtzJobCronTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="newOrderImportQtzJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>	
+	
+	
+	
+
+	<bean id="updateOrderInvoiceReadyIndJob"
+		class="com.mall.b2bp.schedule.UpdateOrderInvoiceReadyIndJob">
+		<property name="orderService" ref="orderService"></property>
+	</bean>
+
+
+
+	<bean id="SpringInvoiceIndJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="updateOrderInvoiceReadyIndJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeOrderInvoiceInd</value>
+		</property>
+	</bean>
+
+	<bean id="invoiceIndTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="SpringInvoiceIndJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+
+	<!-- product master sync job -->
+	<bean id="productMasterSyncJob" class="com.mall.b2bp.schedule.ProductMasterSyncJob">
+		<property name="productSyncService" ref="productSyncService"></property>
+		<property name="ftpService" ref="productInterfaceFtpService"></property>
+		
+	</bean>
+
+	<bean id="productMasterSyncJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productMasterSyncJob" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+
+	<bean id="productMasterSyncJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productMasterSyncJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+	
+	<!-- product images from retek sync job -->
+	<bean id="productImagesSyncFromRetekJob" class="com.mall.b2bp.schedule.ProductImagesSyncFromRetekJob">
+		<property name="productSyncService" ref="productSyncService"></property>		
+	</bean>
+	
+	<bean id="productImagesSyncFromRetekJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productImagesSyncFromRetekJob" />
+		</property>
+		<property name="targetMethod">
+			<value>executeImagesFromRetek</value>
+		</property>
+	</bean>
+	
+	<bean id="productImagesSyncFromRetekJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productImagesSyncFromRetekJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+	
+	<!-- product master from retek sync job -->
+	<bean id="productMasterSyncFromRetekJob" class="com.mall.b2bp.schedule.ProductMasterSyncFromRetekJob">
+		<property name="productSyncService" ref="productSyncService"></property>		
+	</bean>
+
+	<bean id="productMasterSyncFromRetekJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productMasterSyncFromRetekJob" />
+		</property>
+		<property name="targetMethod">
+			<value>executeMasterFromRetek</value>
+		</property>
+	</bean>
+
+	<bean id="productMasterSyncFromRetekJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productMasterSyncFromRetekJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+	
+	<!-- product barcode from retek sync job -->
+	<bean id="productBarcodeSyncFromRetekJob" class="com.mall.b2bp.schedule.ProductBarcodeSyncFromRetekJob">
+		<property name="productSyncService" ref="productSyncService"></property>		
+	</bean>
+
+	<bean id="productBarcodeSyncFromRetekJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productBarcodeSyncFromRetekJob" />
+		</property>
+		<property name="targetMethod">
+			<value>executeBarcodeFromRetek</value>
+		</property>
+	</bean>
+
+	<bean id="productBarcodeSyncFromRetekJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productBarcodeSyncFromRetekJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+	
+
+	<!-- product image sync job -->
+	<bean id="productImageSyncJob" class="com.mall.b2bp.schedule.ProductImageSyncJob">
+		<property name="productImagesSyncService" ref="productImagesSyncService"></property>
+		<property name="ftpService" ref="productInterfaceFtpService"></property>
+	</bean>
+
+	<bean id="productImageSyncJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productImageSyncJob" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+
+	<bean id="productImageSyncJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productImageSyncJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+
+	<!-- product barcode sync job -->
+	<bean id="productBarcodeSyncJob" class="com.mall.b2bp.schedule.ProductBarcodeSyncJob">
+		<property name="productBarcodeSyncService" ref="productBarcodeSyncService"></property>
+		<property name="ftpService" ref="productInterfaceFtpService"></property>
+	</bean>
+
+	<bean id="productBarcodeSyncJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productBarcodeSyncJob" />
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+
+	<bean id="productBarcodeSyncJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productBarcodeSyncJobMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+
+	<!-- product master syn exception -->
+	<bean id="productMasterSyncExceptionJob" class="com.mall.b2bp.schedule.ProductMasterSyncExceptionJob">
+		<property name="productSyncService" ref="productSyncService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+	</bean>
+
+	<bean id="productMasterSyncExceptionMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="productMasterSyncExceptionJob" />
+		</property>
+		<property name="targetMethod"> 
+			<value>executeInternal</value>
+		</property>
+	</bean>
+
+
+	<bean id="productMasterSyncExceptionCronTriggerBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="productMasterSyncExceptionMethod"></property>
+		<property name="cronExpression" value="0 0 */1 * * ?"></property>
+	</bean>
+
+	
+
+    <!-- 7.7.1	Home Order -->
+    <bean id="homeOrderJob" class="com.mall.b2bp.schedule.HomeOrderExportJob">
+        <property name="orderService" ref="orderService"></property>
+        
+    </bean>
+
+    <bean id="homeOrderJobMethod"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="homeOrderJob" />
+        </property>
+        <property name="targetMethod"> 
+            <value>executeInternal</value>
+        </property>
+    </bean>
+
+
+    <bean id="homeOrderJobcronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="homeOrderJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+    
+    
+    <!-- Brand manager -->
+    
+<bean id="brandMasterJob" class="com.mall.b2bp.schedule.BrandMasterJob ">
+        <property name="brandService" ref="brandService"></property>
+    </bean>
+
+    <bean id="brandMasterJobMethod"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="brandMasterJob" />
+        </property>
+        <property name="targetMethod"> 
+            <value>executeInternal</value>
+        </property>
+    </bean>
+
+
+    <bean id="brandMasterJobCronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="brandMasterJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+    
+    <!--  Order Return Order Return – Hybris to PSSP interface (RVS) -->
+    <bean id="orderReturnImportRequestJob" class="com.mall.b2bp.schedule.OrderReturnImportRequestJob">
+		<property name="orderService" ref="orderService"></property>
+		<property name="orderReturnXmlToObject" ref="orderReturnXmlToObject"></property>
+		
+		<property name="orderReturnService" ref="orderReturnService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+	</bean>
+
+	<bean id="returnOrderImportJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderReturnImportRequestJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+	
+	 <bean id="orderReturnImportJobCronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="returnOrderImportJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+    
+         <!--export  Order Return – PSSP to Hybris interface (Return receive)-->
+    <bean id="orderReturnReceivedJob" class="com.mall.b2bp.schedule.OrderReturnReceivedExportJob">
+		<property name="orderReturnService" ref="orderReturnService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+		
+	</bean>
+
+	<bean id="orderReturnReceivedJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderReturnReceivedJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+	
+		 <bean id="orderReturnReceivedJobCronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderReturnReceivedJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+   
+    
+       <!-- Order Completed (Consignment orders)-->
+    <bean id="consignmentOrderCompletedImportJob" class="com.mall.b2bp.schedule.ConsignmentOrderCompletedImportJob">
+		<property name="orderTLogService" ref="orderTLogService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+	</bean>
+
+	<bean id="consignmentOrderCompletedImportJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="consignmentOrderCompletedImportJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+	
+	<bean id="consignmentOrderCompletedImportJobCronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="consignmentOrderCompletedImportJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+    
+   
+    
+        <!--  delete order achieve data job  -->
+    <bean id="deleteOrderAchieveDataJob" class="com.mall.b2bp.schedule.DeleteOrderAchieveDataJob">
+		<property name="orderService" ref="orderService"></property>
+	</bean>
+
+	<bean id="deleteOrderAchieveDataQtzJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="deleteOrderAchieveDataJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+	
+	 <bean id="deleteOrderAchieveDataJobCronTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="deleteOrderAchieveDataQtzJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+	
+     <!-- Brand Master Data Interface && Supplier Interface  -->
+    <bean id="supplierBrandExportJob" class="com.mall.b2bp.schedule.SupplierBrandExportJob">
+		<property name="supplierService" ref="supplierService"></property>
+		<property name="brandService" ref="brandService"></property>
+		<property name="sendEmail" ref="sendEmail"></property>
+		
+	</bean>
+
+	<bean id="supplierBrandExportJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="supplierBrandExportJob" />
+		</property>
+		<property name="targetMethod">  
+			<value>executeInternal</value>
+		</property>
+	</bean>
+	
+	<bean id="supplierBrandExportJobCronTriggerBean"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="supplierBrandExportJobMethod"></property>
+        <property name="cronExpression" value="0 0 */1 * * ?"></property>
+    </bean>
+    
+    
+	<!-- trigger list -->
+	<bean id="trigger"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="newOrderImportQtzJobCronTrigger" />
+				<ref bean="invoiceIndTrigger" />
+				<ref bean="productMasterSyncJobTrigger" />
+				<ref bean="productImageSyncJobTrigger" />
+				<ref bean="productBarcodeSyncJobTrigger" />
+				<ref bean="productMasterSyncExceptionCronTriggerBean" />
+
+				<ref bean="homeOrderJobcronTriggerBean" />
+				<ref bean="brandMasterJobCronTriggerBean" />
+				<ref bean="productMasterSyncFromRetekJobTrigger" />
+				<ref bean="productBarcodeSyncFromRetekJobTrigger" />
+				<ref bean="productImagesSyncFromRetekJobTrigger" />
+				<ref bean="orderReturnImportJobCronTriggerBean" />
+				<ref bean="orderReturnReceivedJobCronTriggerBean" />
+				<ref bean="deleteOrderAchieveDataJobCronTrigger" />
+				<ref bean="consignmentOrderCompletedImportJobCronTriggerBean" /> -->
+			<!-- 	<ref bean="supplierBrandExportJobCronTriggerBean" /> -->
+			</list>
+		</property>
+		<!--
+		<property name="jobListeners"></property>
+		-->
+	</bean>
+</beans>

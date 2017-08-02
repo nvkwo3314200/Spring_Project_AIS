@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_PRODUCT
+	ID="15"
+    PRODUCT_CODE="69822_code"
+    BASE_PRODUCT_CODE="4"
+    SUPPLIER_CODE="2"
+    SHORT_DESC_EN="test"
+    SHORT_DESC_TC="null"
+    DELIVERY_MODE="SDD"
+    STATUS="APPROVED"
+    SUPPLIER_PRODUCT_CODE="aaa"
+
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    VERSION="STAGING"
+    />
+        <PSSP_PRODUCT_AUDIT/>
+        <PSSP_PRODUCT_BARCODE/>
+    <PSSP_PRODUCT_IMAGES/>
+          <AUDIT_PSSP_PRODUCT/>
+</dataset>
+

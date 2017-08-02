@@ -1,0 +1,200 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>{{'order_return' | translate}}</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+
+					<div class="row">
+
+						<label class="col-sm-2 control-label">{{'CustomerID'
+							|translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.customerId}}</div>
+						<label class="col-sm-2 control-label"> {{'CustomerType'
+							|translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.customerType}}</div>
+						<label class="col-sm-2 control-label"> {{'CustomerName'
+							|translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.customerName}}</div>
+
+
+					</div>
+
+
+					<div class="row">
+						<label class="col-sm-2 control-label">
+							{{'CustomerPhoneNo'| translate}}:</label>
+						<div  class="col-sm-2 control-label">{{orderReturnEntryData.customerPhoneNo}}</div>
+
+						<label class="col-sm-2 control-label">{{'TenderType'
+							|translate}}:</label>
+
+						<div class="col-md-2">{{orderReturnEntryData.tenderType}}</div>
+
+						<label class="col-sm-2 control-label"> {{'PaymentRef'
+							|translate}}:</label>
+
+						<div class="col-md-2">{{orderReturnEntryData.paymentRef}}</div>
+
+
+					</div>
+
+					<div class="row">
+
+						<label class="col-sm-2 control-label"> {{'CollectDate'
+							|translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.collectDateStr}}</div>
+
+						<label class="col-sm-2 control-label">
+							{{'CollectTimeslot'| translate}}:</label>
+						<div  class="col-sm-2 control-label">{{orderReturnEntryData.collectTimeSlot}}</div>
+
+						<label class="col-sm-2 control-label">{{'ContactName' |
+							translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.contactName}}</div>
+
+
+
+					</div>
+					<div class="row">
+						<label class="col-sm-2 control-label"> {{'ContactPhoneNo'|
+							translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.contactPhoneNo}}</div>
+
+						<label class="col-sm-2 control-label">
+							{{'ContactMobileNo'| translate}}:</label>
+						<div class="col-md-2">{{orderReturnEntryData.contactMobileNo}}</div>
+
+						<label class="col-sm-2 control-label">
+							{{'CollectDistrict'| translate}}:</label>
+						<div>{{orderReturnEntryData.collectDistrict}}</div>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-2 control-label">{{'CollectAddress'
+							|translate}}:</label>
+						<div >{{orderReturnEntryData.collectAddress}}</div>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-2 control-label"> {{'Remark'
+							|translate}}:</label>
+
+						<div >{{orderReturnEntryData.remark}}</div>
+					</div>
+
+					<div class="row">
+						<label class="col-sm-2 control-label">{{'SpecialInstructions'
+							| translate}}:</label>
+						<div >{{orderReturnEntryData.specialInstruction}}</div>
+					</div>
+
+					<div class="table-responsive">
+
+						<table st-table="rowReturnEntryCollection"
+							class="table table-bordered table-hover smart-table">
+							<thead>
+								<tr>
+
+									<th st-ratio="5">{{'SKU_ID' | translate}}</th>
+									<th st-ratio="8">{{'brand' | translate}}</th>
+									<th st-ratio="8">{{'BrandSec' | translate}}</th>
+
+									<th st-ratio="8">{{'Product_Name' | translate}}</th>
+									<th st-ratio="9">{{'Product_Name_Sec' | translate}}</th>
+									<th st-ratio="5">{{'size_desc' | translate}}</th>
+
+									<th st-ratio="5">{{'Order_Quantity' | translate}}</th>
+									<th st-ratio="5">{{'Return_Request_Quantity' | translate}}</th>
+									<th st-ratio="5">{{'Expected_Collect_Quantity' |
+										translate}}</th>
+									<th st-ratio="10">{{'Actual_Collected_Quantity'
+										|translate}}</th>
+									<th st-ratio="5">{{'Write_Off_Quantity' | translate}}</th>
+									<th st-ratio="15">{{'Remarks' | translate}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="row in rowReturnEntryCollection">
+									<td>{{row.skuId}}</td>
+									<td>{{row.brand}}</td>
+									<td>{{row.brandSec}}</td>
+									<td>{{row.productName}}</td>
+									<td>{{row.productNameSec}}</td>
+									<td>{{row.sizeDesc}}</td>
+									<td>{{row.orderQty}}</td>
+									<td>{{row.returnReqQty}}</td>
+									<td>{{row.expectedQty}}</td>
+
+									<td>
+										<div
+											ng-if="orderReturnEntryData.returnRequestStatus=='WAIT_RETURN' && row.expectedQty>0  && visible">
+											<input type="text" class="form-control "
+												ng-model="row.actualCollectedQty" maxlength="10">
+											<div style="color: red" id="actural_{{row.id}}"></div>
+										</div>
+
+										<div
+											ng-if="!(orderReturnEntryData.returnRequestStatus=='WAIT_RETURN' && row.expectedQty>0  && visible)">
+											{{row.actualCollectedQty}}</div>
+									</td>
+
+									<td>{{row.writeOffQty}}</td>
+									<td>
+										<div
+											ng-if="orderReturnEntryData.returnRequestStatus=='WAIT_RETURN' && row.expectedQty>0  && visible">
+											<input class="form-control " ng-model="row.skuCollectRmk"
+												maxlength="500" size="20">
+										</div>
+
+										<div
+											ng-if="! (orderReturnEntryData.returnRequestStatus=='WAIT_RETURN' && row.expectedQty>0  && visible)">
+											{{row.skuCollectRmk}}</div>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 text-right">
+
+
+							<button type="button"
+								ng-if="orderReturnEntryData.returnRequestStatus=='WAIT_RETURN' && visible"
+								class="btn btn-primary" ng-click="returnConfirmed()">{{'Return_Confirmed'|
+								translate}}</button>
+
+
+							<button type="button" class="btn btn-primary"
+								ng-click="cancelReturn()">{{'button_cancel'|
+								translate}}</button>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+</section>
+<!-- /.content -->

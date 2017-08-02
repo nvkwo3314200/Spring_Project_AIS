@@ -1,0 +1,106 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>Serial No</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					
+					<div class="row">
+						<label class="col-sm-4 control-label">SKU:</label>
+						<div>  
+								{{orderEntry.skuId}}
+						</div>
+
+					</div>
+					
+					
+					<div class="row">
+						<label class="col-sm-4 control-label">Supplier:</label>
+						<div>{{userName}}</div>
+					</div>
+					
+					<!-- <div class="row">
+						<label class="col-sm-4 control-label">Brand:</label>
+						<div>{{orderEntry.brand}}</div>
+					</div> -->
+					
+					<div class="row">
+						<label class="col-sm-4 control-label">Product Description:</label>
+						<div>{{orderEntry.productName}}</div>
+					</div>
+					
+					<div class="row" ng-show="flag == 'pqty'">
+						<label class="col-sm-4 control-label">Picked Quantity:</label>
+						<div>{{orderEntry.pickedQty}}</div>
+					</div>
+					<div class="row" ng-show="flag == 'delivery'">
+						<label class="col-sm-4 control-label">Return Quantity:</label>
+						<div>{{orderEntry.returnTotal}}</div>
+					</div>
+					
+
+					<div class="table-responsive">
+					
+					
+					
+					<div class="row">
+						<!-- <label class="col-sm-4 control-label">Serial No</label> -->
+					</div>
+					
+						<table st-table="serialCollection"
+							class="table table-bordered table-hover smart-table">
+
+							<thead>
+								 <tr>
+	                                <th >Serial No</th>
+	                                <th st-ratio="5"> Return</th>
+	                            </tr>
+							</thead>
+							
+							<tbody>
+								  <tr ng-repeat="(index,row)  in orderEntry.orderEntrySerialList">
+									
+									<td><input ng-model="row.serialNo" id="serialNoId_{{index}}"></td>
+									
+									<td>
+									 <input type="checkbox"  ng-model="row.returnInd" ng-true-value="'Y'" ng-false-value="'N'" >
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 text-right">
+
+							<button type="button" ng-click="saveSerialNo()" class="btn btn-primary">OK</button>
+
+							<button type="button" class="btn btn-primary" ng-click="cancelSerialNo()">Cancel</button>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+</section>
+<!-- /.content -->

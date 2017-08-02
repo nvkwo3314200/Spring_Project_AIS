@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.system.RoleManagerMapper">
+	<resultMap id="BaseResultMap" type="com.mall.b2bp.models.system.RoleModel">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+		<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+		<result column="REMARK" property="roleRemark" jdbcType="VARCHAR" />
+		<result column="DISP_SEQ" property="dispSeq" jdbcType="INTEGER" />
+		<result column="ACTIVE_IND" property="roleActive" jdbcType="VARCHAR" />
+		<result column="MALL_SHOP_IND" property="mallShopInd" jdbcType="VARCHAR" />
+		<result column="INACTIVE_DATE" property="inactiveDate"
+			jdbcType="DATE" />
+		<result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+		<result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+		<result column="LAST_UPDATED_BY" property="lastUpdatedBy"
+			jdbcType="VARCHAR" />  
+		<result column="LAST_UPDATED_DATE" property="lastUpdatedDate"
+			jdbcType="DATE" />
+
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		
+		<result column="DATA_TOTAL"		property="dataTotal"	jdbcType="INTEGER" />
+	
+	</resultMap>
+
+	<sql id="role_view_List">
+		ID, ROLE_CODE, ROLE_NAME, REMARK, DISP_SEQ, ACTIVE_IND,
+		INACTIVE_DATE, MALL_SHOP_IND,CREATED_BY, CREATED_DATE, 
+		LAST_UPDATED_BY,LAST_UPDATED_DATE
+	</sql>
+
+	<select id="selectRoleList" resultMap="BaseResultMap"
+		parameterType="com.mall.b2bp.models.system.RoleModel">
+		select
+		<include refid="role_view_List" />
+		from SYS_ROLE
+		<where>
+		<if test="id != null">
+			and ID = #{id, jdbcType=INTEGER}
+		</if>
+		<if test="roleName != null">
+			and upper(ROLE_NAME) like '%'||#{roleName, jdbcType=VARCHAR}||'%'
+		</if>
+		</where>
+		order by ID
+	</select>
+	
+	<select id="searchRole" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.RoleModel">
+		select * from(
+			select t.*, ROWNUM row_num from(
+				select 
+					count(*)over () DATA_TOTAL,
+					<include refid="role_view_List" />
+					from SYS_ROLE
+					<where>
+					<if test="id != null">
+						and ID = #{id, jdbcType=INTEGER}
+					</if>
+					<if test="roleName != null">
+						and upper(ROLE_NAME) like '%'||#{roleName, jdbcType=VARCHAR}||'%'
+					</if>
+					</where>
+						order by ID
+					 ) t
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+	
+	</select>
+	
+	<insert id="insert" parameterType="com.mall.b2bp.models.system.RoleModel">
+		<selectKey keyProperty="id" resultType="INTEGER" order="BEFORE">
+			select ROLE_ID_SEQ.nextval from dual
+		</selectKey>
+
+		insert into SYS_ROLE ( ID, ROLE_CODE, ROLE_NAME, REMARK, DISP_SEQ,
+		ACTIVE_IND, MALL_SHOP_IND, INACTIVE_DATE,CREATED_BY, CREATED_DATE,
+		LAST_UPDATED_BY, LAST_UPDATED_DATE)
+		values (#{id, jdbcType=INTEGER},
+		#{roleCode, jdbcType=VARCHAR},
+		#{roleName, jdbcType=VARCHAR},
+		#{roleRemark, jdbcType=VARCHAR},
+		#{dispSeq, jdbcType=INTEGER},
+		#{roleActive, jdbcType=VARCHAR},
+		#{mallShopInd, jdbcType=VARCHAR},
+		#{inactiveDate, jdbcType=DATE},
+		#{createdBy, jdbcType=VARCHAR},
+		#{createdDate, jdbcType=DATE},
+		#{lastUpdatedBy, jdbcType=VARCHAR},
+		#{lastUpdatedDate, jdbcType=DATE}
+		)
+
+	</insert>
+	
+	<select id="searchUserRole" parameterType="com.mall.b2bp.models.system.RoleModel"
+	 resultMap="BaseResultMap">
+	select USER_ID from  SYS_USER_ROLE where  ROLE_ID=#{roleId,jdbcType=INTEGER}
+	</select>
+	
+	<update id="update" parameterType="com.mall.b2bp.models.system.RoleModel">
+		update SYS_ROLE
+		<set>
+			<if test="roleCode != null">
+				ROLE_CODE = #{roleCode, jdbcType=VARCHAR},
+			</if>
+			<if test="roleName != null">
+				ROLE_NAME = #{roleName, jdbcType=VARCHAR},
+			</if>
+			<if test="roleRemark != null">
+				REMARK = #{roleRemark, jdbcType=VARCHAR},
+			</if>
+			<if test="dispSeq != null">
+				DISP_SEQ = #{dispSeq, jdbcType=INTEGER},
+			</if>
+			<if test="roleActive != null">
+				ACTIVE_IND =#{roleActive, jdbcType=VARCHAR},
+			</if>
+			<if test="mallShopInd != null">
+				MALL_SHOP_IND =#{mallShopInd, jdbcType=VARCHAR},
+			</if>
+			<if test="inactiveDate != null">
+				INACTIVE_DATE =#{inactiveDate, jdbcType=DATE},
+			</if>
+			<if test="lastUpdatedBy != null">
+				LAST_UPDATED_BY = #{lastUpdatedBy, jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdatedDate != null">
+				LAST_UPDATED_DATE = #{lastUpdatedDate, jdbcType=DATE}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from SYS_ROLE where ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<select id="getRoleUserlist" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		sur.ID,
+		sur.USER_ID,
+		sur.ROLE_ID,
+		sr.ROLE_NAME,
+		sr.ROLE_CODE,
+		sr.MALL_SHOP_IND,
+		sur.ACTIVE_IND,
+		sur.INACTIVE_DATE,
+		sur.CREATED_BY, 
+		sur.CREATED_DATE, 
+		sur.LAST_UPDATED_BY,
+		sur.LAST_UPDATED_DATE
+		from SYS_USER_ROLE sur, SYS_ROLE sr
+		where sur.ROLE_ID = sr.ID
+		and sur.USER_ID = #{userId,jdbcType=INTEGER}
+	</select>
+</mapper>

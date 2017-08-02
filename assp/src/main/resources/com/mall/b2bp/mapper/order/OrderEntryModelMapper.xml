@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.order.OrderEntryModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.order.OrderEntryModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ORDER_ID" property="orderId" jdbcType="DECIMAL" />
+    <result column="SEQ_NUM" property="seqNum" jdbcType="DECIMAL" />
+    <result column="SKU_ID" property="skuId" jdbcType="VARCHAR" />
+    <result column="SKU_TYPE" property="skuType" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="BRAND" property="brand" jdbcType="VARCHAR" />
+    <result column="BRAND_SEC" property="brandSec" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME_SEC" property="productNameSec" jdbcType="VARCHAR" />
+    <result column="QTY" property="qty" jdbcType="DECIMAL" />
+    <result column="SIZE_DESC" property="sizeDesc" jdbcType="VARCHAR" />
+    <result column="UNIT_PRICE" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="SKU_AMOUNT" property="skuAmount" jdbcType="DECIMAL" />
+    <result column="PICKED_QTY" property="pickedQty" jdbcType="DECIMAL" />
+    <result column="PICK_DATE" property="pickDate" jdbcType="DATE" />
+    <result column="TRACK_ID" property="trackId" jdbcType="VARCHAR" />
+    <result column="BOX_NUM" property="boxNum" jdbcType="VARCHAR" />
+    <result column="SHIP_DATE" property="shipDate" jdbcType="DATE" />
+    <result column="DELIVERY_SUCCESS" property="deliverySuccess" jdbcType="VARCHAR" />
+    <result column="DELIVERY_DATE" property="deliveryDate" jdbcType="DATE" />
+    <result column="DELIVERY_QTY" property="deliveryQty" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    
+      <result column="NOT_BEFORE_DATE" property="notBeforeDate" jdbcType="VARCHAR" />
+      <result column="NOT_AFTER_DATE" property="notAfterDate" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <resultMap id="OrderEntryResultMap" type="com.mall.b2bp.models.order.OrderEntryModel" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="ORDER_ID" property="orderId" jdbcType="DECIMAL" />
+        <result column="SEQ_NUM" property="seqNum" jdbcType="DECIMAL" />
+        <result column="SKU_ID" property="skuId" jdbcType="VARCHAR" />
+        <result column="SKU_TYPE" property="skuType" jdbcType="VARCHAR" />
+        <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+        <result column="BRAND" property="brand" jdbcType="VARCHAR" />
+        <result column="BRAND_SEC" property="brandSec" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NAME_SEC" property="productNameSec" jdbcType="VARCHAR" />
+        <result column="QTY" property="qty" jdbcType="DECIMAL" />
+        <result column="SIZE_DESC" property="sizeDesc" jdbcType="VARCHAR" />
+        <result column="UNIT_PRICE" property="unitPrice" jdbcType="DECIMAL" />
+        <result column="SKU_AMOUNT" property="skuAmount" jdbcType="DECIMAL" />
+        <result column="PICKED_QTY" property="pickedQty" jdbcType="DECIMAL" />
+        <result column="PICK_DATE" property="pickDate" jdbcType="DATE" />
+        <result column="TRACK_ID" property="trackId" jdbcType="VARCHAR" />
+        <result column="BOX_NUM" property="boxNum" jdbcType="VARCHAR" />
+        <result column="SHIP_DATE" property="shipDate" jdbcType="DATE" />
+        <result column="DELIVERY_SUCCESS" property="deliverySuccess" jdbcType="VARCHAR" />
+        <result column="DELIVERY_DATE" property="deliveryDate" jdbcType="DATE" />
+        <result column="DELIVERY_QTY" property="deliveryQty" jdbcType="DECIMAL" />
+        <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+        <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+        <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+        <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+
+      
+       
+        <result column="SUPPLIER_PRODUCT_CODE" property="supplierProductCode" jdbcType="VARCHAR" />
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR" />
+        <result column="return_total" property="returnTotal" jdbcType="VARCHAR" />
+    
+      <result column="NOT_BEFORE_DATE" property="notBeforeDate" jdbcType="VARCHAR" />
+      <result column="NOT_AFTER_DATE" property="notAfterDate" jdbcType="VARCHAR" />
+
+    </resultMap>
+
+  <sql id="Base_Column_List" >
+    ID, ORDER_ID, SEQ_NUM, SKU_ID, SKU_TYPE, SUPPLIER_ID, BRAND, BRAND_SEC, PRODUCT_NAME, 
+    PRODUCT_NAME_SEC, QTY, SIZE_DESC, UNIT_PRICE, SKU_AMOUNT, PICKED_QTY, PICK_DATE, 
+    TRACK_ID, BOX_NUM, SHIP_DATE, DELIVERY_SUCCESS, DELIVERY_DATE, DELIVERY_QTY, CREATED_BY, 
+    CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE,NOT_BEFORE_DATE,NOT_AFTER_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_ENTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  
+  
+    <select id="selectByHashMap" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_ENTRY
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+    and SKU_ID=#{skuId,jdbcType=VARCHAR}
+    and SUPPLIER_ID=#{supplierId,jdbcType=VARCHAR}
+  </select>
+
+
+    <select id="selectByOrderId" resultMap="OrderEntryResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+
+    SELECT 
+       ORE.ID,
+       ore.ORDER_ID,
+       SEQ_NUM,
+       ore.SKU_ID,
+       SKU_TYPE,
+       ORE.SUPPLIER_ID,
+       BRAND,
+       BRAND_SEC,
+       PRODUCT_NAME,
+       PRODUCT_NAME_SEC,
+       QTY,
+       ORE.                     SIZE_DESC,
+       UNIT_PRICE,
+       SKU_AMOUNT,
+     ORE.  PICKED_QTY,
+      ORE. PICK_DATE,
+       ORE. TRACK_ID,
+        ORE. BOX_NUM,
+        ORE. SHIP_DATE,
+        ORE. DELIVERY_SUCCESS,
+       ORE.DELIVERY_DATE,
+       ORE.CREATED_BY,
+       ORE.                     CREATED_DATE,
+       ORE.                     LAST_UPDATED_BY,
+       ORE.                     LAST_UPDATED_DATE,
+      
+       PR.SUPPLIER_PRODUCT_CODE,
+       SU.user_name                  SUPPLIER_NAME,
+       ore.DELIVERY_QTY,
+       ore.RETURNED_QTY  return_total
+ FROM PSSP_ORDER_ENTRY ORE,
+       PSSP_ORDER ORD,
+       (SELECT P2.ID, P2.NAME, P.SUPPLIER_ID, P.USER_NAME
+          FROM SYS_USER P, SUPPLIER P2
+         WHERE P2.ID = P.SUPPLIER_ID(+)) SU,
+      (select pr.* from PRODUCT pr  where pr.version = 'ONLINE') PR
+ WHERE ORD.ID = ORE.ORDER_ID
+   AND ORE.SKU_ID = PR.PRODUCT_CODE(+)
+   AND ORE.SUPPLIER_ID = SU.ID(+)
+
+        AND ORE.ORDER_ID= #{orderId,jdbcType=VARCHAR}
+        
+        <if test="supplierId != null and supplierId != ''">
+       		AND ORE.SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+       </if>
+       
+       order by ore.SKU_ID
+    </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_ORDER_ENTRY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderEntryModel" >
+    insert into PSSP_ORDER_ENTRY (ID, ORDER_ID, SEQ_NUM, 
+      SKU_ID, SKU_TYPE, SUPPLIER_ID, 
+      BRAND, BRAND_SEC, PRODUCT_NAME, 
+      PRODUCT_NAME_SEC, QTY, SIZE_DESC, 
+      UNIT_PRICE, SKU_AMOUNT, PICKED_QTY, 
+      PICK_DATE, TRACK_ID, BOX_NUM, 
+      SHIP_DATE, DELIVERY_SUCCESS, DELIVERY_DATE, 
+      DELIVERY_QTY, CREATED_BY, CREATED_DATE, 
+      LAST_UPDATED_BY, LAST_UPDATED_DATE,NOT_BEFORE_DATE,NOT_AFTER_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{orderId,jdbcType=DECIMAL}, #{seqNum,jdbcType=DECIMAL}, 
+      #{skuId,jdbcType=VARCHAR}, #{skuType,jdbcType=VARCHAR}, #{supplierId,jdbcType=DECIMAL}, 
+      #{brand,jdbcType=VARCHAR}, #{brandSec,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productNameSec,jdbcType=VARCHAR}, #{qty,jdbcType=DECIMAL}, #{sizeDesc,jdbcType=VARCHAR}, 
+      #{unitPrice,jdbcType=DECIMAL}, #{skuAmount,jdbcType=DECIMAL}, #{pickedQty,jdbcType=DECIMAL}, 
+      #{pickDate,jdbcType=DATE}, #{trackId,jdbcType=VARCHAR}, #{boxNum,jdbcType=VARCHAR}, 
+      #{shipDate,jdbcType=DATE}, #{deliverySuccess,jdbcType=VARCHAR}, #{deliveryDate,jdbcType=DATE}, 
+      #{deliveryQty,jdbcType=DECIMAL}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=DATE}, #{notBeforeDate,jdbcType=VARCHAR},#{notAfterDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.order.OrderEntryModel" >
+        <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_ORDER_ENTRY_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PSSP_ORDER_ENTRY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="seqNum != null" >
+        SEQ_NUM,
+      </if>
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="skuType != null" >
+        SKU_TYPE,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="brand != null" >
+        BRAND,
+      </if>
+      <if test="brandSec != null" >
+        BRAND_SEC,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="productNameSec != null" >
+        PRODUCT_NAME_SEC,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="sizeDesc != null" >
+        SIZE_DESC,
+      </if>
+      <if test="unitPrice != null" >
+        UNIT_PRICE,
+      </if>
+      <if test="skuAmount != null" >
+        SKU_AMOUNT,
+      </if>
+      <if test="pickedQty != null" >
+        PICKED_QTY,
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE,
+      </if>
+      <if test="trackId != null" >
+        TRACK_ID,
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM,
+      </if>
+      <if test="shipDate != null" >
+        SHIP_DATE,
+      </if>
+      <if test="deliverySuccess != null" >
+        DELIVERY_SUCCESS,
+      </if>
+      <if test="deliveryDate != null" >
+        DELIVERY_DATE,
+      </if>
+      <if test="deliveryQty != null" >
+        DELIVERY_QTY,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="notBeforeDate != null" >
+        NOT_BEFORE_DATE,
+      </if>
+      <if test="notAfterDate != null" >
+        NOT_AFTER_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="seqNum != null" >
+        #{seqNum,jdbcType=DECIMAL},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null" >
+        #{skuType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="brandSec != null" >
+        #{brandSec,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNameSec != null" >
+        #{productNameSec,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeDesc != null" >
+        #{sizeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuAmount != null" >
+        #{skuAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="pickedQty != null" >
+        #{pickedQty,jdbcType=DECIMAL},
+      </if>
+      <if test="pickDate != null" >
+        #{pickDate,jdbcType=DATE},
+      </if>
+      <if test="trackId != null" >
+        #{trackId,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNum != null" >
+        #{boxNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDate != null" >
+        #{shipDate,jdbcType=DATE},
+      </if>
+      <if test="deliverySuccess != null" >
+        #{deliverySuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryDate != null" >
+        #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="deliveryQty != null" >
+        #{deliveryQty,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+            <if test="notBeforeDate != null" >
+        #{notBeforeDate,jdbcType=VARCHAR},
+      </if>
+      
+            <if test="notAfterDate != null" >
+        #{notAfterDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.order.OrderEntryModel" >
+    update PSSP_ORDER_ENTRY
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="seqNum != null" >
+        SEQ_NUM = #{seqNum,jdbcType=DECIMAL},
+      </if>
+      <if test="skuId != null" >
+        SKU_ID = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null" >
+        SKU_TYPE = #{skuType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="brandSec != null" >
+        BRAND_SEC = #{brandSec,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNameSec != null" >
+        PRODUCT_NAME_SEC = #{productNameSec,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeDesc != null" >
+        SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        UNIT_PRICE = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuAmount != null" >
+        SKU_AMOUNT = #{skuAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="pickedQty != null" >
+        PICKED_QTY = #{pickedQty,jdbcType=DECIMAL},
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE = #{pickDate,jdbcType=DATE},
+      </if>
+      <if test="trackId != null" >
+        TRACK_ID = #{trackId,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM = #{boxNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDate != null" >
+        SHIP_DATE = #{shipDate,jdbcType=DATE},
+      </if>
+      <if test="deliverySuccess != null" >
+        DELIVERY_SUCCESS = #{deliverySuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryDate != null" >
+        DELIVERY_DATE = #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="deliveryQty != null" >
+        DELIVERY_QTY = #{deliveryQty,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="notBeforeDate != null" >
+        NOT_BEFORE_DATE = #{notBeforeDate},
+      </if>
+      <if test="notAfterDate != null" >
+        NOT_AFTER_DATE = #{notAfterDate},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.order.OrderEntryModel" >
+    update PSSP_ORDER_ENTRY
+    set ORDER_ID = #{orderId,jdbcType=DECIMAL},
+      SEQ_NUM = #{seqNum,jdbcType=DECIMAL},
+      SKU_ID = #{skuId,jdbcType=VARCHAR},
+      SKU_TYPE = #{skuType,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      BRAND = #{brand,jdbcType=VARCHAR},
+      BRAND_SEC = #{brandSec,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_NAME_SEC = #{productNameSec,jdbcType=VARCHAR},
+      QTY = #{qty,jdbcType=DECIMAL},
+      SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+      UNIT_PRICE = #{unitPrice,jdbcType=DECIMAL},
+      SKU_AMOUNT = #{skuAmount,jdbcType=DECIMAL},
+      PICKED_QTY = #{pickedQty,jdbcType=DECIMAL},
+      PICK_DATE = #{pickDate,jdbcType=DATE},
+      TRACK_ID = #{trackId,jdbcType=VARCHAR},
+      BOX_NUM = #{boxNum,jdbcType=VARCHAR},
+      SHIP_DATE = #{shipDate,jdbcType=DATE},
+      DELIVERY_SUCCESS = #{deliverySuccess,jdbcType=VARCHAR},
+      DELIVERY_DATE = #{deliveryDate,jdbcType=DATE},
+      DELIVERY_QTY = #{deliveryQty,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      NOT_BEFORE_DATE = #{notBeforeDate,jdbcType=VARCHAR},
+      NOT_AFTER_DATE = #{notAfterDate,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <update id="updateTotalReturnedQtyFromRVS" parameterType="java.math.BigDecimal" >
+  	update PSSP_ORDER_ENTRY t
+   set t.returned_qty =
+       (select total
+          from (SELECT POR.ORDER_ID,
+                       PORE.SKU_ID,
+                       PORE.SUPPLIER_ID,
+                       SUM((NVL(PORE.ACTUAL_COLLECTED_QTY, 0) +
+                           NVL(PORE.WRITE_OFF_QTY, 0))) TOTAL
+                  FROM PSSP_ORDER_RETURN POR, PSSP_ORDER_RETURN_ENTRY PORE
+                 WHERE POR.ID = PORE.ORDER_RETURN_ID
+                   AND POR.RETURN_REQUEST_STATUS = 'RETURN_CONFIRMED'
+                 GROUP BY POR.ORDER_ID, PORE.SKU_ID, PORE.SUPPLIER_ID) temp
+        
+         where temp.ORDER_ID = t.order_id
+           and temp.SUPPLIER_ID = t.supplier_id
+           and temp.sku_id = t.sku_id)
+
+ where t.order_id = #{id,jdbcType=DECIMAL}
+   and exists (select 1
+          from pssp_order o
+         where o.order_type = 'SUPPLIER_DIRECT_DELIVERY'
+           and o.id = t.order_id)
+  </update>
+  
+  <update id="updateTotalDeliveryQtyFromTlog" parameterType="java.math.BigDecimal" >
+  update PSSP_ORDER_ENTRY t
+   set t.delivery_qty =
+       (select qty
+          from (select poe.order_id,
+                       pol.hybris_order_id,
+                       pol.sku_id,
+                       sum(pol.qty) qty
+                  from pssp_order_tlog pol,
+                       pssp_order       po,
+                       pssp_order_entry poe
+                
+                 where po.id = poe.order_id
+                   and pol.hybris_order_id = po.hybris_order_id
+                   and pol.sku_id = poe.sku_id
+                      
+                   and pol.qty > 0
+                 group by order_id, pol.hybris_order_id, pol.sku_id) temp
+        
+         where temp.ORDER_ID = t.order_id
+           and temp.sku_id = t.sku_id),
+           
+           
+           t.returned_qty =
+       (select qty * -1
+          from (select poe.order_id,
+                       pol.hybris_order_id,
+                       pol.sku_id,
+                       sum(pol.qty) qty
+                  from pssp_order_tlog pol,
+                       pssp_order       po,
+                       pssp_order_entry poe
+                
+                 where po.id = poe.order_id
+                   and pol.hybris_order_id = po.hybris_order_id
+                   and pol.sku_id = poe.sku_id
+                      
+                   and pol.qty <![CDATA[ < ]]> 0
+                 group by order_id, pol.hybris_order_id, pol.sku_id) temp
+        
+         where temp.ORDER_ID = t.order_id
+           and temp.sku_id = t.sku_id)
+           
+           
+           where t.order_id = #{id,jdbcType=DECIMAL}
+   and exists (select 1
+          from pssp_order o
+         where o.order_type in ('CONSIGNMENT_VIA_WAREHOUSE','CONSIGNMENT')
+           and o.id = t.order_id)
+           
+   </update>
+  
+ 
+  
+  
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+<PSSP_ORDER
+	id="7888880"
+    hybris_order_id="8888880"
+    order_datetime="2016-03-10 00:00:00"
+    pick_store="923"
+    pick_type="P" special_instruction="C"
+     customer_id="1058801"
+    customer_name="Karen"
+     customer_mobile_no="67896789"
+    tender_type="CreditCardFull" payment_ref="eNetsHK01178959"
+    delivery_fee="33"
+    delivery_date="2016-03-8 00:00:00"
+
+    delivery_timeslot="33"
+    ship_district="33"
+    receiver_name="3241234"
+    receiver_phone_no="12342134"
+    receiver_mobile_no="234234"
+    delivery_address="2134134"
+    show_price="1"
+    dn_filename="dsafsdaf" 
+    remark="341234asdf"
+    status="SHIPPED"
+    created_by="test1"
+    pick_order_id="888882"
+    shipped_date      ="2016-03-8 00:00:00"
+    pick_date         ="2016-03-8 00:00:00"
+    box_num             ="1"
+    delivery_success ="A"
+
+    />
+
+
+
+</dataset>

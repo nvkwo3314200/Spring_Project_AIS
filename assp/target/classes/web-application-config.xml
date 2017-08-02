@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+
+
+	<context:annotation-config />
+
+	
+	
+	<context:component-scan base-package="com.mall.b2bp" >
+		<context:include-filter type="regex" expression=".controllers.*"/>
+		<context:include-filter type="regex" expression=".services.*"/>
+
+	</context:component-scan>
+		
+	<mvc:annotation-driven>   
+    <mvc:message-converters register-defaults="true">   
+        <bean class="com.mall.b2bp.servlets.UTF8StringHttpMessageConverter"/>   
+    </mvc:message-converters>   
+</mvc:annotation-driven>  
+ 
+	
+	<mvc:resources mapping="/dist/**"  location="/dist/"/>   
+	<mvc:resources mapping="/plugins/**"  location="/plugins/"/>  
+	<mvc:resources mapping="/bootstrap/**"  location="/bootstrap/"/>  
+	<mvc:resources mapping="/bower_components/**"  location="/bower_components/"/> 
+	<mvc:resources mapping="/scripts/**"  location="/scripts/"/>   
+	<mvc:resources mapping="/views/**"  location="/views/"/>   
+	<mvc:resources mapping="/i18n/**"  location="/i18n/"/>   
+	<mvc:resources mapping="/pssp/**"  location="/pssp/"/>   
+	<mvc:resources mapping="/upload/**"  location="/upload/"/>   
+	
+
+	<!-- 配置国际化资源文件路径 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basename">
+	<!-- 定义消息资源文件的相对路径 -->
+	<value>messages/message</value>
+	</property>
+	</bean>
+	<!-- 基于Cookie的本地化解析器 -->
+	 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	   <property name="cookieMaxAge" value="604800"/>
+	   <property name="defaultLocale" value="en"/>
+	   <property name="cookieName" value="lang"></property>
+	 </bean>
+
+	<import resource="spring-security-config.xml"/>
+	<!-- <import resource="spring-acls-config.xml"/> -->
+	<import resource="spring-services-config.xml"/>
+	<!-- <import resource="spring-cronjob-config.xml"/> -->
+	<!-- <import resource="spring-oxm-config.xml"/> -->
+	
+</beans>

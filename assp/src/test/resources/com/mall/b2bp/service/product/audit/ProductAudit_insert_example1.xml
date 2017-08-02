@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <PSSP_PRODUCT
+            ID="150000"
+            PRODUCT_CODE="69822_code"
+            BASE_PRODUCT_CODE="4"
+            SUPPLIER_CODE="2"
+            SHORT_DESC_EN="test"
+            SHORT_DESC_TC="null"
+            DELIVERY_MODE="Supplier direct delivery"
+            STATUS="APPROVED"
+            SUPPLIER_PRODUCT_CODE="aaa"
+
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+
+            VERSION="STAGING"
+            />
+
+
+
+    <pssp_user ID="10001"
+               USER_ID="testid"
+               USER_NAME="test"
+               USER_ROLE="SYSTEMADMIN"
+               SUPPLIER_ID="2" ACTIVATE="Y"
+               DEACTIVATE_DATE="2016-03-8 00:00:00"
+               CREATED_BY="DJ"
+               CREATED_DATE="2016-03-8 00:00:00"
+               LAST_UPDATED_BY="DJ" LAST_UPDATED_DATE="2016-03-8 00:00:00"
+               PASSWORD="123456"
+               TOKEN="22222"/>
+
+
+
+<PSSP_PRODUCT_AUDIT
+    id ="100"
+    product_id ="150000"
+    user_id="10001"
+    action="Auto approved"
+    action_time="2016-03-11 00:00:00"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+
+
+    />
+
+    <PSSP_PRODUCT_AUDIT
+            id ="101"
+            product_id ="150000"
+            user_id="testid"
+            action="Product master acknowledgment received, product is approved"
+            action_time="2016-03-11 00:00:00"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+
+
+            />
+
+
+    <PSSP_PRODUCT_AUDIT
+            id ="102"
+            product_id ="150000"
+            user_id="testid"
+            action="Product master is interfaced to Retek"
+            action_time="2016-03-11 00:00:00"
+            created_by="unitTest"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="unitTest"
+            last_updated_date="2016-03-11 00:00:00"
+
+
+            />
+
+
+
+    <AUDIT_PSSP_PRODUCT/>
+    
+
+    <PSSP_PRODUCT_BARCODE/>
+    <PSSP_PRODUCT_IMAGES/>
+
+</dataset>

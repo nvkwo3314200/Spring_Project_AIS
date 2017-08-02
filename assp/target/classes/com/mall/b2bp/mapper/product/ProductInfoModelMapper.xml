@@ -1,0 +1,1971 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductInfoModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductInfoModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="BASE_PRODUCT_CODE" property="baseProductCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_CODE" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_EN" property="shortDescEn" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_TC" property="shortDescTc" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_SC" property="shortDescSc" jdbcType="VARCHAR" />
+    <result column="BRAND_CODE" property="brandCode" jdbcType="DECIMAL" />
+    <result column="ONLINE_DATE" property="onlineDate" jdbcType="DATE" />
+    <result column="OFFLINE_DATE" property="offlineDate" jdbcType="DATE" />
+    <result column="UNIT_RETAIL" property="unitRetail" jdbcType="DECIMAL" />
+    <result column="UNIT_COST" property="unitCost" jdbcType="DECIMAL" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="STANDARD_UOM" property="standardUom" jdbcType="VARCHAR" />
+    <result column="ORIGIN_COUNTRY" property="originCountry" jdbcType="VARCHAR" />
+    <result column="DEPT" property="dept" jdbcType="DECIMAL" />
+    <result column="CLASS" property="clazz" jdbcType="DECIMAL" />
+    <result column="SUB_CLASS" property="subClass" jdbcType="DECIMAL" />
+    <result column="DELIVERY_MODE" property="deliveryMode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_LEAD_TIME" property="supplierLeadTime" jdbcType="DECIMAL" />
+    <result column="MIN_ORDER_QTY" property="minOrderQty" jdbcType="DECIMAL" />
+    <result column="DAILY_INVENTORY" property="dailyInventory" jdbcType="DECIMAL" />
+    <result column="MIN_DELIVER_DATE" property="minDeliverDate" jdbcType="DECIMAL" />
+    <result column="MAX_DELIVER_DATE" property="maxDeliverDate" jdbcType="DECIMAL" />
+    <result column="CONSIGNMENT_TYPE" property="consignmentType" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_CAL_BASIS" property="consignmentCalBasis" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_RATE" property="consignmentRate" jdbcType="DECIMAL" />
+    <result column="SIZE_DESC" property="sizeDesc" jdbcType="VARCHAR" />
+    <result column="CASE_PACK_INNER" property="casePackInner" jdbcType="DECIMAL" />
+    <result column="CASE_PACK_CASE" property="casePackCase" jdbcType="DECIMAL" />
+    <result column="PRODUCT_DIM_HEIGHT" property="productDimHeight" jdbcType="DECIMAL" />
+    <result column="PRODUCT_DIM_LENGTH" property="productDimLength" jdbcType="DECIMAL" />
+    <result column="STORAGE_DIM_HEIGHT" property="storageDimHeight" jdbcType="DECIMAL" />
+    <result column="STORAGE_DIM_WIDTH" property="storageDimWidth" jdbcType="DECIMAL" />
+    <result column="GROSS_WEIGHT" property="grossWeight" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="FAILED_REASON" property="failedReason" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="SUPPLIER_PRODUCT_CODE" property="supplierProductCode" jdbcType="VARCHAR" />
+    <result column="PRODUCT_DIM_WIDTH" property="productDimWidth" jdbcType="DECIMAL" />
+    <result column="STORAGE_DIM_LENGTH" property="storageDimLength" jdbcType="DECIMAL" />
+    <result column="LONG_DESC_EN" property="longDescEn" jdbcType="VARCHAR" />
+    <result column="LONG_DESC_TC" property="longDescTc" jdbcType="VARCHAR" />
+    <result column="LONG_DESC_SC" property="longDescSc" jdbcType="VARCHAR" />
+    <result column="CASE_DIM_HEIGHT" property="caseDimHeight" jdbcType="DECIMAL" />
+    <result column="CASE_DIM_WIDTH" property="caseDimWidth" jdbcType="DECIMAL" />
+    <result column="CASE_DIM_LENGTH" property="caseDimLength" jdbcType="DECIMAL" />
+    <result column="SHIPPING_WEIGHT" property="shippingWeight" jdbcType="DECIMAL" />
+    <result column="COLOR_GROUP" property="colorGroup" jdbcType="VARCHAR" />
+    <result column="COLOR_CODE" property="colorCode" jdbcType="VARCHAR" />
+    <result column="COLOR_DESC" property="colorDesc" jdbcType="VARCHAR" />
+    <result column="VARIANT_COLOR" property="variantColor" jdbcType="VARCHAR" />
+    <result column="VARIANT_SIZE" property="variantSize" jdbcType="VARCHAR" />
+    <result column="SHIPPING_DIM_LENGTH" property="shippingDimLength" jdbcType="DECIMAL" />
+    <result column="SHIPPING_DIM_HEIGHT" property="shippingDimHeight" jdbcType="DECIMAL" />
+    <result column="SHIPPING_DIM_WIDTH" property="shippingDimWidth" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_PORTAL_INDICATOR" property="supplierPortalIndicator" jdbcType="VARCHAR" />
+    <result column="ESTORE_CATEGORY" property="estoreCategory" jdbcType="VARCHAR" />
+    <result column="BASE_PRODUCT_ID" property="baseProductId" jdbcType="DECIMAL" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="LAST_EXPORTED_DATE" property="lastExportedDate" jdbcType="TIMESTAMP"/>
+    <result column="LAST_APPROVAL_DATE" property="lastApprovalDate" jdbcType="TIMESTAMP" />
+    <result column="SUPPLIER_PROFILE_UPDATE_IND" property="supplierProfileUpdateInd" jdbcType="VARCHAR" />
+    <result column="AUTO_APPROVAL_IND" property="autoApprovalInd" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_EN" property="productUsageEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_TC" property="productUsageTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_SC" property="productUsageSc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_EN" property="productWarningsEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_TC" property="productWarningsTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_SC" property="productWarningsSc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_EN" property="productIngredientsEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_TC" property="productIngredientsTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_SC" property="productIngredientsSc" jdbcType="VARCHAR" />
+    <result column="PACKAGE" property="packAge" jdbcType="VARCHAR" />
+    <result column="MANUF_COUNTRY" property="manufCountry" jdbcType="VARCHAR" />
+    <result column="PRODUCT_SHELF_LIFE" property="productShelfLife" jdbcType="VARCHAR" />
+    <result column="MIN_SHELF_LIFE" property="minShelfLife" jdbcType="VARCHAR" />
+    <result column="STORAGE_CONDITION_EN" property="storageConditionEn" jdbcType="VARCHAR" />
+    <result column="STORAGE_CONDITION_TC" property="storageConditionTc" jdbcType="VARCHAR" />
+    <result column="STORAGE_CONDITION_SC" property="storageConditionSc" jdbcType="VARCHAR" />
+    <result column="COLOR_HEX_CODE" property="colorHexCode" jdbcType="VARCHAR" />
+    
+    <result column="RETEK_STATUS" property="retekStatus" jdbcType="VARCHAR" />
+    <result column="RETEK_LAST_UPDATED_DATE" property="retekLastUpdatedDate" jdbcType="TIMESTAMP"/>
+    <result column="SMALL_EXPENSIVE" property="smallExpensive" jdbcType="VARCHAR" />
+    <result column="NUTRITION_LABEL" property="nutritionLabel" jdbcType="VARCHAR" />
+    <result column="WEIGHT_UNIT" property="weightUnit" jdbcType="VARCHAR" />
+    <result column="DIM_UNIT" property="dimUnit" jdbcType="VARCHAR" />
+    <result column="ONLINE_UPDATED_IND" property="onlineUpdatedInd" jdbcType="VARCHAR" />
+    <result column="LAST_OVERWRITE_DATE" property="lastOverWriteDate" jdbcType="VARCHAR" />
+    <result column="DELIVERY_FEE_PRODUCT_IND" property="deliveryFeeProductInd" jdbcType="VARCHAR" />
+   
+    <result column="MIN_REPLENISHMENT_LEVEL" property="minReplenishmentLevel" jdbcType="VARCHAR" />
+    <result column="MAX_REPLENISHMENT_LEVEL" property="maxReplenishmentLevel" jdbcType="VARCHAR" />
+    <result column="SHIPPING_INFO" property="shippingInfo" jdbcType="VARCHAR" />
+    <result column="PNS_ONLINE_DELIVERY_TYPE" property="pnsOnlineDeliveryType" jdbcType="VARCHAR" />
+    
+    <result column="MIN_REPLENISHMENT_LEVEL" property="minReplenishmentLevel" jdbcType="VARCHAR" />
+    <result column="MAX_REPLENISHMENT_LEVEL" property="maxReplenishmentLevel" jdbcType="VARCHAR" />
+    <result column="SHIPPING_INFO" property="shippingInfo" jdbcType="VARCHAR" />
+    <result column="PNS_ONLINE_DELIVERY_TYPE" property="pnsOnlineDeliveryType" jdbcType="VARCHAR" />
+    <result column="RETEK_LAST_APPROVED_DATE" property="retekLastApprovedDate" jdbcType="TIMESTAMP"/>
+    <result column="IMAGE_SYNC_CNT" property="imageSyncCount" jdbcType="DECIMAL"/>
+  </resultMap>
+ 
+  
+   <resultMap id="exportProductMap" type="com.mall.b2bp.models.product.ProductExportModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SU_NAME" property="suName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="BASE_PRODUCT_CODE" property="baseProductCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_PRODUCT_CODE" property="supplierProductCode" jdbcType="VARCHAR" />
+    <result column="BASE_SUPPLIER_PRODUCT_CODE" property="baseSupplierProductCode" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_EN" property="shortDescEn" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_TC" property="shortDescTc" jdbcType="VARCHAR" />
+    <result column="SHORT_DESC_SC" property="shortDescSc" jdbcType="VARCHAR" />
+    <result column="LONG_DESC_EN" property="longDescEn" jdbcType="VARCHAR" />
+    <result column="LONG_DESC_TC" property="longDescTc" jdbcType="VARCHAR" />
+    <result column="LONG_DESC_SC" property="longDescSc" jdbcType="VARCHAR" />
+    
+    <result column="BRAND_DESC_EN" property="brandDescEn" jdbcType="VARCHAR" />
+    <result column="COLOR_GROUP" property="colorGroup" jdbcType="VARCHAR" />
+    <result column="COLOR_CODE" property="colorCode" jdbcType="VARCHAR" />
+    <result column="COLOR_DESC" property="colorDesc" jdbcType="VARCHAR" />
+    <result column="COLOR_HEX_CODE" property="colorHexCode" jdbcType="VARCHAR" />
+    <result column="VARIANT_TYPE" property="variantType" jdbcType="VARCHAR" />
+    <result column="ONLINE_DATE" property="onlineDate" jdbcType="VARCHAR" />
+    <result column="OFFLINE_DATE" property="offlineDate" jdbcType="VARCHAR" />
+    <result column="UNIT_RETAIL" property="unitRetail" jdbcType="DECIMAL" />
+    <result column="STANDARD_UOM" property="standardUom" jdbcType="VARCHAR" />
+    <result column="COUNTRY" property="country" jdbcType="VARCHAR" />
+    <result column="DCS" property="dcs" jdbcType="VARCHAR" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+    <result column="DELIVERY_MODE" property="deliveryMode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_LEAD_TIME" property="supplierLeadTime" jdbcType="DECIMAL" />
+    <result column="MIN_ORDER_QTY" property="minOrderQty" jdbcType="DECIMAL" />
+    <result column="DAILY_INVENTORY" property="dailyInventory" jdbcType="DECIMAL" />
+    <result column="CONSIGNMENT_TYPE" property="consignmentType" jdbcType="VARCHAR" />
+    <result column="MIN_DELIVER_DATE" property="minDeliverDate" jdbcType="DECIMAL" />
+    <result column="MAX_DELIVER_DATE" property="maxDeliverDate" jdbcType="DECIMAL" />
+    <result column="CONSIGNMENT_CAL_BASIS" property="consignmentCalBasis" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_RATE" property="consignmentRate" jdbcType="VARCHAR" />
+    <result column="SIZE_DESC" property="sizeDesc" jdbcType="VARCHAR" />
+    <result column="CASE_PACK_CASE" property="casePackCase" jdbcType="DECIMAL" />
+    <result column="CASE_PACK_INNER" property="casePackInner" jdbcType="DECIMAL" />
+    <result column="DIM_UNIT" property="dimUnit" jdbcType="VARCHAR" />
+    
+    <result column="PRODUCT_DIM_HEIGHT" property="productDimHeight" jdbcType="DECIMAL" />
+    <result column="PRODUCT_DIM_LENGTH" property="productDimLength" jdbcType="DECIMAL" />
+    <result column="PRODUCT_DIM_WIDTH" property="productDimWidth" jdbcType="DECIMAL" />
+    <result column="SHIPPING_DIM_LENGTH" property="shippingDimLength" jdbcType="DECIMAL" />
+    <result column="SHIPPING_DIM_HEIGHT" property="shippingDimHeight" jdbcType="DECIMAL" />
+    <result column="SHIPPING_DIM_WIDTH" property="shippingDimWidth" jdbcType="DECIMAL" />
+    <result column="CASE_DIM_HEIGHT" property="caseDimHeight" jdbcType="DECIMAL" />
+    <result column="CASE_DIM_WIDTH" property="caseDimWidth" jdbcType="DECIMAL" />
+    <result column="CASE_DIM_LENGTH" property="caseDimLength" jdbcType="DECIMAL" />
+    
+    <result column="STORAGE_CONDITION_EN" property="storageEn" jdbcType="VARCHAR" />
+    <result column="STORAGE_CONDITION_TC" property="storageTc" jdbcType="VARCHAR" />
+    <result column="STORAGE_CONDITION_SC" property="storageSc" jdbcType="VARCHAR" />
+    
+    <result column="WEIGHT_UNIT" property="weightUnit" jdbcType="VARCHAR" />
+    <result column="GROSS_WEIGHT" property="grossWeight" jdbcType="DECIMAL" />
+    <result column="SHIPPING_WEIGHT" property="shippingWeight" jdbcType="DECIMAL" />
+    <result column="BARCODE_TYPE" property="barcodeType" jdbcType="VARCHAR" />
+    <result column="BARCODE_NUM" property="barcodeNum" jdbcType="VARCHAR" />
+    <result column="NUTRITION_LABEL" property="nutritionLabel" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_EN" property="productUsageEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_TC" property="productUsageTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_USAGE_SC" property="productUsageSc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_EN" property="productWarningsEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_TC" property="productWarningsTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_WARNINGS_SC" property="productWarningsSc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_EN" property="productIngredientsEn" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_TC" property="productIngredientsTc" jdbcType="VARCHAR" />
+    <result column="PRODUCT_INGREDIENTS_SC" property="productIngredientsSc" jdbcType="VARCHAR" />
+    <result column="MANUF_PACKAGE" property="manufPackage" jdbcType="VARCHAR" />
+    <result column="SMALL_EXPENSIVE" property="smallExpensive" jdbcType="VARCHAR" />
+    <result column="MANUF_COUNTRY" property="manufCountry" jdbcType="VARCHAR" />
+    <result column="PRODUCT_SHELF_LIFE" property="productShelfLife" jdbcType="VARCHAR" />
+    <result column="MIN_SHELF_LIFE" property="minShelfLife" jdbcType="VARCHAR" />
+    <result column="ONLINE_UPDATED_IND" property="onlineUpdatedInd" jdbcType="VARCHAR" />
+    
+    <result column="MIN_REPLENISHMENT_LEVEL" property="minReplenishmentLevel" jdbcType="DECIMAL" />
+    <result column="MAX_REPLENISHMENT_LEVEL" property="maxReplenishmentLevel" jdbcType="DECIMAL" />
+    <result column="SHIPPING_INFO" property="shippingInfo" jdbcType="VARCHAR" />
+    <result column="PNS_ONLINE_DELIVERY_TYPE" property="pnsOnlineDeliveryType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="productViewList" type="com.mall.b2bp.models.product.ProductInfoModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_PRODUCT_CODE" property="supplierProductCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_CODE" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="DAILY_INVENTORY" property="dailyInventory" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="DELIVERY_MODE" property="deliveryMode" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="SU_NAME" property="supplierName" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="DECIMAL" />
+    <result column="SHORT_DESC_EN" property="shortDescEn" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+   <resultMap id="SubProductResultMap" type="com.mall.b2bp.vos.product.SubProductInfo" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_PRODUCT_CODE" property="supplierProductCode" jdbcType="VARCHAR" />
+    <result column="COLOR_DESC" property="colorDesc" jdbcType="VARCHAR" />
+    <result column="VARIANT_COLOR" property="variantColor" jdbcType="VARCHAR" />
+    <result column="VARIANT_SIZE" property="variantSize" jdbcType="VARCHAR" />
+    <result column="BASE_PRODUCT_ID" property="baseProductId" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <select id="getProductBySupplierCode" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.product.ProductParameterVo">
+        select
+        <include refid="Base_Column_List" />
+        from PRODUCT t
+          where
+         t.supplier_product_code = #{supplierProductCode,jdbcType=VARCHAR}
+        AND t.supplier_code = #{supplierCode,jdbcType=VARCHAR}
+        AND  DELIVERY_FEE_PRODUCT_IND!='Y'
+    </select>
+
+
+   <select id="exportProductList" resultMap="exportProductMap" parameterType="com.mall.b2bp.vos.product.ProductParameterVo">
+		select P.ID,
+       SU.ID SU_NAME,
+       P.PRODUCT_CODE,
+        (SELECT P1.PRODUCT_CODE
+          FROM PRODUCT P1
+         WHERE P.BASE_PRODUCT_ID IS NOT NULL
+           AND P1.ID = P.BASE_PRODUCT_ID AND rownum =1) BASE_PRODUCT_CODE,
+       P.SUPPLIER_PRODUCT_CODE,
+       
+       (SELECT P1.SUPPLIER_PRODUCT_CODE
+          FROM PRODUCT P1
+         WHERE P.BASE_PRODUCT_ID IS NOT NULL
+           AND P1.ID = P.BASE_PRODUCT_ID AND rownum =1) BASE_SUPPLIER_PRODUCT_CODE,
+       
+       DECODE(p.status,
+              'DRAFT',
+              'Draft',
+              'APPROVED',
+              'Approved',
+              'SUBMIT_FOR_APPROVAL',
+              'Pending for approval',
+              'REJECTED',
+              'Rejected',
+              'APPROVED_IN_RETEK',
+              'Approved in retek',
+              'UNAPPROVED_IN_RETEK',
+              'Unapproved in retek',
+              'AUTO_APPROVED',
+              'Auto Approved') STATUS,
+       
+       SHORT_DESC_EN,
+       SHORT_DESC_TC,
+       SHORT_DESC_SC,
+       
+       LONG_DESC_EN,
+       LONG_DESC_TC,
+       LONG_DESC_SC,
+       
+       (SELECT BR.DESC_EN
+          FROM PSSP_BRAND BR
+         WHERE BR.BRAND_CODE = P.BRAND_CODE AND rownum=1) BRAND_DESC_EN,
+       
+       (SELECT T.LOV_VALUE ||':' ||T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 524
+           AND T.LOV_VALUE = P.COLOR_GROUP AND rownum=1) COLOR_GROUP,
+       COLOR_CODE,
+       COLOR_DESC,
+       COLOR_HEX_CODE,
+       
+       DECODE(variant_color,
+              'Y',
+              'Color',
+              DECODE(variant_size, 'Y', 'Size', '')) VARIANT_TYPE,
+       
+       to_char(online_date, 'MMddyyyy') ONLINE_DATE,
+       to_char(offline_date, 'MMddyyyy') OFFLINE_DATE,
+       
+       P.UNIT_RETAIL,
+       
+       (SELECT T.LOV_VALUE || '-' ||T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 401
+           AND T.LOV_VALUE = P.STANDARD_UOM AND rownum=1) STANDARD_UOM,
+       
+       (SELECT T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 404
+           AND T.LOV_VALUE = P.ORIGIN_COUNTRY AND rownum=1) COUNTRY,
+       
+      (SELECT D.DEPT_ID FROM PSSP_DEPT D WHERE D.ID = P.DEPT AND rownum=1) || '-' ||
+       (SELECT C.CLASS_ID FROM PSSP_CLASS C WHERE C.ID = P.CLASS AND rownum=1) || '-' ||
+       (SELECT SC.SUB_CLASS_ID FROM PSSP_SUB_CLASS SC  WHERE SC.ID = P.SUB_CLASS AND rownum=1) || ':' ||
+       
+       (SELECT D.DESCRIPTION FROM PSSP_DEPT D WHERE D.ID = P.DEPT AND rownum=1) || '>' ||
+       (SELECT C.DESCRIPTION FROM PSSP_CLASS C WHERE C.ID = p.CLASS AND rownum=1) || '>' ||
+       (SELECT SC.DESCRIPTION FROM PSSP_SUB_CLASS SC  WHERE SC.ID = P.SUB_CLASS AND rownum=1) DCS,
+       
+       (select t.lov_value || ':' || t.lov_desc
+          from PSSP_LOV t
+         where t.lov_id = 789
+           and t.lov_value = p.estore_category AND rownum=1) CATEGORY,
+       
+       (case p.DELIVERY_MODE
+         when 'D' then
+          'Supplier direct delivery'
+         when 'W' then
+          'Consignment via warehouse'
+          when 'C' then
+          'Consignment'
+         else
+          ''
+       end) as DELIVERY_MODE,
+       
+       P.SUPPLIER_LEAD_TIME,
+       P.MIN_ORDER_QTY,
+       P.DAILY_INVENTORY,
+       
+       DECODE(p.consignment_type,
+              'C',
+              'Normal Consignment',
+              'W',
+              'Warehouse consignment',
+              'Warehouse consignment') CONSIGNMENT_TYPE,
+       P.MIN_DELIVER_DATE,
+       P.MAX_DELIVER_DATE,
+       
+       DECODE(p.consignment_cal_basis, 'G', 'Amount(Gross)', 'N', 'Amount(Net)', '') CONSIGNMENT_CAL_BASIS,
+       P.CONSIGNMENT_RATE,
+       P.SIZE_DESC,
+       P.CASE_PACK_CASE,
+       P.CASE_PACK_INNER,
+       
+       (SELECT T.LOV_VALUE || '-' ||T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 402
+           AND T.LOV_VALUE = P.DIM_UNIT AND rownum=1) DIM_UNIT,
+       
+       PRODUCT_DIM_HEIGHT,
+       PRODUCT_DIM_LENGTH,
+       PRODUCT_DIM_WIDTH,
+       
+       SHIPPING_DIM_LENGTH,
+       SHIPPING_DIM_HEIGHT,
+       SHIPPING_DIM_WIDTH,
+       
+       CASE_DIM_HEIGHT,
+       CASE_DIM_WIDTH,
+       CASE_DIM_LENGTH,
+       
+              
+STORAGE_CONDITION_EN	,		
+STORAGE_CONDITION_TC	,			
+STORAGE_CONDITION_SC	,
+       
+       (SELECT T.LOV_VALUE || '-' ||T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 403
+           AND T.LOV_VALUE = P.WEIGHT_UNIT AND rownum=1) WEIGHT_UNIT,
+       
+       P.GROSS_WEIGHT,
+       P.SHIPPING_WEIGHT,
+       
+        (SELECT T.LOV_DESC
+          FROM PSSP_LOV T
+         WHERE T.LOV_ID = 405
+           AND T.LOV_VALUE = PB.ITEM_NUM_TYPE AND rownum=1) BARCODE_TYPE,
+       
+       PB.BARCODE_NUM,
+        
+       
+       DECODE(nutrition_label,
+              'E',
+              'Nutrition Labeling Exemption',
+              'W',
+              'With Nutrition Label on package',
+              'N',
+              '',
+              '') NUTRITION_LABEL,
+       
+       PRODUCT_USAGE_EN,
+       PRODUCT_USAGE_TC,
+       PRODUCT_USAGE_SC,
+       
+       PRODUCT_WARNINGS_EN,
+       PRODUCT_WARNINGS_TC,
+       PRODUCT_WARNINGS_SC,
+       
+       PRODUCT_INGREDIENTS_EN,
+       PRODUCT_INGREDIENTS_TC,
+       PRODUCT_INGREDIENTS_SC,
+      
+      
+   (SELECT T.LOV_DESC FROM PSSP_LOV T
+         WHERE T.LOV_ID = 776 AND T.LOV_VALUE = P.PACKAGE AND rownum=1)    MANUF_PACKAGE,
+            
+   (SELECT T.LOV_DESC  FROM PSSP_LOV T
+         WHERE T.LOV_ID = 82  AND T.LOV_VALUE = P.MANUF_COUNTRY AND rownum=1)  MANUF_COUNTRY,
+       PRODUCT_SHELF_LIFE,
+       MIN_SHELF_LIFE,
+       
+       p.shipping_info,
+       p.min_replenishment_level,
+       p.max_replenishment_level ,
+              
+    (SELECT T.LOV_DESC FROM PSSP_LOV T
+         WHERE T.LOV_ID = 782  AND T.LOV_VALUE = p.pns_online_delivery_type AND rownum=1) pns_online_delivery_type
+
+  from PRODUCT  P,
+       SUPPLIER SU,
+       (select * from PRODUCT_barcode pb where pb.primary_ind = 'Y') pb
+ where
+  p.delivery_fee_product_ind != 'Y'
+   and p.VERSION = 'STAGING'
+   AND p.SUPPLIER_CODE = SU.ID(+)
+   AND P.id = pb.product_id(+)
+    
+    <if test="supplierId !=null">
+		  AND  SU.ID = #{supplierId,jdbcType=DECIMAL}
+    </if>
+     <if test="supplierProductCode !=null">
+		  AND  UPPER(p.SUPPLIER_PRODUCT_CODE) like '%'||UPPER(#{supplierProductCode})||'%'
+    </if>
+     <if test="productCode !=null">
+		  AND  UPPER(p.PRODUCT_CODE) like '%'||UPPER(#{productCode})||'%'
+    </if>
+     <if test="status !=null">
+		  AND  p.STATUS IN
+           <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+           #{item}
+           </foreach>
+    </if>
+     <if test="shortDescEn !=null">
+		  AND  p.SHORT_DESC_EN like '%'||#{shortDescEn}||'%'
+    </if>
+     <if test="deliveryMode !=null">
+		  AND  p.DELIVERY_MODE in
+		   <foreach item="item" index="index" collection="deliveryMode" open="(" separator="," close=")">
+           #{item}
+           </foreach>
+    </if>
+    
+    <if test="supplier !=null">
+        and p.SUPPLIER_CODE in 
+
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+
+        </if>
+        
+         <if test="onlineUpdatedInd !=null">
+        	and p.ONLINE_UPDATED_IND = #{onlineUpdatedInd}
+        </if>
+    
+     order by   su_name,supplier_product_code
+     
+   
+  </select>
+  
+  
+  <sql id="Base_Column_List" >
+    ID, PRODUCT_CODE, BASE_PRODUCT_CODE, SUPPLIER_CODE, SHORT_DESC_EN, SHORT_DESC_TC, 
+    SHORT_DESC_SC, BRAND_CODE, ONLINE_DATE, OFFLINE_DATE, UNIT_RETAIL, UNIT_COST, CURRENCY, 
+    STANDARD_UOM, ORIGIN_COUNTRY, DEPT, CLASS, SUB_CLASS, DELIVERY_MODE, SUPPLIER_LEAD_TIME, 
+    MIN_ORDER_QTY, DAILY_INVENTORY, MIN_DELIVER_DATE, MAX_DELIVER_DATE, CONSIGNMENT_TYPE, 
+    CONSIGNMENT_CAL_BASIS, CONSIGNMENT_RATE, SIZE_DESC, CASE_PACK_INNER, CASE_PACK_CASE, 
+    PRODUCT_DIM_HEIGHT, PRODUCT_DIM_LENGTH, STORAGE_DIM_HEIGHT, STORAGE_DIM_WIDTH, GROSS_WEIGHT, 
+    STATUS, FAILED_REASON, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, 
+    SUPPLIER_PRODUCT_CODE, PRODUCT_DIM_WIDTH, STORAGE_DIM_LENGTH, LONG_DESC_EN, LONG_DESC_TC, 
+    LONG_DESC_SC, CASE_DIM_HEIGHT, CASE_DIM_WIDTH, CASE_DIM_LENGTH, SHIPPING_WEIGHT, 
+    COLOR_GROUP, COLOR_CODE, COLOR_DESC, VARIANT_COLOR, VARIANT_SIZE, SHIPPING_DIM_LENGTH, 
+    SHIPPING_DIM_HEIGHT, SHIPPING_DIM_WIDTH, SUPPLIER_PORTAL_INDICATOR,
+    ESTORE_CATEGORY, BASE_PRODUCT_ID, VERSION, LAST_EXPORTED_DATE, LAST_APPROVAL_DATE, 
+    SUPPLIER_PROFILE_UPDATE_IND, AUTO_APPROVAL_IND, PRODUCT_USAGE_EN, PRODUCT_USAGE_TC, 
+    PRODUCT_USAGE_SC, PRODUCT_WARNINGS_EN, PRODUCT_WARNINGS_TC, PRODUCT_WARNINGS_SC, 
+    PRODUCT_INGREDIENTS_EN, PRODUCT_INGREDIENTS_TC, PRODUCT_INGREDIENTS_SC, PACKAGE, 
+    MANUF_COUNTRY, PRODUCT_SHELF_LIFE, MIN_SHELF_LIFE, STORAGE_CONDITION_EN, STORAGE_CONDITION_TC, 
+    STORAGE_CONDITION_SC,COLOR_HEX_CODE,
+    STORAGE_CONDITION_SC,RETEK_STATUS,RETEK_LAST_UPDATED_DATE,SMALL_EXPENSIVE,NUTRITION_LABEL,WEIGHT_UNIT,DIM_UNIT,ONLINE_UPDATED_IND,LAST_OVERWRITE_DATE
+    ,DELIVERY_FEE_PRODUCT_IND,MIN_REPLENISHMENT_LEVEL,MAX_REPLENISHMENT_LEVEL,SHIPPING_INFO,PNS_ONLINE_DELIVERY_TYPE,RETEK_LAST_APPROVED_DATE,IMAGE_SYNC_CNT
+  </sql>
+   <sql id="Sub_Product_Column_List" >
+    ID,SUPPLIER_PRODUCT_CODE,COLOR_DESC,VARIANT_COLOR,VARIANT_SIZE,BASE_PRODUCT_ID,STATUS
+	</sql>
+	
+   <sql id="Product_View_Column_List" >
+    p.ID, p.PRODUCT_CODE,p.SUPPLIER_CODE,p.SUPPLIER_PRODUCT_CODE, p.SHORT_DESC_EN, 
+    (case p.DELIVERY_MODE 
+    when 'D' then 'Supplier direct delivery'
+    when 'W' then 'Consignment via warehouse'
+    when 'C' then 'Consignment' 
+    else '' end) as DELIVERY_MODE,
+    p.STATUS,p.CREATED_DATE,p.DAILY_INVENTORY,
+    
+     su.name as SU_NAME,
+    p.ONLINE_UPDATED_IND,LAST_OVERWRITE_DATE,DELIVERY_FEE_PRODUCT_IND,
+    MIN_REPLENISHMENT_LEVEL,MAX_REPLENISHMENT_LEVEL,SHIPPING_INFO,PNS_ONLINE_DELIVERY_TYPE
+    </sql>
+    
+    
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PRODUCT
+    where ID = #{id,jdbcType=DECIMAL} 
+  </delete>
+  
+   
+  
+  <delete id="deleteDeliveryFeeProductBySu" parameterType="String">
+    delete from PRODUCT  where SUPPLIER_CODE =
+    	#{supplierCode,jdbcType=VARCHAR}  and DELIVERY_FEE_PRODUCT_IND ='Y'
+  </delete>
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductInfoModel" >
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select product_seq.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PRODUCT (ID, PRODUCT_CODE, BASE_PRODUCT_CODE,
+      SUPPLIER_CODE, SHORT_DESC_EN, SHORT_DESC_TC,
+      SHORT_DESC_SC, BRAND_CODE, ONLINE_DATE, 
+      OFFLINE_DATE, UNIT_RETAIL, UNIT_COST, 
+      CURRENCY, STANDARD_UOM, ORIGIN_COUNTRY, 
+      DEPT, CLASS, SUB_CLASS, 
+      DELIVERY_MODE, SUPPLIER_LEAD_TIME, MIN_ORDER_QTY, 
+      DAILY_INVENTORY, MIN_DELIVER_DATE, MAX_DELIVER_DATE, 
+      CONSIGNMENT_TYPE, CONSIGNMENT_CAL_BASIS, CONSIGNMENT_RATE, 
+      SIZE_DESC, CASE_PACK_INNER, CASE_PACK_CASE, 
+      PRODUCT_DIM_HEIGHT, PRODUCT_DIM_LENGTH, STORAGE_DIM_HEIGHT, 
+      STORAGE_DIM_WIDTH, GROSS_WEIGHT, STATUS, 
+      FAILED_REASON, CREATED_BY, CREATED_DATE, 
+      LAST_UPDATED_BY, LAST_UPDATED_DATE, SUPPLIER_PRODUCT_CODE, 
+      PRODUCT_DIM_WIDTH, STORAGE_DIM_LENGTH, LONG_DESC_EN, 
+      LONG_DESC_TC, LONG_DESC_SC, CASE_DIM_HEIGHT, 
+      CASE_DIM_WIDTH, CASE_DIM_LENGTH, SHIPPING_WEIGHT, 
+      COLOR_GROUP, COLOR_CODE, COLOR_DESC, 
+      VARIANT_COLOR, VARIANT_SIZE, SHIPPING_DIM_LENGTH, 
+      SHIPPING_DIM_HEIGHT, SHIPPING_DIM_WIDTH, SUPPLIER_PORTAL_INDICATOR, 
+      ESTORE_CATEGORY, BASE_PRODUCT_ID,
+      VERSION, LAST_EXPORTED_DATE, LAST_APPROVAL_DATE, 
+      SUPPLIER_PROFILE_UPDATE_IND, AUTO_APPROVAL_IND, 
+      PRODUCT_USAGE_EN, PRODUCT_USAGE_TC, PRODUCT_USAGE_SC, 
+      PRODUCT_WARNINGS_EN, PRODUCT_WARNINGS_TC, PRODUCT_WARNINGS_SC, 
+      PRODUCT_INGREDIENTS_EN, PRODUCT_INGREDIENTS_TC, 
+      PRODUCT_INGREDIENTS_SC, PACKAGE, MANUF_COUNTRY, 
+      PRODUCT_SHELF_LIFE, MIN_SHELF_LIFE, STORAGE_CONDITION_EN, 
+      STORAGE_CONDITION_TC, STORAGE_CONDITION_SC,COLOR_HEX_CODE,
+	  RETEK_LAST_UPDATED_DATE,RETEK_STATUS,SMALL_EXPENSIVE,NUTRITION_LABEL,WEIGHT_UNIT,DIM_UNIT,ONLINE_UPDATED_IND,LAST_OVERWRITE_DATE,DELIVERY_FEE_PRODUCT_IND,
+	  MIN_REPLENISHMENT_LEVEL,MAX_REPLENISHMENT_LEVEL,SHIPPING_INFO,PNS_ONLINE_DELIVERY_TYPE)
+    values (#{id,jdbcType=DECIMAL}, #{productCode,jdbcType=VARCHAR}, #{baseProductCode,jdbcType=VARCHAR}, 
+      #{supplierCode,jdbcType=VARCHAR}, #{shortDescEn,jdbcType=VARCHAR}, #{shortDescTc,jdbcType=VARCHAR}, 
+      #{shortDescSc,jdbcType=VARCHAR}, #{brandCode,jdbcType=DECIMAL}, #{onlineDate,jdbcType=DATE}, 
+      #{offlineDate,jdbcType=DATE}, #{unitRetail,jdbcType=DECIMAL}, #{unitCost,jdbcType=DECIMAL}, 
+      #{currency,jdbcType=VARCHAR}, #{standardUom,jdbcType=VARCHAR}, #{originCountry,jdbcType=VARCHAR}, 
+      #{dept,jdbcType=DECIMAL}, #{clazz,jdbcType=DECIMAL}, #{subClass,jdbcType=DECIMAL}, 
+      #{deliveryMode,jdbcType=VARCHAR}, #{supplierLeadTime,jdbcType=DECIMAL}, #{minOrderQty,jdbcType=DECIMAL}, 
+      #{dailyInventory,jdbcType=DECIMAL}, #{minDeliverDate,jdbcType=DECIMAL}, #{maxDeliverDate,jdbcType=DECIMAL}, 
+      #{consignmentType,jdbcType=VARCHAR}, #{consignmentCalBasis,jdbcType=VARCHAR}, #{consignmentRate,jdbcType=DECIMAL}, 
+      #{sizeDesc,jdbcType=VARCHAR}, #{casePackInner,jdbcType=DECIMAL}, #{casePackCase,jdbcType=DECIMAL}, 
+      #{productDimHeight,jdbcType=DECIMAL}, #{productDimLength,jdbcType=DECIMAL}, #{storageDimHeight,jdbcType=DECIMAL}, 
+      #{storageDimWidth,jdbcType=DECIMAL}, #{grossWeight,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{failedReason,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}, #{supplierProductCode,jdbcType=VARCHAR}, 
+      #{productDimWidth,jdbcType=DECIMAL}, #{storageDimLength,jdbcType=DECIMAL}, #{longDescEn,jdbcType=VARCHAR}, 
+      #{longDescTc,jdbcType=VARCHAR}, #{longDescSc,jdbcType=VARCHAR}, #{caseDimHeight,jdbcType=DECIMAL}, 
+      #{caseDimWidth,jdbcType=DECIMAL}, #{caseDimLength,jdbcType=DECIMAL}, #{shippingWeight,jdbcType=DECIMAL}, 
+      #{colorGroup,jdbcType=VARCHAR}, #{colorCode,jdbcType=VARCHAR}, #{colorDesc,jdbcType=VARCHAR}, 
+      #{variantColor,jdbcType=VARCHAR}, #{variantSize,jdbcType=VARCHAR}, #{shippingDimLength,jdbcType=DECIMAL}, 
+      #{shippingDimHeight,jdbcType=DECIMAL}, #{shippingDimWidth,jdbcType=DECIMAL}, #{supplierPortalIndicator,jdbcType=VARCHAR}, 
+      #{estoreCategory,jdbcType=VARCHAR}, #{baseProductId,jdbcType=DECIMAL}, 
+      #{version,jdbcType=VARCHAR}, #{lastExportedDate,jdbcType=TIMESTAMP}, #{lastApprovalDate,jdbcType=TIMESTAMP}, 
+      #{supplierProfileUpdateInd,jdbcType=VARCHAR}, #{autoApprovalInd,jdbcType=VARCHAR}, 
+      #{productUsageEn,jdbcType=VARCHAR}, #{productUsageTc,jdbcType=VARCHAR}, #{productUsageSc,jdbcType=VARCHAR}, 
+      #{productWarningsEn,jdbcType=VARCHAR}, #{productWarningsTc,jdbcType=VARCHAR}, #{productWarningsSc,jdbcType=VARCHAR}, 
+      #{productIngredientsEn,jdbcType=VARCHAR}, #{productIngredientsTc,jdbcType=VARCHAR}, 
+      #{productIngredientsSc,jdbcType=VARCHAR}, #{packAge,jdbcType=VARCHAR}, #{manufCountry,jdbcType=VARCHAR}, 
+      #{productShelfLife,jdbcType=VARCHAR}, #{minShelfLife,jdbcType=VARCHAR}, #{storageConditionEn,jdbcType=VARCHAR}, 
+      #{storageConditionTc,jdbcType=VARCHAR}, #{storageConditionSc,jdbcType=VARCHAR}, #{colorHexCode,jdbcType=VARCHAR}, 
+      #{retekLastUpdatedDate,jdbcType=VARCHAR},#{retekStatus,jdbcType=VARCHAR},#{smallExpensive,jdbcType=VARCHAR},
+      #{nutritionLabel,jdbcType=VARCHAR},#{weightUnit,jdbcType=VARCHAR},#{dimUnit,jdbcType=VARCHAR},#{onlineUpdatedInd,jdbcType=VARCHAR},#{lastOverWriteDate,jdbcType=VARCHAR},
+      #{deliveryFeeProductInd,jdbcType=VARCHAR},#{minReplenishmentLevel,jdbcType=DECIMAL},#{maxReplenishmentLevel,jdbcType=DECIMAL},
+      #{shippingInfo,jdbcType=VARCHAR},#{pnsOnlineDeliveryType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductInfoModel" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select product_seq.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="productCode != null" >
+        PRODUCT_CODE,
+      </if>
+      <if test="baseProductCode != null" >
+        BASE_PRODUCT_CODE,
+      </if>
+      <if test="supplierCode != null" >
+        SUPPLIER_CODE,
+      </if>
+      <if test="shortDescEn != null" >
+        SHORT_DESC_EN,
+      </if>
+      <if test="shortDescTc != null" >
+        SHORT_DESC_TC,
+      </if>
+      <if test="shortDescSc != null" >
+        SHORT_DESC_SC,
+      </if>
+      <if test="brandCode != null" >
+        BRAND_CODE,
+      </if>
+      <if test="onlineDate != null" >
+        ONLINE_DATE,
+      </if>
+      <if test="offlineDate != null" >
+        OFFLINE_DATE,
+      </if>
+      <if test="unitRetail != null" >
+        UNIT_RETAIL,
+      </if>
+      <if test="unitCost != null" >
+        UNIT_COST,
+      </if>
+      <if test="currency != null" >
+        CURRENCY,
+      </if>
+      <if test="standardUom != null" >
+        STANDARD_UOM,
+      </if>
+      <if test="originCountry != null" >
+        ORIGIN_COUNTRY,
+      </if>
+      <if test="dept != null" >
+        DEPT,
+      </if>
+      <if test="clazz != null" >
+        CLASS,
+      </if>
+      <if test="subClass != null" >
+        SUB_CLASS,
+      </if>
+      <if test="deliveryMode != null" >
+        DELIVERY_MODE,
+      </if>
+      <if test="supplierLeadTime != null" >
+        SUPPLIER_LEAD_TIME,
+      </if>
+      <if test="minOrderQty != null" >
+        MIN_ORDER_QTY,
+      </if>
+      <if test="dailyInventory != null" >
+        DAILY_INVENTORY,
+      </if>
+      <if test="minDeliverDate != null" >
+        MIN_DELIVER_DATE,
+      </if>
+      <if test="maxDeliverDate != null" >
+        MAX_DELIVER_DATE,
+      </if>
+      <if test="consignmentType != null" >
+        CONSIGNMENT_TYPE,
+      </if>
+      <if test="consignmentCalBasis != null" >
+        CONSIGNMENT_CAL_BASIS,
+      </if>
+      <if test="consignmentRate != null" >
+        CONSIGNMENT_RATE,
+      </if>
+      <if test="sizeDesc != null" >
+        SIZE_DESC,
+      </if>
+      <if test="casePackInner != null" >
+        CASE_PACK_INNER,
+      </if>
+      <if test="casePackCase != null" >
+        CASE_PACK_CASE,
+      </if>
+      <if test="productDimHeight != null" >
+        PRODUCT_DIM_HEIGHT,
+      </if>
+      <if test="productDimLength != null" >
+        PRODUCT_DIM_LENGTH,
+      </if>
+      <if test="storageDimHeight != null" >
+        STORAGE_DIM_HEIGHT,
+      </if>
+      <if test="storageDimWidth != null" >
+        STORAGE_DIM_WIDTH,
+      </if>
+      <if test="grossWeight != null" >
+        GROSS_WEIGHT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="failedReason != null" >
+        FAILED_REASON,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="supplierProductCode != null" >
+        SUPPLIER_PRODUCT_CODE,
+      </if>
+      <if test="productDimWidth != null" >
+        PRODUCT_DIM_WIDTH,
+      </if>
+      <if test="storageDimLength != null" >
+        STORAGE_DIM_LENGTH,
+      </if>
+      <if test="longDescEn != null" >
+        LONG_DESC_EN,
+      </if>
+      <if test="longDescTc != null" >
+        LONG_DESC_TC,
+      </if>
+      <if test="longDescSc != null" >
+        LONG_DESC_SC,
+      </if>
+      <if test="caseDimHeight != null" >
+        CASE_DIM_HEIGHT,
+      </if>
+      <if test="caseDimWidth != null" >
+        CASE_DIM_WIDTH,
+      </if>
+      <if test="caseDimLength != null" >
+        CASE_DIM_LENGTH,
+      </if>
+      <if test="shippingWeight != null" >
+        SHIPPING_WEIGHT,
+      </if>
+      <if test="colorGroup != null" >
+        COLOR_GROUP,
+      </if>
+      <if test="colorCode != null" >
+        COLOR_CODE,
+      </if>
+      <if test="colorDesc != null" >
+        COLOR_DESC,
+      </if>
+      <if test="variantColor != null" >
+        VARIANT_COLOR,
+      </if>
+      <if test="variantSize != null" >
+        VARIANT_SIZE,
+      </if>
+      <if test="shippingDimLength != null" >
+        SHIPPING_DIM_LENGTH,
+      </if>
+      <if test="shippingDimHeight != null" >
+        SHIPPING_DIM_HEIGHT,
+      </if>
+      <if test="shippingDimWidth != null" >
+        SHIPPING_DIM_WIDTH,
+      </if>
+      <if test="supplierPortalIndicator != null" >
+        SUPPLIER_PORTAL_INDICATOR,
+      </if>
+      <if test="estoreCategory != null" >
+        ESTORE_CATEGORY,
+      </if>
+      <if test="baseProductId != null" >
+        BASE_PRODUCT_ID,
+      </if>
+     <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="lastExportedDate != null" >
+        LAST_EXPORTED_DATE,
+      </if>
+      <if test="lastApprovalDate != null" >
+        LAST_APPROVAL_DATE,
+      </if>
+      <if test="supplierProfileUpdateInd != null" >
+        SUPPLIER_PROFILE_UPDATE_IND,
+      </if>
+      <if test="autoApprovalInd != null" >
+        AUTO_APPROVAL_IND,
+      </if>
+      <if test="productUsageEn != null" >
+        PRODUCT_USAGE_EN,
+      </if>
+      <if test="productUsageTc != null" >
+        PRODUCT_USAGE_TC,
+      </if>
+      <if test="productUsageSc != null" >
+        PRODUCT_USAGE_SC,
+      </if>
+      <if test="productWarningsEn != null" >
+        PRODUCT_WARNINGS_EN,
+      </if>
+      <if test="productWarningsTc != null" >
+        PRODUCT_WARNINGS_TC,
+      </if>
+      <if test="productWarningsSc != null" >
+        PRODUCT_WARNINGS_SC,
+      </if>
+      <if test="productIngredientsEn != null" >
+        PRODUCT_INGREDIENTS_EN,
+      </if>
+      <if test="productIngredientsTc != null" >
+        PRODUCT_INGREDIENTS_TC,
+      </if>
+      <if test="productIngredientsSc != null" >
+        PRODUCT_INGREDIENTS_SC,
+      </if>
+      <if test="packAge != null" >
+        PACKAGE,
+      </if>
+      <if test="manufCountry != null" >
+        MANUF_COUNTRY,
+      </if>
+      <if test="productShelfLife != null" >
+        PRODUCT_SHELF_LIFE,
+      </if>
+      <if test="minShelfLife != null" >
+        MIN_SHELF_LIFE,
+      </if>
+      <if test="storageConditionEn != null" >
+        STORAGE_CONDITION_EN,
+      </if>
+      <if test="storageConditionTc != null" >
+        STORAGE_CONDITION_TC,
+      </if>
+      <if test="storageConditionSc != null" >
+        STORAGE_CONDITION_SC,
+      </if>
+      <if test="colorHexCode != null" >
+        COLOR_HEX_CODE,
+      </if>
+      <if test="retekStatus != null" >
+        RETEK_STATUS,
+      </if>
+      <if test="retekLastUpdatedDate != null" >
+        RETEK_LAST_UPDATED_DATE,
+      </if>
+      <if test="smallExpensive != null" >
+        SMALL_EXPENSIVE,
+      </if>
+       <if test="nutritionLabel != null" >
+        NUTRITION_LABEL,
+      </if>
+      <if test="weightUnit != null" >
+        WEIGHT_UNIT,
+      </if>
+      <if test="dimUnit != null" >
+        DIM_UNIT,
+      </if>
+      <if test="onlineUpdatedInd != null" >
+        ONLINE_UPDATED_IND,
+      </if>
+      <if test="lastOverWriteDate != null" >
+        LAST_OVERWRITE_DATE,
+      </if>
+      <if test="deliveryFeeProductInd != null" >
+        DELIVERY_FEE_PRODUCT_IND,
+      </if>
+      <if test="minReplenishmentLevel != null" >
+        MIN_REPLENISHMENT_LEVEL,
+      </if>
+      <if test="maxReplenishmentLevel != null" >
+        MAX_REPLENISHMENT_LEVEL,
+      </if>
+      <if test="shippingInfo != null" >
+        SHIPPING_INFO,
+      </if>
+      <if test="pnsOnlineDeliveryType != null" >
+        PNS_ONLINE_DELIVERY_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        #{id,jdbcType=DECIMAL},
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="baseProductCode != null" >
+        #{baseProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shortDescEn != null" >
+        #{shortDescEn,jdbcType=VARCHAR},
+      </if>
+      <if test="shortDescTc != null" >
+        #{shortDescTc,jdbcType=VARCHAR},
+      </if>
+      <if test="shortDescSc != null" >
+        #{shortDescSc,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=DECIMAL},
+      </if>
+      <if test="onlineDate != null" >
+        #{onlineDate,jdbcType=DATE},
+      </if>
+      <if test="offlineDate != null" >
+        #{offlineDate,jdbcType=DATE},
+      </if>
+      <if test="unitRetail != null" >
+        #{unitRetail,jdbcType=DECIMAL},
+      </if>
+      <if test="unitCost != null" >
+        #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="standardUom != null" >
+        #{standardUom,jdbcType=VARCHAR},
+      </if>
+      <if test="originCountry != null" >
+        #{originCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null" >
+        #{dept,jdbcType=DECIMAL},
+      </if>
+      <if test="clazz != null" >
+        #{clazz,jdbcType=DECIMAL},
+      </if>
+      <if test="subClass != null" >
+        #{subClass,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryMode != null" >
+        #{deliveryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierLeadTime != null" >
+        #{supplierLeadTime,jdbcType=DECIMAL},
+      </if>
+      <if test="minOrderQty != null" >
+        #{minOrderQty,jdbcType=DECIMAL},
+      </if>
+      <if test="dailyInventory != null" >
+        #{dailyInventory,jdbcType=DECIMAL},
+      </if>
+      <if test="minDeliverDate != null" >
+        #{minDeliverDate,jdbcType=DECIMAL},
+      </if>
+      <if test="maxDeliverDate != null" >
+        #{maxDeliverDate,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentType != null" >
+        #{consignmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentCalBasis != null" >
+        #{consignmentCalBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentRate != null" >
+        #{consignmentRate,jdbcType=DECIMAL},
+      </if>
+      <if test="sizeDesc != null" >
+        #{sizeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="casePackInner != null" >
+        #{casePackInner,jdbcType=DECIMAL},
+      </if>
+      <if test="casePackCase != null" >
+        #{casePackCase,jdbcType=DECIMAL},
+      </if>
+      <if test="productDimHeight != null" >
+        #{productDimHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="productDimLength != null" >
+        #{productDimLength,jdbcType=DECIMAL},
+      </if>
+      <if test="storageDimHeight != null" >
+        #{storageDimHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="storageDimWidth != null" >
+        #{storageDimWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="grossWeight != null" >
+        #{grossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="failedReason != null" >
+        #{failedReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+
+     <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+       #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      
+      <if test="supplierProductCode != null" >
+        #{supplierProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productDimWidth != null" >
+        #{productDimWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="storageDimLength != null" >
+        #{storageDimLength,jdbcType=DECIMAL},
+      </if>
+      <if test="longDescEn != null" >
+        #{longDescEn,jdbcType=VARCHAR},
+      </if>
+      <if test="longDescTc != null" >
+        #{longDescTc,jdbcType=VARCHAR},
+      </if>
+      <if test="longDescSc != null" >
+        #{longDescSc,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDimHeight != null" >
+        #{caseDimHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="caseDimWidth != null" >
+        #{caseDimWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="caseDimLength != null" >
+        #{caseDimLength,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingWeight != null" >
+        #{shippingWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="colorGroup != null" >
+        #{colorGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="colorCode != null" >
+        #{colorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="colorDesc != null" >
+        #{colorDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="variantColor != null" >
+        #{variantColor,jdbcType=VARCHAR},
+      </if>
+      <if test="variantSize != null" >
+        #{variantSize,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingDimLength != null" >
+        #{shippingDimLength,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingDimHeight != null" >
+        #{shippingDimHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingDimWidth != null" >
+        #{shippingDimWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierPortalIndicator != null" >
+        #{supplierPortalIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="estoreCategory != null" >
+        #{estoreCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="baseProductId != null" >
+        #{baseProductId,jdbcType=DECIMAL},
+      </if>
+ 	  <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExportedDate != null" >
+        #{lastExportedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastApprovalDate != null" >
+        #{lastApprovalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierProfileUpdateInd != null" >
+        #{supplierProfileUpdateInd,jdbcType=VARCHAR},
+      </if>
+      <if test="autoApprovalInd != null" >
+        #{autoApprovalInd,jdbcType=VARCHAR},
+      </if>
+      <if test="productUsageEn != null" >
+        #{productUsageEn,jdbcType=VARCHAR},
+      </if>
+      <if test="productUsageTc != null" >
+        #{productUsageTc,jdbcType=VARCHAR},
+      </if>
+      <if test="productUsageSc != null" >
+        #{productUsageSc,jdbcType=VARCHAR},
+      </if>
+      <if test="productWarningsEn != null" >
+        #{productWarningsEn,jdbcType=VARCHAR},
+      </if>
+      <if test="productWarningsTc != null" >
+        #{productWarningsTc,jdbcType=VARCHAR},
+      </if>
+      <if test="productWarningsSc != null" >
+        #{productWarningsSc,jdbcType=VARCHAR},
+      </if>
+      <if test="productIngredientsEn != null" >
+        #{productIngredientsEn,jdbcType=VARCHAR},
+      </if>
+      <if test="productIngredientsTc != null" >
+        #{productIngredientsTc,jdbcType=VARCHAR},
+      </if>
+      <if test="productIngredientsSc != null" >
+        #{productIngredientsSc,jdbcType=VARCHAR},
+      </if>
+      <if test="packAge != null" >
+        #{packAge,jdbcType=VARCHAR},
+      </if>
+      <if test="manufCountry != null" >
+        #{manufCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="productShelfLife != null" >
+        #{productShelfLife,jdbcType=VARCHAR},
+      </if>
+      <if test="minShelfLife != null" >
+        #{minShelfLife,jdbcType=VARCHAR},
+      </if>
+      <if test="storageConditionEn != null" >
+        #{storageConditionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="storageConditionTc != null" >
+        #{storageConditionTc,jdbcType=VARCHAR},
+      </if>
+      <if test="storageConditionSc != null" >
+        #{storageConditionSc,jdbcType=VARCHAR},
+      </if>
+  	  <if test="colorHexCode != null" >
+        #{colorHexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="retekStatus != null" >
+        #{retekStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="retekLastUpdatedDate != null" >
+        #{retekLastUpdatedDate},
+      </if>
+      <if test="smallExpensive != null" >
+        #{smallExpensive,jdbcType=VARCHAR},
+      </if>
+      <if test="nutritionLabel != null" >
+        #{nutritionLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="weightUnit != null" >
+        #{weightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="dimUnit != null" >
+        #{dimUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineUpdatedInd != null" >
+        #{onlineUpdatedInd,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOverWriteDate != null" >
+        #{lastOverWriteDate,jdbcType=VARCHAR},
+      </if>
+       <if test="deliveryFeeProductInd != null" >
+        #{deliveryFeeProductInd,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="minReplenishmentLevel != null" >
+        #{minReplenishmentLevel,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="maxReplenishmentLevel != null" >
+        #{maxReplenishmentLevel,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="shippingInfo != null" >
+        #{shippingInfo,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="pnsOnlineDeliveryType != null" >
+        #{pnsOnlineDeliveryType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.ProductInfoModel" >
+    update PRODUCT
+    <set >
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="baseProductCode != null" >
+        BASE_PRODUCT_CODE = #{baseProductCode,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="supplierCode != null" >
+        SUPPLIER_CODE = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="shortDescEn != null" >
+        SHORT_DESC_EN = #{shortDescEn,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="shortDescTc != null" >
+        SHORT_DESC_TC = #{shortDescTc,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="shortDescSc != null" >
+        SHORT_DESC_SC = #{shortDescSc,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="brandCode != null" >
+        BRAND_CODE = #{brandCode,jdbcType=DECIMAL},
+        </if>
+        
+		<if test="onlineDate != null" >
+        ONLINE_DATE = #{onlineDate,jdbcType=DATE},
+        </if>
+        
+        <if test="offlineDate != null" >
+        OFFLINE_DATE = #{offlineDate,jdbcType=DATE},
+        </if>
+        
+		<if test="unitRetail != null" >
+        UNIT_RETAIL = #{unitRetail,jdbcType=DECIMAL},
+        </if>
+		
+		<if test="unitCost != null" >
+        	UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+        </if>
+
+		<if test="currency != null" >
+        	CURRENCY = #{currency,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="standardUom != null" >
+        STANDARD_UOM = #{standardUom,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="originCountry != null" >
+        ORIGIN_COUNTRY = #{originCountry,jdbcType=VARCHAR},
+        </if>
+		<if test="dept != null" >
+        DEPT = #{dept,jdbcType=DECIMAL},
+        </if>
+		<if test="clazz != null" >
+        CLASS = #{clazz,jdbcType=DECIMAL},
+        </if>
+		<if test="subClass != null" >
+        SUB_CLASS = #{subClass,jdbcType=DECIMAL},
+        </if>
+		<if test="deliveryMode != null" >
+        DELIVERY_MODE = #{deliveryMode,jdbcType=VARCHAR},
+        </if>
+
+		<if test="supplierLeadTime != null" >
+        SUPPLIER_LEAD_TIME = #{supplierLeadTime,jdbcType=DECIMAL},
+        </if>
+
+  		<if test="minOrderQty != null" >
+        MIN_ORDER_QTY = #{minOrderQty,jdbcType=DECIMAL},
+        </if>
+ 
+		<if test="dailyInventory != null" >
+        DAILY_INVENTORY = #{dailyInventory,jdbcType=DECIMAL},
+        </if>
+
+		<if test="minDeliverDate != null" >
+        MIN_DELIVER_DATE = #{minDeliverDate,jdbcType=DECIMAL},
+        </if>
+
+		<if test="maxDeliverDate != null" >
+        MAX_DELIVER_DATE = #{maxDeliverDate,jdbcType=DECIMAL},
+        </if>
+
+		<if test="consignmentType != null" >
+        CONSIGNMENT_TYPE = #{consignmentType,jdbcType=VARCHAR},
+        </if>
+
+		<if test="consignmentCalBasis != null" >
+       	 CONSIGNMENT_CAL_BASIS = #{consignmentCalBasis,jdbcType=VARCHAR},
+       	 </if>
+
+		<if test="consignmentRate != null" >
+        CONSIGNMENT_RATE = #{consignmentRate,jdbcType=DECIMAL},
+        </if>
+
+		<if test="sizeDesc != null" >
+        SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+        </if>
+
+		<if test="casePackInner != null" >
+        CASE_PACK_INNER = #{casePackInner,jdbcType=DECIMAL},
+        </if>
+
+		<if test="casePackCase != null" >
+        CASE_PACK_CASE = #{casePackCase,jdbcType=DECIMAL},
+        </if>
+
+		<if test="productDimHeight != null" >
+        PRODUCT_DIM_HEIGHT = #{productDimHeight,jdbcType=DECIMAL},
+        </if>
+
+		<if test="productDimLength != null" >
+        PRODUCT_DIM_LENGTH = #{productDimLength,jdbcType=DECIMAL},
+        </if>
+ 
+		<if test="storageDimHeight != null" >
+        STORAGE_DIM_HEIGHT = #{storageDimHeight,jdbcType=DECIMAL},
+        </if>
+        
+		<if test="storageDimWidth != null" >
+        STORAGE_DIM_WIDTH = #{storageDimWidth,jdbcType=DECIMAL},
+        </if>
+
+		<if test="grossWeight != null" >
+        GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+        </if>
+
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="failedReason != null" >
+        FAILED_REASON = #{failedReason,jdbcType=VARCHAR},
+      </if>
+
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+	  <if test="supplierProductCode != null" >
+       	SUPPLIER_PRODUCT_CODE = #{supplierProductCode,jdbcType=VARCHAR},
+      </if>
+		<if test="productDimWidth != null" >
+        PRODUCT_DIM_WIDTH = #{productDimWidth,jdbcType=DECIMAL},
+        </if>
+		<if test="storageDimLength != null" >
+        STORAGE_DIM_LENGTH = #{storageDimLength,jdbcType=DECIMAL},
+        </if>
+		<if test="longDescEn != null" >
+        LONG_DESC_EN = #{longDescEn,jdbcType=VARCHAR},
+        </if>
+		<if test="longDescTc != null" >
+        LONG_DESC_TC = #{longDescTc,jdbcType=VARCHAR},
+        </if>
+		<if test="longDescSc != null" >
+        LONG_DESC_SC = #{longDescSc,jdbcType=VARCHAR},
+        </if>
+		<if test="caseDimHeight != null" >
+        CASE_DIM_HEIGHT = #{caseDimHeight,jdbcType=DECIMAL},
+        </if>
+		<if test="caseDimWidth != null" >
+        CASE_DIM_WIDTH = #{caseDimWidth,jdbcType=DECIMAL},
+        </if>
+		<if test="caseDimLength != null" >
+        CASE_DIM_LENGTH = #{caseDimLength,jdbcType=DECIMAL},
+        </if>
+		<if test="shippingWeight != null" >
+        SHIPPING_WEIGHT = #{shippingWeight,jdbcType=DECIMAL},
+        </if>
+        
+		<if test="colorGroup != null" >
+        COLOR_GROUP = #{colorGroup,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="colorCode != null" >
+        COLOR_CODE = #{colorCode,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="colorDesc != null" >
+        COLOR_DESC = #{colorDesc,jdbcType=VARCHAR},
+        </if>
+		<if test="variantColor != null" >
+        VARIANT_COLOR = #{variantColor,jdbcType=VARCHAR},
+        </if>
+		<if test="variantSize != null" >
+        VARIANT_SIZE = #{variantSize,jdbcType=VARCHAR},
+        </if>
+
+		<if test="shippingDimLength != null" >
+        SHIPPING_DIM_LENGTH = #{shippingDimLength,jdbcType=DECIMAL},
+		</if>
+		
+		<if test="shippingDimHeight != null" >
+        	SHIPPING_DIM_HEIGHT = #{shippingDimHeight,jdbcType=DECIMAL},
+		</if>
+		
+		<if test="shippingDimWidth != null" >
+        	SHIPPING_DIM_WIDTH = #{shippingDimWidth,jdbcType=DECIMAL},
+		</if>
+		
+        <if test="supplierPortalIndicator != null" >
+        	SUPPLIER_PORTAL_INDICATOR = #{supplierPortalIndicator,jdbcType=VARCHAR},
+        </if>
+
+		<if test="estoreCategory != null" >
+        	ESTORE_CATEGORY = #{estoreCategory,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="baseProductId != null" >
+        	BASE_PRODUCT_ID = #{baseProductId,jdbcType=DECIMAL},
+        </if>
+        
+		<if test="version != null" >
+        	VERSION = #{version,jdbcType=VARCHAR},
+        </if>
+
+		<if test="lastExportedDate != null" >
+       		 LAST_EXPORTED_DATE = #{lastExportedDate},
+        </if>
+
+		<if test="lastApprovalDate != null" >
+        	LAST_APPROVAL_DATE = #{lastApprovalDate},
+        </if>
+
+		<if test="supplierProfileUpdateInd != null" >
+        	SUPPLIER_PROFILE_UPDATE_IND = #{supplierProfileUpdateInd,jdbcType=DECIMAL},
+        </if>
+
+		<if test="autoApprovalInd != null" >
+        	AUTO_APPROVAL_IND = #{autoApprovalInd,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="productUsageEn != null" >
+        	PRODUCT_USAGE_EN = #{productUsageEn,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productUsageTc != null" >
+        	PRODUCT_USAGE_TC = #{productUsageTc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productUsageSc != null" >
+        	PRODUCT_USAGE_SC = #{productUsageSc,jdbcType=VARCHAR},
+        </if>
+
+		<if test="productWarningsEn != null" >
+        	PRODUCT_WARNINGS_EN = #{productWarningsEn,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productWarningsTc != null" >
+        	PRODUCT_WARNINGS_TC = #{productWarningsTc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productWarningsSc != null" >
+        	PRODUCT_WARNINGS_SC = #{productWarningsSc,jdbcType=VARCHAR},
+        </if>
+        
+		<if test="productIngredientsEn != null" >
+       	 	PRODUCT_INGREDIENTS_EN = #{productIngredientsEn,jdbcType=VARCHAR},
+        </if>
+        
+        <if test="productIngredientsTc != null" >
+        	PRODUCT_INGREDIENTS_TC = #{productIngredientsTc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productIngredientsSc != null" >
+        	PRODUCT_INGREDIENTS_SC = #{productIngredientsSc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="packAge != null" >
+        	PACKAGE = #{packAge,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="manufCountry != null" >
+        	MANUF_COUNTRY = #{manufCountry,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="productShelfLife != null" >
+        	PRODUCT_SHELF_LIFE = #{productShelfLife,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="minShelfLife != null" >
+        	MIN_SHELF_LIFE = #{minShelfLife,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="storageConditionEn != null" >
+        	STORAGE_CONDITION_EN = #{storageConditionEn,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="storageConditionTc != null" >
+          STORAGE_CONDITION_TC = #{storageConditionTc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="storageConditionSc != null" >
+          STORAGE_CONDITION_SC = #{storageConditionSc,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="colorHexCode != null" >
+        	COLOR_HEX_CODE = #{colorHexCode,jdbcType=VARCHAR},
+		</if>
+   
+		<if test="retekStatus != null" >
+        	RETEK_STATUS=#{retekStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="retekLastUpdatedDate != null" >
+        	RETEK_LAST_UPDATED_DATE=#{retekLastUpdatedDate},
+        </if>
+		<if test="retekLastApprovedDate != null" >
+        	RETEK_LAST_APPROVED_DATE=#{retekLastApprovedDate},
+        </if>        
+        
+
+		<if test="smallExpensive != null" >
+        	SMALL_EXPENSIVE=#{smallExpensive,jdbcType=VARCHAR},
+        </if>
+
+		<if test="nutritionLabel != null" >
+        	NUTRITION_LABEL=#{nutritionLabel,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="weightUnit != null" >
+        	WEIGHT_UNIT=#{weightUnit,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="dimUnit != null" >
+        	DIM_UNIT=#{dimUnit,jdbcType=VARCHAR},
+		</if>
+		
+		<if test="onlineUpdatedInd != null" >
+        	ONLINE_UPDATED_IND=#{onlineUpdatedInd,jdbcType=VARCHAR},
+		</if>
+		<if test="lastOverWriteDate != null" >
+        	LAST_OVERWRITE_DATE=#{lastOverWriteDate,jdbcType=VARCHAR},
+        </if>
+
+		<if test="deliveryFeeProductInd != null" >
+        	DELIVERY_FEE_PRODUCT_IND=#{deliveryFeeProductInd,jdbcType=VARCHAR},
+        </if>
+		<if test="minReplenishmentLevel != null" >
+        	MIN_REPLENISHMENT_LEVEL=#{minReplenishmentLevel,jdbcType=DECIMAL},
+        </if>
+        <if test="maxReplenishmentLevel != null" >
+         MAX_REPLENISHMENT_LEVEL=#{maxReplenishmentLevel,jdbcType=DECIMAL},
+		</if>
+
+		<if test="shippingInfo != null" >
+        	SHIPPING_INFO=#{shippingInfo,jdbcType=VARCHAR},
+        </if>
+
+		<if test="pnsOnlineDeliveryType != null" >
+        PNS_ONLINE_DELIVERY_TYPE=#{pnsOnlineDeliveryType,jdbcType=VARCHAR},
+        </if>
+
+		<if test="imageSyncCount != null" >
+        IMAGE_SYNC_CNT=#{imageSyncCount,jdbcType=DECIMAL},
+        </if>
+
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.ProductInfoModel" >
+    update PRODUCT
+    <set >
+      <if test="productCode != null" >
+        PRODUCT_CODE = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="baseProductCode != null" >
+        BASE_PRODUCT_CODE = #{baseProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        SUPPLIER_CODE = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+        SHORT_DESC_EN = #{shortDescEn,jdbcType=VARCHAR},
+
+        SHORT_DESC_TC = #{shortDescTc,jdbcType=VARCHAR},
+
+        SHORT_DESC_SC = #{shortDescSc,jdbcType=VARCHAR},
+
+        BRAND_CODE = #{brandCode,jdbcType=DECIMAL},
+
+        ONLINE_DATE = #{onlineDate,jdbcType=DATE},
+        OFFLINE_DATE = #{offlineDate,jdbcType=DATE},
+
+        UNIT_RETAIL = #{unitRetail,jdbcType=DECIMAL},
+		
+		<if test="unitCost != null" >
+        	UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+        </if>
+
+		<if test="currency != null" >
+        	CURRENCY = #{currency,jdbcType=VARCHAR},
+        </if>
+
+        STANDARD_UOM = #{standardUom,jdbcType=VARCHAR},
+
+        ORIGIN_COUNTRY = #{originCountry,jdbcType=VARCHAR},
+
+        DEPT = #{dept,jdbcType=DECIMAL},
+
+        CLASS = #{clazz,jdbcType=DECIMAL},
+
+        SUB_CLASS = #{subClass,jdbcType=DECIMAL},
+
+        DELIVERY_MODE = #{deliveryMode,jdbcType=VARCHAR},
+
+
+        SUPPLIER_LEAD_TIME = #{supplierLeadTime,jdbcType=DECIMAL},
+
+  
+        MIN_ORDER_QTY = #{minOrderQty,jdbcType=DECIMAL},
+ 
+
+        DAILY_INVENTORY = #{dailyInventory,jdbcType=DECIMAL},
+
+
+        MIN_DELIVER_DATE = #{minDeliverDate,jdbcType=DECIMAL},
+
+
+        MAX_DELIVER_DATE = #{maxDeliverDate,jdbcType=DECIMAL},
+
+
+        CONSIGNMENT_TYPE = #{consignmentType,jdbcType=VARCHAR},
+
+
+       	 CONSIGNMENT_CAL_BASIS = #{consignmentCalBasis,jdbcType=VARCHAR},
+
+
+        CONSIGNMENT_RATE = #{consignmentRate,jdbcType=DECIMAL},
+
+
+        SIZE_DESC = #{sizeDesc,jdbcType=VARCHAR},
+
+
+        CASE_PACK_INNER = #{casePackInner,jdbcType=DECIMAL},
+
+
+        CASE_PACK_CASE = #{casePackCase,jdbcType=DECIMAL},
+
+
+        PRODUCT_DIM_HEIGHT = #{productDimHeight,jdbcType=DECIMAL},
+
+
+        PRODUCT_DIM_LENGTH = #{productDimLength,jdbcType=DECIMAL},
+ 
+
+        STORAGE_DIM_HEIGHT = #{storageDimHeight,jdbcType=DECIMAL},
+
+        STORAGE_DIM_WIDTH = #{storageDimWidth,jdbcType=DECIMAL},
+
+
+        GROSS_WEIGHT = #{grossWeight,jdbcType=DECIMAL},
+
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+        FAILED_REASON = #{failedReason,jdbcType=VARCHAR},
+
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+	  <if test="supplierProductCode != null" >
+       	SUPPLIER_PRODUCT_CODE = #{supplierProductCode,jdbcType=VARCHAR},
+      </if>
+
+        PRODUCT_DIM_WIDTH = #{productDimWidth,jdbcType=DECIMAL},
+
+        STORAGE_DIM_LENGTH = #{storageDimLength,jdbcType=DECIMAL},
+
+        LONG_DESC_EN = #{longDescEn,jdbcType=VARCHAR},
+
+        LONG_DESC_TC = #{longDescTc,jdbcType=VARCHAR},
+
+        LONG_DESC_SC = #{longDescSc,jdbcType=VARCHAR},
+
+        CASE_DIM_HEIGHT = #{caseDimHeight,jdbcType=DECIMAL},
+
+        CASE_DIM_WIDTH = #{caseDimWidth,jdbcType=DECIMAL},
+
+        CASE_DIM_LENGTH = #{caseDimLength,jdbcType=DECIMAL},
+
+        SHIPPING_WEIGHT = #{shippingWeight,jdbcType=DECIMAL},
+
+        COLOR_GROUP = #{colorGroup,jdbcType=VARCHAR},
+
+        COLOR_CODE = #{colorCode,jdbcType=VARCHAR},
+
+        COLOR_DESC = #{colorDesc,jdbcType=VARCHAR},
+
+        VARIANT_COLOR = #{variantColor,jdbcType=VARCHAR},
+
+        VARIANT_SIZE = #{variantSize,jdbcType=VARCHAR},
+
+        SHIPPING_DIM_LENGTH = #{shippingDimLength,jdbcType=DECIMAL},
+
+        SHIPPING_DIM_HEIGHT = #{shippingDimHeight,jdbcType=DECIMAL},
+
+        SHIPPING_DIM_WIDTH = #{shippingDimWidth,jdbcType=DECIMAL},
+
+        <if test="supplierPortalIndicator != null" >
+        	SUPPLIER_PORTAL_INDICATOR = #{supplierPortalIndicator,jdbcType=VARCHAR},
+        </if>
+
+        ESTORE_CATEGORY = #{estoreCategory,jdbcType=VARCHAR},
+
+		<if test="baseProductId != null" >
+        	BASE_PRODUCT_ID = #{baseProductId,jdbcType=DECIMAL},
+        </if>
+        
+		<if test="version != null" >
+        	VERSION = #{version,jdbcType=VARCHAR},
+        </if>
+
+		<if test="lastExportedDate != null" >
+       		 LAST_EXPORTED_DATE = #{lastExportedDate},
+        </if>
+
+		<if test="lastApprovalDate != null" >
+        	LAST_APPROVAL_DATE = #{lastApprovalDate},
+        </if>
+
+		<if test="supplierProfileUpdateInd != null" >
+        	SUPPLIER_PROFILE_UPDATE_IND = #{supplierProfileUpdateInd,jdbcType=DECIMAL},
+        </if>
+
+		<if test="autoApprovalInd != null" >
+        	AUTO_APPROVAL_IND = #{autoApprovalInd,jdbcType=VARCHAR},
+        </if>
+
+        PRODUCT_USAGE_EN = #{productUsageEn,jdbcType=VARCHAR},
+
+        PRODUCT_USAGE_TC = #{productUsageTc,jdbcType=VARCHAR},
+
+        PRODUCT_USAGE_SC = #{productUsageSc,jdbcType=VARCHAR},
+
+        PRODUCT_WARNINGS_EN = #{productWarningsEn,jdbcType=VARCHAR},
+
+        PRODUCT_WARNINGS_TC = #{productWarningsTc,jdbcType=VARCHAR},
+
+        PRODUCT_WARNINGS_SC = #{productWarningsSc,jdbcType=VARCHAR},
+
+        PRODUCT_INGREDIENTS_EN = #{productIngredientsEn,jdbcType=VARCHAR},
+
+        PRODUCT_INGREDIENTS_TC = #{productIngredientsTc,jdbcType=VARCHAR},
+
+        PRODUCT_INGREDIENTS_SC = #{productIngredientsSc,jdbcType=VARCHAR},
+
+        PACKAGE = #{packAge,jdbcType=VARCHAR},
+
+        MANUF_COUNTRY = #{manufCountry,jdbcType=VARCHAR},
+
+        PRODUCT_SHELF_LIFE = #{productShelfLife,jdbcType=VARCHAR},
+
+
+        MIN_SHELF_LIFE = #{minShelfLife,jdbcType=VARCHAR},
+
+
+        STORAGE_CONDITION_EN = #{storageConditionEn,jdbcType=VARCHAR},
+
+
+        STORAGE_CONDITION_TC = #{storageConditionTc,jdbcType=VARCHAR},
+
+
+        STORAGE_CONDITION_SC = #{storageConditionSc,jdbcType=VARCHAR},
+
+
+        COLOR_HEX_CODE = #{colorHexCode,jdbcType=VARCHAR},
+
+   
+		<if test="retekStatus != null" >
+        	RETEK_STATUS=#{retekStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="retekLastUpdatedDate != null" >
+        	RETEK_LAST_UPDATED_DATE=#{retekLastUpdatedDate},
+        </if>
+		<if test="retekLastApprovedDate != null" >
+        	RETEK_LAST_APPROVED_DATE=#{retekLastApprovedDate},
+        </if>     
+
+        SMALL_EXPENSIVE=#{smallExpensive,jdbcType=VARCHAR},
+
+
+        NUTRITION_LABEL=#{nutritionLabel,jdbcType=VARCHAR},
+
+
+        WEIGHT_UNIT=#{weightUnit,jdbcType=VARCHAR},
+
+
+        DIM_UNIT=#{dimUnit,jdbcType=VARCHAR},
+
+		<if test="onlineUpdatedInd != null" >
+        	ONLINE_UPDATED_IND=#{onlineUpdatedInd,jdbcType=VARCHAR},
+		</if>
+		<if test="lastOverWriteDate != null" >
+        	LAST_OVERWRITE_DATE=#{lastOverWriteDate,jdbcType=VARCHAR},
+        </if>
+
+		<if test="deliveryFeeProductInd != null" >
+        	DELIVERY_FEE_PRODUCT_IND=#{deliveryFeeProductInd,jdbcType=VARCHAR},
+        </if>
+
+        MIN_REPLENISHMENT_LEVEL=#{minReplenishmentLevel,jdbcType=DECIMAL},
+        MAX_REPLENISHMENT_LEVEL=#{maxReplenishmentLevel,jdbcType=DECIMAL},
+
+
+        SHIPPING_INFO=#{shippingInfo,jdbcType=VARCHAR},
+
+		<if test="pnsOnlineDeliveryType != null" >
+        PNS_ONLINE_DELIVERY_TYPE=#{pnsOnlineDeliveryType,jdbcType=VARCHAR},
+        </if>
+
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+   <select id="getAll" resultMap="BaseResultMap">
+  	SELECT * FROM PRODUCT where DELIVERY_FEE_PRODUCT_IND!='Y'
+  </select>
+  
+    <select id="getMaxProductId" resultType="int">
+    	select product_seq.nextval FROM dual
+  </select>
+  
+   <select id="getProductInfoModelBySupplierProductCode" parameterType="java.util.Map" resultMap="BaseResultMap">
+    	select * from PRODUCT  where  VERSION = 'STAGING' and DELIVERY_FEE_PRODUCT_IND!='Y' and SUPPLIER_CODE =
+    	#{supplierCode,jdbcType=VARCHAR}
+    	AND  
+    	SUPPLIER_PRODUCT_CODE = #{supplierProductCode,jdbcType=VARCHAR}
+    <if test="id !=null">
+	    AND  
+		ID != #{id,jdbcType=DECIMAL}
+    </if>
+        
+  </select>
+  
+  <select id="selectProductList" resultMap="productViewList" parameterType="com.mall.b2bp.vos.product.ProductParameterVo" >
+    select 
+    <include refid="Product_View_Column_List" />
+    from PRODUCT P,  SUPPLIER SU
+    <!-- ,SYS_USER u -->
+    where 1=1 and p.DELIVERY_FEE_PRODUCT_IND!='Y' 
+    and p.VERSION='STAGING' 
+  <!--   and su.id = u.supplier_id (+)  -->
+    AND p.SUPPLIER_CODE = SU.ID (+)
+     <if test="supplierId !=null">
+		  AND  SU.ID = #{supplierId,jdbcType=DECIMAL}
+    </if>
+     <if test="supplierProductCode !=null">
+		  AND  UPPER(p.SUPPLIER_PRODUCT_CODE) like '%'||UPPER(#{supplierProductCode})||'%'
+    </if>
+     <if test="productCode !=null">
+		  AND  UPPER(p.PRODUCT_CODE) like '%'||UPPER(#{productCode})||'%'
+    </if>
+     <if test="status !=null">
+		  AND  p.STATUS IN
+           <foreach item="item" index="index" collection="status" open="(" separator="," close=")">
+           #{item}
+           </foreach>
+    </if>
+     <if test="shortDescEn !=null">
+		  AND  p.SHORT_DESC_EN like '%'||#{shortDescEn}||'%'
+    </if>
+     <if test="deliveryMode !=null">
+		  AND  p.DELIVERY_MODE in
+		   <foreach item="item" index="index" collection="deliveryMode" open="(" separator="," close=")">
+           #{item}
+           </foreach>
+    </if>
+    
+    <if test="supplier !=null">
+        and p.SUPPLIER_CODE in 
+
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+
+        </if>
+        <if test="onlineUpdatedInd !=null">
+        and p.ONLINE_UPDATED_IND = #{onlineUpdatedInd}
+        </if>
+     order by   p.SUPPLIER_PRODUCT_CODE asc
+  </select>
+  
+    <select id="getSubProductListByBaseProductId" resultMap="SubProductResultMap" parameterType="String" >
+    select 
+    <include refid="Sub_Product_Column_List" />
+    from PRODUCT
+    where  VERSION = 'STAGING' and BASE_PRODUCT_ID = #{baseProductId,jdbcType=VARCHAR} Or ID = #{baseProductId,jdbcType=VARCHAR} 
+    and DELIVERY_FEE_PRODUCT_IND!='Y'
+    order by   ID asc
+  </select>
+  
+  <select id="getProductInfoModelByProductCode" resultMap="BaseResultMap" parameterType="java.util.Map">
+     select * from PRODUCT  where  VERSION = #{version,jdbcType=VARCHAR} and PRODUCT_CODE = #{productCode,jdbcType=VARCHAR}
+     <if test="supplierProductCode !=null">
+     	and supplier_product_code = #{supplierProductCode,jdbcType=VARCHAR}
+     </if>
+     and DELIVERY_FEE_PRODUCT_IND!='Y'
+     and rownum = 1
+  </select>
+  
+  <select id="getExportProducts" resultMap="BaseResultMap">
+  	<![CDATA[
+     select * from PRODUCT  where  VERSION = 'STAGING' and STATUS in ('APPROVED', 'AUTO_APPROVED') and (LAST_EXPORTED_DATE IS NULL OR LAST_EXPORTED_DATE < LAST_APPROVAL_DATE)
+     and DELIVERY_FEE_PRODUCT_IND!='Y'
+     ]]>
+  </select>
+
+
+
+    <update id="editSettingSyncProduct" parameterType="com.mall.b2bp.models.product.ProductInfoModel" >
+        <![CDATA[  update PRODUCT T
+        set
+
+
+ 		SUPPLIER_LEAD_TIME = DECODE(T.DELIVERY_MODE ,'W', #{supplierLeadTime,jdbcType=DECIMAL},T.SUPPLIER_LEAD_TIME),
+        MIN_DELIVER_DATE = DECODE(T.DELIVERY_MODE ,'D', #{minDeliverDate,jdbcType=DECIMAL},T.MIN_DELIVER_DATE),
+        MAX_DELIVER_DATE =DECODE(T.DELIVERY_MODE ,'D',  #{maxDeliverDate,jdbcType=DECIMAL},T.MAX_DELIVER_DATE),
+        
+     
+
+        STATUS =
+        ( CASE
+        WHEN STATUS<>'SUBMIT_FOR_APPROVAL' AND STATUS<>'DRAFT'  THEN 'DRAFT'
+
+        ELSE STATUS
+        END),
+
+        SUPPLIER_PROFILE_UPDATE_IND = #{supplierProfileUpdateInd,jdbcType=VARCHAR},
+
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+        LAST_UPDATED_DATE = #{lastUpdatedDate}
+
+        where supplier_code = #{supplierCode,jdbcType=VARCHAR}
+         and DELIVERY_FEE_PRODUCT_IND!='Y'
+        
+         and T.DELIVERY_MODE IN ('W','D')
+         ]]>
+    </update>
+    
+     <select id="getProductInfoModelBySupplierId" resultMap="BaseResultMap" parameterType="String">
+     select * from PRODUCT  where SUPPLIER_CODE =
+    	#{supplierCode,jdbcType=VARCHAR}  and DELIVERY_FEE_PRODUCT_IND!='Y'
+  	</select>
+   
+   <select id="getProductBySkuAndVersion" resultType="com.mall.b2bp.models.product.ProductInfoModel"  parameterType="java.util.Map">
+   	select p.* from PRODUCT p ,PRODUCT_barcode  b
+	where p.id = b.product_id and p.PRODUCT_CODE = #{productCode,jdbcType=VARCHAR} and p.VERSION = #{version,jdbcType=VARCHAR}
+	and p.DELIVERY_FEE_PRODUCT_IND!='Y'
+   </select>
+   
+    <select id="getSupplierProductInfoModelBySupplierId" resultMap="BaseResultMap" parameterType="String">
+     select * from PRODUCT  where SUPPLIER_CODE =
+    	#{supplierCode,jdbcType=VARCHAR}  and DELIVERY_FEE_PRODUCT_IND ='Y'
+  	</select>
+   
+   
+  <select id="getProductByVpn" resultMap="BaseResultMap" parameterType="java.util.Map">
+     select * from PRODUCT  where  VERSION = #{version,jdbcType=VARCHAR} and SUPPLIER_PRODUCT_CODE = #{supplierProductCode,jdbcType=VARCHAR}
+     and DELIVERY_FEE_PRODUCT_IND!='Y'
+  </select>
+
+
+</mapper>

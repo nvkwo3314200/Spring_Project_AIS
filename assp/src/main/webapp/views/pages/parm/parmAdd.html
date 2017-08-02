@@ -1,0 +1,146 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{'sys_parm'|translate}} {{state?'sys_button_view':'sys_label_add_edit'|translate}}</h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="alert.close($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					
+					<div class="row">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'mall'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" ng-model="parmVo.mallId"  required="required"
+								ng-options="item.id as item.name for item in mallVoList"
+								ng-disabled="isEdit || state">
+								<option></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="parmVo.mallId==null && isSaveCk">
+								{{'mall'|translate}}{{'is_required'|translate}}
+							</span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'parm_segment'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="20"
+								 placeholder="{{'parm_segment'|translate}}"
+								required
+								ng-model="parmVo.segment"
+								ng-disabled="isEdit || state">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="parmVo.segment==null && isSaveCk">
+								{{'parm_segment'|translate}}{{'is_required'|translate}}
+							</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'parm_code'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="50"
+								 placeholder="{{'parm_code'|translate}}"
+								required
+								ng-model="parmVo.code" ng-disabled="state">
+						</div>
+					</div>
+					<div class="row" >
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="parmVo.code==null && isSaveCk">
+								{{'parm_code'|translate}}{{'is_required'|translate}}
+							</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label">{{'parm_short_desc'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="200"
+								 placeholder="{{'parm_short_desc'|translate}}"
+								required
+								ng-model="parmVo.shortDesc" ng-disabled="state">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label">{{'parm_long_desc'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="200"
+								 placeholder="{{'parm_long_desc'|translate}}"
+								required
+								ng-model="parmVo.longDesc" ng-disabled="state">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label">{{'parm_value'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="200"
+								 placeholder="{{'parm_value'|translate}}"
+								required
+								ng-model="parmVo.value" ng-disabled="state">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 required">
+							<label class="control-label">{{'parm_seq'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="3"
+								 placeholder="{{'parm_seq'|translate}}"
+								required
+								ng-keyup="autoCheck(parmVo, 'dispSeq');"
+								ng-blur="autoCheck(parmVo, 'dispSeq');"
+								ng-model="parmVo.dispSeq" ng-disabled="state">
+						</div>
+					</div>
+					<div class="row" >
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="parmVo.dispSeq==null && isSaveCk">
+								{{'parm_seq'|translate}}{{'is_required'|translate}}
+							</span>
+						</div>
+					</div>
+					
+				<div class="row">
+					<div class="col-md-12 text-right">
+						<button type="button" class="btn btn-primary"  ng-if="!state"
+							ng-click="save()">{{'sys_button_save'|translate}}</button>
+						<button type="button" class="btn btn-primary" ng-click="cancel()">{{'sys_button_cancel'|translate}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+

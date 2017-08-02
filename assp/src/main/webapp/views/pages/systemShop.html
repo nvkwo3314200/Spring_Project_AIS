@@ -1,0 +1,219 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		{{'system_shop' | translate}}
+	</h1>
+
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+
+ 				<div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+						<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">{{'system_shop_id' | translate}}</label>
+							</div>
+
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.shopCode" maxlength="50">
+							</div>
+
+							<div class="col-md-1">
+								<label class="control-label">{{'system_shop_name' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.shopName" maxlength="50">
+							</div>
+
+						</div>
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'system_shop_principal' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.respPerson" maxlength="50">
+							</div>
+
+
+
+							<div class="col-md-1">
+								<label class="control-label">{{'system_shop_contact' | translate}}</label>
+							</div>
+
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.contactPerson" maxlength="50">
+							</div>
+						</div>
+
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'system_contact_email' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.contactEmail" maxlength="50">
+							</div>
+							<div class="col-md-1">
+								<label class="control-label">{{'system_shop_website_name' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.websiteName" maxlength="50">
+							</div>
+						</div>
+						<br />
+						<div class="row">
+
+							<div class="col-md-2">
+								<label class="control-label">{{'system_shop_phone' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " ng-model="searchmodel.telNo" maxlength="50"	>
+							</div>
+							<div class="col-md-4"></div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-primary" ng-if="powers.search"
+									ng-click="search()">{{'user_search' |
+									translate}}</button>
+							</div>
+						</div>
+						<br />
+						
+						<!-- 
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<button type="button" class="btn btn-primary"
+									 ng-click="addShop()">
+									{{'product_add'| translate}}
+							    </button>
+								<button type="button" class="btn btn-primary"
+									 ng-click="editShop()">
+									{{'product_edit'| translate}}
+							    </button>
+								<button type="button" class="btn btn-primary"
+									 ng-click="deleteShop()">
+									{{'product_delete'| translate}}
+								</button>
+						    </div>
+						</div>
+						 -->
+						<div class="row">
+							<div class="col-md-12">
+								<button type="button" class="btn btn-primary"  ng-if="powers.create"
+								 ng-click="addShop()"> {{'sys_button_add'|translate}}</button>
+								<button type="button" class="btn btn-primary" ng-if="powers.update" 
+								ng-click="editShop()">{{'sys_button_edit'|translate}}</button>
+								<button type="button" class="btn btn-primary" ng-if="powers.delete"
+									ng-click="deleteShop()">{{'sys_button_delete'|translate}}</button>
+								<button type="button" class="btn btn-primary"	ng-if="powers.audit"
+								 	ng-click="auditTrail()">{{'sys_button_audit'|translate}}</button>
+								 <button type="button" class="btn btn-primary" ng-if="powers.view"
+								 	ng-click="view()">{{'sys_button_view'|translate}}</button>
+							</div>
+						</div>
+						</br>
+						
+						<div class="table-responsive">
+						<table st-table="tableData"
+							class="table table-bordered table-hover smart-table">
+							<thead>
+								<tr>
+									<th row-select-all="tableData" selected="selected"
+										ng-click="selectAll(tableData)"></th>
+									<th st-sort="shopCode">{{'system_shop_id' | translate}}</th>
+									<th st-sort="shopName">{{'system_shop_name' | translate}}</th>
+									<th st-sort="respPerson">{{'system_shop_principal' | translate}}</th>
+									<th st-sort="contactPerson">{{'system_shop_contact' | translate}}</th>
+									<th st-sort="contactEmail">{{'system_contact_email' |translate}}</th>
+									<th st-sort="websiteName">{{'system_shop_website_name' | translate}}</th>
+									<th st-sort="telNo">{{'system_shop_phone' |translate}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="row in tableData" id="tr{{row.id}}" ng-dblclick="select1(row)" ng-click="select(row)">
+									<td row-select="row"></td>
+									<td>{{row.shopCode}}</td>
+									<td>{{row.shopName}}</td>
+									<td>{{row.respPerson}}</td>
+									<td>{{row.contactPerson}}</td>
+									<td>{{row.contactEmail}}</td>
+									<td>{{row.websiteName}}</td>
+									<td>{{row.telNo}}</td>
+								</tr>							
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="8" class="text-center">
+										<sys-pagination/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+						<!-- 
+						<div class="table-responsive">
+							<table st-table="vm.data" st-safe-src="vm.rowCollection"
+								class="table table-bordered table-hover smart-table">
+								<thead>
+									<tr  class="table-header ">
+										<th row-select-all="vm.data" selected="vm.selected"
+											ng-click="vm.selectAll(vm.data)"></th>
+										<th ng-hide='true'></th>
+										<th st-sort="shopCode">{{'system_shop_id' | translate}}</th>
+										<th st-sort="shopName">{{'system_shop_name' | translate}}</th>
+										<th st-sort="respPerson">{{'system_shop_principal' | translate}}</th>
+										<th st-sort="contactPerson">{{'system_shop_contact' | translate}}</th>
+										<th st-sort="contactEmail">{{'system_contact_email' |translate}}</th>
+										<th st-sort="websiteName">{{'system_shop_website_name' | translate}}</th>
+										<th st-sort="telNo">{{'system_shop_phone' |translate}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in vm.data"  id="tr{{row.id}}"  ng-click="vm.select(row)" >
+										<td row-select="row" ></td>
+										<td ng-hide='true'>{{row.id}}</td>
+										<td>{{row.shopCode}}</td>
+										<td>{{row.shopName}}</td>
+										<td>{{row.respPerson}}</td>
+										<td>{{row.contactPerson}}</td>
+										<td>{{row.contactEmail}}</td>
+										<td>{{row.websiteName}}</td>
+										<td>{{row.telNo}}</td>
+									</tr>
+								<tfoot>
+									<tr>
+										<td colspan="8" class="text-center">
+											<div st-items-by-page="page" st-pagination=""
+												st-template="./views/pages/pagination_custom.html">
+												</div>
+													<div ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                                    			<input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+										</td>
+									</tr>
+								</tfoot>
+								</tbody>
+							</table>
+						</div>
+						 -->
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+</section>

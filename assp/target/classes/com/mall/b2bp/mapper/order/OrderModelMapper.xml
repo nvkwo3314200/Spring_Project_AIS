@@ -1,0 +1,1326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.order.OrderModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.order.OrderModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="HYBRIS_ORDER_ID" property="hybrisOrderId" jdbcType="VARCHAR" />
+    <result column="ORDER_DATETIME" property="orderDatetime" jdbcType="DATE" />
+    <result column="PICK_STORE" property="pickStore" jdbcType="DECIMAL" />
+    <result column="PICK_TYPE" property="pickType" jdbcType="VARCHAR" />
+    <result column="SPECIAL_INSTRUCTION" property="specialInstruction" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_ID" property="customerId" jdbcType="DECIMAL" />
+    <result column="CUSTOMER_TYPE" property="customerType" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_PHONE_NO" property="customerPhoneNo" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_MOBILE_NO" property="customerMobileNo" jdbcType="VARCHAR" />
+    <result column="TENDER_TYPE" property="tenderType" jdbcType="VARCHAR" />
+    <result column="PAYMENT_REF" property="paymentRef" jdbcType="VARCHAR" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="SURCHARGE" property="surcharge" jdbcType="DECIMAL" />
+    <result column="DELIVERY_FEE" property="deliveryFee" jdbcType="DECIMAL" />
+    <result column="DELIVERY_DATE" property="deliveryDate" jdbcType="DATE" />
+    <result column="DELIVERY_TIMESLOT" property="deliveryTimeslot" jdbcType="VARCHAR" />
+    <result column="SHIP_DISTRICT" property="shipDistrict" jdbcType="VARCHAR" />
+    <result column="RECEIVER_NAME" property="receiverName" jdbcType="VARCHAR" />
+    <result column="RECEIVER_PHONE_NO" property="receiverPhoneNo" jdbcType="VARCHAR" />
+    <result column="RECEIVER_MOBILE_NO" property="receiverMobileNo" jdbcType="VARCHAR" />
+    <result column="DELIVERY_ADDRESS" property="deliveryAddress" jdbcType="VARCHAR" />
+    <result column="SHOW_PRICE" property="showPrice" jdbcType="VARCHAR" />
+    <result column="INVOICE_FILENAME" property="invoiceFilename" jdbcType="VARCHAR" />
+    <result column="DN_FILENAME" property="dnFilename" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="PICK_ORDER_ID" property="pickOrderId" jdbcType="VARCHAR" />
+    <!--<result column="CONSIGNMENT_STATUS" property="consignmentStatus" jdbcType="VARCHAR" />-->
+    <result column="SHIPPED_DATE" property="consignmentShippedDate" jdbcType="DATE" />
+    <result column="PICK_DATE" property="pickDate" jdbcType="DATE" />
+    <result column="TRACK_ID" property="trackId" jdbcType="VARCHAR" />
+    <result column="BOX_NUM" property="boxNum" jdbcType="VARCHAR" />
+    <result column="DELIVERY_SUCCESS" property="deliverySuccess" jdbcType="VARCHAR" />
+    <result column="INVOICE_READY_IND" property="invoiceReadyInd" jdbcType="VARCHAR" />
+      <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR"/>
+    <result column="RETURN_EQUEST" property="returnRequest" jdbcType="VARCHAR"/>
+    <result column="PICKED_IND" property="pickedInd" jdbcType="VARCHAR"/>
+    <result column="SHIPPED_IND" property="shippedInd" jdbcType="VARCHAR"/>
+    <result column="DELIVERY_IND" property="deliveryInd" jdbcType="VARCHAR"/>
+    <result column="EXTERNAL_ORDER_ID" property="externalOrderId" jdbcType="VARCHAR"/>
+    <result column="EXTERNAL_LOGISTIC_CODE" property="externalLogisticCode" jdbcType="VARCHAR"/>
+    <result column="DELIVERY_POSTAL_CODE" property="deliveryPostalCode" jdbcType="VARCHAR"/>
+    <result column="DC_REFERENCE_CODE" property="dcReferenceCode" jdbcType="VARCHAR"/>
+    <result column="DC_ADDRESS" property="dcAddress" jdbcType="VARCHAR"/>
+    <result column="ORIG_ORDER_ID" property="origOrderId" jdbcType="DECIMAL"/>
+    <result column="REPLACE_ORDER_IND" property="replaceOrderInd" jdbcType="VARCHAR"/>
+
+
+  </resultMap>
+  
+  <resultMap id="HybrisOrderResultMap" type="com.mall.b2bp.models.order.OrderModel" > 
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="pick_order_id" property="pickOrderId" jdbcType="VARCHAR" />
+   </resultMap>
+
+
+    <resultMap id="ViewOrderResultMap" type="com.mall.b2bp.models.order.OrderModel" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="HYBRIS_ORDER_ID" property="hybrisOrderId" jdbcType="VARCHAR" />
+        <result column="ORDER_DATETIME" property="orderDatetime" jdbcType="DATE" />
+        <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+        <result column="SU_NAME" property="supplierName" jdbcType="DECIMAL" />
+        <result column="PICK_ORDER_ID" property="pickOrderId" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <!--<result column="CONSIGNMENT_STATUS" property="consignmentStatus" jdbcType="VARCHAR" />-->
+        <result column="SHIPPED_DATE" property="consignmentShippedDate" jdbcType="DATE" />
+        <result column="DELIVERY_DATE" property="deliveryDate" jdbcType="DATE" />
+
+        <result column="PICK_DATE" property="pickDate" jdbcType="DATE" />
+        <result column="TRACK_ID" property="trackId" jdbcType="VARCHAR" />
+        <result column="BOX_NUM" property="boxNum" jdbcType="VARCHAR" />
+        <result column="DELIVERY_SUCCESS" property="deliverySuccess" jdbcType="VARCHAR" />
+        <result column="INVOICE_READY_IND" property="invoiceReadyInd" jdbcType="VARCHAR" />
+        <result column="INVOICE_FILENAME" property="invoiceFilename" jdbcType="VARCHAR" />
+        <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR"/>
+        <result column="RETURN_EQUEST" property="returnRequest" jdbcType="VARCHAR"/>
+        
+        <result column="sizeWaitReturn" property="sizeWaitReturn" jdbcType="DECIMAL" />
+        <result column="totalRetrnRequest" property="totalRetrnRequest" jdbcType="DECIMAL" />
+        <result column="return_request_outstanding" property="outstandingReturnRequest" jdbcType="VARCHAR" />
+        <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    ID, HYBRIS_ORDER_ID, ORDER_DATETIME, PICK_STORE, PICK_TYPE, SPECIAL_INSTRUCTION, 
+    SUPPLIER_ID, CUSTOMER_ID, CUSTOMER_TYPE, CUSTOMER_NAME, CUSTOMER_PHONE_NO, CUSTOMER_MOBILE_NO, 
+    TENDER_TYPE, PAYMENT_REF, TOTAL_AMOUNT, SURCHARGE, DELIVERY_FEE, DELIVERY_DATE, DELIVERY_TIMESLOT, 
+    SHIP_DISTRICT, RECEIVER_NAME, RECEIVER_PHONE_NO, RECEIVER_MOBILE_NO, DELIVERY_ADDRESS, 
+    SHOW_PRICE, INVOICE_FILENAME, DN_FILENAME, REMARK, STATUS, CREATED_BY, CREATED_DATE, 
+    LAST_UPDATED_BY, LAST_UPDATED_DATE, PICK_ORDER_ID,  SHIPPED_DATE,
+    TRACK_ID,BOX_NUM,DELIVERY_SUCCESS,PICK_DATE,INVOICE_READY_IND,INVOICE_FILENAME,ORDER_TYPE,RETURN_EQUEST,
+    PICKED_IND,SHIPPED_IND,DELIVERY_IND,ORIG_ORDER_ID,REPLACE_ORDER_IND
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+    <select id="selectByOrderHome" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from PSSP_ORDER T
+        where
+        ( T.PICKED_IND = 'Y' OR T.SHIPPED_IND = 'Y' OR T.DELIVERY_IND = 'Y')
+        AND T.STATUS IN ('PICKED', 'SHIPPED','DELIVERY_FAILURE','DELIVERY_CONFIRMED')
+    </select>
+    
+    <select id="getOrderConsignmentID" resultMap="HybrisOrderResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+        select distinct o.pick_order_id,o.id
+		  from PSSP_ORDER o, pssp_order_entry oe 
+		 where o.id = oe.order_id
+		   and o.hybris_order_id = #{orderId}
+		   and oe.supplier_id = #{supplierId}
+    </select>
+    
+    <select id="getOrderByidAndskuId" resultMap="HybrisOrderResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+        select distinct o.pick_order_id,o.id
+		  from PSSP_ORDER o, pssp_order_entry oe
+		 where o.id = oe.order_id
+		   and o.hybris_order_id = #{orderId}
+		   and oe.sku_id = #{skuId,jdbcType=VARCHAR}
+    </select>
+    
+  
+    <select id="selectByHybrisOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    	select 
+    <include refid="Base_Column_List" />
+    	from PSSP_ORDER
+    where hybris_order_id = #{hybrisOrderId}
+  </select>
+  
+
+
+<select id="viewOrderList" resultMap="ViewOrderResultMap"
+	parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+
+	select temp.*,temp.totalRetrnRequest||'('|| temp.sizeWaitReturn||')'
+	return_request_outstanding
+	from(
+	SELECT O.ID,O.HYBRIS_ORDER_ID,O.SUPPLIER_ID, o.CUSTOMER_NAME,
+
+
+	(select u.user_name
+	FROM PSSP_USER u
+	where u.supplier_id = o.supplier_id) SU_NAME,
+
+	O.PICK_ORDER_ID,O.STATUS,
+	O.ORDER_DATETIME,O.SHIPPED_DATE,O.DELIVERY_DATE,
+	O.TRACK_ID,O.BOX_NUM,O.DELIVERY_SUCCESS,O.PICK_DATE,O.INVOICE_READY_IND,O.INVOICE_FILENAME,O.ORDER_TYPE,O.RETURN_EQUEST,
+
+	(SELECT COUNT(1)
+	FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER PO
+	WHERE ORN.ORDER_ID = PO.ID
+	AND ORN.RETURN_REQUEST_STATUS = 'WAIT_RETURN'
+	AND PO.ID = O.ID
+	AND PO.ORDER_TYPE = 'SUPPLIER_DIRECT_DELIVERY'
+                   
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) sizeWaitReturn,
+               
+               
+               (SELECT COUNT(1)
+                  FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER PO
+                 WHERE ORN.ORDER_ID = PO.ID
+                   AND PO.ID = O.ID
+                   AND PO.ORDER_TYPE = 'SUPPLIER_DIRECT_DELIVERY'
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) totalRetrnRequest
+    FROM PSSP_ORDER O
+      
+ WHERE 1 = 1
+ 
+        <if test="orderId != null and orderId != ''" >
+          AND o.hybris_order_id  like #{orderId}||'%'
+        </if>
+
+        <if test="pickOrderId != null and pickOrderId != ''" >
+            AND o.PICK_ORDER_ID  LIKE #{pickOrderId}||'%'
+        </if>
+
+        <if test="orderStatus!= null and orderStatus.length>0" >
+            AND o.status  IN
+            <foreach item="item" index="index" collection="orderStatus" open="(" separator="," close=")">
+            #{item}
+            </foreach>
+        </if>
+   
+    <if test="orderType=='C'.toString()">
+        AND o.ORDER_TYPE in ('CONSIGNMENT_VIA_WAREHOUSE','CONSIGNMENT') 
+    </if>
+    
+    <if test="orderType=='S'.toString()">
+        AND o.ORDER_TYPE = 'SUPPLIER_DIRECT_DELIVERY'
+    </if>
+    
+
+    <if test="invoiceReadyInd != null and invoiceReadyInd != ''">
+        AND o.INVOICE_READY_IND = #{invoiceReadyInd}
+    </if>
+
+        <if test="orderDateFr !=null">
+            AND to_char(o.order_datetime,'yyyyMMdd') >= to_char(#{orderDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="orderDateTo !=null">
+            AND to_char(#{orderDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(o.order_datetime,'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateFr !=null">
+            AND to_char(o.shipped_date,'yyyyMMdd')  >= to_char(#{shippedDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateTo !=null">
+            AND to_char(#{shippedDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(o.shipped_date,'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateFr !=null">
+            AND to_char(o.delivery_date,'yyyyMMdd')  >= to_char(#{deliveryDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateTo !=null">
+            AND to_char(#{deliveryDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(o.delivery_date,'yyyyMMdd')
+        </if>
+
+        <if test="supplier !=null and supplier.length>0">
+        and exists (select 1
+                  from PSSP_ORDER_ENTRY oe
+                   where  o.id = oe.order_id
+                    and oe.supplier_id in
+
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    )
+        </if>
+
+            ) temp where 1 = 1
+
+		
+        
+        <if test="returnRequest =='Y'.toString()">
+           <![CDATA[ and sizeWaitReturn  >0 ]]>
+        </if>
+        
+        
+        <if test="returnRequest =='N'.toString()">
+           <![CDATA[ and sizeWaitReturn  <=0 ]]>
+        </if>
+        
+        <if test="customerName != null and customerName != ''" >
+         	and UPPER(CUSTOMER_NAME) like '%'||UPPER(#{customerName,jdbcType=VARCHAR})||'%'         
+         </if>
+      
+       
+	order by hybris_order_id
+    </select>
+
+
+
+    <resultMap id="ExportOrderResultMap" type="com.mall.b2bp.models.order.OrderExportModel" >
+        <id column="ID" property="id" jdbcType="DECIMAL" />
+        <result column="HYBRIS_ORDER_ID" property="hybrisOrderId" jdbcType="VARCHAR" />
+        <result column="PICK_ORDER_ID" property="pickOrderId" jdbcType="VARCHAR" />
+        <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+        <result column="receiver_phone_no" property="receiverPhoneNo" jdbcType="VARCHAR" />
+        <result column="receiver_mobile_no" property="receiverMobileNo" jdbcType="VARCHAR" />
+        <result column="delivery_address" property="deliveryAddress" jdbcType="VARCHAR" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="customer_phone_no" property="customerPhoneNo" jdbcType="VARCHAR" />
+        <result column="customer_mobile_no" property="customerMobileNo" jdbcType="VARCHAR" />
+        <result column="ORDER_DATETIME" property="orderDatetime" jdbcType="DATE" />
+        <result column="SHIPPED_DATE" property="consignmentShippedDate" jdbcType="DATE" />
+        <result column="DELIVERY_DATE" property="deliveryDate" jdbcType="DATE" />
+        
+        <result column="sku_id" property="skuId" jdbcType="VARCHAR" />
+        <result column="supplier_product_code" property="supplierProductCode" jdbcType="VARCHAR" />
+        <result column="brand_sec" property="brandSec" jdbcType="VARCHAR" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="size_desc" property="sizeDesc" jdbcType="VARCHAR" />
+        <result column="qty" property="qty" jdbcType="DECIMAL" />
+        <result column="picked_qty" property="pickedQty" jdbcType="DECIMAL" />
+        <result column="delivery_qty" property="shippedQty" jdbcType="DECIMAL" />
+        <result column="returned_qty" property="refundedQty" jdbcType="DECIMAL" />
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    </resultMap>
+    
+<select id="exportOrderList" resultMap="ExportOrderResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo" >
+select temp.*,temp.totalRetrnRequest||'('|| temp.sizeWaitReturn||')' return_request_outstanding 
+from (
+select  po.hybris_order_id,po.pick_order_id,po.order_type,po.status,po.receiver_name,po.receiver_phone_no,
+po.receiver_mobile_no,po.delivery_address,po.customer_name,po.customer_phone_no,po.customer_mobile_no,
+po.order_datetime,po.shipped_date,po.delivery_date,pe.sku_id,pp.supplier_product_code,pe.brand_sec,pe.product_name,
+pe.size_desc,pe.qty,pe.picked_qty,pe.DELIVERY_QTY,pe.RETURNED_QTY, pe.unit_price,
+    (SELECT COUNT(1)
+                  FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER POT
+                 WHERE ORN.ORDER_ID = POT.ID
+                   AND ORN.RETURN_REQUEST_STATUS = 'WAIT_RETURN'
+                   AND POT.ID = po.ID
+                   
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) sizeWaitReturn,
+               
+               
+               (SELECT COUNT(1)
+                  FROM PSSP_ORDER_RETURN ORN, PSSP_ORDER POT
+                 WHERE ORN.ORDER_ID = POT.ID
+                   AND POT.ID = po.ID
+                   <if test="supplier !=null and supplier.length>0">
+                    and ORN.supplier_id in
+                        <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+        			</if>
+                   ) totalRetrnRequest
+                   
+from pssp_order po,pssp_order_entry pe, (select * from PRODUCT where version = 'ONLINE') pp 
+ WHERE po.id=pe.order_id 
+   AND pe.sku_id=pp.product_code(+)
+
+        <if test="orderId != null and orderId != ''" >
+          AND po.hybris_order_id  like #{orderId}||'%'
+        </if>
+
+        <if test="pickOrderId != null and pickOrderId != ''" >
+            AND po.PICK_ORDER_ID  LIKE #{pickOrderId}||'%'
+        </if>
+
+        <if test="orderStatus!= null and orderStatus.length>0" >
+            AND po.status  IN
+            <foreach item="item" index="index" collection="orderStatus" open="(" separator="," close=")">
+            #{item}
+            </foreach>
+        </if>
+
+    <if test="orderType=='C'.toString()">
+        AND po.ORDER_TYPE in ('CONSIGNMENT_VIA_WAREHOUSE','CONSIGNMENT') 
+    </if>
+    
+    <if test="orderType=='S'.toString()">
+        AND po.ORDER_TYPE = 'SUPPLIER_DIRECT_DELIVERY'
+    </if>
+
+    <if test="invoiceReadyInd != null and invoiceReadyInd != ''">
+        AND po.INVOICE_READY_IND = #{invoiceReadyInd}
+    </if>
+
+ 
+        <if test="orderDateFr !=null">
+            AND to_char(po.order_datetime,'yyyyMMdd') >= to_char(#{orderDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="orderDateTo !=null">
+            AND to_char(#{orderDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.order_datetime,'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateFr !=null">
+            AND to_char(po.shipped_date,'yyyyMMdd')  >= to_char(#{shippedDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="shippedDateTo !=null">
+            AND to_char(#{shippedDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.shipped_date,'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateFr !=null">
+            AND to_char(po.delivery_date,'yyyyMMdd')  >= to_char(#{deliveryDateFr,jdbcType=DATE},'yyyyMMdd')
+        </if>
+
+        <if test="deliveryDateTo !=null">
+            AND to_char(#{deliveryDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(po.delivery_date,'yyyyMMdd')
+        </if>
+
+        <if test="supplier !=null and supplier.length>0">
+            and pe.supplier_id in
+
+                <foreach item="item" index="index" collection="supplier" open="(" separator="," close=")">
+                    #{item}
+                </foreach>             
+        </if>
+) temp where 1=1
+
+        <if test="returnRequest =='Y'.toString()">
+           <![CDATA[ and sizeWaitReturn  >0 ]]>
+        </if>
+        
+        
+        <if test="returnRequest =='N'.toString()">
+           <![CDATA[ and sizeWaitReturn  <=0 ]]>
+        </if>
+        
+    order by hybris_order_id,pick_order_id,sku_id
+    </select>
+    
+   
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_ORDER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+<!--   <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderModel" >
+    insert into PSSP_ORDER (ID, HYBRIS_ORDER_ID, ORDER_DATETIME, 
+      PICK_STORE, PICK_TYPE, SPECIAL_INSTRUCTION, 
+      SUPPLIER_ID, CUSTOMER_ID, CUSTOMER_TYPE, 
+      CUSTOMER_NAME, CUSTOMER_PHONE_NO, CUSTOMER_MOBILE_NO, 
+      TENDER_TYPE, PAYMENT_REF, TOTAL_AMOUNT, 
+      SURCHARGE, DELIVERY_FEE, DELIVERY_DATE, 
+      DELIVERY_TIMESLOT, SHIP_DISTRICT, RECEIVER_NAME, 
+      RECEIVER_PHONE_NO, RECEIVER_MOBILE_NO, DELIVERY_ADDRESS, 
+      SHOW_PRICE, INVOICE_FILENAME, DN_FILENAME, 
+      REMARK, STATUS, CREATED_BY, 
+      CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, 
+      PICK_ORDER_ID, SHIPPED_DATE,
+      TRACK_ID,BOX_NUM,DELIVERY_SUCCESS,PICK_DATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{hybrisOrderId,jdbcType=VARCHAR}, #{orderDatetime,jdbcType=DATE}, 
+      #{pickStore,jdbcType=DECIMAL}, #{pickType,jdbcType=VARCHAR}, #{specialInstruction,jdbcType=VARCHAR}, 
+      #{supplierId,jdbcType=DECIMAL}, #{customerId,jdbcType=DECIMAL}, #{customerType,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{customerPhoneNo,jdbcType=VARCHAR}, #{customerMobileNo,jdbcType=VARCHAR}, 
+      #{tenderType,jdbcType=VARCHAR}, #{paymentRef,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{surcharge,jdbcType=DECIMAL}, #{deliveryFee,jdbcType=DECIMAL}, #{deliveryDate,jdbcType=DATE}, 
+      #{deliveryTimeslot,jdbcType=VARCHAR}, #{shipDistrict,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+      #{receiverPhoneNo,jdbcType=VARCHAR}, #{receiverMobileNo,jdbcType=VARCHAR}, #{deliveryAddress,jdbcType=VARCHAR}, 
+      #{showPrice,jdbcType=VARCHAR}, #{invoiceFilename,jdbcType=VARCHAR}, #{dnFilename,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=DATE}, 
+      #{pickOrderId,jdbcType=DECIMAL},
+        #{consignmentStatus,jdbcType=VARCHAR},
+       #{consignmentShippedDate,jdbcType=DATE},
+      #{trackId,jdbcType=VARCHAR}, #{boxNum,jdbcType=VARCHAR}, #{deliverySuccess,jdbcType=VARCHAR},
+        #{pickDate,jdbcType=DATE}
+
+      )
+  </insert> -->
+  
+   <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderModel" >
+
+    insert into PSSP_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID,
+      </if>
+      <if test="orderDatetime != null" >
+        ORDER_DATETIME,
+      </if>
+      <if test="pickStore != null" >
+        PICK_STORE,
+      </if>
+      <if test="pickType != null" >
+        PICK_TYPE,
+      </if>
+      <if test="specialInstruction != null" >
+        SPECIAL_INSTRUCTION,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="customerPhoneNo != null" >
+        CUSTOMER_PHONE_NO,
+      </if>
+      <if test="customerMobileNo != null" >
+        CUSTOMER_MOBILE_NO,
+      </if>
+      <if test="tenderType != null" >
+        TENDER_TYPE,
+      </if>
+      <if test="paymentRef != null" >
+        PAYMENT_REF,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="surcharge != null" >
+        SURCHARGE,
+      </if>
+      <if test="deliveryFee != null" >
+        DELIVERY_FEE,
+      </if>
+      <if test="deliveryDate != null" >
+        DELIVERY_DATE,
+      </if>
+      <if test="deliveryTimeslot != null" >
+        DELIVERY_TIMESLOT,
+      </if>
+      <if test="shipDistrict != null" >
+        SHIP_DISTRICT,
+      </if>
+      <if test="receiverName != null" >
+        RECEIVER_NAME,
+      </if>
+      <if test="receiverPhoneNo != null" >
+        RECEIVER_PHONE_NO,
+      </if>
+      <if test="receiverMobileNo != null" >
+        RECEIVER_MOBILE_NO,
+      </if>
+      <if test="deliveryAddress != null" >
+        DELIVERY_ADDRESS,
+      </if>
+      <if test="showPrice != null" >
+        SHOW_PRICE,
+      </if>
+      <if test="invoiceFilename != null" >
+        INVOICE_FILENAME,
+      </if>
+      <if test="dnFilename != null" >
+        DN_FILENAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="pickOrderId != null" >
+        PICK_ORDER_ID,
+      </if>
+      <!--<if test="consignmentStatus != null" >-->
+        <!--CONSIGNMENT_STATUS,-->
+      <!--</if>-->
+      <if test="consignmentShippedDate != null" >
+        SHIPPED_DATE,
+      </if>
+
+      <if test="trackId != null" >
+        TRACK_ID,
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM,
+      </if>
+      <if test="deliverySuccess != null" >
+        DELIVERY_SUCCESS,
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE,
+      </if>
+       <if test="invoiceReadyInd != null" >
+        INVOICE_READY_IND,
+      </if>
+       <if test="externalOrderId != null" >
+        EXTERNAL_ORDER_ID,
+      </if>
+       <if test="externalLogisticCode != null" >
+        EXTERNAL_LOGISTIC_CODE,
+      </if>
+       <if test="deliveryPostalCode != null" >
+        DELIVERY_POSTAL_CODE,
+      </if>
+       <if test="dcReferenceCode != null" >
+        DC_REFERENCE_CODE,
+      </if>
+       <if test="dcAddress != null" >
+        DC_ADDRESS,
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE,
+      </if>
+             <if test="replaceOrderInd != null" >
+               REPLACE_ORDER_IND,
+      </if>  
+       <if test="origOrderId != null" >
+               ORIG_ORDER_ID,
+      </if>   
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="hybrisOrderId != null" >
+        #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDatetime != null" >
+        #{orderDatetime,jdbcType=DATE},
+      </if>
+      <if test="pickStore != null" >
+        #{pickStore,jdbcType=DECIMAL},
+      </if>
+      <if test="pickType != null" >
+        #{pickType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialInstruction != null" >
+        #{specialInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhoneNo != null" >
+        #{customerPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMobileNo != null" >
+        #{customerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderType != null" >
+        #{tenderType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentRef != null" >
+        #{paymentRef,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="surcharge != null" >
+        #{surcharge,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryFee != null" >
+        #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDate != null" >
+        #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="deliveryTimeslot != null" >
+        #{deliveryTimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDistrict != null" >
+        #{shipDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhoneNo != null" >
+        #{receiverPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobileNo != null" >
+        #{receiverMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null" >
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="showPrice != null" >
+        #{showPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceFilename != null" >
+        #{invoiceFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="dnFilename != null" >
+        #{dnFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+      <if test="pickOrderId != null" >
+        #{pickOrderId,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentStatus != null" >
+        #{consignmentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentShippedDate != null" >
+        #{consignmentShippedDate,jdbcType=DATE},
+      </if>
+
+      <if test="trackId != null" >
+        #{trackId,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNum != null" >
+        #{boxNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverySuccess != null" >
+        #{deliverySuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        #{pickDate,jdbcType=DATE},
+      </if>
+ 	  <if test="invoiceReadyInd != null" >
+	#{invoiceReadyInd,jdbcType=VARCHAR},
+      </if>
+             <if test="externalOrderId != null" >
+                #{externalOrderId,jdbcType=VARCHAR},
+      </if>
+       <if test="externalLogisticCode != null" >
+                #{externalLogisticCode,jdbcType=VARCHAR},
+      </if>
+       <if test="deliveryPostalCode != null" >
+                #{deliveryPostalCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcReferenceCode != null" >
+                #{dcReferenceCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcAddress != null" >
+                #{dcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+   #{orderType,jdbcType=VARCHAR},
+      </if>      
+       <if test="replaceOrderInd != null" >
+               REPLACE_ORDER_IND =  #{replaceOrderInd,jdbcType=VARCHAR},
+      </if>  
+       <if test="origOrderId != null" >
+               ORIG_ORDER_ID =  #{origOrderId,jdbcType=DECIMAL},
+      </if>         
+    </trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.order.OrderModel" >
+
+
+      <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_ORDER_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+
+    insert into PSSP_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID,
+      </if>
+      <if test="orderDatetime != null" >
+        ORDER_DATETIME,
+      </if>
+      <if test="pickStore != null" >
+        PICK_STORE,
+      </if>
+      <if test="pickType != null" >
+        PICK_TYPE,
+      </if>
+      <if test="specialInstruction != null" >
+        SPECIAL_INSTRUCTION,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="customerPhoneNo != null" >
+        CUSTOMER_PHONE_NO,
+      </if>
+      <if test="customerMobileNo != null" >
+        CUSTOMER_MOBILE_NO,
+      </if>
+      <if test="tenderType != null" >
+        TENDER_TYPE,
+      </if>
+      <if test="paymentRef != null" >
+        PAYMENT_REF,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="surcharge != null" >
+        SURCHARGE,
+      </if>
+      <if test="deliveryFee != null" >
+        DELIVERY_FEE,
+      </if>
+      <if test="deliveryDate != null" >
+        DELIVERY_DATE,
+      </if>
+      <if test="deliveryTimeslot != null" >
+        DELIVERY_TIMESLOT,
+      </if>
+      <if test="shipDistrict != null" >
+        SHIP_DISTRICT,
+      </if>
+      <if test="receiverName != null" >
+        RECEIVER_NAME,
+      </if>
+      <if test="receiverPhoneNo != null" >
+        RECEIVER_PHONE_NO,
+      </if>
+      <if test="receiverMobileNo != null" >
+        RECEIVER_MOBILE_NO,
+      </if>
+      <if test="deliveryAddress != null" >
+        DELIVERY_ADDRESS,
+      </if>
+      <if test="showPrice != null" >
+        SHOW_PRICE,
+      </if>
+      <if test="invoiceFilename != null" >
+        INVOICE_FILENAME,
+      </if>
+      <if test="dnFilename != null" >
+        DN_FILENAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="pickOrderId != null" >
+        PICK_ORDER_ID,
+      </if>
+      <!--<if test="consignmentStatus != null" >-->
+        <!--CONSIGNMENT_STATUS,-->
+      <!--</if>-->
+      <if test="consignmentShippedDate != null" >
+        SHIPPED_DATE,
+      </if>
+
+      <if test="trackId != null" >
+        TRACK_ID,
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM,
+      </if>
+      <if test="deliverySuccess != null" >
+        DELIVERY_SUCCESS,
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE,
+      </if>
+      <if test="invoiceReadyInd != null" >
+        INVOICE_READY_IND,
+      </if>
+      <if test="externalOrderId != null" >
+        EXTERNAL_ORDER_ID,
+      </if>
+       <if test="externalLogisticCode != null" >
+        EXTERNAL_LOGISTIC_CODE,
+      </if>
+       <if test="deliveryPostalCode != null" >
+        DELIVERY_POSTAL_CODE,
+      </if>
+       <if test="dcReferenceCode != null" >
+        DC_REFERENCE_CODE,
+      </if>
+       <if test="dcAddress != null" >
+        DC_ADDRESS,
+      </if>      
+       <if test="orderType != null" >
+        ORDER_TYPE,
+      </if>
+      <if test="replaceOrderInd != null" >
+               REPLACE_ORDER_IND,
+      </if>  
+       <if test="origOrderId != null" >
+               ORIG_ORDER_ID,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="hybrisOrderId != null" >
+        #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDatetime != null" >
+        #{orderDatetime,jdbcType=DATE},
+      </if>
+      <if test="pickStore != null" >
+        #{pickStore,jdbcType=DECIMAL},
+      </if>
+      <if test="pickType != null" >
+        #{pickType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialInstruction != null" >
+        #{specialInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhoneNo != null" >
+        #{customerPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMobileNo != null" >
+        #{customerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderType != null" >
+        #{tenderType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentRef != null" >
+        #{paymentRef,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="surcharge != null" >
+        #{surcharge,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryFee != null" >
+        #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDate != null" >
+        #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="deliveryTimeslot != null" >
+        #{deliveryTimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDistrict != null" >
+        #{shipDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhoneNo != null" >
+        #{receiverPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobileNo != null" >
+        #{receiverMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null" >
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="showPrice != null" >
+        #{showPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceFilename != null" >
+        #{invoiceFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="dnFilename != null" >
+        #{dnFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+      <if test="pickOrderId != null" >
+        #{pickOrderId,jdbcType=DECIMAL},
+      </if>
+      <if test="consignmentStatus != null" >
+        #{consignmentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="consignmentShippedDate != null" >
+        #{consignmentShippedDate,jdbcType=DATE},
+      </if>
+
+      <if test="trackId != null" >
+        #{trackId,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNum != null" >
+        #{boxNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverySuccess != null" >
+        #{deliverySuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        #{pickDate,jdbcType=DATE},
+      </if>
+ 	  <if test="invoiceReadyInd != null" >
+        #{invoiceReadyInd,jdbcType=VARCHAR},
+      </if>
+      <if test="externalOrderId != null" >
+         #{externalOrderId,jdbcType=VARCHAR},
+      </if>
+       <if test="externalLogisticCode != null" >
+                #{externalLogisticCode,jdbcType=VARCHAR},
+      </if>
+       <if test="deliveryPostalCode != null" >
+                #{deliveryPostalCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcReferenceCode != null" >
+                #{dcReferenceCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcAddress != null" >
+                #{dcAddress,jdbcType=VARCHAR},
+      </if>    
+       <if test="orderType != null" >
+  			#{orderType,jdbcType=VARCHAR},
+      </if>  
+       <if test="replaceOrderInd != null" >
+                #{replaceOrderInd,jdbcType=VARCHAR},
+      </if>  
+       <if test="origOrderId != null" >
+               #{origOrderId,jdbcType=DECIMAL},
+      </if>              
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.order.OrderModel" >
+    update PSSP_ORDER
+    <set >
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDatetime != null" >
+        ORDER_DATETIME = #{orderDatetime,jdbcType=DATE},
+      </if>
+      <if test="pickStore != null" >
+        PICK_STORE = #{pickStore,jdbcType=DECIMAL},
+      </if>
+      <if test="pickType != null" >
+        PICK_TYPE = #{pickType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialInstruction != null" >
+        SPECIAL_INSTRUCTION = #{specialInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhoneNo != null" >
+        CUSTOMER_PHONE_NO = #{customerPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMobileNo != null" >
+        CUSTOMER_MOBILE_NO = #{customerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderType != null" >
+        TENDER_TYPE = #{tenderType,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentRef != null" >
+        PAYMENT_REF = #{paymentRef,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="surcharge != null" >
+        SURCHARGE = #{surcharge,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryFee != null" >
+        DELIVERY_FEE = #{deliveryFee,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDate != null" >
+        DELIVERY_DATE = #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="deliveryTimeslot != null" >
+        DELIVERY_TIMESLOT = #{deliveryTimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="shipDistrict != null" >
+        SHIP_DISTRICT = #{shipDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhoneNo != null" >
+        RECEIVER_PHONE_NO = #{receiverPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobileNo != null" >
+        RECEIVER_MOBILE_NO = #{receiverMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null" >
+        DELIVERY_ADDRESS = #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="showPrice != null" >
+        SHOW_PRICE = #{showPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceFilename != null" >
+        INVOICE_FILENAME = #{invoiceFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="dnFilename != null" >
+        DN_FILENAME = #{dnFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="pickOrderId != null" >
+        PICK_ORDER_ID = #{pickOrderId,jdbcType=VARCHAR},
+      </if>
+      <!--<if test="consignmentStatus != null" >-->
+        <!--CONSIGNMENT_STATUS = #{consignmentStatus,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      
+      <if test="consignmentShippedDate != null" >
+        SHIPPED_DATE = #{consignmentShippedDate,jdbcType=DATE},
+      </if>
+
+      <if test="trackId != null" >
+        TRACK_ID =  #{trackId,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNum != null" >
+        BOX_NUM= #{boxNum,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverySuccess != null" >
+        DELIVERY_SUCCESS =  #{deliverySuccess,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDate != null" >
+        PICK_DATE= #{pickDate,jdbcType=DATE},
+      </if>
+
+      <if test="invoiceReadyInd != null" >
+       INVOICE_READY_IND = #{invoiceReadyInd,jdbcType=VARCHAR},
+      </if>
+
+        <if test="pickedInd!= null" >
+            PICKED_IND = #{pickedInd,jdbcType=VARCHAR},
+        </if>
+
+        <if test="shippedInd != null" >
+            SHIPPED_IND = #{shippedInd,jdbcType=VARCHAR},
+        </if>
+
+        <if test="deliveryInd != null" >
+            DELIVERY_IND = #{deliveryInd,jdbcType=VARCHAR},
+        </if>
+             <if test="externalOrderId != null" >
+                EXTERNAL_ORDER_ID = #{externalOrderId,jdbcType=VARCHAR},
+      </if>
+       <if test="externalLogisticCode != null" >
+                EXTERNAL_LOGISTIC_CODE = #{externalLogisticCode,jdbcType=VARCHAR},
+      </if>
+       <if test="deliveryPostalCode != null" >
+                DELIVERY_POSTAL_CODE = #{deliveryPostalCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcReferenceCode != null" >
+               DC_REFERENCE_CODE =  #{dcReferenceCode,jdbcType=VARCHAR},
+      </if>
+       <if test="dcAddress != null" >
+               DC_ADDRESS =  #{dcAddress,jdbcType=VARCHAR},
+      </if>  
+       <if test="orderType != null" >
+               ORDER_TYPE =  #{orderType,jdbcType=VARCHAR},
+      </if>  
+       <if test="replaceOrderInd != null" >
+               REPLACE_ORDER_IND =  #{replaceOrderInd,jdbcType=VARCHAR},
+      </if>  
+       <if test="origOrderId != null" >
+               ORIG_ORDER_ID =  #{origOrderId,jdbcType=DECIMAL},
+      </if>  
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.order.OrderModel" >
+    update PSSP_ORDER
+    set HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      ORDER_DATETIME = #{orderDatetime,jdbcType=DATE},
+      PICK_STORE = #{pickStore,jdbcType=DECIMAL},
+      PICK_TYPE = #{pickType,jdbcType=VARCHAR},
+      SPECIAL_INSTRUCTION = #{specialInstruction,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL},
+      CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      CUSTOMER_PHONE_NO = #{customerPhoneNo,jdbcType=VARCHAR},
+      CUSTOMER_MOBILE_NO = #{customerMobileNo,jdbcType=VARCHAR},
+      TENDER_TYPE = #{tenderType,jdbcType=VARCHAR},
+      PAYMENT_REF = #{paymentRef,jdbcType=VARCHAR},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      SURCHARGE = #{surcharge,jdbcType=DECIMAL},
+      DELIVERY_FEE = #{deliveryFee,jdbcType=DECIMAL},
+      DELIVERY_DATE = #{deliveryDate,jdbcType=DATE},
+      DELIVERY_TIMESLOT = #{deliveryTimeslot,jdbcType=VARCHAR},
+      SHIP_DISTRICT = #{shipDistrict,jdbcType=VARCHAR},
+      RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      RECEIVER_PHONE_NO = #{receiverPhoneNo,jdbcType=VARCHAR},
+      RECEIVER_MOBILE_NO = #{receiverMobileNo,jdbcType=VARCHAR},
+      DELIVERY_ADDRESS = #{deliveryAddress,jdbcType=VARCHAR},
+      SHOW_PRICE = #{showPrice,jdbcType=VARCHAR},
+      INVOICE_FILENAME = #{invoiceFilename,jdbcType=VARCHAR},
+      DN_FILENAME = #{dnFilename,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE},
+      PICK_ORDER_ID = #{pickOrderId,jdbcType=VARCHAR},
+--       CONSIGNMENT_STATUS = #{consignmentStatus,jdbcType=VARCHAR},
+      SHIPPED_DATE = #{consignmentShippedDate,jdbcType=DATE},
+      TRACK_ID =  #{trackId,jdbcType=VARCHAR},
+    BOX_NUM= #{boxNum,jdbcType=VARCHAR},
+    DELIVERY_SUCCESS =  #{deliverySuccess,jdbcType=VARCHAR},
+    PICK_DATE =#{pickDate,jdbcType=DATE},
+    INVOICE_READY_IND = #{invoiceReadyInd,jdbcType=VARCHAR},
+    EXTERNAL_ORDER_ID = #{externalOrderId,jdbcType=VARCHAR},    
+    EXTERNAL_LOGISTIC_CODE = #{externalLogisticCode,jdbcType=VARCHAR},    
+    DELIVERY_POSTAL_CODE = #{deliveryPostalCode,jdbcType=VARCHAR},    
+    DC_REFERENCE_CODE = #{dcReferenceCode,jdbcType=VARCHAR},    
+    ORDER_TYPE = #{orderType,jdbcType=VARCHAR},    
+    REPLACE_ORDER_IND = #{replaceOrderInd,jdbcType=VARCHAR},    
+    ORIG_ORDER_ID = #{origOrderId,jdbcType=DECIMAL},
+    DC_ADDRESS = #{dcAddress,jdbcType=VARCHAR}    
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getPkId" resultType="int">
+    	 select PSSP_ORDER_SEQ.NEXTVAL FROM DUAL
+  </select>
+  
+  <select id="getOrderListByInvoiceInd" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER
+    where INVOICE_READY_IND = 'N'
+  </select>
+  
+  <select id="getOutOfDateOrderList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER
+    where INVOICE_READY_IND = 'Y' and STATUS=#{status} and (sysdate-order_datetime)>#{outOfDate}
+  </select>
+  
+  <select id="getOrderByPickOrderId" resultMap="BaseResultMap"  parameterType="String">
+     select 
+      <include refid="Base_Column_List" />
+      from pssp_order where pick_order_id = #{pickOrderId,jdbcType=VARCHAR} 
+      	AND rownum=1
+  </select>
+  
+</mapper>

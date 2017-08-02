@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.lov.LovModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.lov.LovModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="LOV_ID" property="lovId" jdbcType="DECIMAL" />
+    <result column="LOV_VALUE" property="lovValue" jdbcType="VARCHAR" />
+    <result column="LOV_DESC" property="lovDesc" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="SEQUENCE" property="sequence" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, LOV_ID, LOV_VALUE, LOV_DESC, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE,SEQUENCE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOV
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_LOV
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.lov.LovModel" >
+	insert into SYS_LOV (ID, LOV_ID, LOV_VALUE,
+	LOV_DESC, CREATED_BY, CREATED_DATE,
+	LAST_UPDATED_BY, LAST_UPDATED_DATE)
+	values (lov_seq.nextval, #{lovId,jdbcType=DECIMAL},
+	#{lovValue,jdbcType=VARCHAR},
+	#{lovDesc,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate},
+	#{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}, #{sequence,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.lov.LovModel" >
+    insert into SYS_LOV
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="lovId != null" >
+        LOV_ID,
+      </if>
+      <if test="lovValue != null" >
+        LOV_VALUE,
+      </if>
+      <if test="lovDesc != null" >
+        LOV_DESC,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="sequence != null" >
+        SEQUENCE,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        lov_seq.nextval,
+      <if test="lovId != null" >
+        #{lovId,jdbcType=DECIMAL},
+      </if>
+      <if test="lovValue != null" >
+        #{lovValue,jdbcType=VARCHAR},
+      </if>
+      <if test="lovDesc != null" >
+        #{lovDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=DECIMAL},
+      </if>    
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.lov.LovModel" >
+    update SYS_LOV
+    <set >
+      <if test="lovId != null" >
+        LOV_ID = #{lovId,jdbcType=DECIMAL},
+      </if>
+      <if test="lovValue != null" >
+        LOV_VALUE = #{lovValue,jdbcType=VARCHAR},
+      </if>
+      <if test="lovDesc != null" >
+        LOV_DESC = #{lovDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+            <if test="sequence != null" >
+        SEQUENCE = #{sequence,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.lov.LovModel" >
+    update SYS_LOV
+    set LOV_ID = #{lovId,jdbcType=DECIMAL},
+      LOV_VALUE = #{lovValue,jdbcType=VARCHAR},
+      LOV_DESC = #{lovDesc,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+         SEQUENCE = #{sequence,jdbcType=DECIMAL},
+      LAST_UPDATED_DATE = #{lastUpdatedDate}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+<select id="getLovsByLovId" parameterType="java.util.Map" resultMap="BaseResultMap">
+	   select 
+	   *
+	   from SYS_LOV
+	   where LOV_ID = #{lovId}  
+	   <if test="lovId == '789'" >
+	   order by LOV_VALUE asc
+	   </if>
+	   
+	   <if test="lovId != '789'" >
+	   order by SEQUENCE asc
+	   </if>
+  </select>
+  
+  
+  <select id="getCatBySupplierId" parameterType="java.util.Map" resultMap="BaseResultMap">
+	   select 
+	   LOV.*
+	    FROM SYS_LOV LOV ,SUPPLIER_CATEGORY SC 
+	   WHERE 
+     LOV.LOV_VALUE = SC.CATEGORY_ID(+)
+		AND      LOV.LOV_ID = '789'
+ 		<if test="supplierId != null and supplierId != ''" >
+         and SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+        </if>
+		order by LOV_VALUE asc
+  </select>
+  
+  
+
+  <select id="checkLovByCode" parameterType="java.util.Map" resultMap="BaseResultMap">
+	        select 
+ 		PU.*
+     from SYS_LOV PU
+     where PU.LOV_ID=#{lovId,jdbcType=VARCHAR} 
+     and PU.LOV_VALUE=#{lovValue,jdbcType=VARCHAR}
+  </select>  
+  
+
+  <select id="getMaxsequnence" parameterType="java.util.Map" resultType="java.lang.Long">
+	        select 
+ 		count(*)
+     from SYS_LOV PU
+     where PU.LOV_ID=#{lovId,jdbcType=VARCHAR} 
+  </select>  
+  
+  
+  <select id="getCategoryBySupplierId" parameterType="java.util.Map" resultMap="BaseResultMap">
+	        select 
+ PU.*
+     from SYS_LOV PU,SUPPLIER_CATEGORY PSC
+     where PU.LOV_ID=#{lovId,jdbcType=VARCHAR} and PU.LOV_VALUE=PSC.CATEGORY_ID
+     and PSC.SUPPLIER_ID=#{supplierId,jdbcType=VARCHAR} order by PU.LOV_DESC
+  </select>  
+  
+    <select id="getLovModelByLovIdValue" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOV
+    where LOV_ID = #{lovId,jdbcType=VARCHAR} and LOV_VALUE = #{lovValue,jdbcType=VARCHAR} 
+  </select>
+  
+   <select id="getLovModelByLovIdDesc" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOV
+    where LOV_ID = #{lovId,jdbcType=VARCHAR} and LOV_DESC = #{lovDesc,jdbcType=VARCHAR} 
+  </select>
+  
+     <select id="getLovModelByLovDesc" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOV
+    where LOV_DESC = #{lovDesc,jdbcType=VARCHAR} 
+  </select>
+  
+</mapper>

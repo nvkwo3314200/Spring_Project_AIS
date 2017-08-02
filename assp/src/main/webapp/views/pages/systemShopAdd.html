@@ -1,0 +1,76 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{isEdit? 'sys_button_edit':'sys_button_add'|translate}} {{'system_shop' | translate}}</h1>
+</section>
+<style>
+
+div.box-body {
+	margin-top: 40px;
+}
+
+input.withpoint {
+	margin-right: 20px;
+}
+
+li.active a:first-child{
+	cursor: pointer !important;
+}
+
+li.active.selected a:first-child{
+  background-color : #2152c3;
+  color : #ffffff;
+}
+
+</style>
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+
+					
+				   <a href="#"></a>
+				   <ul class="nav nav-tabs">
+				      <li class="active {{showBasicInfo? 'selected' : ''}}"><a ui-sref="main.shop_basic_info({shopId:shopId,shopName:shopName})" ><span>{{'system_shop_basic_info' | translate}}</span></a></li>
+				      <li ng-if="isEdit" class="active {{showShopIp? 'selected' : ''}}"><a ui-sref="main.shop_ip({shopId:shopId,shopName:shopName})" ><span>{{'system_shop_login_ip_restriction' | translate}}</span></a></li>
+				      <li ng-if="isEdit" class="active {{showShopUser? 'selected' : ''}}"><a ui-sref="main.shop_user({shopId:shopId,shopName:shopName})" ><span>{{'system_shop_admin_setting' | translate}}</span></a></li>
+				      <li ng-if="isEdit" class="active {{showShopCategory? 'selected' : ''}}"><a ui-sref="main.shop_category({shopId:shopId,shopName:shopName})" ><span>{{'system_shop_sell_product'| translate}}</span></a></li>
+				      <li ng-if="isEdit" class="active {{showShopContract? 'selected' : ''}}"><a ui-sref="main.shop_contract({shopId:shopId,shopName:shopName})" ><span>{{'system_shop_contract'| translate}}</span></a></li>
+				   </ul>
+				   <div class="shop_name">
+				   		{{shopName}}
+				   </div>
+				 	<div ng-if="showBasicInfo" ng-include="'views/pages/shopInfoDetail.html'"></div>
+				 	<div ng-if="showShopIp" ng-include="'views/pages/shopIpDetail.html'"></div>
+				 	<div ng-if="showShopUser" ng-include="'views/pages/shopUserDetail.html'"></div>
+				 	<div ng-if="showShopCategory" ng-include="'views/pages/shopCategoryDetail.html'"></div>
+				 	<div ng-if="showShopContract" ng-include="'views/pages/shopContractDetail.html'"></div>
+					<div ng-if="showEditContract" ng-include="'views/pages/shopContractAdd.html'"></div>
+
+					<!-- 
+					<my-pane tittle="{{'system_shop_basic_info' | translate}}">
+						<div ng-include="'views/pages/shopInfoDetail.html'"></div>
+					</my-pane>
+					<my-pane tittle="{{'system_shop_login_ip_restriction' | translate}}" ng-if="isEdit">
+						<div ng-include="'views/pages/shopIpDetail.html'"></div>
+					</my-pane> 
+					<my-pane tittle="{{'system_shop_admin_setting' | translate}}" ng-if="isEdit">
+						<div ng-include="'views/pages/shopUserDetail.html'"></div>
+					</my-pane> 
+					<my-pane tittle="{{'system_shop_sell_product'| translate}}" ng-if="isEdit">
+						<div ng-include="'views/pages/shopCategoryDetail.html'"></div>
+					</my-pane>
+					 --> 
+				</div>
+			</div>
+</section>
+</section>

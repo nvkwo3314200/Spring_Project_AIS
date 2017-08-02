@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_USER ID="10000000001157" 
+           USER_ID="ldj" 
+           USER_NAME="liangdejian"
+           PASSWORD="123456"
+		   USER_ROLE="SUPPLIER" 
+           SUPPLIER_ID="2" 
+           activate="Y"
+	       CREATED_BY="liangdejian" 
+	       CREATED_DATE="2016-03-8 00:00:00"  
+	       LAST_UPDATED_BY="liangdejian"
+		   LAST_UPDATED_DATE="2016-03-8 00:00:00"  
+		   EMAIL="ldj@aishk.com" 
+		   TOKEN="SAFSWERWWWQERWRQWERDSWERRRTRKTO" 
+		   CONTACT_NO="777777777777777" />
+</dataset>

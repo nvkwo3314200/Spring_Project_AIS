@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/pssp" reloadable="true" privileged="true">
+	<Resource name="jdbc/pssp_db" 
+		auth="Container" 
+		type="javax.sql.DataSource" 
+		username="PSSP"
+		password="PSSP" 
+		driverClassName="oracle.jdbc.driver.OracleDriver" 
+		url="jdbc:oracle:thin:@192.168.1.98:1521:orcl"   
+		maxActive="8" 
+		maxIdle="2" />
+</Context>

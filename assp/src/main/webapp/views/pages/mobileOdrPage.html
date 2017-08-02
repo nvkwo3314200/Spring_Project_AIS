@@ -1,0 +1,324 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">{{'order_view_history' |
+	translate}}</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+
+
+					<div class="row">
+						<div class="box1">
+							<label>{{'order_id' | translate}}</label>
+						</div>
+
+						<div class="box2">
+							<input class="form-control"  type="text" ng-model="orerId" maxlength="20">
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="box1">
+							<label>Delivery Status</label>
+
+						</div>
+
+						<div class="box2">
+							<select id="orderStatus_id" 
+							 class="form-control"
+								ng-model="orderstatus"
+								ng-options="op.name as op.label for op in orderstatusList"
+								>
+
+							</select>
+						</div>
+					</div>
+
+					<div class="row" ng-hide="true">
+						<div class="box1">
+							<label >{{'order_type' | translate}}</label>
+						</div>
+
+						<div class="box2">
+							<select class="form-control" ng-model="orderType"
+								ng-options="op.name as op.label for op in orderTypeList">
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="box1">
+							<label class="control-label">Customer Name</label>
+						</div>
+
+						<div class="box2">
+							<input type="text" class="form-control " maxlength="20"
+								ng-model="customerName" size="10">
+						</div>
+					</div>
+
+
+					<div class="row">
+
+						<div class="box1">
+							<label class="control-label">{{'order_create_date' | translate}}</label>
+						</div>
+
+						<div class="box2">
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="orderCreateDateFr"
+									is-open="popup1.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" placeholder="yyyyMMdd"
+									id="crfm" maxlength="20" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open1()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="box1">
+							<label class="control-label">{{'date_to' | translate}}</label>
+						</div>
+
+						<div class="box2">
+
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="orderCreateDateTo"
+									is-open="popup2.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" placeholder="yyyyMMdd"
+									id="crto" maxlength="20" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open2()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+
+					</div>
+
+					
+					<div class="row">
+						<div class="box1">
+							<label class="control-label">Collect Date</label>
+						</div>
+
+						<div class="box2">
+
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="deliveredDateFr"
+									is-open="popup5.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" placeholder="yyyyMMdd"
+									id="delfm" maxlength="20" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open5()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="box1">
+							<label class="control-label">{{'date_to' | translate}}</label>
+						</div>
+
+						<div class="box2">
+
+
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="deliveredDateTo"
+									is-open="popup6.opened" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" placeholder="yyyyMMdd"
+									id="delto" maxlength="20" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open6()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="box1">
+							<label class="control-label">Collect Method</label>
+						</div>
+
+						<div class="box2">
+							<select id="orderStatus_id"  
+							 class="form-control"
+								ng-model="collectMethod"
+								ng-options="op.name as op.label for op in collectMethodList"
+								>
+
+							</select>
+						</div>
+					</div>
+					
+					<div class="row">
+
+						<div class="col-md-12 text-right">
+							<div>
+								<div class="table_row_right">
+									<button type="button" class="btn btn-primary"
+										style="width: 120" ng-click="searchOrder()">{{'order_Search' | translate}}</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-12 text-right">
+
+							<button type="button" class="btn btn-primary" ng-click="view()"
+								style="width: 120">{{'order_view' | translate}}</button>
+<!-- 
+							<button ng-if="supplierRole && orderType!='C'" type="button"
+								class="btn btn-primary" ng-click="batchPick()"
+								style="width: 120">{{'order_batch_pick' | translate}}</button>
+ -->
+
+							<button ng-if="visible" type="button" class="btn btn-primary"
+								ng-click="batchShip()" style="width: 120">{{'order_batch_ship' | translate}}</button>
+
+
+							<button type="button" class="btn btn-primary"
+								ng-click="batchConfirmDelivery()" style="width: 120">
+								{{'order_batch_confirm_delivery' | translate}}</button>
+
+<!-- ng-click="report()" -->
+							<button ng-if="supplierRole" type="button"
+								class="btn btn-primary"  style="width: 120">
+								Order Export</button>
+
+							<button type="button" class="btn btn-primary"
+								ng-click="printPdf()" style="width: 120">Print D/N</button>
+
+
+						</div>
+					</div>
+
+
+
+
+					<div class="table-responsive">
+
+						<table wt-responsive-table st-table="vm.data"
+							st-safe-src="vm.rowCollection"
+							class="table table-bordered table-hover smart-table">
+
+							<thead>
+								<tr class="table-header ">
+									<th st-ratio="5" row-select-all="vm.data"
+										selected="vm.selected" ng-click="vm.selectAll(vm.data)"></th>
+
+									<th ng-if="visible" st-ratio="11" st-sort="supplierName">
+										{{'supplier_name' | translate}}</th>
+									<th st-ratio="10" st-sort="hybrisOrderId">{{'order_id' |translate}}</th>
+
+									<th st-ratio="5" st-sort="customerName">Customer</th>
+
+									<th st-sort="statusDesc">Order Status</th>
+									<th st-sort="statusDesc">Delivery Status</th>
+									
+									<th st-sort="orderDatetimeStr">{{'order_create_date' |translate}}</th>
+
+									<th st-sort="pickDateStr">Order Picked Date</th>
+									<th st-sort="consignmentShippedDateStr">Order Shipped Date</th>
+									 <th st-sort="deliveryDateStr">  {{'order_consignment_delivered_date' | translate}}</th>
+									<th st-sort="collectMethod">Collect Method</th>
+									<th st-sort="collectDateStr">Collect Date</th>
+									<th st-sort="trackId">Track ID</th>
+
+
+									<th>{{'return_request_outstanding' | translate}}</th>
+									<th>Delivery Note Available</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--st-select-mode="multiple"-->
+								<tr ng-repeat="row in vm.data" id="tr{{row.hybrisOrderId}}"
+									ng-click="vm.select(row)">
+									<td row-select="row"></td>
+									<td ng-if="visible">{{row.supplierName}}</td>
+
+									<td>{{row.hybrisOrderId}}</td>
+									<td>{{row.customerName}}</td>
+									<!-- {{row.entryStatus}}  -->
+									<td>
+									{{row.orderStatus  | translate}} 
+									</td>
+									<td>
+									{{row.statusDesc}} 
+									
+									<div ng-if="row.status=='NEW' && row.entryStatus!='NEW'">  ({{row.entryStatus}})</div>
+									</td>
+									<td>{{row.orderDatetimeStr}}</td>
+									<td>{{row.pickDateStr}}</td>
+									<td>{{row.consignmentShippedDateStr}}</td>
+									<td>{{row.deliveryDateStr}}</td>
+									<td>{{row.collectMethod}}</td>
+									<td>{{row.collectDateStr}}</td>
+									<td>{{row.trackId}}</td>
+									<td align="right">{{row.totalRetrnRequest}}</td>
+									<td>
+										<div ng-show="row.invoiceReadyInd == 'Y' && supplierRole">
+
+											<button type="button"
+												ng-click="singlePrintPdf(row.invoiceFilename)">
+												<img src="pssp/images/pdf.png" alt="" width="30">
+											</button>
+
+										</div>
+
+										<div ng-if="row.invoiceReadyInd == 'Y' && !supplierRole">
+											<img src="pssp/images/pdf.png" alt="" width="30">
+										</div>
+
+									</td>
+								</tr>
+							
+
+							</tbody>
+						</table>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+</section>
+

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.shop.ShopInfoModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.shop.ShopInfoModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CODE" property="shopCode" jdbcType="VARCHAR" />
+    <result column="NAME" property="shopName" jdbcType="VARCHAR" />
+    <result column="RESP_PERSON" property="respPerson" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="CONTACT_EMAIL" property="contactEmail" jdbcType="VARCHAR" />
+    <result column="TEL_NO" property="telNo" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ADDRESS2" property="address2" jdbcType="VARCHAR" />
+    <result column="ADDRESS3" property="address3" jdbcType="VARCHAR" />
+    <result column="ADDRESS4" property="address4" jdbcType="VARCHAR" />
+    <result column="CONTRACT_START_DATE" property="contractStartDate" jdbcType="DATE" />
+    <result column="CONTRACT_END_DATE" property="contractEndDate" jdbcType="DATE" />
+    <result column="WEB_SITE_NAME" property="websiteName" jdbcType="VARCHAR" />
+   	<result column="WEB_SITE_DOMAIN" property="websiteDomain" jdbcType="VARCHAR" />
+   	<result column="WEB_SITE_EMAIL_DOMAIN" property="websiteEmailDomain" jdbcType="VARCHAR" />
+   	<result column="WEB_SITE_CONTACT_EMAIL" property="websiteContactEmail" jdbcType="VARCHAR" />
+   	<result column="WEB_SITE_STATUS_REASON_ID" property="websiteStatusReasonId" jdbcType="DECIMAL" />
+   	<result column="WEB_SITE_STATUS_REASON_DESC" property="websiteStatusReasonDesc" jdbcType="VARCHAR" />
+   	<result column="LOGO_NAME" property="logoName" jdbcType="VARCHAR" />
+   	<result column="SHOP_DESC" property="shopDesc" jdbcType="CLOB" />
+   	<result column="MALL_ID" property="mallId" jdbcType="DECIMAL" />
+   	<result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    
+    <result column="DATA_TOTAL"		property="dataTotal"	jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_FULL_List" >
+	  ID, CODE, NAME, RESP_PERSON, 
+	  CONTACT_PERSON, CONTACT_EMAIL, TEL_NO, FAX, ADDRESS,ADDRESS2,ADDRESS3,ADDRESS4, CONTRACT_START_DATE, 
+	  CONTRACT_END_DATE, WEB_SITE_NAME,  WEB_SITE_DOMAIN, WEB_SITE_EMAIL_DOMAIN, WEB_SITE_CONTACT_EMAIL, WEB_SITE_STATUS, 
+	  WEB_SITE_DISP_SEQ, USE_SHOP_CART_IND, WEB_SITE_ONLINE_DATETIME, WEB_SITE_ACTIVE_IND, WEB_SITE_INACTIVE_DATE, 
+	  WEB_SITE_STATUS_REASON_ID, WEB_SITE_STATUS_REASON_DESC, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE,
+	  MALL_ID	  
+  </sql>
+  
+  <sql id="view_shop_list">
+	ID, CODE, NAME, RESP_PERSON, CONTACT_PERSON, 
+	CONTACT_EMAIL, WEB_SITE_NAME, TEL_NO, MALL_ID,
+	CREATED_BY,CREATED_DATE,LAST_UPDATED_BY,LAST_UPDATED_DATE		
+  </sql>
+  
+  <sql id="view_shop_setting_list">
+  	ID, CODE, NAME, LOGO_NAME, SHOP_DESC, MALL_ID
+  </sql>
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.shop.ShopInfoModel" >
+    insert into SUPPLIER (ID, CODE, NAME, RESP_PERSON, 
+	  CONTACT_PERSON, CONTACT_EMAIL, TEL_NO, FAX, ADDRESS, CONTRACT_START_DATE, 
+	  CONTRACT_END_DATE, WEB_SITE_NAME,  WEB_SITE_DOMAIN, WEB_SITE_EMAIL_DOMAIN, WEB_SITE_CONTACT_EMAIL, WEB_SITE_STATUS, 
+	  WEB_SITE_DISP_SEQ, USE_SHOP_CART_IND, WEB_SITE_ONLINE_DATETIME, WEB_SITE_ACTIVE_IND, WEB_SITE_INACTIVE_DATE, 
+	  WEB_SITE_STATUS_REASON_ID, WEB_SITE_STATUS_REASON_DESC, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{shopCode,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR},#{respPerson,jdbcType=VARCHAR}, 
+      #{contactPerson,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR}, #{telNo,jdbcType=VARCHAR},
+      #{fax,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{contractStartDate},
+      #{contractEndDate},#{websiteName,jdbcType=VARCHAR}, #{websiteDomain,jdbcType=VARCHAR},
+      #{websiteEmailDomain,jdbcType=VARCHAR},#{websiteContactEmail,jdbcType=VARCHAR}, #{websiteStatus,jdbcType=VARCHAR},  
+      #{websiteDispSeq, jdbcType=INTEGER}, #{useShopCartInd,jdbcType=VARCHAR}, #{websiteOnlineDatetime},
+      #{websiteActiveInd, jdbcType=INTEGER}, #{websiteInactiveDate}, #{websiteStatusReasonId, jdbcType=DECIMAL},
+      #{websiteStatusReasonDesc, jdbcType=INTEGER}, #{createdBy, jdbcType=VARCHAR}, #{createdDate}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.shop.ShopInfoModel" >
+ 	<selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+         select SUPPLIER_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    insert into SUPPLIER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="shopCode != null" >
+        CODE,
+      </if>
+      <if test="shopName != null" >
+        NAME,
+      </if>
+      <if test="respPerson != null" >
+        RESP_PERSON,
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON,
+      </if>
+      <if test="contactEmail != null" >
+        CONTACT_EMAIL,
+      </if>
+      <if test="telNo != null" >
+        TEL_NO,
+      </if>
+      <if test="fax != null">
+      	FAX,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+       <if test="address2 != null" >
+        ADDRESS2,
+      </if>
+       <if test="address3 != null" >
+        ADDRESS3,
+      </if>
+       <if test="address4 != null" >
+        ADDRESS4,
+      </if>
+      <if test="contractStartDate != null" >
+        CONTRACT_START_DATE,
+      </if>
+        <if test="contractEndDate != null" >
+        CONTRACT_END_DATE,
+      </if>
+      <if test="websiteName != null" >
+        WEB_SITE_NAME,
+      </if>
+      <if test="websiteDomain != null" >
+        WEB_SITE_DOMAIN,
+      </if>
+      <if test="websiteEmailDomain != null" >
+        WEB_SITE_EMAIL_DOMAIN,
+      </if>
+      <if test="websiteContactEmail != null" >
+        WEB_SITE_CONTACT_EMAIL,
+      </if>
+      <if test="websiteStatus != null" >
+        WEB_SITE_STATUS,
+      </if>
+      <if test="websiteDispSeq != null" >
+        WEB_SITE_DISP_SEQ,
+      </if>
+      <if test="useShopCartInd != null" >
+        USE_SHOP_CART_IND,
+      </if>
+      <if test="websiteOnlineDatetime != null" >
+        WEB_SITE_ONLINE_DATETIME,
+      </if>
+      <if test="websiteActiveInd != null" >
+        WEB_SITE_ACTIVE_IND,
+      </if>
+      <if test="websiteInactiveDate != null" >
+        WEB_SITE_INACTIVE_DATE,
+      </if>
+      <if test="websiteStatusReasonId != null" >
+        WEB_SITE_STATUS_REASON_ID,
+      </if>
+      <if test="websiteStatusReasonDesc != null" >
+        WEB_SITE_STATUS_REASON_DESC,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+       <if test="mallId != null" >
+        MALL_ID,
+      </if>
+    </trim>
+    
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="shopCode != null" >
+        #{shopCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="respPerson != null" >
+        #{respPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null" >
+        #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+      	#{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null" >
+        #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="address3 != null" >
+        #{address3,jdbcType=VARCHAR},
+      </if>
+      <if test="address4 != null" >
+        #{address4,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStartDate != null" >
+        #{contractStartDate},
+      </if>
+      <if test="contractEndDate != null" >
+        #{contractEndDate},
+      </if>
+      <if test="websiteName != null" >
+        #{websiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDomain != null" >
+        #{websiteDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteEmailDomain != null" >
+        #{websiteEmailDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteContactEmail != null" >
+        #{websiteContactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteStatus != null" >
+        #{websiteStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDispSeq != null" >
+        #{websiteDispSeq, jdbcType=INTEGER},
+      </if>
+      <if test="useShopCartInd != null" >
+        #{useShopCartInd,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteOnlineDatetime != null" >
+        #{websiteOnlineDatetime},
+      </if>
+      <if test="websiteActiveInd != null" >
+        #{websiteActiveInd, jdbcType=INTEGER},
+      </if>
+      <if test="websiteInactiveDate != null" >
+        #{websiteInactiveDate},
+      </if>
+      <if test="websiteStatusReasonId != null" >
+        #{websiteStatusReasonId, jdbcType=DECIMAL},
+      </if>
+      <if test="websiteStatusReasonDesc != null" >
+        #{websiteStatusReasonDesc, jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy, jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="mallId != null" >
+        #{mallId},
+      </if>
+    </trim>
+  </insert>
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SUPPLIER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_FULL_List" />
+    from SUPPLIER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectInterfaceByKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+  	 select 
+    <include refid="view_shop_setting_list" />
+    from SUPPLIER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectShopList" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.shop.ShopInfoViewVo" >
+   	select 
+     	ID, CODE, NAME, RESP_PERSON, CONTACT_PERSON, 
+		CONTACT_EMAIL, WEB_SITE_NAME, TEL_NO , MALL_ID
+	from SUPPLIER
+     where 1=1 
+     <if test="id !=null">
+		  AND  ID = #{id,jdbcType=DECIMAL}
+     </if>
+     <if test="mallId != null">
+     	 AND MALL_ID = #{mallId, jdbcType=DECIMAL}
+     </if> 
+     <if test="shopCode !=null">
+		  AND  CODE like '%'||#{shopCode}||'%'
+     </if>
+     <if test="shopName !=null">
+		  AND  UPPER(NAME) like '%'||UPPER(#{shopName})||'%'
+     </if>
+     <if test="respPerson !=null">
+		  AND  RESP_PERSON like '%'||#{respPerson}||'%'
+     </if>
+     <if test="contactPerson !=null">
+		  AND  CONTACT_PERSON like '%'||#{contactPerson}||'%'
+     </if>
+     <if test="contactEmail !=null">
+		  AND  CONTACT_EMAIL like '%'||#{contactEmail}||'%'
+     </if>
+     <if test="websiteName !=null">
+		  AND  WEB_SITE_NAME like '%'||#{websiteName}||'%'
+     </if>
+     <if test="telNo !=null">
+		  AND UPPER( TEL_NO) like '%'|| UPPER(#{telNo,jdbcType=VARCHAR} )||'%'
+      </if>
+     order by CODE asc
+  </select>
+  
+  
+   <select id="selectIdList" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.shop.ShopInfoViewVo" >
+   	select 
+     	ID
+	from SUPPLIER
+     where 1=1 
+     <if test="shopCode !=null">
+		  AND  CODE = #{shopCode, jdbcType=VARCHAR}
+     </if> 
+      <if test="websiteDomain !=null">
+		  AND  WEB_SITE_DOMAIN = #{websiteDomain, jdbcType=VARCHAR}
+     </if>
+      <if test="websiteEmailDomain !=null">
+		  AND  WEB_SITE_EMAIL_DOMAIN = #{websiteEmailDomain, jdbcType=VARCHAR}
+     </if>
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.shop.ShopInfoModel" >
+    update SUPPLIER
+    <set >
+      <if test="shopCode != null" >
+        CODE = #{shopCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        NAME = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="respPerson != null" >
+        RESP_PERSON = #{respPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        CONTACT_EMAIL = #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null" >
+        TEL_NO = #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+      	FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null">
+      	ADDRESS2 = #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="address3 != null">
+      	ADDRESS3 = #{address3,jdbcType=VARCHAR},
+      </if>
+      <if test="address4 != null">
+      	ADDRESS4 = #{address4,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStartDate != null" >
+        CONTRACT_START_DATE#{contractStartDate},
+      </if>
+      <if test="contractEndDate != null" >
+        CONTRACT_END_DATE#{contractEndDate},
+      </if>
+      <if test="websiteName != null" >
+        WEB_SITE_NAME = #{websiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDomain != null" >
+        WEB_SITE_DOMAIN = #{websiteDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteEmailDomain != null" >
+        WEB_SITE_EMAIL_DOMAIN = #{websiteEmailDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteContactEmail != null" >
+        WEB_SITE_CONTACT_EMAIL = #{websiteContactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteStatus != null" >
+        WEB_SITE_STATUS = #{websiteStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDispSeq != null" >
+        WEB_SITE_DISP_SEQ = #{websiteDispSeq, jdbcType=INTEGER},
+      </if>
+      <if test="useShopCartInd != null" >
+        USE_SHOP_CART_IND = #{useShopCartInd,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteOnlineDatetime != null" >
+        WEB_SITE_ONLINE_DATETIME#{websiteOnlineDatetime},
+      </if>
+      <if test="websiteActiveInd != null" >
+        WEB_SITE_ACTIVE_IND = #{websiteActiveInd, jdbcType=INTEGER},
+      </if>
+      <if test="websiteInactiveDate != null" >
+        WEB_SITE_INACTIVE_DATE#{websiteInactiveDate},
+      </if>
+      <if test="websiteStatusReasonId != null" >
+        WEB_SITE_STATUS_REASON_ID = #{websiteStatusReasonId, jdbcType=DECIMAL},
+      </if>
+      <if test="websiteStatusReasonDesc != null" >
+        WEB_SITE_STATUS_REASON_DESC = #{websiteStatusReasonDesc, jdbcType=INTEGER},
+      </if>
+      <if test="logoName != null">
+      	LOGO_NAME = #{logoName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopDesc != null">
+      	SHOP_DESC = #{shopDesc,jdbcType=CLOB},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="search" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.mall.MallModel" >
+  		select * from(
+			select t.*, ROWNUM row_num from(
+			    select 
+			    	count(*)over () DATA_TOTAL,
+			    <include refid="view_shop_list" />
+			 	from  SUPPLIER
+			    where 1 = 1
+			       <if test="id !=null">
+					  AND  ID = #{id,jdbcType=DECIMAL}
+			     </if>
+			     <if test="mallId != null">
+			     	 AND MALL_ID = #{mallId, jdbcType=DECIMAL}
+			     </if> 
+			     <if test="shopCode !=null">
+					  AND  CODE like '%'||#{shopCode}||'%'
+			     </if>
+			     <if test="shopName !=null">
+					  AND  UPPER(NAME) like '%'||UPPER(#{shopName})||'%'
+			     </if>
+			     <if test="respPerson !=null">
+					  AND  RESP_PERSON like '%'||#{respPerson}||'%'
+			     </if>
+			     <if test="contactPerson !=null">
+					  AND  CONTACT_PERSON like '%'||#{contactPerson}||'%'
+			     </if>
+			     <if test="contactEmail !=null">
+					  AND  CONTACT_EMAIL like '%'||#{contactEmail}||'%'
+			     </if>
+			     <if test="websiteName !=null">
+					  AND  WEB_SITE_NAME like '%'||#{websiteName}||'%'
+			     </if>
+			     <if test="telNo !=null">
+					  AND UPPER( TEL_NO) like '%'|| UPPER(#{telNo,jdbcType=VARCHAR} )||'%'
+			      </if>
+				order by ID
+				) t
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+  	</select>
+  
+</mapper>

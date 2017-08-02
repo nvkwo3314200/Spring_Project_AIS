@@ -1,0 +1,194 @@
+<section class="content-header">
+    <h1>
+        {{'brand' | translate}}
+
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+
+
+
+
+                    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <div translate="{{alert.msg}}">
+                        </div>
+                    </uib-alert>
+
+ <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+ 					<div class="row">
+                        <div class="col-md-1"><label class="control-label">{{'brandCode' | translate}}</label></div>
+
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="brand_code" maxlength="20"></div>
+
+                        <div class="col-md-1"><label class="control-label">{{'sysRef' | translate}}</label>
+                        </div>
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="sys_ref" maxlength="20"></div>
+
+
+						<div class="col-md-1"><label class="control-label">{{'masterId' | translate}}</label>
+                        </div>
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="masterId" maxlength="20"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-1"><label class="control-label">{{'eNDescription' | translate}}</label></div>
+
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="desc_en" maxlength="100"></div>
+
+                        <div class="col-md-1"><label class="control-label">{{'tCDescription' | translate}}</label>
+                        </div>
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="desc_tc" maxlength="100"></div>
+
+
+						<div class="col-md-1"><label class="control-label">{{'sCDescription' | translate}}</label>
+                        </div>
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="desc_sc" maxlength="100"></div>
+                        
+                       
+                       
+                       <div class="col-md-1">
+                            <label class="control-label">{{'brand_watsons_mall' | translate}}</label>
+                        </div>
+                        
+        					<div class="col-md-1">
+									 <input type="checkbox"  ng-model="watsonsMallInd" ng-true-value="'Y'" ng-false-value="'N'"> 
+							</div>
+							
+							
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary" ng-click="search()">{{'product_search'
+                                | translate}}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    
+                 <br/>
+                 
+                  <div class="row">
+                        <div class="col-md-12 text-right">
+
+                             <button  type="button" class="btn btn-primary" ng-click="updateWatsonsMallInd()">{{'update_watsons_mall_brand' | translate}}
+                             </button>
+
+                             <button   type="button" class="btn btn-primary" ng-click="cancelWatsonsMallInd()">{{'cancel_watsons_mall_brand' | translate}}
+                             </button>
+
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="table-responsive">
+
+                        <table st-table="vm.data" st-safe-src="vm.rowCollection"
+                               class="table table-bordered table-hover smart-table">
+                            <thead>
+                            <tr class="table-header ">
+                                <th st-ratio="4" row-select-all="vm.data" selected="vm.selected" ng-click="vm.selectAll(vm.data)"></th>
+                                <th ng-hide='true'></th>
+                              
+                               <th st-ratio="5" st-sort="brandCode">{{'brandCode' |translate}}</th>
+								<th st-ratio="5" st-sort="masterId">{{'masterId' |translate}}</th>
+								<th>{{'brand_image' | translate}}</th>
+								
+								<th>{{'retek_brand_desc_en' | translate}}</th>
+								<th>{{'retek_brand_desc_tc' | translate}}</th>
+								<th>{{'retek_brand_desc_sc' | translate}}</th>
+								
+								<th>{{'brand_name(EN)' | translate}}</th>
+								<th>{{'brand_name(TC)' | translate}}</th>
+								<th>{{'brand_name(SC)' | translate}}</th>
+								
+								<th>{{'brand_tagline(EN)' | translate}}</th>
+								<th>{{'brand_tagline(TC)' | translate}}</th>
+								<th>{{'brand_tagline(SC)' | translate}}</th>
+							
+								<th>{{'brand_description(EN)' | translate}}</th>
+								<th>{{'brand_description(TC)' | translate}}</th>
+								<th>{{'brand_description(SC)' | translate}}</th>
+								
+                                <th st-ratio="5" >{{'sysRef' | translate}}</th>
+                                <th st-ratio="5" >{{'brand_watsons_mall' | translate}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in vm.data" id="tr{{row.brandCode}}"  ng-click="vm.select(row)" >
+                                
+                                <td row-select="row" ></td>
+                                <td ><span ng-show="{{row.supplierId != null}}">*</span>{{row.code}}</td>
+                              
+								<td>{{row.masterId}}</td>
+								
+								<td> 
+								
+								<span ng-show="{{row.imageFileName!=null}}">
+									<img style="width:50" ng-src="./supplierUpload?fileName={{row.imageFileName}}"  />
+								
+								</span>
+								</td>
+								
+								<td>{{row.descEn}}</td>
+								<td>{{row.descTc}}</td>
+								<td>{{row.descSc}}</td>
+								
+								<td>{{row.brandNameEn}}</td>
+								<td>{{row.brandNameTc}}</td>
+								<td>{{row.brandNameSc}}</td>
+								
+								<td>{{row.brandTaglineEn}}</td>
+								<td>{{row.brandTaglineTc}}</td>
+								<td>{{row.brandTaglineSc}}</td>
+								
+								<td>{{row.brandDescEn}}</td>
+								<td>{{row.brandDescTc}}</td>
+								<td>{{row.brandDescSc}}</td>
+                                <td> {{row.sysRef}}</td>
+                                <td> {{row.watsonsMallInd}}</td>
+                                
+                                
+                                <td>
+									<button type="button" class="btn btn-default"
+										ng-click="openView(row.brandCode)">
+										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</button>
+
+								</td>
+                            </tr>
+                            
+                           
+                            <tfoot>
+                            <tr>
+                                <td colspan="14" class="text-center">
+                                    <div st-items-by-page="page" st-pagination=""
+                                         st-template="./views/pages/pagination_custom.html"></div>
+                                    <div  ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                                        <input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" maxlength="8">&nbsp;{{'items_per_page' | translate}}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    
+                        
+                        
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

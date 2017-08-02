@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+    <PSSP_PRODUCT
+            ID="20001"
+            PRODUCT_CODE="test_123456789"
+            SUPPLIER_CODE="10001"
+            MIN_DELIVER_DATE="88"
+            MAX_DELIVER_DATE="99"
+            SUPPLIER_LEAD_TIME="50"
+            CREATED_BY="UNITTEST"
+            CREATED_DATE="2016-03-11 00:00:00"
+            LAST_UPDATED_BY="UNITTEST"
+            LAST_UPDATED_DATE="2016-03-11 00:00:00"
+            SHORT_DESC_EN="test2"
+            DELIVERY_MODE="SDD"
+            STATUS="APPROVED"
+            SUPPLIER_PRODUCT_CODE="bbb"
+            VERSION="STAGING"
+            />
+
+    <PSSP_PRODUCT_BARCODE/>
+   
+    <PSSP_PRODUCT_IMAGES/>
+</dataset>

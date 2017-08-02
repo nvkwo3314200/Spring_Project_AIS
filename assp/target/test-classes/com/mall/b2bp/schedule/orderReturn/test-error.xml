@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReturnRequests>
+<ReturnRequest>
+<ReturnType></ReturnType>
+<PickStore></PickStore>
+<ReturnId></ReturnId>
+<OrderId>16301178954-11</OrderId>
+<ReturnCreateDate>20160217</ReturnCreateDate>
+<Remark>testing email order</Remark>
+<SpecialInstruction>test SpecialInstruction</SpecialInstruction>
+<CustomerId>1057504</CustomerId>
+<CustomerType>Individual</CustomerType>
+<CustomerName>Joe MemberHome1 HomeTesting</CustomerName>
+<CustomerPhoneNo> 123456</CustomerPhoneNo>
+<CustomerMobileNo>98000000</CustomerMobileNo>
+<TenderType>CreditCardFullAmex</TenderType>
+<PaymentRef>TNS01201438</PaymentRef>
+<CollectDate>20160218</CollectDate>
+<CollectTimeSlot>07:00PM - 10:30PM</CollectTimeSlot>
+<CollectDistrict>causewaybay</CollectDistrict>
+<ContactName>Firstname Lastname </ContactName>
+<ContactPhoneNo>456789 </ContactPhoneNo>
+<ContactrMobileNo>98760002</ContactrMobileNo>
+<CollectAddress>Flat - Floor 12 Block 12b 12c ݲ�¨@ 12e Member Street causewaybay hongkongisland</CollectAddress>
+<ReturnEntries>
+<ReturnEntry>
+<SkuId>1111</SkuId>
+<SkuType>Ambient</SkuType>
+<Brand>HEINEKEN</Brand>
+<BrandSec> test BrandSec </BrandSec>
+<ProductName>BEER 12S CAN HEINEKEN</ProductName>
+<ProductNameSec> test ProductNameSec</ProductNameSec>
+<SizeDesc>12'S</SizeDesc>
+<OrderQty>10</OrderQty>
+<ExpectedCollectQty>0</ExpectedCollectQty>
+<ReturnReqQty>1</ReturnReqQty>
+<WriteOffQty>1 </WriteOffQty>
+<SkuCollectRemark> test SkuCollectRemark</SkuCollectRemark>
+<SupplierCode></SupplierCode>
+</ReturnEntry>
+</ReturnEntries>
+</ReturnRequest>
+</ReturnRequests>

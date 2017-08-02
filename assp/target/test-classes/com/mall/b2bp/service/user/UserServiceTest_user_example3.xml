@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+   <PSSP_SUPPLIER>
+	   </PSSP_SUPPLIER>
+	<t_user id="10000000003" user_id="04" user_name="yjc"
+		user_role="P" password="123456789" activate="Y"
+		deactivate_date="2016-03-4 00:00:00" created_by="dk" created_date="2016-03-4 00:00:00" last_updated_by="bbs"
+		last_updated_date="2016-03-15 00:00:00"  />
+
+</dataset>

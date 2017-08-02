@@ -1,0 +1,120 @@
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+
+
+                    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+                               close="closeAlert($index)">
+                        <div translate="{{alert.msg}}"></div>
+                    </uib-alert>
+
+                    <div class="row">
+                        <div class="col-md-2"><label class="control-label">{{'user_id' | translate}}</label></div>
+
+                        <div class="col-md-2"><input type="text" class="form-control " ng-model="productinfo.userId"  maxlength="100"></div>
+
+                        <div class="col-md-1"><label class="control-label">{{'product_action' | translate}}</label>
+                        </div>
+                        <div class="col-md-6"><input type="text" class="form-control " ng-model="productinfo.action"  maxlength="100"></div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="control-label">{{'product_action_time' | translate}}</label>
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       ng-model="productinfo.actionTimeFr" is-open="popup3.opened" datepicker-options="dateOptions2"
+                                       ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                       placeholder="MM/dd/yyyy" id="fm"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open3()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                            </p>
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="control-label">{{'date_to' | translate}}</label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       ng-model="productinfo.actionTimeTo" is-open="popup4.opened" datepicker-options="dateOptions2"
+                                       ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                       placeholder="MM/dd/yyyy" id="to"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open4()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                            </p>
+                        </div>
+
+                        <div class="col-md-5">
+
+                        </div>
+
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary" ng-click="search_update_history()">{{'product_search'
+                                | translate}}
+                            </button>
+                        </div>
+
+                    </div>
+                    <br/>
+
+
+                    <div class="table-responsive">
+
+                        <table st-table="vm.data" st-safe-src="vm.rowCollection"
+                               class="table table-bordered table-hover smart-table">
+                            <thead>
+                            <tr>
+                                <!--<th row-select-all="vm.data" selected="vm.selected" ng-click="vm.selectAll(vm.data)"></th>-->
+                                <th ng-hide='true'></th>
+                                <th st-ratio="10" st-sort="userId">{{'user_name' | translate}}</th>
+                                <th st-ratio="15" st-sort="actionTimeStr">{{'product_action_time' | translate}}</th>
+                                <th st-sort="action">{{'product_action' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in vm.data">
+                                <!--<td row-select="row" ng-click="vm.select(row)"></td>-->
+                                <td ng-hide='true'>{{row.id}}</td>
+                                <td> {{row.userId}}</td>
+                                <td>{{row.actionTimeStr}}</td>
+                                <td>{{row.action}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div st-items-by-page="page" st-pagination=""
+                                         st-template="./views/pages/pagination_custom.html"></div>
+                                    <div  ng-show="page  < vm.rowCollection.length " style="margin-left:412px;margin-top:-53px">
+                                        <input style="height:32px" id="pageInput" class="select-page" type="text"  ng-model="page" >&nbsp;{{'items_per_page' | translate}}</div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

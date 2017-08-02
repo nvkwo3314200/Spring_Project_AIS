@@ -1,0 +1,65 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>
+		{{'list_of_value_item'|translate}}
+	</h1>
+	
+	 
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+<div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body" >
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+
+                    
+                    <div class="row">
+					  <div class="col-md-4 required"><label class="control-label">{{'lov_value'|translate}}</label></div>
+					  <div class="col-md-8">
+						  	<input type="text" class="form-control"   maxlength="30" style="border-radius:4px"  id="lovValue"  ng-model="lovValue">
+					  </div>
+					  </div>
+					   <div class="row">
+					   <div class="col-md-4 required"><label class="control-label">{{'lov_description'|translate}}</label></div>
+					  <div class="col-md-8">
+						  	<input type="text" class="form-control" maxlength="255" style="border-radius:4px"  id="lovDesc"  ng-model="lovDesc">
+					  </div>
+					  
+					</div>
+				
+				 
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+
+                         <button type="button" class="btn btn-primary ng-binding" ng-disabled="ableAdd" ng-click="addValue()">
+                                	 {{'button_add'|translate}}
+                                </button>
+                                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="closeThisDialog(0)">{{'button_cancel'
+                                    | translate}}
+                                </button>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</section>
+<!-- /.content -->

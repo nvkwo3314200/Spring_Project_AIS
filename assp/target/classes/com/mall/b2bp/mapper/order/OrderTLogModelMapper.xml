@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.order.OrderTLogModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.order.OrderTLogModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="HYBRIS_ORDER_ID" property="hybrisOrderId" jdbcType="VARCHAR" />
+    <result column="SKU_ID" property="skuId" jdbcType="VARCHAR" />
+    <result column="TRANSACTION_DATE" property="transactionDate" jdbcType="DATE" />
+    <result column="ORDER_CREATED_DATE" property="orderCreatedDate" jdbcType="DATE" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="QTY" property="qty" jdbcType="DECIMAL" />
+    <result column="NET_SALES" property="netSales" jdbcType="VARCHAR" />
+    <result column="TYPE_OF_DISTRIBUTION" property="typeOfDistribution" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, HYBRIS_ORDER_ID, SKU_ID, TRANSACTION_DATE, ORDER_CREATED_DATE, AMOUNT, QTY, NET_SALES, 
+    TYPE_OF_DISTRIBUTION, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_ORDER_TLOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.order.OrderParameterVo">
+    select  ot.ID, ot.HYBRIS_ORDER_ID, ot.SKU_ID, ot.TRANSACTION_DATE, ot.ORDER_CREATED_DATE, ot.AMOUNT, ot.QTY, ot.NET_SALES, 
+    ot.TYPE_OF_DISTRIBUTION, ot.CREATED_BY, ot.CREATED_DATE, ot.LAST_UPDATED_BY, ot.LAST_UPDATED_DATE
+  from PSSP_ORDER_TLOG ot,    
+       (select oe.*, po.hybris_order_id,po.id orderSeq 
+          from PSSP_ORDER_ENTRY oe, PSSP_ORDER po
+         where po.id = oe.order_id) o
+ where ot.hybris_order_id = o.hybris_order_id(+)
+   and ot.sku_id = o.sku_id(+)
+   
+    and o.orderSeq = #{orderId,jdbcType=VARCHAR}
+    
+     <if test="supplierId != null and supplierId != ''">
+       		and o.SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+       </if>
+  </select>
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_ORDER_TLOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.order.OrderTLogModel" >
+    insert into PSSP_ORDER_TLOG (ID, HYBRIS_ORDER_ID, SKU_ID, 
+      TRANSACTION_DATE, ORDER_CREATED_DATE, AMOUNT, 
+      QTY, NET_SALES, TYPE_OF_DISTRIBUTION, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{hybrisOrderId,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR}, 
+      #{transactionDate,jdbcType=DATE}, #{orderCreatedDate,jdbcType=DATE}, #{amount,jdbcType=DECIMAL}, 
+      #{qty,jdbcType=DECIMAL}, #{netSales,jdbcType=VARCHAR}, #{typeOfDistribution,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.order.OrderTLogModel" >
+  
+  
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_ORDER_TLOG_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+  
+    insert into PSSP_ORDER_TLOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID,
+      </if>
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="transactionDate != null" >
+        TRANSACTION_DATE,
+      </if>
+      <if test="orderCreatedDate != null" >
+        ORDER_CREATED_DATE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="qty != null" >
+        QTY,
+      </if>
+      <if test="netSales != null" >
+        NET_SALES,
+      </if>
+      <if test="typeOfDistribution != null" >
+        TYPE_OF_DISTRIBUTION,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    
+    
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="hybrisOrderId != null" >
+        #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionDate != null" >
+        #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="orderCreatedDate != null" >
+        #{orderCreatedDate,jdbcType=DATE},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="netSales != null" >
+        #{netSales,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOfDistribution != null" >
+        #{typeOfDistribution,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.order.OrderTLogModel" >
+    update PSSP_ORDER_TLOG
+    <set >
+      <if test="hybrisOrderId != null" >
+        HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        SKU_ID = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionDate != null" >
+        TRANSACTION_DATE = #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="orderCreatedDate != null" >
+        ORDER_CREATED_DATE = #{orderCreatedDate,jdbcType=DATE},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="qty != null" >
+        QTY = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="netSales != null" >
+        NET_SALES = #{netSales,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOfDistribution != null" >
+        TYPE_OF_DISTRIBUTION = #{typeOfDistribution,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.order.OrderTLogModel" >
+    update PSSP_ORDER_TLOG
+    set HYBRIS_ORDER_ID = #{hybrisOrderId,jdbcType=VARCHAR},
+      SKU_ID = #{skuId,jdbcType=VARCHAR},
+      TRANSACTION_DATE = #{transactionDate,jdbcType=DATE},
+      ORDER_CREATED_DATE = #{orderCreatedDate,jdbcType=DATE},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      QTY = #{qty,jdbcType=DECIMAL},
+      NET_SALES = #{netSales,jdbcType=VARCHAR},
+      TYPE_OF_DISTRIBUTION = #{typeOfDistribution,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

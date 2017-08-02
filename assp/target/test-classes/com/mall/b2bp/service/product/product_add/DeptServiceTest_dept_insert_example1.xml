@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_DEPT
+	ID="102"
+    DEPT_ID="102"
+    DESCRIPTION="TEST"
+   /> 
+      
+  <PSSP_CLASS
+  	ID="10"
+  	CLASS_ID="111"
+    DEPT_ID="102"
+    DESCRIPTION="TEST2"
+  />
+ <PSSP_SUB_CLASS
+ 	ID="10"
+ 	SUB_CLASS_ID='222'
+  	CLASS_ID="10"
+    DESCRIPTION="TEST3"
+ /> 
+ 
+  <PSSP_SUPPLIER_SUB_CLASS
+ 	ID="10"
+ 	SUPPLIER_ID="1"
+ 	SUB_CLASS_ID='10'
+  	CLASS_ID="10"
+    DEPT_ID="102"
+    CREATED_BY="TIM"
+    CREATED_DATE="2016-05-01 14:00:20"
+ /> 
+  
+</dataset>

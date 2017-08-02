@@ -1,0 +1,75 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{'shop_setup'|translate}}</h1>
+</section>
+<style>
+div.row {
+	margin-bottom: 15px;
+}
+
+div.longdiv {
+	width: 83.3333333%;
+}
+
+div.box-body {
+	margin-top: 40px;
+}
+
+._content {
+	margin-top: 10px;
+	margin-buttom: 10px;
+	margin-left: 10%;
+}
+
+div.box-body {
+	margin-top: 40px;
+}
+
+input.withpoint {
+	margin-right: 20px;
+}
+
+li.active a:first-child {
+	cursor: pointer !important;
+}
+
+li.active.selected a:first-child {
+	background-color: #2152c3;
+	color: #ffffff;
+}
+</style>
+
+<!-- Main content -->
+<section class="content" ng-init="init()">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+
+
+					<a href="#"></a>
+					<ul class="nav nav-tabs">
+						<li class="active {{showHomePage? 'selected' : ''}}"><a
+							ui-sref="main.shop_setting"><span>{{'home_page' |
+									translate}}</span></a></li>
+						<li class="active {{showShopUser? 'selected' : ''}}"><a
+							ui-sref="main.shop_setup_user({my_type:'SHOPSETUP'})"><span>{{'system_shop_admin_setting'
+									| translate}}</span></a></li>
+					</ul>
+					<div class="box-body">
+						<div ng-if="showHomePage"
+							ng-include="'views/pages/shopSetupHomePage.html'"></div>
+						<div ng-if="showShopUser"
+							ng-include="'views/pages/shopUserDetail.html'"></div>
+					</div>
+				</div>
+			</div>
+</section>
+</section>

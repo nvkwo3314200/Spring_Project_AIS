@@ -1,0 +1,44 @@
+<div class="row">
+	<div class="col-md-2">{{'logo' | translate}}:</div>
+	<div class="col-md-4">
+		<div ng-repeat="item in thumb_default">
+			<!-- 这里之所以写个循环，是为了后期万一需要多个‘加号’框 -->
+			<label> <input type="file" id="one-input" file-model="images"
+				onchange="angular.element(this).scope().img_upload(this.files)" />
+			</label>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<button type="button" class="btn btn-primary" ng-click="upload()"
+			ng-disabled="disable" data-ui-sref-opts="{reload: true}">{{'upload_button'
+			| translate}}</button>
+	</div>
+	<div>
+		<div ng-repeat="item in thumb">
+			<!-- 采用angular循环的方式，对存入thumb的图片进行展示 -->
+			<label> <img width="300px;" ng-src="{{item.imgSrc}}" />
+			</label> <span ng-if="item.imgSrc" ng-click="img_del($index)"></span>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<label class="control-label">{{'shop_short_desc' | translate}}</label>
+	</div>
+</div>
+<div class="_content">
+	<textarea ckeditor ng-model="shopInfo.shopDesc" class="form-control"></textarea>
+</div>
+<div class="shop_foot">
+	<div class="row">
+		<div class="col-md-12 text-right">
+			<button type="button" class="btn btn-primary ng-binding"
+				ng-click="save()">{{'button_save' | translate}}</button>
+			<button type="button" class="btn btn-primary" id="cancel2"
+				ng-click="cancel2()">{{'button_cancel' | translate}}</button>
+		</div>
+	</div>
+</div>

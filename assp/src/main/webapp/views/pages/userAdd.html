@@ -1,0 +1,405 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        {{'add_edit_user' | translate}}
+    </h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" >
+                <div class="box-body">
+                
+                <uib-alert type="warning" ng-show="userVo.userRole=='SUPPLIER'" >
+					<div
+						translate="Delivery fee - Cannot be edited on Supplier Portal after first setup, to update delivery fee afterwards, please contact support staff"></div>
+					<div
+						translate="Free delivery threshold - Changes will be effective from tomorrow"></div>
+						
+					<div translate="{{userVo.supplierVo.failedReason}}" ng-show="userVo.supplierVo.failedReason!=null"></div>
+					
+				</uib-alert>
+					
+
+                     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+				        <div translate="{{alert.msg}}">
+				        </div>
+				    </uib-alert>
+
+                    <div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+                     </div>
+                     
+                    
+                     
+                    <div class="row">
+					  <div class="col-md-2 required"><label class="control-label">{{'user_id' | translate}}</label></div>
+					  <div class="col-md-4">
+						  	<input type="text" class="form-control"  ng-readonly="readDate" maxlength="30" style="border-radius:4px" placeholder="User Id" id="userId"  ng-model="userVo.userId">
+					  </div>
+					   <div class="col-md-2 required"><label class="control-label">{{'user_password' | translate}}</label></div>
+					  <div class="col-md-4">
+						  	<input type="password" class="form-control" maxlength="30" style="border-radius:4px" placeholder="Password" id="password"  ng-model="userVo.password">
+					  </div>
+					  
+					</div>
+					
+					<div class="row">
+					 <div class="col-md-2 required"><label class="control-label">{{'user_name' | translate}}</label></div>
+					  <div class="col-md-4">
+						  	<input type="text" class="form-control" maxlength="30" style="border-radius:4px" placeholder="User Name" id="userName"  ng-model="userVo.userName">
+					  </div>
+					  <div class="col-md-2 required"><label class="control-label">{{'email' | translate}}</label></div>
+					  <div class="col-md-4">
+						  	<input type="text" class="form-control" maxlength="30" style="border-radius:4px" placeholder="Email" id="email"  ng-model="userVo.email">
+					  </div>
+					  
+					</div>
+					 <div class="row">
+					  <div class="col-md-2"><label class="control-label">{{'contact_no' | translate}}</label></div>
+					  <div class="col-md-4">
+						  	<input type="text" class="form-control" maxlength="30" style="border-radius:4px" placeholder="Contact No" id="contactNo"  ng-model="userVo.contactNo">
+					  </div>
+					  <div class="col-md-2 "><label class="control-label">{{'activate' | translate}}</label></div>
+					   <div class="col-md-4">
+						  	 <input type="checkbox"  ng-model="activate2" ng-true-value="'Y'" ng-false-value="'N'">	
+					  </div>
+					  
+					</div> 
+					
+					<div class="row" >
+				    <div class="col-md-2 required"><label class="control-label">{{'user_role' | translate}}</label></div>
+					  <div class="col-md-4" >
+						  	<select id="userVo.userRole" ng-change="getShowData()" class="form-control" 
+						  	 
+						  	ng-model="userVo.userRole" ng-options="option.description as option.description for option in userroles" 
+						  	ng-show="!userVo.updateSupplierId">
+							</select>
+							
+							<input type="text" class="form-control" maxlength="30" style="border-radius:4px"
+							 ng-model="userVo.userRole" 
+							 
+							ng-show="userVo.updateSupplierId" ng-readonly="true"/>
+							
+					  </div>
+					
+				 </div>
+				 
+				<div class="row" ng-show="userVo.userRole=='SUPPLIER'" >
+					<div class="col-md-2 required">
+				    	<label class="control-label"> {{'supplier_id' | translate}}</label>
+				    </div>
+				    <div class="col-md-4">
+						<input type="text" class="form-control" maxlength="10" ng-readonly="userVo.updateSupplierId"  
+						style="border-radius:4px"  
+						placeholder="{{'supplier_id' | translate}}" id="supplierId111"  ng-model="userVo.supplierId"¡¡
+						ng-blur="blur()">
+					</div>
+					
+					
+    
+				</div>
+				
+				<div class="row" ng-if="userVo.userRole=='SUPPLIER'">
+						<label class="col-md-2 control-label">{{'delivery_fee'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control " ng-readonly="userVo.supplierVo.disableDeliveryFee"
+								ng-model="userVo.supplierVo.deliveryFee" maxlength="10" 
+								placeholder="{{'delivery_fee' | translate}}" >
+						</div>
+						<div class="col-md-8">
+							<div style="color: red" id="error_deliveryFee"></div>
+						</div>
+					</div>
+
+					<div class="row" ng-if="userVo.userRole=='SUPPLIER'">
+						<label class="col-md-2 control-label">{{'free_delivery_threshold'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control "
+							placeholder="{{'free_delivery_threshold' | translate}}" 
+								ng-model="userVo.supplierVo.freeDeliveryThreshold" maxlength="10">
+						</div>
+
+						<div class="col-md-8">
+							<div style="color: red" id="error_freeDeliveryThreshold"></div>
+						</div>
+					</div>
+
+
+					<div class="row" ng-if="userVo.userRole=='SUPPLIER'">
+						<label class="col-md-2 control-label">{{'supplier_direct_delivery_SLA'|translate}}:</label>
+
+						<label class="col-md-1 control-label">{{'min_value'|translate}}:</label>
+						<div class="col-md-2">
+							<select class="form-control" ng-model="userVo.supplierVo.minDeliveryDay"
+								ng-change="minDeliveryDayChange()"
+								ng-selected="userVo.supplierVo.minDeliveryDay"
+								ng-options="op.lovValue as op.lovDesc for op in minValueList" 
+								placeholder="{{'min_value' | translate}}">
+							</select>
+
+						</div>
+						<label class="col-md-1 control-label">{{'max_value'|translate}}:</label>
+						<div class="col-md-2">
+							<select class="form-control" ng-model="userVo.supplierVo.maxDeliveryDay"
+								ng-change="maxDeliveryDayChange()"
+								ng-selected="userVo.supplierVo.maxDeliveryDay"
+								ng-options="op.lovValue as op.lovDesc for op in maxValueList" 
+								placeholder="{{'max_value' | translate}}">
+							</select>
+						</div>
+
+						<div class="col-md-4">
+							<div style="color: red" id="error_deliveryDay"></div>
+						</div>
+					</div>
+
+					<div class="row" ng-if="userVo.userRole=='SUPPLIER'">
+						<label class="col-md-3 control-label">{{'delivery_lead_time'|translate}}:</label>
+
+						<div class="col-md-2">
+							<input type="text" class="form-control "
+								ng-model="userVo.supplierVo.warehouseDeliLeadTime"
+								placeholder="{{'delivery_lead_time' | translate}}"
+								ng-change="warehouseDeliLeadTimeChange()" maxlength="4">
+						</div>
+
+						<div class="col-md-7">
+							<div style="color: red" id="error_warehouseDeliLeadTime"></div>
+						</div>
+					</div>
+
+		
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(EN)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"  
+								placeholder="{{'shop_name(EN)' | translate}}"
+								style="border-radius: 4px" ng-readonly="shopNameEnReadonly"
+								id="shopNameEn" ng-model="userVo.supplierVo.shopNameEn">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(TC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"
+								style="border-radius: 4px"
+								placeholder="{{'shop_name(TC)' | translate}}" id="shopNameTc"
+								ng-readonly="shopNameTcReadonly"
+								ng-model="userVo.supplierVo.shopNameTc">
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_name(SC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control " maxlength="100"
+								style="border-radius: 4px"
+								placeholder="{{'shop_name(SC)' | translate}}" id="shopNameSc"
+								ng-readonly="shopNameScReadonly"
+								ng-model="userVo.supplierVo.shopNameSc">
+						</div>
+					</div>
+
+					
+
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(EN)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(EN)' | translate}}"
+								style="border-radius: 4px;" ng-model="userVo.supplierVo.shopDescEn"
+								maxlength="4000" id="shopDescEn"
+								ng-readonly="shopDescEnReadonly"> 
+					  		</textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(TC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(TC)' | translate}}"
+								style="border-radius: 4px;" ng-model="userVo.supplierVo.shopDescTc"
+								maxlength="4000" id="shopDescTc"
+								ng-readonly="shopDescTcReadonly">
+					  </textarea>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 10px" ng-if="userVo.userRole=='SUPPLIER'">
+						<div class="col-md-2">
+							<label class="control-label">{{'shop_description(SC)' |
+								translate}}</label>
+						</div>
+						<div class="col-md-10">
+							<textarea rows="3" cols="98"
+								placeholder="{{'shop_description(SC)' | translate}}"
+								style="border-radius: 4px;" ng-model="userVo.supplierVo.shopDescSc"
+								maxlength="4000" id="shopDescSc"
+								ng-readonly="shopDescScReadonly">
+					  </textarea>
+						</div>
+					</div>
+
+				
+				<br />
+				
+				
+				 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">
+				       <div class="col-md-12" >
+				           <label class="control-label">{{'brand' | translate}}</label>
+				        </div>
+				 </div>       				
+				
+				 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				     
+				        <div class="col-md-5 col-lg-5">
+				        
+						      <select style="width:100%;height:200px" ng-model="brandSelect" multiple="multiple" ng-options="brandSelect.descEn  for brandSelect in brandList">  
+						        </select> 
+						 </div> 
+						      <div class="col-md-2 text-center" >  
+						      <button ng-click="brand_from()">-->  
+						       </button>  
+						        <br/>  
+						        <button ng-click="brand_to(typetoSelect)">  
+						        <-- </button>  
+						            </div>
+						  <div class="col-md-5 col-lg-5"> 
+						        <select style="width:100%;height:200px" ng-model="brandtoSelect" multiple="multiple" ng-options="brandtoSelect.descEn for brandtoSelect in brandshowtoHtml">  
+						        </select>  
+						  </div>			
+				  </div>
+				 
+				<br/>				 
+				  
+				 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">
+				       <div class="col-md-12" >
+				           <label class="control-label">{{'category' | translate}}</label>
+				        </div>				  
+				 </div>	
+				 
+				 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">
+				     
+				        <div class="col-md-5 col-lg-5">
+						        <select style="width:100%;height:200px;overflow:auto;" ng-model="categorySelect" multiple="multiple" ng-options="categorySelect.lovValue for categorySelect in categoryList">  
+						        </select>  
+						 </div> 
+						     <div class="col-md-2 text-center" >  
+						      <button ng-click="category_from()"> -->   
+						       </button>  
+						        <br/>  
+						        <button ng-click="category_to(typetoSelect)">  
+						         <-- </button>  
+						            </div>
+						  <div class="col-md-5 col-lg-5"> 
+						        <select style="width:100%;height:200px;overflow:auto;" 
+						        ng-model="categorytoSelect" multiple="multiple" 
+						        ng-options="categorytoSelect.lovValue for categorytoSelect in categorytoHtml">  
+						        </select>  
+						  </div>			
+				 </div>	
+				 
+				 <br/>	
+				 
+				  <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+						<div class="col-md-12" >
+							<label class="control-label">Department</label>
+						</div>
+				  </div>		        				 
+				 
+				  <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+						<div class="col-md-5 col-lg-5">
+						        <select style="width:100%;height:200px;overflow:auto;" ng-change="changeDept()"  ng-model="unDeptSelect"  multiple="multiple"  ng-options="unDeptSelect.description for unDeptSelect in deptList">  
+								</select>  
+						 </div> 
+						 <div class="col-md-2" >
+						 </div>
+						 <div class="col-md-5 col-lg-5"> 
+						        <select style="width:100%;height:200px;overflow:auto;" ng-model="deptSelect" multiple="multiple" ng-options="deptSelect.description for deptSelect in deptToHtml">  
+						        </select>  
+						  </div>	
+					</div>
+					
+				  <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+						<div class="col-md-12" >
+							<label class="control-label">Class</label>
+						</div>
+				  </div>						
+					
+					 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+						 <div class="col-md-5 col-lg-5">
+						         <select style="width:100%;height:200px;overflow:auto;" ng-change="changeClass()"  ng-model="unClassSelect"  multiple="multiple"  ng-options="unClassSelect.description for unClassSelect in classList">  
+						        </select>   
+						 </div> 
+						 <div class="col-md-2 text-center" >  
+						      <button ng-click="deptClass_from()">&nbsp;-->   
+						       </button>  
+						        <br/>  
+						        <button ng-click="deptClass_to(typetoSelect)">  
+						         <-- </button>  
+						 </div>
+						  <div class="col-md-5 col-lg-5"> 
+						        <select style="width:100%;height:200px;overflow:auto;" ng-model="classSelect" multiple="multiple" ng-options="classSelect.description for classSelect in classToHtml">  
+						        </select>  
+						  </div>		
+					</div>
+					
+					
+				  <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+						<div class="col-md-12" >
+							<label class="control-label">SubClass</label>
+						</div>
+				  </div>						
+					
+					 <div class="row" ng-show="userVo.userRole=='SUPPLIER'">				       
+							<div class="col-md-5 col-lg-5">
+						         <select style="width:100%;height:200px;overflow:auto;"  ng-model="unSubClassSelect"  multiple="multiple"  ng-options="unSubClassSelect.description for unSubClassSelect in subclassList">  
+						        </select>   
+						 	</div>
+						 		<div class="col-md-2" >
+						        </div> 
+						 	<div class="col-md-5 col-lg-5"> 
+						        <select style="width:100%;height:200px;overflow:auto;" ng-model="subClassSelect" multiple="multiple" ng-options="subClassSelect.description for subClassSelect in subClassToHtml">  
+						     	</select> 
+							</div>
+                	</div>
+            </div>
+            		<div class="row">
+                        <div class="col-md-12 text-right">
+                        		<button type="button" class="btn btn-primary ng-binding"  ng-click="save(userVo.id)">
+                                	Save
+                                </button>
+                                  <button type="button" class="btn btn-primary" id="cancel2" ng-click="cancel2()">{{'button_cancel'
+                                    | translate}}
+                                </button>
+                        </div>                       
+                    </div>
+        </div>
+    </div>
+</section>
+</section>
+
+
+

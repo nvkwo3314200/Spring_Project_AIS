@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_UOM
+	CODE="100G"
+    DESCRIPTION="HUNDRED GRAMS"
+   /> 
+<PSSP_UOM
+	CODE="BA"
+    DESCRIPTION="BARRELL"
+   /> 
+<PSSP_UOM
+	CODE="AED"
+    DESCRIPTION="U.A.E. Dirham"
+   /> 
+<PSSP_UOM
+	CODE="BE"
+    DESCRIPTION="BUNDLE"
+   /> 
+<PSSP_UOM
+	CODE="BG"
+    DESCRIPTION="BAG"
+   /> 
+<PSSP_UOM
+	CODE="BI"
+    DESCRIPTION="BIN"
+   /> 
+<PSSP_UOM
+	CODE="BJ"
+    DESCRIPTION="BUCKET"
+   /> 
+</dataset>

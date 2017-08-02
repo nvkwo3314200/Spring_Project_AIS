@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <PSSP_ORDER
+            id="26301178951"
+            hybris_order_id="26301178951"
+            order_datetime="2016-03-11 00:00:00"
+            pick_store="922"
+            status="PICKED"
+            PICKED_IND = 'P'
+            SHIPPED_IND = 'N'
+            DELIVERY_IND = 'N'
+
+            />
+
+    <PSSP_ORDER
+            id="26301178952"
+            hybris_order_id="26301178952"
+            order_datetime="2016-03-11 00:00:00"
+            pick_store="922"
+            status="SHIPPED"
+            PICKED_IND = 'P'
+            SHIPPED_IND = 'P'
+            DELIVERY_IND = 'N'
+
+
+            />
+
+
+
+
+
+
+</dataset>

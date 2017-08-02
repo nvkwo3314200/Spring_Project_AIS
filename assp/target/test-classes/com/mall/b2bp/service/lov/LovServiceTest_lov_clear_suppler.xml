@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+	<PSSP_SUPPLIER />
+	<PSSP_SUPPLIER_CATEGORY />
+	<PSSP_ORDER />
+	<PSSP_ORDER_ENTRY />
+
+	<PSSP_ORDER_RETURN />
+	<PSSP_ORDER_RETURN_ENTRY />
+	<PSSP_USER />
+	<PSSP_SUPPLIER_SUB_CLASS />
+</dataset>
+

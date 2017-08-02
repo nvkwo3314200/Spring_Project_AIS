@@ -1,0 +1,30 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        {{'order_management' | translate}}
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <uib-tabset active="active">
+                        <uib-tab index="0" heading="{{'order_displayDetails' | translate}}"
+                                 select="get_staging_version_product()">
+                            <div ng-include="'views/pages/orderDisplayDetails.html'"></div>
+                        </uib-tab>
+                        <uib-tab index="2" heading="{{'update_history1' | translate}}" select="click_update_history()">
+                            <div ng-include="'views/pages/orderUpdateHistory.html'"></div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- /.content -->

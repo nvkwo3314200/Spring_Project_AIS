@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+
+
+<PSSP_PRODUCT
+ID="11"
+    PRODUCT_CODE="3-1111-5551"
+    BASE_PRODUCT_CODE="4"
+    SUPPLIER_CODE="2"
+    SHORT_DESC_EN="test"
+    SHORT_DESC_TC="null"
+    DELIVERY_MODE="SDD"
+    STATUS="APPROVED"
+    SUPPLIER_PRODUCT_CODE="aaa"
+	CASE_DIM_WIDTH="23"
+	CASE_DIM_LENGTH="45"
+	CASE_DIM_HEIGHT="67"
+  	CASE_PACK_INNER="67"
+  	CASE_PACK_CASE="67"
+  	PRODUCT_DIM_HEIGHT="67"
+  	PRODUCT_DIM_LENGTH="67"
+  	STORAGE_DIM_HEIGHT="67"
+  	STORAGE_DIM_WIDTH="67"	
+  	SHIPPING_DIM_LENGTH="67"
+  	SHIPPING_DIM_HEIGHT="67"
+  	SHIPPING_DIM_WIDTH="67"
+  	SHIPPING_WEIGHT="48"
+  	GROSS_WEIGHT="78"
+  	UNIT_RETAIL="98"
+  	UNIT_COST="76"
+  	ONLINE_DATE="2016-03-20"
+  	OFFLINE_DATE="2016-03-29"
+    VERSION="STAGING"
+created_by="unitTest"
+created_date="2016-03-11 00:00:00"
+last_updated_by="unitTest"
+last_updated_date="2016-03-11 00:00:00"
+
+    />
+    
+    <PSSP_PRODUCT
+ID="12"
+    PRODUCT_CODE="3-1111-5552"
+    BASE_PRODUCT_CODE="4"
+    SUPPLIER_CODE="2"
+    SHORT_DESC_EN="test"
+    SHORT_DESC_TC="null"
+    DELIVERY_MODE="SDD"
+    STATUS="APPROVED"
+    SUPPLIER_PRODUCT_CODE="aaa"
+	CASE_DIM_WIDTH="23"
+	CASE_DIM_LENGTH="45"
+	CASE_DIM_HEIGHT="67"
+  	CASE_PACK_INNER="67"
+  	CASE_PACK_CASE="67"
+  	PRODUCT_DIM_HEIGHT="67"
+  	PRODUCT_DIM_LENGTH="67"
+  	STORAGE_DIM_HEIGHT="67"
+  	STORAGE_DIM_WIDTH="67"	
+  	SHIPPING_DIM_LENGTH="67"
+  	SHIPPING_DIM_HEIGHT="67"
+  	SHIPPING_DIM_WIDTH="67"
+  	SHIPPING_WEIGHT="48"
+  	GROSS_WEIGHT="78"
+  	UNIT_RETAIL="98"
+  	UNIT_COST="76"
+  	ONLINE_DATE="2016-03-20"
+  	OFFLINE_DATE="2016-03-29"
+    VERSION="STAGING"
+created_by="unitTest"
+created_date="2016-03-11 00:00:00"
+last_updated_by="unitTest"
+last_updated_date="2016-03-11 00:00:00"
+
+    />
+<PSSP_PRODUCT_AUDIT />
+	<AUDIT_PSSP_PRODUCT />
+
+
+    <PSSP_PRODUCT_BARCODE
+            ID="1"
+            PRODUCT_ID="11"
+            ITEM_NUM_TYPE="EAN8"
+            BARCODE_NUM="888"
+            CREATED_BY="UNITTEST"
+            CREATED_DATE="2016-03-11 00:00:00"
+            LAST_UPDATED_BY="UNITTEST"
+            LAST_UPDATED_DATE="2016-03-11 00:00:00"
+            />
+    <PSSP_PRODUCT_BARCODE
+            ID="2"
+            PRODUCT_ID="12"
+            ITEM_NUM_TYPE="EAN8"
+            BARCODE_NUM="999"
+            CREATED_BY="UNITTEST"
+            CREATED_DATE="2016-03-11 00:00:00"
+            LAST_UPDATED_BY="UNITTEST"
+            LAST_UPDATED_DATE="2016-03-11 00:00:00"
+            />
+            
+ <PSSP_PRODUCT_IMAGES
+    id="1"
+    product_id="11"
+        file_name="sdf.jpg"
+		file_path="sdf.jpg"
+		description="测试1图片"
+		sequence="1"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    />
+    
+    <PSSP_PRODUCT_IMAGES
+    id="2"
+    product_id="12"
+        file_name="abc.jpg"
+		file_path="abc.jpg"
+		description="测试1图片"
+		sequence="1"
+    created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    />
+	
+</dataset>

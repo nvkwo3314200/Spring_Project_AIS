@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <PSSP_SUPPLIER
+		id="200000000"
+		name="ccbs"
+		delivery_fee="300"
+		min_delivery_day="3"
+		max_delivery_day="5"
+		consignment_via="234"
+		warehouse_deli_lead_time="3"
+        created_by="dunitTest1"
+        created_date="2016-03-11 00:00:00"
+        last_updated_by="dunitTest1"
+        last_updated_date="2016-03-11 00:00:00"
+            />
+	<pssp_user ID="10001" USER_ID="dengjin" USER_NAME="dj"
+		USER_ROLE="SYSTEMADMIN" SUPPLIER_ID="200000000" ACTIVATE="Y" DEACTIVATE_DATE="2016-03-8 00:00:00" 
+		CREATED_BY="DJ"  CREATED_DATE="2016-03-8 00:00:00" LAST_UPDATED_BY="DJ" LAST_UPDATED_DATE="2016-03-8 00:00:00"
+		PASSWORD="123456"   />            
+     <PSSP_SUPPLIER_SUB_CLASS/>
+
+</dataset>

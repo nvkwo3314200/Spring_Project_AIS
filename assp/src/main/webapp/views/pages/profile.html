@@ -1,0 +1,87 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+
+
+	<h1>
+		{{'menu_profile'|translate}}
+	</h1>
+
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Your Page Content Here -->
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					<div class="row">
+						<label class="col-md-2 control-label">{{'user_id'|
+							translate}}:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control " ng-model="userModel.userId"  ng-readonly="userId" />
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-2 control-label">{{'user_name'|
+							translate}}:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" ng-model="userModel.userName" ng-readonly="userName" />
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 required"> <label  class="control-label">{{'email'|
+							translate}}:</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" ng-model="userModel.email" maxlength="100" />
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2 control-label">{{'contact_no'| translate}}:</label>
+	
+						<div class="col-md-4">
+							<input type="text" class="form-control" ng-model="userModel.contactNo" maxlength="32"/>
+						</div>
+						<div class="col-md-6">
+						</div>
+				   </div>
+				   <button type="button" class="btn btn-primary" style="float:right"
+							ng-click="editUser()">{{'save_button' |
+							translate}}</button>
+				</div>
+			</div>
+				
+
+
+
+		</div>
+
+
+
+	</div>
+	</div>
+	</div>
+
+
+
+</section>
+<!-- /.content -->

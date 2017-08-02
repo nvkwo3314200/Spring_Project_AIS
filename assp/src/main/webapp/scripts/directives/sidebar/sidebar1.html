@@ -1,0 +1,160 @@
+	      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            
+            <!--<div class="pull-left info">-->
+              <!--<p></p>-->
+              <!--&lt;!&ndash; Status &ndash;&gt;-->
+              <!---->
+            <!--</div>-->
+
+              <span class="ng-binding "><font color="#000000">{{userName}} </font></span>
+
+          </div>
+
+          <!-- search form (Optional) -->
+
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+          
+          	<!-- product management -->
+			<li class="treeview" ng-if="!su">
+			   <a href="#"><i class="fa fa-link"></i> <span>{{'product_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+			   <ul class="treeview-menu">
+			      <li class="active"><a ui-sref="main.product_view" ><span> {{'view_products' | translate}}</span></a></li>
+			      <li class="active" ng-if="productImportLog"><a ui-sref="main.product_import_log" ><span>{{'import_log' | translate}}</span></a></li>
+			      <li class="active" ng-if="productAddEdit"><a ui-sref="main.productAdd" ><span> {{'add_edit_product' | translate}}</span></a></li>
+			      <li class="active" ng-if="productBatchUpload"><a ui-sref="main.product_batch_upload" ><span>{{'batch_upload' | translate}}</span></a></li>
+			   </ul>
+			</li>
+			
+			<li class="treeview" ng-if="su">
+			   <a href="#"><i class="fa fa-link"></i> <span>{{'product_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+			   <ul class="treeview-menu">
+			      <li class="active"><a ui-sref="main.product_view" ><span> {{'view_products' | translate}}</span></a></li>
+			      <li class="active" ng-if="productAddEdit"><a ui-sref="main.productAdd" ><span> {{'add_edit_product' | translate}}</span></a></li>
+			      <li class="active" ng-if="productBatchUpload"><a ui-sref="main.product_batch_upload" ><span>{{'batch_upload' | translate}}</span></a></li>
+			   </ul>
+			</li>
+     		
+     		<li class="treeview" ng-if="!su">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'order_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+	              <li class="active" ><a ui-sref="main.view_order_history"><span>{{'order_view' | translate}}</span></a></li>
+              </ul>
+            </li>
+            
+            
+            <li class="treeview" ng-if="su">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'order_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+	              <li class="active" ><a ui-sref="main.mobile_view_order_history"><span>{{'order_view' | translate}}</span></a></li>
+              </ul>
+            </li>
+          
+          	<li class="treeview" ng-if="systemManagement">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'system_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active" ng-if="systemUserAccount"><a ui-sref="main.user_view"><span> {{'user_account' | translate}}</span></a></li>
+                 <li class="active"><a ui-sref="main.role_function"  ><span> {{'role_function' | translate}}</span></a></li> <!-- new -->
+                 <li class="active" ng-if="systemListValue"><a ui-sref="main.system_list_value"><span>{{'list_of_value' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemConfiguration"><a ui-sref="main.deliveryDate"><span>{{'General_Configuration' | translate}}</span></a></li>
+                 <li class="active"><a ui-sref="main.system_shop"><span>{{'system_shop' | translate}}</span></a></li>
+                 
+				 <li class="active"><a ui-sref="main.userManager"><span>{{'user_account' | translate}}</span></a></li>             
+                 <li class="active"><a ui-sref="main.menu_manager"><span>{{'sys_menu_function' | translate}}</span></a></li>
+                 <li class="active"><a ui-sref="main.roleManager"><span>{{'sys_menu_role' | translate}}</span></a></li>
+                 <!--    
+                 <li class="active" ng-if="systemDept"><a ui-sref="main.system_dept"><span>{{'system_dept' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemBrand"><a ui-sref="main.system_brand"><span>{{'brand' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemUserAccount"><a ui-sref="main.cronJob"><span>{{'cron_job' | translate}}</span></a></li>
+                  -->
+              </ul>
+            </li>
+            
+            <li class="treeview" ng-if="su">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'system_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active"><a ui-sref="main.user_view_su"><span> {{'user_account' | translate}}</span></a></li>
+                 <!-- 
+                 <li class="active"><a ui-sref="main.system_eletter"><span>{{'system_eLetter' | translate}}</span></a></li>
+                  -->
+              </ul>
+            </li>
+            
+            <li class="treeview" >
+              <a href="#"><i class="fa fa-link" ></i> <span>{{'my_account' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active" ><a ui-sref="main.myAccount_profile"><span>{{'menu_profile' | translate}}</span></a></li>
+                 <li class="active" ><a ui-sref="main.password"><span>{{'menu_password' | translate}}</span></a></li>
+              </ul>
+            </li>
+            
+            <li class="treeview" ng-if="su">
+              <a href="#"><i class="fa fa-link" ></i> <span>{{'my_shop' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active" ><a ui-sref="main.shop_setting"><span>{{'my_shop_setting_topic' | translate}}</span></a></li>
+                 <li class="active" ><a ui-sref="main.shop_product_cat"><span>{{'my_shop_product_cat' | translate}}</span></a></li>
+                 <li class="active" ><a ui-sref="main.shop_discount"><span>{{'my_shop_discount' | translate}}</span></a></li>
+              </ul>
+            </li>
+          
+          
+          <!-- 
+          
+			   <a href="#"><i class="fa fa-link"></i> <span>{{'product_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+			   <ul class="treeview-menu">
+			      <li class="active"><a ui-sref="main.product_view" ><span> {{'view_products' | translate}}</span></a></li>
+			      <li class="active" ng-if="productImportLog"><a ui-sref="main.product_import_log" ><span>{{'import_log' | translate}}</span></a></li>
+			      <li class="active" ng-if="productAddEdit"><a ui-sref="main.productAdd" ><span> {{'add_edit_product' | translate}}</span></a></li>
+			      <li class="active" ng-if="productBatchUpload"><a ui-sref="main.product_batch_upload" ><span>{{'batch_upload' | translate}}</span></a></li>
+			   </ul>
+			</li>
+           
+            <li class="treeview" ng-if="!su">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'order_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+	              <li class="active" ><a ui-sref="main.view_order_history"><span>{{'order_view_history' | translate}}</span></a></li>
+              </ul>
+            </li>
+            
+            
+            <li class="treeview" ng-if="su">
+            
+              <a href="#"><i class="fa fa-link"></i> <span>{{'order_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+	              <li class="active" ><a ui-sref="main.mobile_view_order_history"><span>{{'order_view_history' | translate}}</span></a></li>
+              </ul>
+            </li>
+            
+            <li class="treeview" ng-if="systemManagement">
+              <a href="#"><i class="fa fa-link"></i> <span>{{'system_management' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active"><a ui-sref="main.user_view"  ng-if="systemUserAccount" ><span> {{'user_account' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemListValue"><a ui-sref="main.system_list_value"><span>{{'list_of_value' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemDept"><a ui-sref="main.system_dept"><span>{{'system_dept' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemBrand"><a ui-sref="main.system_brand"><span>{{'brand' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemConfiguration"><a ui-sref="main.deliveryDate"><span>{{'General_Configuration' | translate}}</span></a></li>
+                 <li class="active" ng-if="systemUserAccount"><a ui-sref="main.cronJob"><span>{{'cron_job' | translate}}</span></a></li>
+              </ul>
+            </li>
+            
+            <li class="treeview" >
+              <a href="#"><i class="fa fa-link" ></i> <span>{{'my_account' | translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                 <li class="active" ><a ui-sref="main.myAccount_profile"><span>{{'menu_profile' | translate}}</span></a></li>
+                 <li class="active" ng-if="myAccountSettings"><a ui-sref="main.myAccount_settings"><span>{{'menu_settings' | translate}}</span></a></li>
+                 <li class="active" ><a ui-sref="main.password"><span>{{'menu_password' | translate}}</span></a></li>
+              </ul>
+            </li>
+             -->
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>

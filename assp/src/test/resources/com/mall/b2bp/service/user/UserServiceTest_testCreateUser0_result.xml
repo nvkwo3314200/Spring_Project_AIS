@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+   <PSSP_SUPPLIER>
+	   </PSSP_SUPPLIER>
+ 	<pssp_user
+ 	  USER_ID="DJTEST"
+ 	  USER_NAME="dj"
+	  USER_ROLE="SYSTEMADMIN" 
+	  ACTIVATE="Y"  
+	  EMAIL="136548@qq.com"
+	  PASSWORD="bcd59ae5686eff06d3a12dd86f33a828"   
+	  CONTACT_NO="13168075869"/>
+<PSSP_SUPPLIER_SUB_CLASS/>
+</dataset>

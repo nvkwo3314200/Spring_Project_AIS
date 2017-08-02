@@ -1,0 +1,355 @@
+<!-- Content Header (Page header) -->
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+
+                    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                        <div translate="{{alert.msg}}">
+                        </div>
+                    </uib-alert>
+
+<div cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+         </div>
+                    <div class="row">
+
+                        <label class="col-sm-2 control-label">{{'order_id' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.hybrisOrderId}}</div>
+
+
+                       
+
+                        <label class="col-sm-2 control-label"> {{'order_create_date' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.orderDatetimeStr}}</div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="col-sm-2 control-label"> {{'order_customerName' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.customerName}}</div>
+
+                        <label class="col-sm-2 control-label"> {{'order_PhoneNo' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.customerPhoneNo}}</div>
+
+                        <label class="col-sm-2 control-label"> {{'order_MobileNo' | translate}}:</label>
+
+                        <div class="col-md-1"> {{orderData.customerMobileNo}}</div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="col-sm-2 control-label"> {{'order_RecipientName' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.receiverName}}</div>
+
+
+                        <label class="col-sm-2 control-label"> {{'order_RecipientContactNumber' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.receiverPhoneNo}}</div>
+                        
+                        
+                        <label class="col-sm-2 control-label" ng-if="orderData.replaceOrderInd=='Y'"> {{'orig_order_id' | translate}}:</label>
+
+                        <div class="col-md-1" ng-if="orderData.replaceOrderInd=='Y'">
+                         <label  ng-click="linkOrigOrder(orderData.origOrderId)"><u> {{orderData.origHybrisOrderId}} </u> </label>
+                         </div>
+                        
+                        
+                    </div>
+
+                    <div class="row">
+                        <label class="col-sm-2 control-label"> {{'order_RecipientAddress' | translate}}:</label>
+
+                        <div class="col-md-10"> {{orderData.deliveryAddress}}</div>
+                    </div>
+
+                    <div class="row">
+
+                        <label class="col-sm-2 control-label"> {{'order_status' | translate}}:</label>
+
+                        <div class="col-md-2"> {{orderData.statusDesc}}</div>
+
+                        <!--<label class="col-sm-2 control-label"> {{'order_consignment_status' | translate}}:</label>-->
+
+                        <!--<div class="col-md-2"> {{orderData.consignmentStatusDesc}}</div>-->
+
+                        <label class="col-sm-2 control-label"> {{'order_shipped_date' | translate}}:</label>
+
+
+                        <div class="col-md-2">
+
+                            <div ng-if="shippedStatus && visible">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="orderData.consignmentShippedDate" is-open="popup1.opened"
+                                           datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                           placeholder="yyyyMMdd" id="crfm" maxlength="20"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                                </p>
+                                <div style="color:red" id="error_shippedDate"></div>
+                            </div>
+
+                            <div ng-if="!shippedStatus">
+                                {{orderData.consignmentShippedDateStr}}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <label class="col-sm-2 control-label">{{'order_deliveredFee' | translate}}:</label>
+
+                        <div class="col-md-2">
+                            {{orderData.deliveryFee}}
+                        </div>
+
+                        <label class="col-sm-2 control-label"> {{'order_deliveredDate' | translate}}:</label>
+
+                        <div class="col-md-2">
+
+                            <div ng-if="waitFordeliveryStatus && visible">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="orderData.deliveryDate" is-open="popup1.opened"
+                                           datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                           placeholder="yyyyMMdd"  maxlength="20"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                                </p>
+                                <div style="color:#ff0000" id="error_deliveredDate"></div>
+                            </div>
+
+                            <div ng-if="!waitFordeliveryStatus">
+                                {{orderData.deliveryDateStr}}
+                            </div>
+
+                        </div>
+
+                       
+
+                    </div>
+
+
+                    <div class="row">
+                        <label class="col-sm-2 control-label">{{'order_pickDate' | translate}} </label>
+
+                        <div class="col-md-2">
+                            <div ng-if=" pickedStatus && visible">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="orderData.pickDate" is-open="popup1.opened"
+                                           datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                           placeholder="yyyyMMdd"  maxlength="20"/>
+                                  <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                  </span>
+                                </p>
+                                <div style="color:#ff0000" id="error_pickDate"></div>
+                            </div>
+
+                            <div ng-if="!pickedStatus">
+                                {{orderData.pickDateStr}}
+                            </div>
+
+                        </div>
+
+
+                        <label class="col-md-2 control-label"  ng-hide='true'>{{'order_box_number' | translate}}</label>
+
+                        <div class="col-md-2" ng-hide='true'>
+                            <div ng-if="(shippedStatus || pickedStatus) && visible">
+                                <input type="text" class="form-control " ng-model="orderData.boxNum" maxlength="20">
+                            </div>
+
+                            <div ng-if="!shippedStatus && !pickedStatus">
+                                {{orderData.boxNum}}
+                            </div>
+                        </div>
+                        
+
+
+                        <label class="col-sm-2 control-label">{{'order_trackId' | translate}}</label>
+
+                        <div class="col-md-2">
+                            <div ng-if="(shippedStatus || pickedStatus) && visible">
+                                <input type="text" class="form-control " ng-model="orderData.trackId" maxlength="20">
+                            </div>
+
+                            <div ng-if="!shippedStatus && !pickedStatus">
+                                {{orderData.trackId}}
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <br/>
+
+
+                        <table st-table="rowCollection" class="table table-bordered table-hover smart-table">
+                            <thead>
+                            <tr>
+
+                                <th st-ratio="8">{{'sku' | translate}}</th>
+                                <th st-ratio="13"> {{'supplier_id' | translate}}</th>
+                                
+                                <th st-ratio="13" ng-hide="true">{{'brand_name' | translate}}</th>
+                                <th st-ratio="8"> Product Image</th>
+                                <th st-ratio="12">{{'product_description' | translate}}</th>
+                                <th st-ratio="8">{{'ordered_quantity' | translate}}</th>
+                                <th st-ratio="8">{{'picked_quantity' | translate}}</th>
+                                <th st-ratio="3"></th>
+                                <!-- <th st-ratio="8">{{'delivered_quantity' | translate}} </th> -->
+                                <th st-ratio="5">{{'size_desc' | translate}}</th>
+                                <th st-ratio="5">{{'net_price' | translate}}</th>
+                                <th st-ratio="5">{{'total_returned_quantity' | translate}}</th>
+                                <th st-ratio="5"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollection">
+                                <td>{{row.skuId}}</td>
+                                <td>{{row.brand}}</td>
+                                <td ng-hide="true">{{row.brand}}</td>
+                                
+                               <td>		
+                                 <img style="width:50" 
+                                 ng-hide = "row.productImageDefault == null || row.productImageDefault == ''"  
+                                 ng-src="{{row.productImageDefault}}"  />
+			                     <!-- ng-src="./orderImageShow?fileName={{row.productImageDefault}}"  --> 
+								</td>
+                                
+                                <td>{{row.productName}}</td>
+                                <td align="right">{{row.qty}}</td>
+                                <td>
+                                
+                                
+                                    <div ng-if="pickedStatus && visible">
+                                        <input type="number" class="form-control " ng-model="row.pickedQty"  maxlength="10"  ng-blur="blur_checkPqty(row)"  style="text-align:right" >
+										 <div style="color:red" id="error_{{row.id}}"></div>
+                                    </div>
+
+                                    <div ng-if="!pickedStatus"  align="right">
+                                        {{row.pickedQty}} 
+                                    </div>
+                                </td>
+                                
+								<td>
+									 <button type="button" class="btn btn-default" ng-click="openSerial(row,'pqty')" >
+											  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</button>
+								</td>
+								
+                                <!-- <td>
+                                    <div ng-if="status== 'DELIVERY'  ">
+                                        <input type="number" class="form-control " ng-model="row.deliveryQty"  maxlength="10">
+
+                                        <div style="color:red" id="error_delivered_{{row.id}}"></div>
+                                    </div>
+
+                                    <div ng-if="status!= 'DELIVERY'  ">
+                                        {{row.deliveryQty}}
+                                    </div>
+                                </td> -->
+
+                                <td>{{row.sizeDesc}}</td>
+                                <td align="right">{{row.unitPrice | number:2 }}</td>
+                              
+                                <td align="right"> 
+	              					<div ng-if="status== 'DELIVERY' ">
+	                            		<input type="number" class="form-control " ng-model="row.returnTotal"  maxlength="10"   ng-blur="blur_returnqty(row)" >
+										 <div style="color:red" id="errorReturn_{{row.id}}"></div>
+									 </div>
+                                </td>
+                                
+                                <td>
+                                 <div ng-if="status== 'DELIVERY'  ">
+                                	<button type="button" class="btn btn-default" ng-click="openSerial(row,'delivery')" >
+										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</button>
+								 </div>
+									
+								</td>
+                            </tr>
+                          
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+
+
+                            <button type="button" ng-if="invoiceReadyInd && visible" class="btn btn-primary"
+                                    ng-click="singlePrintPdf(orderData.invoiceFilename)">{{'print_invoice_delivery_note'  | translate}}
+                            </button>
+
+
+                            <button type="button" ng-if="pickedStatus && visible" class="btn btn-primary"
+                                    ng-click="pick()">{{'button_pick'  | translate}}
+                            </button>
+
+
+                            <button type="button" ng-if="shippedStatus && visible" class="btn btn-primary"
+                                    ng-click="ship()">{{'button_ship'  | translate}}
+                            </button>
+
+<button type="button" ng-if="waitFordeliveryStatus ||permissionExecut"
+								class="btn btn-primary" ng-click="batchConfirmDelivery()">{{'button_delivery'| translate}}</button>
+								
+
+                            <button type="button" ng-if="waitFordeliveryStatus && visible" class="btn btn-primary"
+                                    ng-click="delivery()">{{'button_delivery' | translate}}
+                            </button>
+
+                            <button type="button" ng-if="deliveredStatus && !visible" class="btn btn-primary"
+                                    ng-click="returnConfirm()">Save
+                            </button>
+
+
+                            <button type="button" class="btn btn-primary" ng-click="cancel()">{{'button_cancel'| translate}}
+                            </button>
+
+                        </div>
+                    </div>
+                 
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+</section>
+
+
+

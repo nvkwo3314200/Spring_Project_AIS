@@ -1,0 +1,255 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1 ng-hide="viewStatu">{{'sys_label_add_edit'|translate}}
+		{{'sys_menu_user'|translate}}</h1>
+	<h1 ng-show="viewStatu">{{'sys_label_view'|translate}}
+		{{'sys_menu_user'|translate}}</h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="alert.close($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					<!-- user id , user name -->
+					<div class="row">
+						<div class="col-md-1 required">
+							<label class="control-label">{{'user_id'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" required maxlength="50"
+								placeholder="{{'user_id'|translate}}" id="userCode"
+								ng-model="userInfoVo.userCode"
+								ng-disabled="(userInfoVo.id != null ?true:false) || viewStatu">
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1 required">
+							<label class="control-label">{{'user_name'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" required maxlength="100"
+								placeholder="{{'user_name'|translate}}" id="userName"
+								ng-model="userInfoVo.userName" ng-disabled="viewStatu">
+						</div>
+					</div>
+					<div class="row" ng-if="isSaveCk">
+						<div class="col-md-1"></div>
+						<div class="col-md-4">
+							<span style="color: red"
+								ng-show="userInfoVo.userCode==null && isSaveCk"> Login ID
+								is required. </span>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1"></div>
+						<div class="col-md-4">
+							<span style="color: red"
+								ng-show="userInfoVo.userName==null && isSaveCk"> Name is
+								required. </span>
+						</div>
+					</div>
+
+					<!-- password , email -->
+					<div class="row" ng-if="userInfoVo.id == null">
+						<div class="col-md-1 required">
+							<label class="control-label">{{'user_password'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="password" class="form-control" required
+								maxlength="20" placeholder="{{'user_password'|translate}}"
+								ng-model="userInfoVo.userPwd" ng-disabled="viewStatu">
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1">
+							<label class="control-label">{{'email'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="50"
+								placeholder="{{viewStatu ? '' : 'email'|translate}}" id="email"
+								ng-model="userInfoVo.email" ng-disabled="viewStatu">
+						</div>
+					</div>
+					<div class="row" ng-if="userInfoVo.id !=null">
+						<div class="col-md-1 required">
+							<label class="control-label">{{'user_password'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="password" class="form-control" required
+								maxlength="20" placeholder="******" id="userPwd"
+								ng-model="userInfoVo.userPwd" ng-disabled="viewStatu">
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1">
+							<label class="control-label">{{'email'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="50"
+								placeholder="{{viewStatu ? '' : 'email'|translate}}" id="email"
+								ng-model="userInfoVo.email" ng-disabled="viewStatu">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-4">
+							<span style="color: red"
+								ng-show="userInfoVo.userPwd==null && isSaveCk && userInfoVo.id ==null">
+								Password is required. </span>
+						</div>
+						<!-- 
+						<div class="col-md-1"></div>
+						<div class="col-md-4">
+							<span style="color:red" ng-show="userInfoVo.mallId==null && isSaveCk && isMall">
+								{{'mall'|translate}}{{'is_required'|translate}}
+							</span>
+						</div>
+						 -->
+					</div>
+
+					<!-- contact no, shop id -->
+					<div class="row">
+						<div class="col-md-1">
+							<label class="control-label">{{'contact_no'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="20"
+								placeholder="{{'contact_no'|translate}}"
+								ng-model="userInfoVo.tel" ng-disabled="viewStatu">
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1">
+							<label class="control-label">{{'sys_label_active'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<select id="active" ng-model="userInfoVo.userActiveInd"
+								ng-change="setdate()" class="form-control"
+								ng-disabled="viewStatu">
+								<option value="Y">{{'sys_label_y'|translate}}</option>
+								<option value="N">{{'sys_label_n'|translate}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row" ng-if="userInfoVo.shopId != null">
+						<div class="col-md-1">
+							<label class="control-label">{{'shop'|translate}}</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" maxlength="50" id="shop"
+								ng-model="userInfoVo.shop.shopCode" ng-disabled=true>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-2">
+							<h3>{{'sys_menu_role'|translate}}</h3>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12" ng-hide="viewStatu">
+							<button type="button" class="btn btn-primary"
+								ng-click="addUserRole()">{{'sys_button_add'|translate}}</button>
+							<button type="button" class="btn btn-primary"
+								ng-click="editUserRole()">{{'sys_button_edit'|translate}}</button>
+							<button type="button" class="btn btn-primary"
+								ng-click="deleteUserRole()">{{'sys_button_delete'|translate}}</button>
+							<!-- 
+						<button type="button" class="btn btn-primary"
+							 ng-click="userRoleAuditTrail()">{{'sys_button_audit'|translate}}</button>
+							  -->
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<table st-table="bufferRole.data"
+							st-safe-src="bufferRole.rowCollection"
+							class="table table-bordered table-hover smart-table">
+							<thead>
+								<tr>
+									<th row-select-all="bufferRole.data"
+										selected="bufferRole.selected"
+										ng-click="bufferRole.selectAll(bufferRole.data)"></th>
+									<th ng-hide='true'></th>
+									<th st-sort="roleName">{{'sys_label_role_name'|translate}}</th>
+									<th st-sort="roleCode">{{'sys_label_role_code'|translate}}</th>
+									<th st-sort="active">{{'sys_label_active'|translate}}</th>
+									<!-- 
+								<th st-sort="inactiveDate">{{'sys_label_inactive_date'|translate}}</th>
+								 -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="row in bufferRole.data" id="tr{{row.id}}"
+									ng-dblclick="editUserRole2(row)"
+									ng-click="bufferRole.select(row)">
+									<td row-select="row"></td>
+									<td ng-hide='true'>{{row.id}}</td>
+									<td>{{row.roleName}}</td>
+									<td>{{row.roleCode}}</td>
+									<td><span ng-show="row.roleActive=='Y'">{{'sys_label_y'|translate}}</span>
+										<span ng-show="row.ActiveInd=='N'">{{'sys_label_n'|translate}}</span>
+									</td>
+									<!--  
+								<td>{{row.inactiveDate | date:'yyyy-MM-dd'}}</td>
+							-->
+								</tr>
+							<tfoot>
+								<tr>
+									<td colspan="8" class="text-center">
+										<div st-items-by-page="page" st-pagination=""
+											st-template="./views/pages/pagination_custom.html"></div>
+										<div ng-show="page  < bufferRole.rowCollection.length "
+											style="margin-left: 412px; margin-top: -53px">
+											<input style="height: 32px" id="pageInput"
+												class="select-page" type="text" ng-model="page">&nbsp;{{'sys_label_items_per_page'
+											| translate}}
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+							</tbody>
+						</table>
+					</div>
+					<div ng-if="showRolePop"
+						ng-include="'views/pages/power/userRoleDialog.html'">asdfasdfasdf</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-right">
+						<button type="button" class="btn btn-primary ng-binding"
+							ng-click="save()" ng-hide="viewStatu">{{'sys_button_save'|translate}}</button>
+						<button type="button" class="btn btn-primary" id="cancel"
+							ng-click="cancel()">{{'sys_button_cancel'|translate}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+<!-- confirmModal -->
+<div id="confirmModal" class="modal fade bd-example-modal-sm"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">{{'sys_label_hint'|translate}}</h4>
+			</div>
+			<div class="modal-body">{{'sys_msg_confirm'|translate}}</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal"
+					ng-click="deleteUserRole(true)">{{'sys_button_ok'|translate}}</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{'sys_button_cancel'|translate}}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

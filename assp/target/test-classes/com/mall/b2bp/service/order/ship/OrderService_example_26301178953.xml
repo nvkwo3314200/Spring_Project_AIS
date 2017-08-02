@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+
+
+
+    <PSSP_ORDER
+            hybris_order_id="26301178953"
+            order_datetime="2016-03-11 00:00:00"
+            pick_store="922"
+            pick_type=""
+            special_instruction=""
+            supplier_id=""
+            customer_id="1058801"
+            customer_type=""
+            customer_name="Karen"
+            customer_phone_no="" customer_mobile_no="67896789"
+            tender_type="CreditCardFull" payment_ref="eNetsHK01178959"
+            total_amount="" surcharge=""
+            delivery_fee=""
+            delivery_date=""
+
+            delivery_timeslot=""
+            ship_district=""
+            receiver_name=""
+            receiver_phone_no=""
+            receiver_mobile_no=""
+            delivery_address=""
+            show_price=""
+            invoice_filename=""
+            dn_filename="" remark=""
+            status="PICKED"
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            pick_order_id=""
+            shipped_date=""
+            pick_date="2016-03-11 00:00:00"
+            track_id="26301178953a"
+            box_num=""
+            delivery_success=""
+            />
+
+
+ <PSSP_ORDER_RETURN/>
+ <PSSP_ORDER_RETURN_ENTRY/>
+</dataset>

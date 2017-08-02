@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductImagesModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductImagesModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="DECIMAL" />
+
+    <result column="IMAGE_TYPE" property="imageType" jdbcType="VARCHAR" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="SEQUENCE" property="sequence" jdbcType="DECIMAL" />
+    <result column="FAILED_REASON" property="failedReason" jdbcType="VARCHAR" />    
+    <result column="LAST_EXPORTED_DATE" property="lastExportedDate" jdbcType="TIMESTAMP" />  
+  </resultMap>
+  
+  <resultMap id="ExportImagesResultMap" type="com.mall.b2bp.models.product.ProductImagesModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="DECIMAL" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="DECIMAL" />
+    <result column="IMAGE_TYPE" property="imageType" jdbcType="VARCHAR" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="TIMESTAMP" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="SEQUENCE" property="sequence" jdbcType="DECIMAL" />
+    <result column="FAILED_REASON" property="failedReason" jdbcType="VARCHAR" />    
+    <result column="LAST_EXPORTED_DATE" property="lastExportedDate" jdbcType="TIMESTAMP" />  
+    <result column="IMAGE_SYNC_CNT" property="imageSyncCount" jdbcType="DECIMAL" />
+  </resultMap>  
+  
+  <sql id="Base_Column_List" >
+    ID, PRODUCT_ID,  FILE_NAME, FILE_PATH, STATUS, CREATED_BY, CREATED_DATE, 
+    LAST_UPDATED_BY, LAST_UPDATED_DATE, DESCRIPTION, SEQUENCE,IMAGE_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCT_IMAGES
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PRODUCT_IMAGES
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+    <delete id="deleteByProductId" parameterType="java.math.BigDecimal" >
+    delete from PRODUCT_IMAGES
+    where PRODUCT_ID = #{id,jdbcType=DECIMAL}
+  </delete>
+
+  
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductImagesModel" >
+    insert into PRODUCT_IMAGES (ID, PRODUCT_ID, 
+      FILE_NAME, FILE_PATH, STATUS, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE, DESCRIPTION, SEQUENCE,IMAGE_TYPE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{productId,jdbcType=DECIMAL},
+      #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate}, #{description,jdbcType=VARCHAR}, #{sequence,jdbcType=DECIMAL}, #{imageType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductImagesModel" >
+          <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PRODUCT_images_seq.NEXTVAL FROM DUAL
+      </selectKey>
+      
+    insert into PRODUCT_IMAGES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+
+      <if test="fileName != null" >
+        FILE_NAME,
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="sequence != null" >
+        SEQUENCE,
+      </if>
+      
+    <if test="imageType != null" >
+        IMAGE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=DECIMAL},
+      </if>
+
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=DECIMAL},
+      </if>
+    <if test="imageType != null" >
+        #{imageType,jdbcType=VARCHAR},    
+      </if>      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.ProductImagesModel" >
+    update PRODUCT_IMAGES
+    <set >
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      </if>
+
+      <if test="fileName != null" >
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        SEQUENCE = #{sequence,jdbcType=DECIMAL},
+      </if>
+      <if test="failedReason != null" >
+        FAILED_REASON = #{failedReason,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExportedDate != null" >
+        LAST_EXPORTED_DATE = #{lastExportedDate}
+      </if>
+     <if test="imageType != null" >
+        IMAGE_TYPE=#{imageType,jdbcType=VARCHAR},    
+      </if>              
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.ProductImagesModel" >
+    update PRODUCT_IMAGES
+    set PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      SEQUENCE = #{sequence,jdbcType=DECIMAL},
+      IMAGE_TYPE=#{imageType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+	<select id="getMaxProductImagesId" resultType="int">
+		select PRODUCT_images_seq.nextval FROM dual
+	</select>
+
+	<select id="getProductImagesByProductId" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		*
+		from PRODUCT_IMAGES
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+		 
+		<if test="imageType != null and imageType != ''" >
+			and IMAGE_TYPE=#{imageType,jdbcType=VARCHAR} 
+		</if>
+		
+		order by SEQUENCE asc
+	</select>
+
+	<select id="getProductImagesBySkutId" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+	    select  ppi.*
+	    from PRODUCT_IMAGES ppi , PRODUCT pp
+	    where pp.id = ppi.product_id  and  pp.product_code  = #{productCode,jdbcType=VARCHAR}
+     
+		 
+		<if test="imageType != null and imageType != ''" >
+			and IMAGE_TYPE=#{imageType,jdbcType=VARCHAR} 
+		</if>
+		
+		order by SEQUENCE asc
+	</select>
+
+	<select id="getProductImagesByProductCode" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		ppi.*
+		from PRODUCT_IMAGES ppi,PRODUCT pp
+		where pp.id=ppi.product_id
+		and pp.VERSION = #{version,jdbcType=VARCHAR}
+		and pp.PRODUCT_CODE = #{productCode,jdbcType=VARCHAR}
+		and ppi.SEQUENCE = #{seq,jdbcType=DECIMAL}
+		and ppi.IMAGE_TYPE = #{imageType,jdbcType=VARCHAR}
+	</select>
+
+<!--  
+  <select id="getExportImages" resultMap="ExportImagesResultMap">
+  	<![CDATA[
+     select P.PRODUCT_CODE, I.* from PRODUCT P, PRODUCT_IMAGES I 
+     where P.ID = I.PRODUCT_ID AND P.VERSION = 'STAGING' and P.STATUS = 'APPROVED_IN_RETEK' and (I.LAST_EXPORTED_DATE IS NULL OR I.LAST_EXPORTED_DATE < P.LAST_APPROVAL_DATE)
+     ]]>
+  </select>  
+  -->
+    <select id="getExportImages" resultMap="ExportImagesResultMap">
+  	<![CDATA[
+     select P.PRODUCT_CODE, P.IMAGE_SYNC_CNT, I.* from PRODUCT P, PRODUCT_IMAGES I 
+     where P.ID = I.PRODUCT_ID AND P.VERSION = 'STAGING' and P.RETEK_LAST_APPROVED_DATE is not null
+      and (I.LAST_EXPORTED_DATE IS NULL OR 
+      (I.LAST_EXPORTED_DATE < P.RETEK_LAST_APPROVED_DATE and I.LAST_UPDATED_DATE > I.LAST_EXPORTED_DATE)
+      )
+     ]]>
+  </select>  
+  
+	<select id="getProductImagesByProductIdSequence" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		*
+		from PRODUCT_IMAGES
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and SEQUENCE=#{sequence,jdbcType=VARCHAR} and IMAGE_TYPE=#{imageType,jdbcType=VARCHAR} order by SEQUENCE asc
+	</select>
+	
+</mapper>

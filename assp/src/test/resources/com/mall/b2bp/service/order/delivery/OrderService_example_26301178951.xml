@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <PSSP_ORDER
+            id="26301178951"
+            hybris_order_id="26301178951"
+            order_datetime="2016-03-11 00:00:00"
+            pick_store="922"
+            status="SHIPPED"
+            pick_date="2016-03-11 00:00:00"
+
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+
+
+    <PSSP_ORDER_ENTRY
+            id="1092067442"
+            ORDER_ID="26301178951"
+            seq_num="1"
+            sku_id="1092067442"
+            sku_type="Ambient"
+            supplier_id="2"
+            brand="BORGO SALCETINO"
+            brand_sec="BORGO"
+            product_name="nullCHIANTI CLASSICO DOCG"
+            product_name_sec="古典奇揚第紅酒"
+            qty="5"
+            picked_qty="12"
+            size_desc="75CL"
+            unit_price="113.05"
+            sku_amount="113.05"
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+
+
+    <PSSP_ORDER_ENTRY
+            id="1092067443"
+            ORDER_ID="26301178951"
+            seq_num="2"
+            sku_id="1092067442"
+            sku_type="Ambient"
+            supplier_id="2"
+            brand="BORGO SALCETINO"
+            brand_sec="BORGO"
+            product_name="nullCHIANTI CLASSICO DOCG"
+            product_name_sec="古典奇揚第紅酒"
+            qty="15"
+            picked_qty="12"
+            size_desc="75CL"
+            unit_price="113.05"
+            sku_amount="113.05"
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+
+
+    <PSSP_ORDER_ENTRY
+            id="1092067444"
+            ORDER_ID="26301178951"
+            seq_num="3"
+            sku_id="1092067442"
+            sku_type="Ambient"
+            supplier_id="2"
+            brand="BORGO SALCETINO"
+            brand_sec="BORGO"
+            product_name="nullCHIANTI CLASSICO DOCG"
+            product_name_sec="古典奇揚第紅酒"
+            qty="25"
+            picked_qty="12"
+            size_desc="75CL"
+            unit_price="113.05"
+            sku_amount="113.05"
+            created_by="dunitTest1"
+            created_date="2016-03-11 00:00:00"
+            last_updated_by="dunitTest1"
+            last_updated_date="2016-03-11 00:00:00"
+            />
+<PSSP_ORDER_AUDIT/>
+ <PSSP_ORDER_RETURN/>
+ <PSSP_ORDER_RETURN_ENTRY/>
+</dataset>

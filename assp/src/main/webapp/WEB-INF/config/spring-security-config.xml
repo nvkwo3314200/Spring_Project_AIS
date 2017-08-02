@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<security:global-method-security secured-annotations="enabled" />
+
+	<security:http 
+		realm="Welcome to A.S. Watson Supplier Portal Web Application">
+
+		<security:http-basic />
+		
+		<security:form-login
+			default-target-url="/login/success"
+			authentication-failure-handler-ref="loginAuthenticationFailureHandler"
+			login-processing-url="/j_spring_security_check" />
+			
+		<!-- token-validity 30 days -->  
+		<security:remember-me data-source-ref="dataSource" 
+				token-validity-seconds="2592000" 
+				remember-me-parameter="rememberMe"/>	
+		
+		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+
+		<security:logout logout-url="/logout" logout-success-url="/#/login" />
+		<security:csrf disabled="true" />
+		
+		<!-- <security:headers defaults-disabled="true" > -->
+		
+	<!-- 	<security:cache-control/> -->
+		
+	<!-- 	</security:headers> -->
+	</security:http>
+
+
+	
+	<!-- check user -->
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider>
+			<!-- encryption -->
+			<security:password-encoder hash="md5">
+				<security:salt-source user-property="username"/>
+			</security:password-encoder>
+			
+			<!-- Verify the current logged in user -->
+        	<security:jdbc-user-service data-source-ref="dataSource"
+        		users-by-username-query="select USER_CODE username, PASSWORD password, decode(ACTIVE_IND, 'Y', 1, 'N', 0, 1) enabled from SYS_USER where USER_CODE = ?"
+        		authorities-by-username-query="select USER_CODE username, 'SYSTEMADMIN' authority from SYS_USER su, SYS_USER_ROLE sur, SYS_ROLE sr where su.ID = sur.USER_ID(+) and sur.ROLE_ID = sr.ID(+)  and su.USER_CODE = ?"
+        		role-prefix="ROLE_"/>
+      	</security:authentication-provider>
+	</security:authentication-manager>	
+	
+	<bean id="loginAuthenticationFailureHandler"
+		  class="com.mall.b2bp.security.LoginAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login/failure"/>
+		<aop:scoped-proxy/>
+		
+	</bean>
+	
+</beans>	

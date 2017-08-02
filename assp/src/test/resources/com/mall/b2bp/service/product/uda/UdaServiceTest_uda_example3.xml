@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+	<PSSP_UDA id="1000004" uda_id="99991" uda_value="898989"
+		uda_desc="BBs" sequence="1" created_by="unitTest" created_date="2016-03-11 00:00:00"
+		last_updated_by="unitTest" last_updated_date="2016-03-11 00:00:00" />
+	<PSSP_UDA id="1000005" uda_id="99991" uda_value="898988"
+		uda_desc="bBBs" sequence="2" created_by="unitTest" created_date="2016-03-11 00:00:00"
+		last_updated_by="unitTest" last_updated_date="2016-03-11 00:00:00" />
+
+	<PSSP_SUPPLIER id="2000000000" name="unitTestSupplier"
+		delivery_fee="100" free_delivery_threshold="10" min_delivery_day="1"
+		max_delivery_day="10" warehouse_deli_lead_time="50" created_by="unitTest"
+		created_date="2016-03-11 00:00:00" last_updated_by="unitTest"
+		last_updated_date="2016-03-11 00:00:00" />
+
+	<PSSP_SUPPLIER_CATEGORY id="1000008"
+	category_id="898988"
+		supplier_id="2000000000" created_by="unitTest" created_date="2016-03-11 00:00:00"
+		last_updated_by="unitTest" last_updated_date="2016-03-11 00:00:00" />
+</dataset>
+

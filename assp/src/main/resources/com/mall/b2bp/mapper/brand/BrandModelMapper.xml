@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.brand.BrandModelMapper">
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.brand.BrandModel" >
+    <id column="BRAND_CODE" property="brandCode" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="DECIMAL" />
+    <result column="DESC_EN" property="descEn" jdbcType="VARCHAR" />
+    <result column="DESC_TC" property="descTc" jdbcType="VARCHAR" />
+    <result column="DESC_SC" property="descSc" jdbcType="VARCHAR" />
+    <result column="SYS_REF" property="sysRef" jdbcType="VARCHAR" />
+    <result column="MASTER_ID" property="masterId" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    
+    <result column="IMAGE_FILE_NAME" property="imageFileName" jdbcType="VARCHAR" />
+    
+    <result column="brand_desc_en" property="brandDescEn" jdbcType="VARCHAR" />
+    <result column="brand_desc_tc" property="brandDescTc" jdbcType="VARCHAR" />
+    <result column="brand_desc_sc" property="brandDescSc" jdbcType="VARCHAR" />
+   
+    <result column="TAGLINE_EN" property="brandTaglineEn" jdbcType="VARCHAR" />
+    <result column="TAGLINE_TC" property="brandTaglineTc" jdbcType="VARCHAR" />
+    <result column="TAGLINE_SC" property="brandTaglineSc" jdbcType="VARCHAR" />
+    
+    <result column="BRAND_NAME_SC" property="brandNameSc" jdbcType="VARCHAR" />
+    <result column="BRAND_NAME_EN" property="brandNameEn" jdbcType="VARCHAR" />
+    <result column="BRAND_NAME_TC" property="brandNameTc" jdbcType="VARCHAR" />
+    
+    
+    <result column="WATSONS_MALL_IND" property="watsonsMallInd" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  
+
+  <resultMap  id="BaseResultMap_Supplier" type="com.mall.b2bp.models.brand.BrandModel" extends="BaseResultMap">
+ 	<result column="supplier_id" property="supplierId" jdbcType="VARCHAR" /> 
+  </resultMap>
+   <!-- 
+   <resultMap id="BaseResultMap_Supplier" type="com.mall.b2bp.models.brand.BrandModel" >
+    <id column="BRAND_CODE" property="brandCode" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="DECIMAL" />
+    <result column="DESC_EN" property="descEn" jdbcType="VARCHAR" />
+    <result column="DESC_TC" property="descTc" jdbcType="VARCHAR" />
+    <result column="DESC_SC" property="descSc" jdbcType="VARCHAR" />
+    <result column="SYS_REF" property="sysRef" jdbcType="VARCHAR" />
+    <result column="MASTER_ID" property="masterId" jdbcType="DECIMAL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    
+    <result column="IMAGE_FILE_NAME" property="imageFileName" jdbcType="VARCHAR" />
+    
+    <result column="brand_desc_en" property="shopDescEn" jdbcType="VARCHAR" />
+    <result column="brand_desc_tc" property="shopDescTc" jdbcType="VARCHAR" />
+    <result column="brand_desc_sc" property="shopDescSc" jdbcType="VARCHAR" />
+   
+    <result column="TAGLINE_EN" property="shopTaglineEn" jdbcType="VARCHAR" />
+    <result column="TAGLINE_TC" property="shopTaglineTc" jdbcType="VARCHAR" />
+    <result column="TAGLINE_SC" property="shopTaglineSc" jdbcType="VARCHAR" />
+    <result column="WATSONS_MALL_IND" property="watsonsMallInd" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    
+  </resultMap>
+ 
+   -->
+ 
+  <sql id="Base_Column_List">
+	BRAND_CODE,
+	code,
+
+	DESC_EN,
+	DESC_TC,
+	DESC_SC,
+
+	SYS_REF,
+	MASTER_ID,
+	CREATED_BY,
+	CREATED_DATE,
+	LAST_UPDATED_BY,
+	LAST_UPDATED_DATE ,
+	image_file_name,
+
+	brand_desc_en,
+	brand_desc_tc,
+	brand_desc_sc,
+
+	tagline_en,
+	tagline_tc,
+	tagline_sc,
+
+	BRAND_NAME_EN ,
+	BRAND_NAME_TC ,
+	BRAND_NAME_SC,
+
+	WATSONS_MALL_IND
+
+</sql>
+  
+  <select id="view" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.brand.BrandVo">
+        select * from PSSP_BRAND
+        WHERE 1=1
+
+        <if test="brandCodeStr != null and brandCodeStr != ''" >
+            AND CODE  like '%'||#{brandCodeStr}||'%'
+        </if>
+
+        <if test="descEn != null and descEn!=''">
+            AND UPPER(DESC_EN)  like '%'||UPPER(#{descEn})||'%'
+        </if>
+                
+        <if test="descSc != null and descSc != ''" >
+            AND UPPER(DESC_SC)  like '%'||UPPER(#{descSc})||'%'
+        </if>
+
+        <if test="descTc != null and descTc!=''">
+            AND UPPER(DESC_TC)  like '%'||UPPER(#{descTc})||'%'
+        </if>
+        
+        <if test="sysRef != null and sysRef!=''">
+            AND UPPER(SYS_REF)  like '%'||UPPER(#{sysRef})||'%'
+        </if>
+        
+        <if test="masterIdStr != null and masterIdStr!=''">
+            AND UPPER(MASTER_ID)  like '%'||UPPER(#{masterIdStr})||'%'
+        </if>
+        
+ 		<if test="watsonsMallInd =='Y'.toString()">
+           <![CDATA[ and WATSONS_MALL_IND  ='Y' ]]>
+        </if>
+        
+ 		<!-- <if test="watsonsMallInd =='N'.toString()">
+           <![CDATA[ and (WATSONS_MALL_IND  ='N' or WATSONS_MALL_IND  is null)]]>
+        </if>
+         -->
+        order by CODE 
+
+    </select>
+  
+  <select id="view_brand_supplier" resultMap="BaseResultMap_Supplier" parameterType="com.mall.b2bp.vos.brand.BrandVo">
+			SELECT t.brand_code supplier_id,b.*	FROM PSSP_BRAND b,
+			
+			(select ps.brand_code from PSSP_SUPPLIER_BRAND ps group by ps.brand_code ) t
+      
+      where b.brand_code = t.brand_code(+)
+			and	1 = 1
+
+        <if test="brandCodeStr != null and brandCodeStr != ''" >
+            AND CODE  like '%'||#{brandCodeStr}||'%'
+        </if>
+
+        <if test="descEn != null and descEn!=''">
+            AND UPPER(DESC_EN)  like '%'||UPPER(#{descEn})||'%'
+        </if>
+                
+        <if test="descSc != null and descSc != ''" >
+            AND UPPER(DESC_SC)  like '%'||UPPER(#{descSc})||'%'
+        </if>
+
+        <if test="descTc != null and descTc!=''">
+            AND UPPER(DESC_TC)  like '%'||UPPER(#{descTc})||'%'
+        </if>
+        
+        <if test="sysRef != null and sysRef!=''">
+            AND UPPER(SYS_REF)  like '%'||UPPER(#{sysRef})||'%'
+        </if>
+        
+        <if test="masterIdStr != null and masterIdStr!=''">
+            AND UPPER(MASTER_ID)  like '%'||UPPER(#{masterIdStr})||'%'
+        </if>
+        
+ 		<if test="watsonsMallInd =='Y'.toString()">
+           <![CDATA[ and WATSONS_MALL_IND  ='Y' ]]>
+        </if>
+        
+ 		<!-- <if test="watsonsMallInd =='N'.toString()">
+           <![CDATA[ and (WATSONS_MALL_IND  ='N' or WATSONS_MALL_IND  is null)]]>
+        </if>
+         -->
+        order by CODE 
+
+    </select>
+    
+  <select id="selectByPk" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.brand.BrandVo">
+        select * from PSSP_BRAND
+
+        WHERE 1=1
+            AND CODE =#{brandCodeStr}
+            AND MASTER_ID  = #{masterIdStr}
+        order by CODE 
+    </select>
+	
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PSSP_BRAND
+    where BRAND_CODE = #{brandCode,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PSSP_BRAND
+    where BRAND_CODE = #{brandCode,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.brand.BrandModel" >
+    insert into PSSP_BRAND (BRAND_CODE,code, DESC_EN, DESC_TC, 
+      DESC_SC, SYS_REF, MASTER_ID, 
+      CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+      LAST_UPDATED_DATE)
+    values (#{brandCode,jdbcType=DECIMAL}, #{code,jdbcType=DECIMAL},  #{descEn,jdbcType=VARCHAR}, #{descTc,jdbcType=VARCHAR}, 
+      #{descSc,jdbcType=VARCHAR}, #{sysRef,jdbcType=VARCHAR}, #{masterId,jdbcType=DECIMAL}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{lastUpdatedDate,jdbcType=DATE})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.brand.BrandModel" >
+  
+     <selectKey keyProperty="brandCode" resultType="java.math.BigDecimal" order="BEFORE">
+          select PSSP_BRAND_SEQ.nextval FROM DUAL
+     </selectKey>
+      
+    insert into PSSP_BRAND
+    
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="brandCode != null" >
+        BRAND_CODE,
+      </if>
+       
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="descEn != null" >
+        DESC_EN,
+      </if>
+      <if test="descTc != null" >
+        DESC_TC,
+      </if>
+      <if test="descSc != null" >
+        DESC_SC,
+      </if>
+      <if test="sysRef != null" >
+        SYS_REF,
+      </if>
+      <if test="masterId != null" >
+        MASTER_ID,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="code != null" >
+        #{code,jdbcType=DECIMAL},
+      </if>
+      
+      <if test="descEn != null" >
+        #{descEn,jdbcType=VARCHAR},
+      </if>
+      <if test="descTc != null" >
+        #{descTc,jdbcType=VARCHAR},
+      </if>
+      <if test="descSc != null" >
+        #{descSc,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRef != null" >
+        #{sysRef,jdbcType=VARCHAR},
+      </if>
+      <if test="masterId != null" >
+        #{masterId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=DATE},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate,jdbcType=DATE},
+      </if>
+
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.brand.BrandModel" >
+    update PSSP_BRAND
+    <set >
+      <if test="descEn != null" >
+        DESC_EN = #{descEn,jdbcType=VARCHAR},
+      </if>
+      <if test="descTc != null" >
+        DESC_TC = #{descTc,jdbcType=VARCHAR},
+      </if>
+      <if test="descSc != null" >
+        DESC_SC = #{descSc,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRef != null" >
+        SYS_REF = #{sysRef,jdbcType=VARCHAR},
+      </if>
+     
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      
+      <if test="imageFileName != null" >
+       IMAGE_FILE_NAME = #{imageFileName,jdbcType=VARCHAR},
+      </if>
+      
+      
+      <if test="brandDescEn != null" >
+        brand_desc_en = #{brandDescEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandDescTc != null" >
+        brand_desc_TC = #{brandDescTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandDescSc != null" >
+        brand_desc_SC = #{brandDescSc,jdbcType=VARCHAR},
+      </if>
+     
+      <if test="brandTaglineEn != null" >
+        TAGLINE_EN = #{brandTaglineEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandTaglineTc != null" >
+        TAGLINE_TC = #{brandTaglineTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandTaglineSc != null" >
+        TAGLINE_SC = #{brandTaglineSc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandNameEn != null" >
+        BRAND_NAME_EN = #{brandNameEn,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandNameTc != null" >
+        BRAND_NAME_TC = #{brandNameTc,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="brandNameSc != null" >
+        BRAND_NAME_SC = #{brandNameSc,jdbcType=VARCHAR},
+      </if>
+      
+      
+      
+      <if test="watsonsMallInd != null" >
+        WATSONS_MALL_IND = #{watsonsMallInd,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where CODE = #{code,jdbcType=DECIMAL} 
+    AND  MASTER_ID = #{masterId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <update id="updateWatsonsMallInd" parameterType="com.mall.b2bp.models.brand.BrandModel" >
+    update PSSP_BRAND b
+    <set>
+     <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      
+       <if test="watsonsMallInd != null" >
+        WATSONS_MALL_IND = #{watsonsMallInd,jdbcType=VARCHAR},
+      </if>      
+    </set>
+    where CODE = #{code,jdbcType=DECIMAL} 
+    AND  MASTER_ID = #{masterId,jdbcType=DECIMAL}
+    
+    and not exists (select 1  from pssp_supplier_brand psb where psb.brand_code = b.brand_code)
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.brand.BrandModel" >
+    update PSSP_BRAND
+    set DESC_EN = #{descEn,jdbcType=VARCHAR},
+      DESC_TC = #{descTc,jdbcType=VARCHAR},
+      DESC_SC = #{descSc,jdbcType=VARCHAR},
+      SYS_REF = #{sysRef,jdbcType=VARCHAR},
+      MASTER_ID = #{masterId,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=DATE},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate,jdbcType=DATE}
+    where BRAND_CODE = #{brandCode,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getBrandsBySupplierId" resultMap="BaseResultMap" parameterType="String">
+	select PB.* FROM PSSP_BRAND PB right join PSSP_SUPPLIER_BRAND PSB
+	on PB.BRAND_CODE=PSB.BRAND_CODE
+	where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+</select>
+
+	<select id="selectBrandList" resultMap="BaseResultMap" parameterType="com.mall.b2bp.vos.brand.BrandVo">
+select PB.* FROM PSSP_BRAND PB ,PSSP_SUPPLIER_BRAND PSB
+	where  1=1
+and PB.BRAND_CODE=PSB.BRAND_CODE(+) 
+  	 <if test="supplierId != null and supplierId != ''" >
+        and SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+     </if>
+order by PB.DESC_EN asc
+	</select>
+	
+	<select id="selectAllBrandList" resultMap="BaseResultMap">	
+select PB.brand_code,
+       PB.code || '-' || PB.DESC_EN ||
+       nvl2(PB.DESC_TC, '-' || PB.DESC_TC, null) as descEn
+  FROM PSSP_BRAND PB
+
+ where 1 = 1
+ 
+ and WATSONS_MALL_IND = 'Y'
+   and not exists (select 1
+          from pssp_supplier_brand psb
+         where psb.brand_code = pb.brand_code)
+
+ order by PB.code || '-' || PB.DESC_EN asc
+
+	</select>
+	
+	  <!-- delete p2.code || '-' || p2.MASTER_ID || '-' || -->
+  <select id="getSelectSupplierBrandByUserId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+	select  p2.brand_code, p2.code || '-' || p2.DESC_EN ||
+       nvl2(p2.DESC_TC, '-' || p2.DESC_TC, null) as descEn
+	 from pssp_user u,pssp_supplier_brand p1,pssp_brand  p2
+	where u.supplier_id = p1.supplier_id and p1.brand_code = p2.brand_code
+	and u.id = #{id,jdbcType=DECIMAL} 
+	
+	order by p2.code || '-' || p2.DESC_EN  asc
+  </select>
+	<!-- delete code || '-' || MASTER_ID || '-' || -->
+  <select id="getUnSelectSupplierBrandByUserId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+ <!--    select brand_code as brandCode, desc_en as descEn  
+     from pssp_brand  where brand_code not in (select distinct p2.brand_code
+   from pssp_user u,pssp_supplier_brand p1,pssp_brand  p2  
+   	where u.supplier_id = p1.supplier_id and p1.brand_code = p2.brand_code
+	and u.id = #{id,jdbcType=DECIMAL} )
+	order by desc_en asc
+-->
+	 
+	 select PB.brand_code,
+       PB.code || '-' || PB.DESC_EN ||
+       nvl2(PB.DESC_TC, '-' || PB.DESC_TC, null) as descEn
+  FROM PSSP_BRAND PB
+
+ where 1 = 1
+  and WATSONS_MALL_IND = 'Y'
+   and not exists (select 1
+          from pssp_supplier_brand psb
+         where psb.brand_code = pb.brand_code)
+
+ order by PB.code || '-' || PB.DESC_EN asc
+  </select>
+  
+ <select id="getBrandModelByDescEn" resultMap="BaseResultMap" parameterType="String">
+	select * FROM PSSP_BRAND 
+	where DESC_EN = #{descEn,jdbcType=VARCHAR}
+ </select>
+ 
+ <select id="getAllBrandsBySupplierId" resultMap="BaseResultMap" parameterType="String">
+  select PB.* FROM PSSP_BRAND PB ,PSSP_SUPPLIER_BRAND PSB,
+	 pssp_supplier ps
+   where  1=1
+   and PB.BRAND_CODE = PSB.BRAND_CODE
+   and ps.id = psb.supplier_id
+   and SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+      
+  order by CODE
+ </select>
+
+</mapper>

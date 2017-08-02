@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_PRODUCT
+	ID="222"
+    BRAND_CODE="3"
+    ESTORE_CATEGORY="2"
+    SUPPLIER_CODE="2"
+    UNIT_RETAIL="12"
+    SHORT_DESC_EN="test2"
+    DELIVERY_MODE="SDD"
+    STATUS="DRAFT"
+    SUPPLIER_PRODUCT_CODE="aaaaaaabbb"
+    VERSION="STAGING"
+    STANDARD_UOM="CA"
+    DAILY_INVENTORY="12"
+    created_by="supplier"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="supplier"
+    last_updated_date="2016-03-11 00:00:00"
+    /> 
+    <PSSP_PRODUCT_AUDIT/>
+ 
+<PSSP_PRODUCT_BARCODE
+   ID="1111"
+   PRODUCT_ID="222"
+   ITEM_NUM_TYPE="UCC14"
+   BARCODE_NUM="1546458846" 
+    created_by="supplier"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="supplier"
+    last_updated_date="2016-03-11 00:00:00"
+/>
+
+<PSSP_PRODUCT_IMAGES
+/>
+         <AUDIT_PSSP_PRODUCT/>
+   
+</dataset>

@@ -1,0 +1,108 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>ASW Supplier Portal Web Application</display-name>
+
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/web-application-config.xml;classpath:com/mall/b2bp/config/spring.xml;classpath:com/mall/b2bp/config/spring-mybatis.xml</param-value>
+	</context-param>
+
+	
+    
+
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>  
+	    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>  
+	</listener> 
+	
+	<filter>
+		<filter-name>languageFilter</filter-name>
+		<filter-class>com.mall.b2bp.servlets.LanguageFilter</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>languageFilter</filter-name>
+		<url-pattern>/j_spring_security_check</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>orderImageServlet</servlet-name>
+		<servlet-class>com.mall.b2bp.servlets.OrderFileServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>orderImageServlet</servlet-name>
+		<url-pattern>/orderImageShow</url-pattern>
+	</servlet-mapping>
+	
+    <servlet>
+		<servlet-name>pdfFileServlet</servlet-name>
+		<servlet-class>com.mall.b2bp.servlets.DownPdfFileServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>pdfFileServlet</servlet-name>
+		<url-pattern>/uploadPdfFile</url-pattern>
+	</servlet-mapping>
+	
+	  <servlet>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<servlet-class>com.mall.b2bp.servlets.FileDownloadServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<url-pattern>/downloadServletFile</url-pattern>
+	</servlet-mapping>
+	
+
+
+	<servlet>
+		<servlet-name>spring mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/web-application-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+</web-app>

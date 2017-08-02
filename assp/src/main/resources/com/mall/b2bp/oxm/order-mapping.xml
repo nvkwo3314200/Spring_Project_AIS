@@ -1,0 +1,222 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+
+	<class name="com.mall.b2bp.oxm.order.OrderBeans">
+
+		<map-to xml="Orders" />
+		<field name="orderBeanList" collection="arraylist" auto-complete="true"
+			type="com.mall.b2bp.oxm.order.OrderBean">
+			<bind-xml name="Order" />
+		</field>
+
+	</class>
+
+	<class name="com.mall.b2bp.oxm.order.OrderBean">
+		<map-to xml="Order" />
+		
+<!-- 		<field name="supplierId" type="string">
+			<bind-xml name="SupplierId" node="element" />
+		</field> -->
+		
+		<field name="pickStore" type="java.math.BigDecimal">
+			<bind-xml name="PickStore" node="element" />
+		</field>
+
+		<field name="pickOrderId" type="string">
+			<bind-xml name="PickOrderId" node="element" />
+		</field>
+
+		<field name="hybrisOrderId" type="string">
+			<bind-xml name="OrderId" node="element" />
+		</field>
+
+		<field name="orderDatetime" type="string">
+			<bind-xml name="OrderDatetime" node="element" />
+		</field>
+
+		<field name="lastUpdatedDate" type="string">
+			<bind-xml name="LastUpdateDate" node="element" />
+		</field>
+
+		<field name="remark" type="string">
+			<bind-xml name="Remark" node="element" />
+		</field>
+
+		<field name="specialInstruction" type="string">
+			<bind-xml name="SpecialInstruction" node="element" />
+		</field>
+
+		<field name="pickType" type="string">
+			<bind-xml name="PackType" node="element" />
+		</field>
+
+		<field name="customerId" type="java.math.BigDecimal">
+			<bind-xml name="CustomerId" node="element" />
+		</field>
+
+		<field name="customerType" type="string">
+			<bind-xml name="CustomerType" node="element" />
+		</field>
+
+		<field name="customerName" type="string">
+			<bind-xml name="CustomerName" node="element" />
+		</field>
+
+		<field name="customerPhoneNo" type="string">
+			<bind-xml name="CustomerPhoneNo" node="element" />
+		</field>
+
+		<field name="customerMobileNo" type="string">
+			<bind-xml name="CustomerMobileNo" node="element" />
+		</field>
+
+		<field name="tenderType" type="string">
+			<bind-xml name="TenderType" node="element" />
+		</field>
+
+		<field name="paymentRef" type="string">
+			<bind-xml name="PaymentRef" node="element" />
+		</field>
+
+		<field name="totalAmount" type="java.math.BigDecimal">
+			<bind-xml name="TotalAmount" node="element" />
+		</field>
+
+		<field name="surcharge" type="java.math.BigDecimal">
+			<bind-xml name="Surcharge" node="element" />
+		</field>
+
+		<field name="deliveryFee" type="java.math.BigDecimal">
+			<bind-xml name="DeliveryFee" node="element" />
+		</field>
+
+		<field name="deliveryDate" type="string">
+			<bind-xml name="DeliveryDate" node="element" />
+		</field>
+
+		<field name="deliveryTimeslot" type="string">
+			<bind-xml name="DeliveryTimeSlot" node="element" />
+		</field>
+
+		<field name="shipDistrict" type="string">
+			<bind-xml name="ShipDistrict" node="element" />
+		</field>
+
+		<field name="receiverName" type="string">
+			<bind-xml name="ReceiverName" node="element" />
+		</field>
+
+		<field name="receiverPhoneNo" type="string">
+			<bind-xml name="ReceiverPhoneNo" node="element" />
+		</field>
+
+		<field name="receiverMobileNo" type="string">
+			<bind-xml name="ReceiverMobileNo" node="element" />
+		</field>
+
+		<field name="deliveryAddress" type="string">
+			<bind-xml name="DeliveryAddress" node="element" />
+		</field>
+
+		<field name="showPrice" type="string">
+			<bind-xml name="ShowPrice" node="element" />
+		</field>
+
+		<field name="invoiceFilename" type="string">
+			<bind-xml name="InvoiceFilename" node="element" />
+		</field>
+
+		<field name="externalOrderId" type="string">
+			<bind-xml name="ExternalOrderId" node="element" />
+		</field>
+
+		<field name="externalLogisticCode" type="string">
+			<bind-xml name="ExternalLogisticCode" node="element" />
+		</field>
+
+		<field name="deliveryPostalCode" type="string">
+			<bind-xml name="DeliveryPostalCode" node="element" />
+		</field>
+
+		<field name="dcReferenceCode" type="string">
+			<bind-xml name="DCReferenceCode" node="element" />
+		</field>
+
+		<field name="dcAddress" type="string">
+			<bind-xml name="DCAddress" node="element" />
+		</field>
+
+		<field name="orderType" type="string">
+			<bind-xml name="TypeOfDistribution" node="element" />
+		</field>
+		
+		<field name="entryBeanList"  collection="arraylist" auto-complete="true"  type="com.mall.b2bp.oxm.order.OrderEntryBean">
+		<bind-xml name="OrderEntry"  location="OrderEntries" />
+		</field>
+
+	</class>
+	
+	
+	<class name="com.mall.b2bp.oxm.order.OrderEntryBean">
+		<map-to xml="OrderEntry" />
+		
+		<field name="seqNum" type="java.math.BigDecimal">
+			<bind-xml name="SequenceNumber" node="element" />
+		</field>
+
+		<field name="skuId" type="string">
+			<bind-xml name="SkuId" node="element" />
+		</field>
+
+		<field name="skuType" type="string">
+			<bind-xml name="SkuType" node="element" />
+		</field>
+
+		<field name="brand" type="string">
+			<bind-xml name="Brand" node="element" />
+		</field>
+
+		<field name="brandSec" type="string">
+			<bind-xml name="BrandSec" node="element" />
+		</field>
+
+		<field name="productName" type="string">
+			<bind-xml name="ProductName" node="element" />
+		</field>
+
+		<field name="productNameSec" type="string">
+			<bind-xml name="ProductNameSec" node="element" />
+		</field>
+
+		<field name="qty" type="java.math.BigDecimal">
+			<bind-xml name="Quantity" node="element" />
+		</field>
+
+		<field name="sizeDesc" type="string">
+			<bind-xml name="SizeDesc" node="element" />
+		</field>
+
+		<field name="unitPrice" type="java.math.BigDecimal">
+			<bind-xml name="UnitPrice" node="element" />
+		</field>
+
+		<field name="skuAmount" type="java.math.BigDecimal">
+			<bind-xml name="SkuAmount" node="element" />
+		</field>
+
+		<field name="supplierId" type="string">
+			<bind-xml name="SupplierCode" node="element" />
+		</field>
+
+		<field name="notBeforeDate" type="string">
+			<bind-xml name="NotBeforeDate" node="element" />
+		</field>
+
+		<field name="notAfterDate" type="string">
+			<bind-xml name="NotAfterDate" node="element" />
+		</field>
+		
+		</class>
+	</mapping>

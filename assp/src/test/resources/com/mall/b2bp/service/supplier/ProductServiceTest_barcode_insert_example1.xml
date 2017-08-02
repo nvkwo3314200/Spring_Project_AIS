@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_PRODUCT_BARCODE
+        id="5000"
+       item_num_type="EAN13"
+       barcode_num="777000"
+    />
+<PSSP_PRODUCT_BARCODE
+        id="5001"
+       item_num_type="EAN8"
+       barcode_num="888000"
+    />
+
+</dataset>

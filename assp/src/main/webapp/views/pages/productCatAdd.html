@@ -1,0 +1,87 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>{{'add_edit_product_cate' | translate}}</h1>
+</section>
+<style>
+	div.row {
+		margin-bottom: 15px;
+	}
+	div.longdiv {
+		width: 83.3333333%;
+	}
+	div.box-body {
+		margin-top: 40px;
+	}
+	.eletter_content {
+		margin-top: 10px;
+		margin-buttom: 10px;
+	}
+</style>
+
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+						close="closeAlert($index)">
+					<div translate="{{alert.msg}}"></div>
+					</uib-alert>
+					<div
+						cg-busy="{promise:promise,templateUrl:templateUrl,message:message,backdrop:backdrop,delay:delay,minDuration:minDuration}">
+					</div>
+					<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">{{'product_cat_code' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " maxlength="50">
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">{{'product_cat_name' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control " maxlength="50">
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">{{'parent_cate_menu' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								 <select class="form-control" >
+								 	<option></option>
+								 	<option>{{data.top1}}</option>
+								 	<option>{{data.top2}}</option>
+								 	<option>{{data.top3}}</option>
+								 	<option>{{data.top4}}</option>
+								 	<option>{{data.child1}}</option>
+								 	<option>{{data.child2}}</option>
+								 	<option>{{data.child3}}</option>
+								 	<option>{{data.child4}}</option> 
+								 </select>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">{{'product_cat_seq' | translate}}</label>
+							</div>
+							<div class="col-md-4">
+								<input type="number" class="form-control " maxlength="50">
+							</div>
+						</div>
+						<br />
+					<div class="shop_foot">
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<button type="button" class="btn btn-primary ng-binding"
+									ng-click="save()" >{{'button_save' | translate}}</button>
+								<button type="button" class="btn btn-primary" id="cancel2"
+									ng-click="cancel2()">{{'button_cancel' | translate}}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</section>
+</section>

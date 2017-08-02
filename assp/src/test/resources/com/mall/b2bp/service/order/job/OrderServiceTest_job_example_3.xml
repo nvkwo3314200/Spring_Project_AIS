@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+
+<PSSP_ORDER
+	id="7888881"
+    hybris_order_id="8888882"
+    order_datetime="2016-03-10 00:00:00"
+    pick_store="9233"
+    pick_type="C" 
+    special_instruction="A"
+    customer_id="10588012"
+    customer_name="Karen"
+    customer_mobile_no="67896789"
+    tender_type="CreditCardFull1" 
+    payment_ref="eNetsHK01178d959"
+    delivery_fee="33"
+    delivery_date="2016-03-18 00:00:00"
+    delivery_timeslot="33"
+
+    pick_order_id="888883"
+    delivery_success ="C"
+
+    />
+    
+
+</dataset>

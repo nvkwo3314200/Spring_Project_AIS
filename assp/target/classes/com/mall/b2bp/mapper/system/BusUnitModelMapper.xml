@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ais.sys.daos.BusUnitModelMapper">
+	<resultMap id="BaseResultMap" type="com.mall.b2bp.models.system.BusUnitModel">
+		<result column="BUS_UNIT_CODE" 		property="busUnitCode" 		jdbcType="VARCHAR" />
+		<result column="BUS_UNIT_NAME" 		property="busUnitName" 		jdbcType="VARCHAR" />
+		<result column="CREATED_BY" 		property="createdBy" 		jdbcType="VARCHAR" />
+		<result column="CREATED_DATE" 		property="createdDate" 		jdbcType="DATE" />
+		<result column="LAST_UPDATED_BY" 	property="lastUpdatedBy" 	jdbcType="VARCHAR" />
+		<result column="LAST_UPDATED_DATE" 	property="lastUpdatedDate" 	jdbcType="DATE" />
+		<result column="DATA_TOTAL"		property="dataTotal"	jdbcType="INTEGER" />
+	</resultMap>
+	
+
+	<select id="insertRun" parameterType="com.mall.b2bp.models.system.BusUnitModel"   statementType="STATEMENT">  
+    ${sql} 
+	</select>   
+	<select id="search" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.BusUnitModel">
+		select
+			BUS_UNIT_CODE,
+			BUS_UNIT_NAME,
+			CREATED_BY,
+			CREATED_DATE,
+			LAST_UPDATED_BY,
+			LAST_UPDATED_DATE
+		from SYS_BUS_UNIT
+		<where>
+			<if test="busUnitCode != null">
+				and BUS_UNIT_CODE = #{busUnitCode,jdbcType=VARCHAR}
+			</if>
+			<if test="busUnitName !=null">
+				and BUS_UNIT_NAME like '%'||#{busUnitName, jdbcType=VARCHAR}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="select" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.BusUnitModel">
+	select * from(
+		select t.*, ROWNUM row_num from(
+			select
+				count(*)over () DATA_TOTAL,
+				BUS_UNIT_CODE,
+				BUS_UNIT_NAME,
+				CREATED_BY,
+				CREATED_DATE,
+				LAST_UPDATED_BY,
+				LAST_UPDATED_DATE
+				from SYS_BUS_UNIT
+				<where>
+					<if test="busUnitCode != null">
+						and BUS_UNIT_CODE = #{busUnitCode,jdbcType=VARCHAR}
+					</if>
+					<if test="busUnitName !=null">
+						and BUS_UNIT_NAME like '%'||#{busUnitName, jdbcType=VARCHAR}||'%'
+					</if>
+				</where>
+				order by BUS_UNIT_CODE
+				 ) t
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+	
+	</select>
+	
+	<insert id="insert" parameterType="com.mall.b2bp.models.system.BusUnitModel">
+		insert into SYS_BUS_UNIT(
+			BUS_UNIT_NAME,
+			BUS_UNIT_CODE,
+			CREATED_BY,
+			CREATED_DATE,
+			LAST_UPDATED_BY,
+			LAST_UPDATED_DATE)
+		values (
+			#{busUnitName,jdbcType=VARCHAR},
+			#{busUnitCode,jdbcType=VARCHAR},
+			#{lastUpdatedBy,jdbcType=VARCHAR},
+			SYSDATE,
+			#{lastUpdatedBy,jdbcType=VARCHAR},
+			SYSDATE)
+	</insert>
+	
+	<update id="update" parameterType="com.mall.b2bp.models.system.BusUnitModel">
+		update SYS_BUS_UNIT
+		set BUS_UNIT_NAME = #{busUnitName,jdbcType=VARCHAR},
+			BUS_UNIT_CODE = #{busUnitCode,jdbcType=VARCHAR},
+			LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+			LAST_UPDATED_DATE = SYSDATE
+		where BUS_UNIT_CODE = #{busUnitCode,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete" parameterType="com.mall.b2bp.models.system.BusUnitModel">
+		delete from SYS_BUS_UNIT where BUS_UNIT_CODE = #{busUnitCode,jdbcType=VARCHAR}
+	</delete>
+</mapper>

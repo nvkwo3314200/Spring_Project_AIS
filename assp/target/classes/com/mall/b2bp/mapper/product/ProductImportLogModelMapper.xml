@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.product.ProductImportLogModelMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.b2bp.models.product.ProductImportLogModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="IMPORT_TYPE" property="importType" jdbcType="VARCHAR" />
+    <result column="IMPORT_DATE" property="importDate"/>
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="DATE" />
+    <result column="LAST_UPDATED_BY" property="lastUpdatedBy" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATED_DATE" property="lastUpdatedDate" jdbcType="DATE" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, IMPORT_TYPE, IMPORT_DATE, FILE_NAME, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, 
+    LAST_UPDATED_DATE,MESSAGE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCT_IMPORT_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from PRODUCT_IMPORT_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.mall.b2bp.models.product.ProductImportLogModel" >
+    insert into PRODUCT_IMPORT_LOG (ID, IMPORT_TYPE, IMPORT_DATE, 
+      FILE_NAME, CREATED_BY, CREATED_DATE, 
+      LAST_UPDATED_BY, LAST_UPDATED_DATE,MESSAGE)
+    values (#{id,jdbcType=DECIMAL}, #{importType,jdbcType=VARCHAR}, #{importDate}, 
+      #{fileName,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate}, 
+      #{lastUpdatedBy,jdbcType=VARCHAR}, #{lastUpdatedDate},#{message,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.b2bp.models.product.ProductImportLogModel" >
+    <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+          select PRODUCT_IMPORT_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+    insert into PRODUCT_IMPORT_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="importType != null" >
+        IMPORT_TYPE,
+      </if>
+      <if test="importDate != null" >
+        IMPORT_DATE,
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY,
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE,
+      </if>
+       <if test="message != null" >
+        MESSAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="importType != null" >
+        #{importType,jdbcType=VARCHAR},
+      </if>
+      <if test="importDate != null" >
+        #{importDate},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        #{lastUpdatedDate},
+      </if>
+       <if test="message != null" >
+        #{message},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.b2bp.models.product.ProductImportLogModel" >
+    update PRODUCT_IMPORT_LOG
+    <set >
+      <if test="importType != null" >
+        IMPORT_TYPE = #{importType,jdbcType=VARCHAR},
+      </if>
+      <if test="importDate != null" >
+        IMPORT_DATE = #{importDate},
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate},
+      </if>
+      <if test="lastUpdatedBy != null" >
+        LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null" >
+        LAST_UPDATED_DATE = #{lastUpdatedDate},
+      </if>
+      <if test="message != null" >
+        MESSAGE = #{message},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.b2bp.models.product.ProductImportLogModel" >
+    update PRODUCT_IMPORT_LOG
+    set IMPORT_TYPE = #{importType,jdbcType=VARCHAR},
+      IMPORT_DATE = #{importDate},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate},
+      LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+      LAST_UPDATED_DATE = #{lastUpdatedDate},
+      MESSAGE = #{message}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="getAllProductImportLog" parameterType="com.mall.b2bp.vos.product.ProductImportLogVo" resultMap="BaseResultMap">
+      select 
+    <include refid="Base_Column_List" />
+    from PRODUCT_IMPORT_LOG where 1=1
+        <if test="importTypeArr !=null">
+		  AND  IMPORT_TYPE IN
+           <foreach item="item" index="index" collection="importTypeArr" open="(" separator="," close=")">
+           #{item}
+           </foreach>
+    </if>
+    <if test="importDateFr !=null">
+           AND to_char(IMPORT_DATE,'yyyyMMdd') >= to_char(#{importDateFr,jdbcType=DATE},'yyyyMMdd')
+    </if>
+    <if test="importDateTo !=null">
+           AND to_char(#{importDateTo,jdbcType=DATE},'yyyyMMdd') >= to_char(IMPORT_DATE,'yyyyMMdd')
+    </if>
+   
+     order by IMPORT_DATE desc
+  </select>
+</mapper>

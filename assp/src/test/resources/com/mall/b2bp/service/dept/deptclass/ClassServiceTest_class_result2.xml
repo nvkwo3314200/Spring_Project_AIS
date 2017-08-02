@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_DEPT
+	dept_id="1000001"
+	id="1000001"
+	description="ads"
+	created_by="unitTest"
+    created_date="2016-03-11 00:00:00"
+    last_updated_by="unitTest"
+    last_updated_date="2016-03-11 00:00:00"
+    />
+
+
+     <PSSP_CLASS
+	dept_id="1000001"
+	description="test"
+	class_id="789456"
+    />  
+   
+</dataset>
+

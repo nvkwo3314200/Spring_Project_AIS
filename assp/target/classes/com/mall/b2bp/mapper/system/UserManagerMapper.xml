@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.b2bp.daos.system.UserManagerMapper" >
+	<resultMap id="BaseResultMap" type="com.mall.b2bp.models.system.UserInfoModel" >
+	    <result column="ID" 				property="id" 				jdbcType="INTEGER" />
+	    <result column="USER_CODE" 			property="userCode" 		jdbcType="VARCHAR" />
+	    <result column="USER_NAME" 			property="userName" 	    jdbcType="VARCHAR" />
+	    <result column="PASSWORD" 			property="userPwd" 	    	jdbcType="VARCHAR" />
+	    <!-- 
+	    <result column="DEL_IND" 			property="deleteInd" 		jdbcType="VARCHAR" />
+	    -->
+	    <result column="TEL" 				property="tel" 				jdbcType="VARCHAR" />
+	    
+	    <result column="EMAIL" 				property="email" 			jdbcType="VARCHAR" />
+	    <result column="INACTIVE_DATE" 		property="userActiveDate" 	jdbcType="DATE" />
+	    <result column="LOGIN_FAIL_TIMES" 	property="loginFailTimes" 	jdbcType="INTEGER" />
+	    <result column="SESSION_LANG" 		property="sessionLang" 		jdbcType="VARCHAR" />
+	    
+	    <result column="SUPPLIER_ID" 		property="shopId" 	jdbcType="INTEGER" />
+	    <result column="MALL_ID" 		property="mallId" 	jdbcType="INTEGER" />
+	    <!-- 
+	    <result column="PARENT_ID" 		property="parentId" 	jdbcType="INTEGER" />
+	     -->
+	    <result column="ACTIVE_IND" 		property="userActiveInd" 	jdbcType="VARCHAR" />
+	    <result column="CREATED_BY" 		property="createdBy" 		jdbcType="VARCHAR" />
+	    <result column="CREATED_DATE" 		property="createdDate" 		jdbcType="DATE" />
+	    <result column="LAST_UPDATED_BY" 	property="lastUpdatedBy" 	jdbcType="VARCHAR" />
+	    <result column="LAST_UPDATED_DATE" 	property="lastUpdatedDate" 	jdbcType="DATE" />
+		
+		<result column="DATA_TOTAL"		property="dataTotal"	jdbcType="INTEGER" />
+		<!-- 
+		<result column="PROD_LN"			property="prodName"        	jdbcType="VARCHAR"/>
+		<result column="USER_PLANT"			property="plantCode"		jdbcType="VARCHAR"/>
+		<result column="USER_PROD_LN"		property="prodLn" 			jdbcType="VARCHAR"/>
+		<result column="SSO_HOST"			property="ssoHost" 			jdbcType="VARCHAR"/>
+		<result column="SSO_LOGIN_ID"		property="ssoLoginId" 		jdbcType="VARCHAR"/>
+		<result column="SSO_STAFF_ID"		property="ssoStaffId" 		jdbcType="VARCHAR"/>
+		-->
+	</resultMap>
+	
+	<resultMap id="MenueResultMap" type="com.mall.b2bp.models.system.MenuModel" >
+	    <result column="TYPE" 				property="type" 			jdbcType="VARCHAR" />
+	    <result column="FUNC_CODE" 			property="funcCode" 		jdbcType="VARCHAR" />
+	    <result column="FUNC_NAME_EN" 		property="funcNameEN" 	    jdbcType="VARCHAR" />
+	    <result column="FUNC_NAME_ZH_CN" 	property="funcNameCN" 	    jdbcType="VARCHAR" />
+	    <result column="FUNC_NAME_ZH_TW" 	property="funcNameTW" 	    jdbcType="VARCHAR" />
+	    <result column="UI_SREF" 			property="uiSref" 	    	jdbcType="VARCHAR" />
+	    <result column="FUNC_URL" 			property="funcUrl" 	    	jdbcType="VARCHAR" />
+	</resultMap>
+	
+  	<resultMap id="FuncPowerResultMap" type="com.mall.b2bp.models.system.PowerModel" >
+	    <result column="FUNC_URL" 		property="url" 			jdbcType="VARCHAR" />
+	    <result column="FUNC_NAME" 		property="funcName" 	jdbcType="VARCHAR" />
+	    <result column="CAN_SELECT" 	property="search" 		jdbcType="VARCHAR" />
+	    <result column="CAN_INSERT" 	property="create" 	    jdbcType="VARCHAR" />
+	    <result column="CAN_UPDATE" 	property="update" 	    jdbcType="VARCHAR" />
+	    <result column="CAN_DELETE" 	property="delete" 	    jdbcType="VARCHAR" />
+	    <result column="CAN_AUDIT" 		property="audit" 	    jdbcType="VARCHAR" />
+	    <result column="CAN_VIEW" 		property="view" 	    jdbcType="VARCHAR" />
+	</resultMap>
+  	
+  	<sql id="user_view_List" >
+    	b.ID, b.USER_CODE, b.USER_NAME, b.EMAIL,b.TEL, b.ACTIVE_IND, b.INACTIVE_DATE,b.LOGIN_FAIL_TIMES,b.SUPPLIER_ID,MALL_ID,b.SESSION_LANG,
+    	b.CREATED_BY, b.CREATED_DATE, b.LAST_UPDATED_BY, b.LAST_UPDATED_DATE
+  	</sql>
+	
+   	<select id="selectUserList" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+	    select 
+	    <include refid="user_view_List" />
+	 	from  SYS_USER b 
+	    where 1 = 1
+	      <if test="id != null" >
+	       	and ID = #{id, jdbcType=INTEGER}
+	      </if>
+	      <if test="shopId != null" >
+	       	and SUPPLIER_ID = #{shopId, jdbcType=INTEGER}
+	      </if>
+	      <if test="userCode != null">
+			and upper(b.USER_CODE)like  upper('%'||#{userCode,jdbcType=VARCHAR}||'%')
+		  </if>
+	      <if test="userName != null">
+			and upper(b.USER_NAME)like  upper('%'||#{userName,jdbcType=VARCHAR}||'%')
+		  </if>
+		order by ID
+  	</select>
+  	
+  	
+  	<select id="search" resultMap="BaseResultMap" parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+  		select * from(
+			select t.*, ROWNUM row_num from(
+			    select 
+			    	count(*)over () DATA_TOTAL, 
+			    <include refid="user_view_List" />
+			 	from  SYS_USER b 
+			    where 1 = 1
+			      <if test="id != null" >
+			       	and ID = #{id, jdbcType=INTEGER}
+			      </if>
+			      <if test="userCode != null">
+					and upper(b.USER_CODE)like  upper('%'||#{userCode,jdbcType=VARCHAR}||'%')
+				  </if>
+			      <if test="userName != null">
+					and upper(b.USER_NAME)like  upper('%'||#{userName,jdbcType=VARCHAR}||'%')
+				  </if>
+				  <if test="shopId != null">
+					and SUPPLIER_ID = #{shopId, jdbcType=INTEGER}
+				  </if>
+				  <if test="mallId != null">
+				  	and (b.MALL_ID = #{mallId,jdbcType=INTEGER} or b.SUPPLIER_ID in (SELECT s.id from SUPPLIER s WHERE s.mall_id = #{mallId,jdbcType=INTEGER}))
+				  </if>
+				order by ID
+				) t
+			) temp
+		where temp.row_num between #{startRow, jdbcType=INTEGER} and #{endRow, jdbcType=INTEGER}
+  	</select>
+  	
+  	
+   	<insert id="insert"  parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+   	<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		select SYS_USER_ID_SEQ.nextval as id from dual
+	</selectKey>
+	
+    insert into SYS_USER ( ID, USER_CODE, USER_NAME, PASSWORD,SUPPLIER_ID, MALL_ID, EMAIL,TEL, ACTIVE_IND, INACTIVE_DATE, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE)
+    values (#{id ,			jdbcType=INTEGER},
+    		#{userCode,		jdbcType=VARCHAR}, 
+    		#{userName,		jdbcType=VARCHAR}, 
+		    #{userPwd,		jdbcType=VARCHAR},
+		   <!--  #{deleteInd,	jdbcType=VARCHAR},--> 
+    		#{shopId ,		jdbcType=INTEGER},
+    		#{mallId ,		jdbcType=INTEGER}, 
+    		#{email,		jdbcType=VARCHAR},
+    		#{tel,			jdbcType=VARCHAR},
+    		#{userActiveInd,	jdbcType=VARCHAR},
+		    #{userActiveDate,	jdbcType=DATE},
+		    #{createdBy,		jdbcType=VARCHAR},
+		    #{createdDate,		jdbcType=DATE}, 
+    		#{lastUpdatedBy,	jdbcType=VARCHAR}, 
+		    #{lastUpdatedDate,	jdbcType=DATE})
+  	</insert>
+  	
+  	
+  	<update id="update" parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+    	update SYS_USER
+    	<set>
+	      	<if test="userName != null" >
+	        	USER_NAME = #{userName,jdbcType=VARCHAR}, 
+	      	</if>
+	      	<if test="userPwd != null" >
+	        	PASSWORD = #{userPwd,jdbcType=VARCHAR},
+	      	</if>
+	      	<if test="email != null" >
+	        	EMAIL = #{email,jdbcType=VARCHAR},
+	        </if>
+	        <if test="tel != null" >
+	        	TEL = #{tel,jdbcType=VARCHAR},
+	        </if>
+	      	<if test="userActiveInd != null" >
+	        	ACTIVE_IND =#{userActiveInd,jdbcType=VARCHAR}, 
+	      	</if>
+	      	<if test="shopId != null">
+	      		SUPPLIER_ID =#{shopId,jdbcType=INTEGER},
+	      	</if>
+	      	<if test="mallId != null">
+	      		MALL_ID =#{mallId,jdbcType=INTEGER},
+	      	</if>
+	      	<!-- 
+	        	INACTIVE_DATE = #{userActiveDate,	jdbcType=DATE},
+	        --> 
+	       	<if test="loginFailTimes !=null">
+	       		LOGIN_FAIL_TIMES=#{loginFailTimes,jdbcType=INTEGER},
+	       	</if>
+	       	<if test="lastUpdatedBy != null" >
+	        	LAST_UPDATED_BY = #{lastUpdatedBy,	jdbcType=VARCHAR},
+	       	</if>
+	       	<if test="lastUpdatedDate != null" >
+	        	LAST_UPDATED_DATE = #{lastUpdatedDate,	jdbcType=DATE}
+	      	</if>
+    	</set>
+    	where ID = #{id,jdbcType=INTEGER}
+  	</update>
+  
+  	<delete id="deleteUser" parameterType="java.lang.Integer" >
+    	delete from SYS_USER where ID = #{id,jdbcType=INTEGER}
+  	</delete> 
+  
+  
+  	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    	delete from SYS_USER_ROLE where USER_ID = #{id,	jdbcType=INTEGER}
+  	</delete>
+  
+  	<select id="createExsitUser"  parameterType="com.mall.b2bp.models.system.UserInfoModel" resultType="java.lang.Integer">
+	    select ID from SYS_USER  where  USER_CODE = #{userCode, jdbcType=VARCHAR}
+  	</select>
+  	
+	<!-- login by lh-6-29 -->
+	<select id="selectUser" resultType="com.mall.b2bp.models.system.UserInfoModel" parameterType="String" >
+	    select 
+	    	su.ID as id,
+		    su.USER_CODE as userCode,
+		    su.USER_NAME as userName,
+		    <!-- (select listagg(sr.ROLE_CODE, ',') within group(order by sr.ROLE_CODE) as ROLE_CODE from SYS_USER_ROLE sur, SYS_ROLE sr where sur.ROLE_ID = sr.ID and su.ID = sur.USER_ID) as roleCode, --> 
+		    
+		    (select wmsys.wm_concat(ROLE_CODE)||'' from (select sr.ROLE_CODE
+                                             from SYS_USER_ROLE sur,
+                                                  SYS_ROLE      sr,
+                                                  sys_user su1
+                                            where sur.ROLE_ID = sr.ID
+                                            and su1.id = sur.USER_ID
+                                            and su1.user_code = #{userCode,jdbcType=VARCHAR}
+                                            group by (sr.ROLE_CODE)) ) roleCode,
+		    su.ACTIVE_IND as userActiveInd, 
+		    su.SUPPLIER_ID as shopId,
+		    su.MALL_ID as mallId,
+		    su.CREATED_BY as createdBy, 
+		    su.CREATED_DATE as createdDate,
+		    su.LAST_UPDATED_BY as lastUpdatedBy, 
+		    su.LAST_UPDATED_DATE as lastUpdatedDate,
+		    su.PASSWORD as userPwd,
+		    su.EMAIL as email,
+		    su.INACTIVE_DATE as userActiveDate,
+		    su.LAST_UPDATED_DATE as lastLoginDate,
+		    su.SESSION_LANG as sessionLang,
+		    nvl(su.LOGIN_FAIL_TIMES, 0) as loginFailTimes
+	    from SYS_USER su
+	    where su.USER_CODE = #{userCode,jdbcType=VARCHAR}
+  	</select> 
+  	
+  	<!-- login by lh-7-1 -->
+	<select id="selectMenu" resultMap="MenueResultMap" parameterType="String" >
+		select * from (
+		    select 
+		    	sf.TYPE,
+			    sf.FUNC_CODE,
+			    sf.FUNC_NAME_EN,
+			    sf.FUNC_NAME_ZH_CN,
+			    sf.FUNC_NAME_ZH_TW,
+			    sf.UI_SREF,
+			    sf.FUNC_URL,
+			    sf.LEVEL_1_POS, 
+			    sf.LEVEL_2_POS,
+			    (select count(*) from SYS_ROLE_FUNC rf, SYS_FUNC f where sr.ID = rf.ROLE_ID and rf.FUNC_ID = f.ID and rf.ACTIVE = 'Y' and f.TYPE = 'menu' and sf.LEVEL_1_POS = f.LEVEL_1_POS) ACTIVE
+		    from SYS_USER su, SYS_USER_ROLE sur, SYS_ROLE sr, SYS_ROLE_FUNC srf, SYS_FUNC sf
+		    where su.USER_CODE =  #{userCode,jdbcType=VARCHAR}
+		    and su.ID = sur.USER_ID
+		    and sur.ROLE_ID = srf.ROLE_ID
+		    and srf.FUNC_ID = sf.ID
+		    and srf.ROLE_ID = sr.ID
+        	and srf.ACTIVE = 'Y') temp
+		where temp.ACTIVE > 0
+		group by 
+    		TYPE,
+ 			FUNC_CODE,
+		    FUNC_NAME_EN,
+		    FUNC_NAME_ZH_CN,
+		    FUNC_NAME_ZH_TW,
+		    UI_SREF,
+		    FUNC_URL, 
+		    LEVEL_1_POS, 
+		    LEVEL_2_POS,
+		    ACTIVE
+		 order by 
+		 	LEVEL_1_POS, 
+		 	LEVEL_2_POS
+  	</select>
+  	
+  	<!-- login by lh-9-8 -->
+	<select id="getUserAllFuncPower" resultMap="FuncPowerResultMap" parameterType="String" >
+			
+		select 
+			(CASE temp.SESSION_LANG
+          		WHEN 'en' THEN f.FUNC_NAME_EN
+         		WHEN 'zh_CN' THEN f.FUNC_NAME_ZH_CN
+         		WHEN 'zh_TW' THEN f.FUNC_NAME_ZH_TW
+          	END) FUNC_NAME,
+          	temp.FUNC_URL,
+          	temp.can_insert,
+          	temp.can_delete,
+          	temp.can_update,
+          	temp.can_select,
+          	temp.can_audit,
+          	temp.can_view
+		from SYS_FUNC f,
+			(select 
+				sf.FUNC_URL,
+				sui.SESSION_LANG,
+				max(srf.can_insert) can_insert,
+			    max(srf.can_delete) can_delete,
+			    max(srf.can_update) can_update,
+			    max(srf.can_select) can_select,
+			    max(srf.can_audit) can_audit,
+			    max(srf.can_view) can_view
+			from SYS_USER sui, SYS_USER_ROLE sur, SYS_ROLE_FUNC srf, SYS_FUNC sf
+			where sui.USER_CODE = #{userCode,jdbcType=VARCHAR}
+			and sui.ID = sur.USER_ID
+			and sur.ROLE_ID = srf.ROLE_ID
+			and srf.FUNC_ID = sf.ID
+	    	and sf.TYPE = 'func'
+			group by sf.FUNC_URL,sui.SESSION_LANG) temp
+		where 
+			f.FUNC_URL = temp.FUNC_URL
+			
+	</select>
+
+  	<!-- login by lh-10-12 -->
+	<insert id="saveUserLoginSuccess" parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+  		insert into SYS_USER_LOGINS ( 
+  			ID, 
+  			USER_CODE, 
+  			OPERATE, 
+  			OPERATE_DATE, 
+  			IP)
+	    values (
+	    	SYS_USER_LOGINS_ID_SEQ.nextval,
+	    	#{userCode,		jdbcType=VARCHAR}, 
+	    	#{operate,		jdbcType=VARCHAR}, 
+	    	sysDate, 
+	    	#{ip,			jdbcType=VARCHAR})
+	</insert>
+
+  	<!-- login by lh-6-30 -->
+	<update id="updateUserLoginSuccess" parameterType="com.mall.b2bp.models.system.UserInfoModel" >
+  		UPDATE SYS_USER SET 
+       		LOGIN_FAIL_TIMES = 0,
+       		LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+       		LAST_UPDATED_DATE = #{lastUpdatedDate},
+       		LAST_LOGIN_DATE = #{lastUpdatedDate}
+   		WHERE USER_CODE = #{userCode,jdbcType=VARCHAR}
+	</update>
+  
+	<!-- login by lh-6-30 -->
+	<update id="updateUserLoginFail" parameterType="com.mall.b2bp.models.system.UserInfoModel">
+		UPDATE SYS_USER SET 
+			LOGIN_FAIL_TIMES =(NVL(LOGIN_FAIL_TIMES, 0) + 1),
+			ACTIVE_IND = (CASE WHEN NVL(LOGIN_FAIL_TIMES, 0) >= 4 THEN 'N' ELSE ACTIVE_IND END),
+			INACTIVE_DATE = (CASE WHEN NVL(LOGIN_FAIL_TIMES, 0) >= 4 THEN #{lastUpdatedDate} ELSE INACTIVE_DATE END),
+			LAST_UPDATED_BY = #{lastUpdatedBy,jdbcType=VARCHAR},
+			LAST_UPDATED_DATE = #{lastUpdatedDate}
+		WHERE USER_CODE = #{userCode,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- update the user selected language by Keven in July 20, 2016-->
+	<update id="updateUserLang" parameterType="com.mall.b2bp.models.system.UserInfoModel">
+  		UPDATE SYS_USER SET 
+       		SESSION_LANG = #{sessionLang,jdbcType=VARCHAR},
+       		LAST_UPDATED_DATE = #{lastUpdatedDate}
+   		WHERE ID = #{id,jdbcType=INTEGER}
+	</update>
+  
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<PSSP_CLASS
+    ID="1"
+	CLASS_ID="1"
+    DEPT_ID="102"
+    DESCRIPTION="CHINA RANGE"
+   /> 
+
+<PSSP_CLASS
+	ID="2"
+	CLASS_ID="2"
+    DEPT_ID="103"
+    DESCRIPTION="AUST"
+   /> 
+   
+<PSSP_CLASS
+	ID="3"
+	CLASS_ID="3"
+    DEPT_ID="103"
+    DESCRIPTION="CHINA"
+   /> 
+
+<PSSP_CLASS
+	ID="4"
+	CLASS_ID="4"
+    DEPT_ID="103"
+    DESCRIPTION="JAPAN"
+   /> 
+
+<PSSP_CLASS
+    ID="5"
+	CLASS_ID="5"
+    DEPT_ID="103"
+    DESCRIPTION="VIETNAM"
+   /> 
+
+<PSSP_CLASS
+	ID="6"
+	CLASS_ID="6"
+    DEPT_ID="103"
+    DESCRIPTION="THAI"
+   /> 
+<PSSP_SUB_CLASS/> 
+<PSSP_SUPPLIER_SUB_CLASS/>
+</dataset>
